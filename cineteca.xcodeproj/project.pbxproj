@@ -7,11 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		448D4D4E2FEA0D970008718A /* Cartography in Frameworks */ = {isa = PBXBuildFile; productRef = 448D4D4D2FEA0D970008718A /* Cartography */; };
+		448D4D512FEA0EFC0008718A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 448D4D502FEA0EFC0008718A /* Alamofire */; };
+		448D4D532FEA0EFC0008718A /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 448D4D522FEA0EFC0008718A /* AlamofireDynamic */; };
+		448D4D5F2FEA1C310008718A /* URLRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448D4D5D2FEA1C310008718A /* URLRequestBuilder.swift */; };
+		448D4D602FEA1C310008718A /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448D4D5C2FEA1C310008718A /* ParameterEncoding.swift */; };
+		448D4D612FEA1C310008718A /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448D4D5A2FEA1C310008718A /* NetworkError.swift */; };
+		448D4D622FEA1C310008718A /* URLRequestBuilder+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448D4D5E2FEA1C310008718A /* URLRequestBuilder+Extension.swift */; };
+		448D4D632FEA1C310008718A /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448D4D5B2FEA1C310008718A /* NetworkService.swift */; };
+		448D4D642FEA1C310008718A /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448D4D592FEA1C310008718A /* HTTPMethod.swift */; };
 		AA000001000000000000001A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000001B /* AppDelegate.swift */; };
 		AA000001000000000000002A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000002B /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		448D4D592FEA1C310008718A /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		448D4D5A2FEA1C310008718A /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		448D4D5B2FEA1C310008718A /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		448D4D5C2FEA1C310008718A /* ParameterEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterEncoding.swift; sourceTree = "<group>"; };
+		448D4D5D2FEA1C310008718A /* URLRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilder.swift; sourceTree = "<group>"; };
+		448D4D5E2FEA1C310008718A /* URLRequestBuilder+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequestBuilder+Extension.swift"; sourceTree = "<group>"; };
 		AA000001000000000000000A /* cineteca.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cineteca.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA000001000000000000001B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA000001000000000000002B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -23,15 +38,56 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				448D4D4E2FEA0D970008718A /* Cartography in Frameworks */,
+				448D4D532FEA0EFC0008718A /* AlamofireDynamic in Frameworks */,
+				448D4D512FEA0EFC0008718A /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		448D4C252FEA0A800008718A /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		448D4C262FEA0A870008718A /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		448D4C272FEA0A8C0008718A /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				448D4D582FEA1C280008718A /* Networking */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		448D4D582FEA1C280008718A /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				448D4D592FEA1C310008718A /* HTTPMethod.swift */,
+				448D4D5A2FEA1C310008718A /* NetworkError.swift */,
+				448D4D5B2FEA1C310008718A /* NetworkService.swift */,
+				448D4D5C2FEA1C310008718A /* ParameterEncoding.swift */,
+				448D4D5D2FEA1C310008718A /* URLRequestBuilder.swift */,
+				448D4D5E2FEA1C310008718A /* URLRequestBuilder+Extension.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		AA000001000000000000005A /* cineteca */ = {
 			isa = PBXGroup;
 			children = (
+				448D4C272FEA0A8C0008718A /* Data */,
+				448D4C262FEA0A870008718A /* Domain */,
+				448D4C252FEA0A800008718A /* Presentation */,
 				AA000001000000000000001B /* AppDelegate.swift */,
 				AA000001000000000000002B /* ViewController.swift */,
 				AA000001000000000000003B /* Info.plist */,
@@ -47,7 +103,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		AA000001000000000000007A /* root */ = {
+		AA000001000000000000007A = {
 			isa = PBXGroup;
 			children = (
 				AA000001000000000000005A /* cineteca */,
@@ -98,7 +154,11 @@
 				en,
 				Base,
 			);
-			mainGroup = AA000001000000000000007A /* root */;
+			mainGroup = AA000001000000000000007A;
+			packageReferences = (
+				448D4D4C2FEA0D970008718A /* XCRemoteSwiftPackageReference "Cartography" */,
+				448D4D4F2FEA0EFC0008718A /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = AA000001000000000000006A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -125,6 +185,12 @@
 			files = (
 				AA000001000000000000001A /* AppDelegate.swift in Sources */,
 				AA000001000000000000002A /* ViewController.swift in Sources */,
+				448D4D5F2FEA1C310008718A /* URLRequestBuilder.swift in Sources */,
+				448D4D602FEA1C310008718A /* ParameterEncoding.swift in Sources */,
+				448D4D612FEA1C310008718A /* NetworkError.swift in Sources */,
+				448D4D622FEA1C310008718A /* URLRequestBuilder+Extension.swift in Sources */,
+				448D4D632FEA1C310008718A /* NetworkService.swift in Sources */,
+				448D4D642FEA1C310008718A /* HTTPMethod.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +382,42 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		448D4D4C2FEA0D970008718A /* XCRemoteSwiftPackageReference "Cartography" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/robb/Cartography.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+		448D4D4F2FEA0EFC0008718A /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.12.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		448D4D4D2FEA0D970008718A /* Cartography */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 448D4D4C2FEA0D970008718A /* XCRemoteSwiftPackageReference "Cartography" */;
+			productName = Cartography;
+		};
+		448D4D502FEA0EFC0008718A /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 448D4D4F2FEA0EFC0008718A /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		448D4D522FEA0EFC0008718A /* AlamofireDynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 448D4D4F2FEA0EFC0008718A /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = AlamofireDynamic;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AA000001000000000000012A /* Project object */;
 }
