@@ -1,9 +1,9 @@
-import Alamofire
 import Foundation
 
-protocol URLRequestBuilder: URLRequestConvertible {
+protocol URLRequestBuilder: Sendable {
     var path: String { get }
     var method: HTTPMethod { get }
-    var parameters: Parameters? { get }
+    var queryItems: [URLQueryItem] { get }
     var headers: [String: String] { get }
+    var body: (any Encodable & Sendable)? { get }
 }

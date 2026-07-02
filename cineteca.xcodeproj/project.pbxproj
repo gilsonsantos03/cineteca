@@ -157,7 +157,6 @@
 			mainGroup = AA000001000000000000007A;
 			packageReferences = (
 				448D4D4C2FEA0D970008718A /* XCRemoteSwiftPackageReference "Cartography" */,
-				448D4D4F2FEA0EFC0008718A /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = AA000001000000000000006A /* Products */;
 			projectDirPath = "";
