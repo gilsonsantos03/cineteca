@@ -63,4 +63,5 @@ playground.xcworkspace
 *.env.*
 Secrets.swift
 Secrets.plist
+Keys.plist
 GoogleService-Info.plist

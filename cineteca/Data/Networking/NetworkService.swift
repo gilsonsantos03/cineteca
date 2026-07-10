@@ -5,7 +5,6 @@ protocol NetworkServiceProtocol: Sendable {
 }
 
 final class NetworkService: NetworkServiceProtocol {
-
     private let configuration: NetworkConfiguration
     private let session: URLSession
     private let decoder: JSONDecoder
