@@ -24,7 +24,7 @@ final class MovieCardCell: UICollectionViewCell {
 
     private lazy var trendingTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Trending"
+        label.text = Strings.HomeScene.Card.trendingBadge
         label.font = .systemFont(ofSize: 10, weight: .semibold)
         label.textColor = .white
         return label

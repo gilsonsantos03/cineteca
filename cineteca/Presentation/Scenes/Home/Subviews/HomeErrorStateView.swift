@@ -1,11 +1,15 @@
 import UIKit
 import Cartography
 
+protocol HomeErrorStateViewDelegate: AnyObject {
+    func homeErrorStateViewDidRequestRetry(_ view: HomeErrorStateView)
+}
+
 final class HomeErrorStateView: UIView {
 
-    // MARK: - Public API
+    // MARK: - Properties
 
-    var onRetry: (() -> Void)?
+    weak var delegate: HomeErrorStateViewDelegate?
 
     // MARK: - UI Components
 
@@ -19,7 +23,7 @@ final class HomeErrorStateView: UIView {
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Something went wrong"
+        label.text = Strings.HomeScene.Error.title
         label.font = .systemFont(ofSize: 20, weight: .semibold)
         label.textColor = .white
         label.textAlignment = .center
@@ -29,7 +33,7 @@ final class HomeErrorStateView: UIView {
 
     private lazy var subtitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "We couldn't load your home. Check your connection and try again."
+        label.text = Strings.HomeScene.Error.subtitle
         label.font = .systemFont(ofSize: 14)
         label.textColor = .textSecondary
         label.textAlignment = .center
@@ -39,7 +43,7 @@ final class HomeErrorStateView: UIView {
 
     private lazy var retryButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Try again", for: .normal)
+        button.setTitle(Strings.HomeScene.Error.retryButton, for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
         button.backgroundColor = .accentYellow
@@ -116,6 +120,6 @@ final class HomeErrorStateView: UIView {
     // MARK: - Actions
 
     @objc private func didTapRetry() {
-        onRetry?()
+        delegate?.homeErrorStateViewDidRequestRetry(self)
     }
 }

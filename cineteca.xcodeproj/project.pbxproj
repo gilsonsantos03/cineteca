@@ -34,6 +34,9 @@
 		442CB2B630008AA7004FCC82 /* HomeSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CB2B530008AA7004FCC82 /* HomeSkeletonView.swift */; };
 		442CB2B730008AA7004FCC82 /* MovieSectionSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CB2B430008AA7004FCC82 /* MovieSectionSkeletonView.swift */; };
 		442CB2B830008AA7004FCC82 /* MovieCardSkeletonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CB2B330008AA7004FCC82 /* MovieCardSkeletonCell.swift */; };
+		444CB41430033EE6000410E2 /* architecture.md in Resources */ = {isa = PBXBuildFile; fileRef = 444CB41230033EE6000410E2 /* architecture.md */; };
+		444CB41530033EE6000410E2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 444CB41130033EE6000410E2 /* README.md */; };
+		444CB41630033EE6000410E2 /* view-conventions.md in Resources */ = {isa = PBXBuildFile; fileRef = 444CB41330033EE6000410E2 /* view-conventions.md */; };
 		448D4D4E2FEA0D970008718A /* Cartography in Frameworks */ = {isa = PBXBuildFile; productRef = 448D4D4D2FEA0D970008718A /* Cartography */; };
 		448D4D5F2FEA1C310008718A /* URLRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448D4D5D2FEA1C310008718A /* URLRequestBuilder.swift */; };
 		448D4D602FEA1C310008718A /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448D4D5C2FEA1C310008718A /* ParameterEncoding.swift */; };
@@ -46,7 +49,9 @@
 		CC000001000000000000002A /* MovieEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC000001000000000000002B /* MovieEndpoint.swift */; };
 		CC000001000000000000003A /* HomeModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC000001000000000000003B /* HomeModels.swift */; };
 		CC000001000000000000005A /* UIImageView+AsyncLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC000001000000000000005B /* UIImageView+AsyncLoad.swift */; };
+		CC000001000000000000005C /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC000001000000000000005D /* Strings.swift */; };
 		CC000001000000000000006A /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC000001000000000000006B /* MainTabBarController.swift */; };
+		CC000001000000000000007C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC000001000000000000007D /* Localizable.strings */; };
 		CC000001000000000000007A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC000001000000000000007B /* Assets.xcassets */; };
 		CC00000100000000000000AA /* MovieRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC00000100000000000000AB /* MovieRepository.swift */; };
 		DD000001000000000000001A /* MovieDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD000001000000000000001B /* MovieDTO.swift */; };
@@ -81,6 +86,9 @@
 		442CB2B330008AA7004FCC82 /* MovieCardSkeletonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCardSkeletonCell.swift; sourceTree = "<group>"; };
 		442CB2B430008AA7004FCC82 /* MovieSectionSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSectionSkeletonView.swift; sourceTree = "<group>"; };
 		442CB2B530008AA7004FCC82 /* HomeSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSkeletonView.swift; sourceTree = "<group>"; };
+		444CB41130033EE6000410E2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = cineteca/README.md; sourceTree = SOURCE_ROOT; };
+		444CB41230033EE6000410E2 /* architecture.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = architecture.md; path = cineteca/architecture.md; sourceTree = SOURCE_ROOT; };
+		444CB41330033EE6000410E2 /* view-conventions.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = "view-conventions.md"; path = "cineteca/view-conventions.md"; sourceTree = SOURCE_ROOT; };
 		448D4D592FEA1C310008718A /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		448D4D5A2FEA1C310008718A /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		448D4D5B2FEA1C310008718A /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -94,6 +102,9 @@
 		CC000001000000000000002B /* MovieEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieEndpoint.swift; sourceTree = "<group>"; };
 		CC000001000000000000003B /* HomeModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModels.swift; sourceTree = "<group>"; };
 		CC000001000000000000005B /* UIImageView+AsyncLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+AsyncLoad.swift"; sourceTree = "<group>"; };
+		CC000001000000000000005D /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		CC000001000000000000005E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CC000001000000000000005F /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		CC000001000000000000006B /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		CC000001000000000000007B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CC00000100000000000000AB /* MovieRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepository.swift; sourceTree = "<group>"; };
@@ -218,12 +229,16 @@
 		AA000001000000000000005A /* cineteca */ = {
 			isa = PBXGroup;
 			children = (
+				444CB41130033EE6000410E2 /* README.md */,
+				444CB41230033EE6000410E2 /* architecture.md */,
+				444CB41330033EE6000410E2 /* view-conventions.md */,
 				442CB0522FF6027B004FCC82 /* Application */,
 				448D4C272FEA0A8C0008718A /* Data */,
 				448D4C262FEA0A870008718A /* Domain */,
 				448D4C252FEA0A800008718A /* Presentation */,
 				AA000001000000000000001B /* AppDelegate.swift */,
 				AA000001000000000000003B /* Info.plist */,
+				CC000001000000000000007D /* Localizable.strings */,
 				442CB04A2FF5EF91004FCC82 /* Keys.plist */,
 				CC000001000000000000007B /* Assets.xcassets */,
 			);
@@ -258,9 +273,19 @@
 			isa = PBXGroup;
 			children = (
 				CC000001000000000000005B /* UIImageView+AsyncLoad.swift */,
+				CC000001000000000000005D /* Strings.swift */,
 				442CB0A12FFC8501004FCC82 /* ShimmerView.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		CC000001000000000000007D /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CC000001000000000000005E /* en */,
+				CC000001000000000000005F /* pt-BR */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		CC00000100000000000000BB /* Repositories */ = {
@@ -363,7 +388,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				442CB04B2FF5EF91004FCC82 /* Keys.plist in Resources */,
+				CC000001000000000000007C /* Localizable.strings in Resources */,
 				CC000001000000000000007A /* Assets.xcassets in Resources */,
+				444CB41430033EE6000410E2 /* architecture.md in Resources */,
+				444CB41530033EE6000410E2 /* README.md in Resources */,
+				444CB41630033EE6000410E2 /* view-conventions.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +440,7 @@
 				CC000001000000000000002A /* MovieEndpoint.swift in Sources */,
 				CC000001000000000000003A /* HomeModels.swift in Sources */,
 				CC000001000000000000005A /* UIImageView+AsyncLoad.swift in Sources */,
+				CC000001000000000000005C /* Strings.swift in Sources */,
 				CC000001000000000000006A /* MainTabBarController.swift in Sources */,
 				CC00000100000000000000AA /* MovieRepository.swift in Sources */,
 				DD000001000000000000001A /* MovieDTO.swift in Sources */,

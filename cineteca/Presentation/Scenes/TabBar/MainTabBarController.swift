@@ -2,9 +2,11 @@ import UIKit
 
 final class MainTabBarController: UITabBarController {
     private let repository: MovieRepositoryProtocol
+    private let genreRepository: GenreRepositoryProtocol
 
-    init(repository: MovieRepositoryProtocol) {
+    init(repository: MovieRepositoryProtocol, genreRepository: GenreRepositoryProtocol) {
         self.repository = repository
+        self.genreRepository = genreRepository
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -38,13 +40,13 @@ final class MainTabBarController: UITabBarController {
     }
 
     private func setupTabs() {
-        let homeVC = HomeConfigurator.resolve(repository: repository)
-        homeVC.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill"))
+        let homeVC = HomeConfigurator.resolve(repository: repository, genreRepository: genreRepository)
+        homeVC.tabBarItem = UITabBarItem(title: Strings.TabBar.home, image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill"))
 
-        let searchVC = makePlaceholder(title: "Search", icon: "magnifyingglass")
-        let listsVC  = makePlaceholder(title: "Lists",  icon: "bookmark")
-        let statsVC  = makePlaceholder(title: "Stats",  icon: "chart.bar")
-        let profileVC = makePlaceholder(title: "Profile", icon: "person")
+        let searchVC = makePlaceholder(title: Strings.TabBar.search, icon: "magnifyingglass")
+        let listsVC  = makePlaceholder(title: Strings.TabBar.lists,  icon: "bookmark")
+        let statsVC  = makePlaceholder(title: Strings.TabBar.stats,  icon: "chart.bar")
+        let profileVC = makePlaceholder(title: Strings.TabBar.profile, icon: "person")
 
         viewControllers = [homeVC, searchVC, listsVC, statsVC, profileVC].map {
             UINavigationController(rootViewController: $0)

@@ -21,8 +21,7 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: false)
-        customView.onRefresh = { [weak self] in self?.interactor.refresh() }
-        customView.onRetry = { [weak self] in self?.interactor.fetchContent(request: .init()) }
+        customView.delegate = self
         interactor.fetchContent(request: .init())
     }
 }
@@ -40,5 +39,21 @@ extension HomeViewController: HomeDisplayLogic {
     func displayError(viewModel: HomeModels.ErrorState.ViewModel) {
         customView.showError()
         customView.endRefreshing()
+    }
+}
+
+// MARK: - HomeViewDelegate
+
+extension HomeViewController: HomeViewDelegate {
+    func homeViewDidRequestRefresh(_ view: HomeView) {
+        interactor.refresh()
+    }
+
+    func homeViewDidRequestRetry(_ view: HomeView) {
+        interactor.fetchContent(request: .init())
+    }
+
+    func didSelectGenreAt(_ index: Int) {
+        interactor.selectGenre(request: .init(index: index))
     }
 }

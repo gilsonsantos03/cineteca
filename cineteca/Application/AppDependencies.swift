@@ -3,6 +3,7 @@ import UIKit
 
 final class AppDependencies {
     let movieRepository: MovieRepositoryProtocol
+    let genreRepository: GenreRepositoryProtocol
 
     init() {
         let networkService = AppDependencies.makeTMDBNetworkService()
@@ -11,6 +12,7 @@ final class AppDependencies {
             networkService: networkService,
             localeProvider: localeProvider
         )
+        self.genreRepository = genreRepository
         self.movieRepository = MovieRepository(
             networkService: networkService,
             genreRepository: genreRepository,
@@ -41,6 +43,9 @@ final class AppDependencies {
 
 extension AppDependencies {
     func makeRootViewController() -> UIViewController {
-        MainTabBarController(repository: movieRepository)
+        MainTabBarController(
+            repository: movieRepository,
+            genreRepository: genreRepository
+        )
     }
 }

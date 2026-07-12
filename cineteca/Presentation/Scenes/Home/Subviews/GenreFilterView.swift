@@ -1,11 +1,17 @@
 import UIKit
 import Cartography
 
+protocol GenreFilterViewDelegate: AnyObject {
+    func genreFilterView(_ view: GenreFilterView, didSelectGenreAt index: Int)
+}
+
 final class GenreFilterView: UIView {
 
     // MARK: - Properties
 
-    private let genres = ["All", "Action", "Drama", "Sci-Fi", "Horror", "Comedy", "Thriller"]
+    weak var delegate: GenreFilterViewDelegate?
+
+    private var options: [String] = []
     private var selectedIndex = 0
 
     // MARK: - UI Components
@@ -66,23 +72,31 @@ final class GenreFilterView: UIView {
             superview.height == 72
         }
     }
+
+    // MARK: - Configure
+
+    func configure(viewModel: GenreFilterViewModel) {
+        options = viewModel.options
+        selectedIndex = viewModel.selectedIndex
+        collectionView.reloadData()
+    }
 }
 
 // MARK: - UICollectionViewDataSource, UICollectionViewDelegate
 
 extension GenreFilterView: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        genres.count
+        options.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GenreChipCell.reuseId, for: indexPath) as! GenreChipCell
-        cell.configure(title: genres[indexPath.item], isSelected: indexPath.item == selectedIndex)
+        cell.configure(title: options[indexPath.item], isSelected: indexPath.item == selectedIndex)
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedIndex = indexPath.item
-        collectionView.reloadData()
+        guard indexPath.item != selectedIndex else { return }
+        delegate?.genreFilterView(self, didSelectGenreAt: indexPath.item)
     }
 }

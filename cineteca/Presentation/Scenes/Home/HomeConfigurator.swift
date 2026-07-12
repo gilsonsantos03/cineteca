@@ -1,9 +1,16 @@
 import UIKit
 
 final class HomeConfigurator {
-    static func resolve(repository: MovieRepositoryProtocol) -> UIViewController {
+    static func resolve(
+        repository: MovieRepositoryProtocol,
+        genreRepository: GenreRepositoryProtocol
+    ) -> UIViewController {
         let presenter = HomePresenter()
-        let interactor = HomeInteractor(presenter: presenter, repository: repository)
+        let interactor = HomeInteractor(
+            presenter: presenter,
+            repository: repository,
+            genreRepository: genreRepository
+        )
         let router = HomeRouter()
         let view = HomeView()
         let viewController = HomeViewController(customView: view, interactor: interactor, router: router)

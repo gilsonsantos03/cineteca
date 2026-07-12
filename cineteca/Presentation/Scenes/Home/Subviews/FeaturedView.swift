@@ -79,7 +79,7 @@ final class FeaturedView: UIView {
 
     private lazy var watchTrailerButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("  Watch Trailer", for: .normal)
+        button.setTitle(Strings.HomeScene.Featured.watchTrailerButton, for: .normal)
         let config = UIImage.SymbolConfiguration(pointSize: 14, weight: .semibold)
         button.setImage(UIImage(systemName: "play.fill", withConfiguration: config), for: .normal)
         button.tintColor = .black
@@ -92,7 +92,7 @@ final class FeaturedView: UIView {
 
     private lazy var watchlistButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("  Watchlist", for: .normal)
+        button.setTitle(Strings.HomeScene.Featured.watchlistButton, for: .normal)
         let config = UIImage.SymbolConfiguration(pointSize: 14, weight: .semibold)
         button.setImage(UIImage(systemName: "plus", withConfiguration: config), for: .normal)
         button.tintColor = .white

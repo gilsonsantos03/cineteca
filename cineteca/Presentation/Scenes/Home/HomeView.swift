@@ -1,7 +1,17 @@
 import UIKit
 import Cartography
 
+protocol HomeViewDelegate: AnyObject {
+    func homeViewDidRequestRefresh(_ view: HomeView)
+    func homeViewDidRequestRetry(_ view: HomeView)
+    func didSelectGenreAt(_ index: Int)
+}
+
 final class HomeView: UIView {
+
+    // MARK: - Properties
+
+    weak var delegate: HomeViewDelegate?
 
     // MARK: - State
 
@@ -9,16 +19,6 @@ final class HomeView: UIView {
         case loading
         case content
         case error
-    }
-
-    // MARK: - Public API
-
-    var onRefresh: (() -> Void)? {
-        didSet { homeContentView.onRefresh = onRefresh }
-    }
-
-    var onRetry: (() -> Void)? {
-        didSet { errorStateView.onRetry = onRetry }
     }
 
     // MARK: - UI Components
@@ -40,6 +40,8 @@ final class HomeView: UIView {
 
     private func setup() {
         backgroundColor = .appBackground
+        homeContentView.delegate = self
+        errorStateView.delegate = self
         setupSubviews()
         setupConstraints()
         setState(.loading)
@@ -100,5 +102,25 @@ final class HomeView: UIView {
         loadingSkeletonView.isHidden = state != .loading
         homeContentView.isHidden = state != .content
         errorStateView.isHidden = state != .error
+    }
+}
+
+// MARK: - HomeContentViewDelegate
+
+extension HomeView: HomeContentViewDelegate {
+    func homeContentViewDidRequestRefresh(_ view: HomeContentView) {
+        delegate?.homeViewDidRequestRefresh(self)
+    }
+
+    func homeContentView(_ view: HomeContentView, didSelectGenreAt index: Int) {
+        delegate?.didSelectGenreAt(index)
+    }
+}
+
+// MARK: - HomeErrorStateViewDelegate
+
+extension HomeView: HomeErrorStateViewDelegate {
+    func homeErrorStateViewDidRequestRetry(_ view: HomeErrorStateView) {
+        delegate?.homeViewDidRequestRetry(self)
     }
 }

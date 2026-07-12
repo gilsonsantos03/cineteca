@@ -1,0 +1,24 @@
+"HomeScene.GenreFilter.All.Text" = "Todos";
+
+"HomeScene.Section.NowPlaying.Title" = "Em cartaz";
+"HomeScene.Section.Trending.Title" = "Em alta";
+"HomeScene.Section.TopRated.Title" = "Mais bem avaliados";
+"HomeScene.Section.SeeAll.Text" = "Ver tudo";
+
+"HomeScene.Error.Title" = "Algo deu errado";
+"HomeScene.Error.Subtitle" = "Não foi possível carregar sua home. Verifique sua conexão e tente novamente.";
+"HomeScene.Error.RetryButton.Text" = "Tentar novamente";
+
+"HomeScene.Featured.WatchTrailerButton.Text" = "  Ver trailer";
+"HomeScene.Featured.WatchlistButton.Text" = "  Minha lista";
+
+"HomeScene.Card.TrendingBadge.Text" = "Em alta";
+
+"HomeScene.WeeklyDigest.Title" = "Seu resumo semanal";
+"HomeScene.WeeklyDigest.Subtitle" = "4 novos filmes combinam com você";
+
+"TabBar.Home.Title" = "Home";
+"TabBar.Search.Title" = "Buscar";
+"TabBar.Lists.Title" = "Listas";
+"TabBar.Stats.Title" = "Stats";
+"TabBar.Profile.Title" = "Perfil";

@@ -7,7 +7,7 @@ final class WeeklyDigestView: UIView {
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Your weekly digest"
+        label.text = Strings.HomeScene.WeeklyDigest.title
         label.font = .systemFont(ofSize: 15, weight: .semibold)
         label.textColor = .white
         return label
@@ -15,7 +15,7 @@ final class WeeklyDigestView: UIView {
 
     private lazy var subtitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "4 new films match your taste"
+        label.text = Strings.HomeScene.WeeklyDigest.subtitle
         label.font = .systemFont(ofSize: 13)
         label.textColor = .textSecondary
         return label

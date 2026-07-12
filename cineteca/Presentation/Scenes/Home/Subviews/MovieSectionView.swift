@@ -20,7 +20,7 @@ final class MovieSectionView: UIView {
 
     private lazy var seeAllButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("See all", for: .normal)
+        button.setTitle(Strings.HomeScene.Section.seeAll, for: .normal)
         button.setTitleColor(.textSecondary, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 13)
         return button

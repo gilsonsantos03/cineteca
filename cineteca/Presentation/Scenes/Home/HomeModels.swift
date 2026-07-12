@@ -9,19 +9,37 @@ struct HomeModels {
             let nowPlaying: [Movie]
             let trending: [Movie]
             let topRated: [Movie]
+            let genreFilter: GenreFilter
         }
 
         struct ViewModel {
             let featured: FeaturedViewModel
+            let genreFilter: GenreFilterViewModel
             let nowPlaying: [MovieCardViewModel]
             let trending: [MovieCardViewModel]
             let topRated: [MovieCardViewModel]
         }
     }
 
+    enum SelectGenre {
+        struct Request {
+            let index: Int
+        }
+    }
+
     enum ErrorState {
         struct ViewModel {}
     }
+}
+
+struct GenreFilter {
+    let options: [String]
+    let selectedIndex: Int
+}
+
+struct GenreFilterViewModel {
+    let options: [String]
+    let selectedIndex: Int
 }
 
 struct FeaturedViewModel {

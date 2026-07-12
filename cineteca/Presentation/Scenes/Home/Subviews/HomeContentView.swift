@@ -1,11 +1,16 @@
 import UIKit
 import Cartography
 
+protocol HomeContentViewDelegate: AnyObject {
+    func homeContentViewDidRequestRefresh(_ view: HomeContentView)
+    func homeContentView(_ view: HomeContentView, didSelectGenreAt index: Int)
+}
+
 final class HomeContentView: UIView {
 
-    // MARK: - Public API
+    // MARK: - Properties
 
-    var onRefresh: (() -> Void)?
+    weak var delegate: HomeContentViewDelegate?
 
     // MARK: - UI Components
 
@@ -33,9 +38,9 @@ final class HomeContentView: UIView {
 
     private lazy var featuredView = FeaturedView()
     private lazy var genreFilterView = GenreFilterView()
-    private lazy var nowPlayingSectionView = MovieSectionView(title: "Now Playing")
-    private lazy var trendingSectionView = MovieSectionView(title: "Trending Now")
-    private lazy var topRatedSectionView = MovieSectionView(title: "Top Rated")
+    private lazy var nowPlayingSectionView = MovieSectionView(title: Strings.HomeScene.Section.nowPlaying)
+    private lazy var trendingSectionView = MovieSectionView(title: Strings.HomeScene.Section.trending)
+    private lazy var topRatedSectionView = MovieSectionView(title: Strings.HomeScene.Section.topRated)
     private lazy var weeklyDigestView = WeeklyDigestView()
 
     // MARK: - Initialization
@@ -51,6 +56,7 @@ final class HomeContentView: UIView {
 
     private func setup() {
         backgroundColor = .appBackground
+        genreFilterView.delegate = self
         setupSubviews()
         setupConstraints()
     }
@@ -96,6 +102,7 @@ final class HomeContentView: UIView {
 
     func configure(viewModel: HomeModels.FetchContent.ViewModel) {
         featuredView.configure(viewModel: viewModel.featured)
+        genreFilterView.configure(viewModel: viewModel.genreFilter)
         nowPlayingSectionView.configure(movies: viewModel.nowPlaying)
         trendingSectionView.configure(movies: viewModel.trending)
         topRatedSectionView.configure(movies: viewModel.topRated)
@@ -108,7 +115,7 @@ final class HomeContentView: UIView {
     // MARK: - Actions
 
     @objc private func didPullToRefresh() {
-        onRefresh?()
+        delegate?.homeContentViewDidRequestRefresh(self)
     }
 
     // MARK: - Helpers
@@ -118,5 +125,13 @@ final class HomeContentView: UIView {
         spacer.backgroundColor = .clear
         constrain(spacer) { $0.height == height }
         return spacer
+    }
+}
+
+// MARK: - GenreFilterViewDelegate
+
+extension HomeContentView: GenreFilterViewDelegate {
+    func genreFilterView(_ view: GenreFilterView, didSelectGenreAt index: Int) {
+        delegate?.homeContentView(self, didSelectGenreAt: index)
     }
 }

@@ -1,0 +1,24 @@
+"HomeScene.GenreFilter.All.Text" = "All";
+
+"HomeScene.Section.NowPlaying.Title" = "Now Playing";
+"HomeScene.Section.Trending.Title" = "Trending Now";
+"HomeScene.Section.TopRated.Title" = "Top Rated";
+"HomeScene.Section.SeeAll.Text" = "See all";
+
+"HomeScene.Error.Title" = "Something went wrong";
+"HomeScene.Error.Subtitle" = "We couldn't load your home. Check your connection and try again.";
+"HomeScene.Error.RetryButton.Text" = "Try again";
+
+"HomeScene.Featured.WatchTrailerButton.Text" = "  Watch Trailer";
+"HomeScene.Featured.WatchlistButton.Text" = "  Watchlist";
+
+"HomeScene.Card.TrendingBadge.Text" = "Trending";
+
+"HomeScene.WeeklyDigest.Title" = "Your weekly digest";
+"HomeScene.WeeklyDigest.Subtitle" = "4 new films match your taste";
+
+"TabBar.Home.Title" = "Home";
+"TabBar.Search.Title" = "Search";
+"TabBar.Lists.Title" = "Lists";
+"TabBar.Stats.Title" = "Stats";
+"TabBar.Profile.Title" = "Profile";

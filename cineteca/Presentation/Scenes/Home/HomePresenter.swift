@@ -20,6 +20,10 @@ extension HomePresenter: HomePresentationLogic {
     func presentContent(response: HomeModels.FetchContent.Response) {
         let viewModel = HomeModels.FetchContent.ViewModel(
             featured: makeFeaturedViewModel(from: response.featured),
+            genreFilter: GenreFilterViewModel(
+                options: response.genreFilter.options,
+                selectedIndex: response.genreFilter.selectedIndex
+            ),
             nowPlaying: response.nowPlaying.map { makeCardViewModel(from: $0) },
             trending: response.trending.map { makeCardViewModel(from: $0, isTrending: true) },
             topRated: response.topRated.map { makeCardViewModel(from: $0) }
