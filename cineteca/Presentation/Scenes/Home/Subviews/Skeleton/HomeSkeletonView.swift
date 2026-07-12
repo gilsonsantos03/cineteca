@@ -20,17 +20,17 @@ final class HomeSkeletonView: UIView {
         return stack
     }()
 
-    private lazy var featuredContainer = UIView()
+    private lazy var featuredContainerView = UIView()
     private lazy var featuredBackdropShimmer = ShimmerView(cornerRadius: 0)
-    private lazy var featuredMetaShimmer = ShimmerView(cornerRadius: 4)
+    private lazy var featuredRatingYearShimmer = ShimmerView(cornerRadius: 4)
     private lazy var featuredTitleShimmer = ShimmerView(cornerRadius: 6)
     private lazy var featuredButtonShimmer = ShimmerView(cornerRadius: 22)
 
-    private lazy var nowPlayingSkeleton = MovieSectionSkeletonView()
-    private lazy var trendingSkeleton = MovieSectionSkeletonView()
-    private lazy var topRatedSkeleton = MovieSectionSkeletonView()
+    private lazy var nowPlayingSectionSkeletonView = MovieSectionSkeletonView()
+    private lazy var trendingSectionSkeletonView = MovieSectionSkeletonView()
+    private lazy var topRatedSectionSkeletonView = MovieSectionSkeletonView()
 
-    private lazy var weeklyDigestContainer = UIView()
+    private lazy var weeklyDigestContainerView = UIView()
     private lazy var weeklyDigestShimmer = ShimmerView(cornerRadius: 14)
 
     // MARK: - Initialization
@@ -54,22 +54,22 @@ final class HomeSkeletonView: UIView {
         addSubview(scrollView)
         scrollView.addSubview(contentStack)
 
-        featuredContainer.addSubview(featuredBackdropShimmer)
-        featuredContainer.addSubview(featuredMetaShimmer)
-        featuredContainer.addSubview(featuredTitleShimmer)
-        featuredContainer.addSubview(featuredButtonShimmer)
+        featuredContainerView.addSubview(featuredBackdropShimmer)
+        featuredContainerView.addSubview(featuredRatingYearShimmer)
+        featuredContainerView.addSubview(featuredTitleShimmer)
+        featuredContainerView.addSubview(featuredButtonShimmer)
 
-        weeklyDigestContainer.addSubview(weeklyDigestShimmer)
+        weeklyDigestContainerView.addSubview(weeklyDigestShimmer)
 
-        contentStack.addArrangedSubview(featuredContainer)
+        contentStack.addArrangedSubview(featuredContainerView)
         contentStack.addArrangedSubview(makeSpacer(height: 24))
-        contentStack.addArrangedSubview(nowPlayingSkeleton)
+        contentStack.addArrangedSubview(nowPlayingSectionSkeletonView)
         contentStack.addArrangedSubview(makeSpacer(height: 24))
-        contentStack.addArrangedSubview(trendingSkeleton)
+        contentStack.addArrangedSubview(trendingSectionSkeletonView)
         contentStack.addArrangedSubview(makeSpacer(height: 24))
-        contentStack.addArrangedSubview(topRatedSkeleton)
+        contentStack.addArrangedSubview(topRatedSectionSkeletonView)
         contentStack.addArrangedSubview(makeSpacer(height: 24))
-        contentStack.addArrangedSubview(weeklyDigestContainer)
+        contentStack.addArrangedSubview(weeklyDigestContainerView)
         contentStack.addArrangedSubview(makeSpacer(height: 32))
     }
 
@@ -79,7 +79,7 @@ final class HomeSkeletonView: UIView {
         constrainFeaturedBackdropShimmer()
         constrainFeaturedButtonShimmer()
         constrainFeaturedTitleShimmer()
-        constrainFeaturedMetaShimmer()
+        constrainFeaturedRatingYearShimmer()
         constrainWeeklyDigestShimmer()
     }
 
@@ -100,7 +100,7 @@ final class HomeSkeletonView: UIView {
     }
 
     private func constrainFeaturedBackdropShimmer() {
-        constrain(featuredBackdropShimmer, featuredContainer) { shimmer, container in
+        constrain(featuredBackdropShimmer, featuredContainerView) { shimmer, container in
             shimmer.top == container.top
             shimmer.left == container.left
             shimmer.right == container.right
@@ -110,7 +110,7 @@ final class HomeSkeletonView: UIView {
     }
 
     private func constrainFeaturedButtonShimmer() {
-        constrain(featuredButtonShimmer, featuredBackdropShimmer, featuredContainer) { shimmer, backdrop, container in
+        constrain(featuredButtonShimmer, featuredBackdropShimmer, featuredContainerView) { shimmer, backdrop, container in
             shimmer.left == container.left + 20
             shimmer.right == container.right - 20
             shimmer.bottom == backdrop.bottom - 20
@@ -119,7 +119,7 @@ final class HomeSkeletonView: UIView {
     }
 
     private func constrainFeaturedTitleShimmer() {
-        constrain(featuredTitleShimmer, featuredButtonShimmer, featuredContainer) { shimmer, button, container in
+        constrain(featuredTitleShimmer, featuredButtonShimmer, featuredContainerView) { shimmer, button, container in
             shimmer.left == container.left + 20
             shimmer.right == container.right - 80
             shimmer.bottom == button.top - 24
@@ -127,8 +127,8 @@ final class HomeSkeletonView: UIView {
         }
     }
 
-    private func constrainFeaturedMetaShimmer() {
-        constrain(featuredMetaShimmer, featuredTitleShimmer, featuredContainer) { shimmer, title, container in
+    private func constrainFeaturedRatingYearShimmer() {
+        constrain(featuredRatingYearShimmer, featuredTitleShimmer, featuredContainerView) { shimmer, title, container in
             shimmer.left == container.left + 20
             shimmer.width == 160
             shimmer.bottom == title.top - 8
@@ -137,7 +137,7 @@ final class HomeSkeletonView: UIView {
     }
 
     private func constrainWeeklyDigestShimmer() {
-        constrain(weeklyDigestShimmer, weeklyDigestContainer) { shimmer, container in
+        constrain(weeklyDigestShimmer, weeklyDigestContainerView) { shimmer, container in
             shimmer.top == container.top
             shimmer.bottom == container.bottom
             shimmer.left == container.left + 20

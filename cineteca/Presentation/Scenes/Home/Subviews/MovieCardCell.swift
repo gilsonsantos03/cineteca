@@ -37,7 +37,7 @@ final class MovieCardCell: UICollectionViewCell {
         return row
     }()
 
-    private lazy var trendingBadge: UIView = {
+    private lazy var trendingBadgeView: UIView = {
         let container = UIView()
         container.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         container.layer.cornerRadius = 8
@@ -75,7 +75,7 @@ final class MovieCardCell: UICollectionViewCell {
         return row
     }()
 
-    private lazy var infoStack: UIStackView = {
+    private lazy var movieInfoStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [titleLabel, ratingRow])
         stack.axis = .vertical
         stack.spacing = 2
@@ -100,17 +100,17 @@ final class MovieCardCell: UICollectionViewCell {
 
     private func setupSubviews() {
         contentView.addSubview(posterImageView)
-        contentView.addSubview(trendingBadge)
-        trendingBadge.addSubview(trendingRow)
-        contentView.addSubview(infoStack)
+        contentView.addSubview(trendingBadgeView)
+        trendingBadgeView.addSubview(trendingRow)
+        contentView.addSubview(movieInfoStack)
     }
 
     private func setupConstraints() {
         constrainPosterImageView()
-        constrainTrendingBadge()
+        constrainTrendingBadgeView()
         constrainTrendingRow()
         constrainStarImageView()
-        constrainInfoStack()
+        constrainMovieInfoStack()
     }
 
     private func constrainPosterImageView() {
@@ -122,15 +122,15 @@ final class MovieCardCell: UICollectionViewCell {
         }
     }
 
-    private func constrainTrendingBadge() {
-        constrain(trendingBadge, posterImageView) { badge, imageView in
+    private func constrainTrendingBadgeView() {
+        constrain(trendingBadgeView, posterImageView) { badge, imageView in
             badge.top == imageView.top + 8
             badge.left == imageView.left + 8
         }
     }
 
     private func constrainTrendingRow() {
-        constrain(trendingRow, trendingBadge) { row, container in
+        constrain(trendingRow, trendingBadgeView) { row, container in
             row.top == container.top + 4
             row.bottom == container.bottom - 4
             row.left == container.left + 6
@@ -145,8 +145,8 @@ final class MovieCardCell: UICollectionViewCell {
         }
     }
 
-    private func constrainInfoStack() {
-        constrain(infoStack, posterImageView, contentView) { stack, imageView, container in
+    private func constrainMovieInfoStack() {
+        constrain(movieInfoStack, posterImageView, contentView) { stack, imageView, container in
             stack.top == imageView.bottom + 6
             stack.left == container.left
             stack.right == container.right
@@ -159,7 +159,7 @@ final class MovieCardCell: UICollectionViewCell {
         posterImageView.loadImage(from: viewModel.posterURL)
         titleLabel.text = viewModel.title
         ratingLabel.text = viewModel.rating
-        trendingBadge.isHidden = !viewModel.isTrending
+        trendingBadgeView.isHidden = !viewModel.isTrending
     }
 
     override func prepareForReuse() {

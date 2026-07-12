@@ -1,7 +1,7 @@
 import UIKit
 import Cartography
 
-final class FeaturedHeroView: UIView {
+final class FeaturedView: UIView {
 
     // MARK: - UI Components
 
@@ -33,21 +33,29 @@ final class FeaturedHeroView: UIView {
         return label
     }()
 
-    private lazy var imdbBadge: UIView = {
+    private lazy var imdbBadgeView: UIView = {
         let container = UIView()
         container.backgroundColor = .accentYellow
         container.layer.cornerRadius = 6
         return container
     }()
 
-    private lazy var ratingLabel: UILabel = {
+    private lazy var imdbRatingLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 13, weight: .semibold)
-        label.textColor = .white
+        label.font = .systemFont(ofSize: 10, weight: .bold)
+        label.textColor = .black
         return label
     }()
 
-    private lazy var metaLabel: UILabel = {
+    private lazy var imdbBadgeStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [imdbBadgeLabel, imdbRatingLabel])
+        stack.axis = .horizontal
+        stack.spacing = 4
+        stack.alignment = .center
+        return stack
+    }()
+
+    private lazy var yearLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13)
         label.textColor = .textSecondary
@@ -62,7 +70,7 @@ final class FeaturedHeroView: UIView {
         return label
     }()
 
-    private lazy var genreStack: UIStackView = {
+    private lazy var genreChipStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.spacing = 8
@@ -97,15 +105,15 @@ final class FeaturedHeroView: UIView {
         return button
     }()
 
-    private lazy var metaRow: UIStackView = {
-        let row = UIStackView(arrangedSubviews: [imdbBadge, ratingLabel, metaLabel])
+    private lazy var ratingYearRow: UIStackView = {
+        let row = UIStackView(arrangedSubviews: [imdbBadgeView, yearLabel])
         row.axis = .horizontal
         row.spacing = 8
         row.alignment = .center
         return row
     }()
 
-    private lazy var buttonRow: UIStackView = {
+    private lazy var actionButtonRow: UIStackView = {
         let row = UIStackView(arrangedSubviews: [watchTrailerButton, watchlistButton])
         row.axis = .horizontal
         row.spacing = 12
@@ -150,21 +158,21 @@ final class FeaturedHeroView: UIView {
     private func setupSubviews() {
         addSubview(backdropImageView)
         addSubview(notificationButton)
-        imdbBadge.addSubview(imdbBadgeLabel)
-        addSubview(metaRow)
+        imdbBadgeView.addSubview(imdbBadgeStack)
+        addSubview(ratingYearRow)
         addSubview(titleLabel)
-        addSubview(genreStack)
-        addSubview(buttonRow)
+        addSubview(genreChipStack)
+        addSubview(actionButtonRow)
     }
 
     private func setupConstraints() {
         constrainBackdropImageView()
         constrainNotificationButton()
-        constrainImdbBadgeLabel()
-        constrainButtonRow()
-        constrainGenreStack()
+        constrainImdbBadgeStack()
+        constrainActionButtonRow()
+        constrainGenreChipStack()
         constrainTitleLabel()
-        constrainMetaRow()
+        constrainRatingYearRow()
     }
 
     private func constrainBackdropImageView() {
@@ -186,17 +194,17 @@ final class FeaturedHeroView: UIView {
         }
     }
 
-    private func constrainImdbBadgeLabel() {
-        constrain(imdbBadgeLabel, imdbBadge) { label, container in
-            label.top == container.top + 3
-            label.bottom == container.bottom - 3
-            label.left == container.left + 6
-            label.right == container.right - 6
+    private func constrainImdbBadgeStack() {
+        constrain(imdbBadgeStack, imdbBadgeView) { stack, container in
+            stack.top == container.top + 3
+            stack.bottom == container.bottom - 3
+            stack.left == container.left + 6
+            stack.right == container.right - 6
         }
     }
 
-    private func constrainButtonRow() {
-        constrain(buttonRow, backdropImageView, self) { row, imageView, superview in
+    private func constrainActionButtonRow() {
+        constrain(actionButtonRow, backdropImageView, self) { row, imageView, superview in
             row.left == superview.left + 20
             row.right == superview.right - 20
             row.bottom == imageView.bottom - 20
@@ -204,23 +212,23 @@ final class FeaturedHeroView: UIView {
         }
     }
 
-    private func constrainGenreStack() {
-        constrain(genreStack, buttonRow) { stack, row in
+    private func constrainGenreChipStack() {
+        constrain(genreChipStack, actionButtonRow) { stack, row in
             stack.left == row.left
             stack.bottom == row.top - 16
         }
     }
 
     private func constrainTitleLabel() {
-        constrain(titleLabel, genreStack) { label, stack in
+        constrain(titleLabel, genreChipStack) { label, stack in
             label.left == stack.left
             label.right == stack.right + 200
             label.bottom == stack.top - 10
         }
     }
 
-    private func constrainMetaRow() {
-        constrain(metaRow, titleLabel) { row, label in
+    private func constrainRatingYearRow() {
+        constrain(ratingYearRow, titleLabel) { row, label in
             row.left == label.left
             row.bottom == label.top - 8
         }
@@ -231,13 +239,13 @@ final class FeaturedHeroView: UIView {
     func configure(viewModel: FeaturedViewModel) {
         backdropImageView.loadImage(from: viewModel.backdropURL)
         titleLabel.text = viewModel.title
-        ratingLabel.text = viewModel.rating
-        metaLabel.text = "\(viewModel.year) · \(viewModel.runtime)"
+        imdbRatingLabel.text = viewModel.rating
+        yearLabel.text = viewModel.year
 
-        genreStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        genreChipStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
         viewModel.genres.forEach { genre in
             let chip = makeGenreChip(genre)
-            genreStack.addArrangedSubview(chip)
+            genreChipStack.addArrangedSubview(chip)
         }
     }
 

@@ -120,9 +120,9 @@ private func constrainImageView() {
     | `UIButton` | `Button` | `watchTrailerButton`, `seeAllButton` |
     | `UIImageView` | `ImageView` | `posterImageView`, `starImageView` |
     | `UITextField` | `TextField` | `nameTextField` |
-    | `UIStackView` | `Stack` or `Row` | `infoStack`, `metaRow` |
+    | `UIStackView` | `Stack` or `Row` | `movieInfoStack`, `ratingYearRow` |
     | `UICollectionView` | `CollectionView` | `collectionView` |
-    | `UIView` (container) | `View` or `Container` | `notificationContainerView`, `trendingBadge` |
+    | `UIView` (container) | `View` or `Container` | `imdbBadgeView`, `trendingBadgeView` |
 
 ### Init
 
@@ -186,7 +186,7 @@ Views are **display-only**. They accept a view model and bind it — no business
 func configure(viewModel: FeaturedViewModel) {
     backdropImageView.loadImage(from: viewModel.backdropURL)
     titleLabel.text = viewModel.title
-    ratingLabel.text = viewModel.rating
+    imdbRatingLabel.text = viewModel.rating
 }
 ```
 

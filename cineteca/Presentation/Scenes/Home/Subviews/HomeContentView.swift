@@ -31,11 +31,11 @@ final class HomeContentView: UIView {
         return stack
     }()
 
-    private lazy var featuredView = FeaturedHeroView()
+    private lazy var featuredView = FeaturedView()
     private lazy var genreFilterView = GenreFilterView()
-    private lazy var nowPlayingSection = MovieSectionView(title: "Now Playing")
-    private lazy var trendingSection = MovieSectionView(title: "Trending Now")
-    private lazy var topRatedSection = MovieSectionView(title: "Top Rated")
+    private lazy var nowPlayingSectionView = MovieSectionView(title: "Now Playing")
+    private lazy var trendingSectionView = MovieSectionView(title: "Trending Now")
+    private lazy var topRatedSectionView = MovieSectionView(title: "Top Rated")
     private lazy var weeklyDigestView = WeeklyDigestView()
 
     // MARK: - Initialization
@@ -61,11 +61,11 @@ final class HomeContentView: UIView {
 
         contentStack.addArrangedSubview(featuredView)
         contentStack.addArrangedSubview(genreFilterView)
-        contentStack.addArrangedSubview(nowPlayingSection)
+        contentStack.addArrangedSubview(nowPlayingSectionView)
         contentStack.addArrangedSubview(makeSpacer(height: 24))
-        contentStack.addArrangedSubview(trendingSection)
+        contentStack.addArrangedSubview(trendingSectionView)
         contentStack.addArrangedSubview(makeSpacer(height: 24))
-        contentStack.addArrangedSubview(topRatedSection)
+        contentStack.addArrangedSubview(topRatedSectionView)
         contentStack.addArrangedSubview(makeSpacer(height: 24))
         contentStack.addArrangedSubview(weeklyDigestView)
         contentStack.addArrangedSubview(makeSpacer(height: 32))
@@ -96,9 +96,9 @@ final class HomeContentView: UIView {
 
     func configure(viewModel: HomeModels.FetchContent.ViewModel) {
         featuredView.configure(viewModel: viewModel.featured)
-        nowPlayingSection.configure(movies: viewModel.nowPlaying)
-        trendingSection.configure(movies: viewModel.trending)
-        topRatedSection.configure(movies: viewModel.topRated)
+        nowPlayingSectionView.configure(movies: viewModel.nowPlaying)
+        trendingSectionView.configure(movies: viewModel.trending)
+        topRatedSectionView.configure(movies: viewModel.topRated)
     }
 
     func endRefreshing() {

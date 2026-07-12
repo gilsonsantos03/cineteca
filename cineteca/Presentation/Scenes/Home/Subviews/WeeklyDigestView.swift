@@ -21,7 +21,7 @@ final class WeeklyDigestView: UIView {
         return label
     }()
 
-    private lazy var textStack: UIStackView = {
+    private lazy var digestTextStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [titleLabel, subtitleLabel])
         stack.axis = .vertical
         stack.spacing = 4
@@ -55,18 +55,18 @@ final class WeeklyDigestView: UIView {
     }
 
     private func setupSubviews() {
-        addSubview(textStack)
+        addSubview(digestTextStack)
         addSubview(starImageView)
     }
 
     private func setupConstraints() {
-        constrainTextStack()
+        constrainDigestTextStack()
         constrainStarImageView()
         constrainSelf()
     }
 
-    private func constrainTextStack() {
-        constrain(textStack, self) { stack, superview in
+    private func constrainDigestTextStack() {
+        constrain(digestTextStack, self) { stack, superview in
             stack.top == superview.top + 16
             stack.bottom == superview.bottom - 16
             stack.left == superview.left + 16
@@ -74,7 +74,7 @@ final class WeeklyDigestView: UIView {
     }
 
     private func constrainStarImageView() {
-        constrain(starImageView, self, textStack) { imageView, superview, stack in
+        constrain(starImageView, self, digestTextStack) { imageView, superview, stack in
             imageView.centerY == stack.centerY
             imageView.right == superview.right - 16
             imageView.left >= stack.right + 8

@@ -14,18 +14,18 @@ final class HomeView: UIView {
     // MARK: - Public API
 
     var onRefresh: (() -> Void)? {
-        didSet { contentView.onRefresh = onRefresh }
+        didSet { homeContentView.onRefresh = onRefresh }
     }
 
     var onRetry: (() -> Void)? {
-        didSet { errorView.onRetry = onRetry }
+        didSet { errorStateView.onRetry = onRetry }
     }
 
     // MARK: - UI Components
 
-    private lazy var skeletonView = HomeSkeletonView()
-    private lazy var contentView = HomeContentView()
-    private lazy var errorView = HomeErrorStateView()
+    private lazy var loadingSkeletonView = HomeSkeletonView()
+    private lazy var homeContentView = HomeContentView()
+    private lazy var errorStateView = HomeErrorStateView()
 
     // MARK: - Initialization
 
@@ -46,31 +46,31 @@ final class HomeView: UIView {
     }
 
     private func setupSubviews() {
-        addSubview(contentView)
-        addSubview(errorView)
-        addSubview(skeletonView)
+        addSubview(homeContentView)
+        addSubview(errorStateView)
+        addSubview(loadingSkeletonView)
     }
 
     private func setupConstraints() {
-        constrainSkeletonView()
-        constrainContentView()
-        constrainErrorView()
+        constrainLoadingSkeletonView()
+        constrainHomeContentView()
+        constrainErrorStateView()
     }
 
-    private func constrainSkeletonView() {
-        constrain(skeletonView, self) { view, superview in
+    private func constrainLoadingSkeletonView() {
+        constrain(loadingSkeletonView, self) { view, superview in
             view.edges == superview.edges
         }
     }
 
-    private func constrainContentView() {
-        constrain(contentView, self) { view, superview in
+    private func constrainHomeContentView() {
+        constrain(homeContentView, self) { view, superview in
             view.edges == superview.edges
         }
     }
 
-    private func constrainErrorView() {
-        constrain(errorView, self) { view, superview in
+    private func constrainErrorStateView() {
+        constrain(errorStateView, self) { view, superview in
             view.edges == superview.edges
         }
     }
@@ -82,7 +82,7 @@ final class HomeView: UIView {
     }
 
     func showContent(viewModel: HomeModels.FetchContent.ViewModel) {
-        contentView.configure(viewModel: viewModel)
+        homeContentView.configure(viewModel: viewModel)
         setState(.content)
     }
 
@@ -91,14 +91,14 @@ final class HomeView: UIView {
     }
 
     func endRefreshing() {
-        contentView.endRefreshing()
+        homeContentView.endRefreshing()
     }
 
     // MARK: - Helpers
 
     private func setState(_ state: State) {
-        skeletonView.isHidden = state != .loading
-        contentView.isHidden = state != .content
-        errorView.isHidden = state != .error
+        loadingSkeletonView.isHidden = state != .loading
+        homeContentView.isHidden = state != .content
+        errorStateView.isHidden = state != .error
     }
 }
