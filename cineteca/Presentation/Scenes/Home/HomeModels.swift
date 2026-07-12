@@ -27,7 +27,6 @@ struct HomeModels {
 struct FeaturedViewModel {
     let title: String
     let year: String
-    let runtime: String
     let rating: String
     let genres: [String]
     let backdropURL: URL?

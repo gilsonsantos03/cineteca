@@ -39,7 +39,6 @@ extension HomePresenter: HomePresentationLogic {
         FeaturedViewModel(
             title: movie.title,
             year: movie.releaseYear,
-            runtime: formatRuntime(movie.runtime),
             rating: formatRating(movie.rating),
             genres: Array(movie.genres.prefix(3)),
             backdropURL: movie.backdropURL
@@ -58,10 +57,5 @@ extension HomePresenter: HomePresentationLogic {
 
     private func formatRating(_ rating: Double) -> String {
         String(format: "%.1f", rating)
-    }
-
-    private func formatRuntime(_ runtime: Int?) -> String {
-        guard let runtime else { return "" }
-        return "\(runtime / 60)h \(runtime % 60)m"
     }
 }
