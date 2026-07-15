@@ -11,6 +11,12 @@ actor GenreRepository: GenreRepositoryProtocol {
         self.localeProvider = localeProvider
     }
 
+    func invalidateCache() {
+        cache = nil
+        inFlight?.cancel()
+        inFlight = nil
+    }
+
     func genres() async throws -> [Int: String] {
         if let cache {
             return cache

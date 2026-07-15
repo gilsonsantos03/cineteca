@@ -69,6 +69,7 @@ final class NetworkService: NetworkServiceProtocol {
 
         var request = URLRequest(url: finalURL)
         request.httpMethod = builder.method.rawValue
+        request.cachePolicy = .reloadIgnoringLocalCacheData
 
         configuration.defaultHeaders.forEach { key, value in
             request.setValue(value, forHTTPHeaderField: key)

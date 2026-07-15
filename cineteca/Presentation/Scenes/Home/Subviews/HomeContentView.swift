@@ -25,6 +25,7 @@ final class HomeContentView: UIView {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
         scrollView.backgroundColor = .appBackground
+        scrollView.alwaysBounceVertical = true
         scrollView.refreshControl = refreshControl
         return scrollView
     }()

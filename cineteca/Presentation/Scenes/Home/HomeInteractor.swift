@@ -33,7 +33,10 @@ extension HomeInteractor: HomeBusinessLogic {
     }
 
     func refresh() {
-        Task { await loadContent() }
+        Task {
+            await genreRepository.invalidateCache()
+            await loadContent()
+        }
     }
 
     func selectGenre(request: HomeModels.SelectGenre.Request) {
