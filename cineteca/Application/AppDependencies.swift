@@ -15,7 +15,6 @@ final class AppDependencies {
         self.genreRepository = genreRepository
         self.movieRepository = MovieRepository(
             networkService: networkService,
-            genreRepository: genreRepository,
             localeProvider: localeProvider
         )
     }

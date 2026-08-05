@@ -1,8 +1,8 @@
 import Foundation
 
 protocol MovieRepositoryProtocol {
-    func fetchNowPlaying() async throws -> [Movie]
-    func fetchTrending() async throws -> [Movie]
-    func fetchTopRated() async throws -> [Movie]
-    func fetchFeatured() async throws -> [Movie]
+    func fetchNowPlaying(genreMap: [Int: String]) async throws -> [Movie]
+    func fetchTrending(genreMap: [Int: String]) async throws -> [Movie]
+    func fetchTopRated(genreMap: [Int: String]) async throws -> [Movie]
+    func fetchFeatured(genreMap: [Int: String]) async throws -> [Movie]
 }

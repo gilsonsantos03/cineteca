@@ -29,10 +29,12 @@ Padrão igual ao habit-stack: `en.lproj/Localizable.strings`, `pt-BR.lproj/Local
 A Home carrega quatro listas do TMDB (popular, now playing, trending, top rated) e os gêneros (`/genre/movie/list`). O filtro por gênero é **client-side**: os filmes completos ficam em cache no `HomeInteractor` e são refiltrados ao trocar o chip, sem nova chamada à API.
 
 ```
-API (1x)  →  CachedHomeContent  →  filtro por gênero  →  FetchContent.Response  →  UI
-                    ↑
-              selectGenre() reutiliza o cache
+API (5x no load/refresh)  →  CachedHomeContent  →  filtro por gênero (0x)  →  FetchContent.Response  →  UI
+                                    ↑
+                          selectGenre() reutiliza o cache
 ```
+
+**5 requests por load:** 1× gêneros + 4× listas de filmes. Trocar o chip de gênero não dispara nova request.
 
 Código em `cineteca/Presentation/Scenes/Home/`.
 
@@ -52,10 +54,11 @@ O presenter e as views recebem `HomeModels.FetchContent.Response` — listas já
 ### Carregamento
 
 1. `fetchContent()` ou `refresh()` → `loadContent()`.
-2. Cinco requisições em paralelo: 4 listas + gêneros.
-3. `genreOptions` = `Strings.HomeScene.GenreFilter.all` + gêneros da API ordenados.
-4. Salva `CachedHomeContent` em `cachedHomeContent`.
-5. `presentFilteredContent(from:)` aplica o gênero atual.
+2. `genreRepository.genres()` — uma request de gêneros (com cache no repositório).
+3. Quatro requests de filmes em paralelo, recebendo o `genreMap` como parâmetro.
+4. `genreOptions` = `Strings.HomeScene.GenreFilter.all` + gêneros da API ordenados.
+5. Salva `CachedHomeContent` em `cachedHomeContent`.
+6. `presentFilteredContent(from:)` aplica o gênero atual.
 
 ### Filtro por gênero
 
@@ -90,7 +93,9 @@ O presenter e as views recebem `HomeModels.FetchContent.Response` — listas já
 
 | Responsabilidade | Camada |
 |---|---|
-| Buscar filmes e gêneros | `MovieRepository`, `GenreRepository` |
+| Orquestrar busca de filmes e gêneros | `HomeInteractor` |
+| Buscar filmes | `MovieRepository` |
+| Buscar e cachear gêneros | `GenreRepository` |
 | Cache + filtro | `HomeInteractor` (`CachedHomeContent`) |
 | View models | `HomePresenter` |
 | Chips e listas | `GenreFilterView`, `HomeContentView` |

@@ -49,14 +49,15 @@ extension HomeInteractor: HomeBusinessLogic {
 
     private func loadContent() async {
         do {
-            async let featured = repository.fetchFeatured()
-            async let nowPlaying = repository.fetchNowPlaying()
-            async let trending = repository.fetchTrending()
-            async let topRated = repository.fetchTopRated()
-            async let genreMap = genreRepository.genres()
+            let genreMap = try await genreRepository.genres()
 
-            let (featuredMovies, nowPlayingMovies, trendingMovies, topRatedMovies, genres) = try await (
-                featured, nowPlaying, trending, topRated, genreMap
+            async let featured = repository.fetchFeatured(genreMap: genreMap)
+            async let nowPlaying = repository.fetchNowPlaying(genreMap: genreMap)
+            async let trending = repository.fetchTrending(genreMap: genreMap)
+            async let topRated = repository.fetchTopRated(genreMap: genreMap)
+
+            let (featuredMovies, nowPlayingMovies, trendingMovies, topRatedMovies) = try await (
+                featured, nowPlaying, trending, topRated
             )
 
             guard let featuredMovie = featuredMovies.first else {
@@ -64,7 +65,7 @@ extension HomeInteractor: HomeBusinessLogic {
                 return
             }
 
-            genreOptions = buildGenreOptions(from: genres)
+            genreOptions = buildGenreOptions(from: genreMap)
             let content = CachedHomeContent(
                 featured: featuredMovie,
                 nowPlaying: nowPlayingMovies,
