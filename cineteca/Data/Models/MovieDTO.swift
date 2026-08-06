@@ -15,6 +15,31 @@ struct MovieResponseDTO: Decodable, Sendable {
     let results: [MovieDTO]
 }
 
+struct VideoDTO: Decodable, Sendable {
+    let key: String
+    let site: String
+    let type: String
+    let official: Bool?
+    let publishedAt: String?
+
+    enum CodingKeys: String, CodingKey {
+        case key, site, type, official
+        case publishedAt = "published_at"
+    }
+}
+
+struct VideoListResponseDTO: Decodable, Sendable {
+    let results: [VideoDTO]
+}
+
+extension VideoListResponseDTO {
+    func youtubeTrailerKey() -> String? {
+        let trailers = results.filter { $0.site == "YouTube" && $0.type == "Trailer" }
+        let selected = trailers.first(where: { $0.official == true }) ?? trailers.first
+        return selected?.key
+    }
+}
+
 private enum TMDBImage {
     static let posterBaseURL = "https://image.tmdb.org/t/p/w500"
     static let backdropBaseURL = "https://image.tmdb.org/t/p/w780"

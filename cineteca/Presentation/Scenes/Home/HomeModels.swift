@@ -30,6 +30,22 @@ struct HomeModels {
     enum ErrorState {
         struct ViewModel {}
     }
+
+    enum WatchTrailer {
+        struct Request {
+            let movieId: Int
+        }
+
+        enum Response {
+            case success(youtubeKey: String)
+            case unavailable
+        }
+
+        enum ViewModel {
+            case success(youtubeKey: String)
+            case unavailable(title: String, message: String)
+        }
+    }
 }
 
 struct GenreFilter {
@@ -43,6 +59,7 @@ struct GenreFilterViewModel {
 }
 
 struct FeaturedViewModel {
+    let movieId: Int
     let title: String
     let year: String
     let rating: String

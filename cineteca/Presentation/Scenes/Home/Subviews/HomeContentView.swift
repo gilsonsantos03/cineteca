@@ -4,6 +4,7 @@ import Cartography
 protocol HomeContentViewDelegate: AnyObject {
     func homeContentViewDidRequestRefresh(_ view: HomeContentView)
     func homeContentView(_ view: HomeContentView, didSelectGenreAt index: Int)
+    func homeContentView(_ view: HomeContentView, didTapWatchTrailerForMovieId movieId: Int)
 }
 
 final class HomeContentView: UIView {
@@ -58,6 +59,7 @@ final class HomeContentView: UIView {
     private func setup() {
         backgroundColor = .appBackground
         genreFilterView.delegate = self
+        featuredView.delegate = self
         setupSubviews()
         setupConstraints()
     }
@@ -134,5 +136,13 @@ final class HomeContentView: UIView {
 extension HomeContentView: GenreFilterViewDelegate {
     func genreFilterView(_ view: GenreFilterView, didSelectGenreAt index: Int) {
         delegate?.homeContentView(self, didSelectGenreAt: index)
+    }
+}
+
+// MARK: - FeaturedViewDelegate
+
+extension HomeContentView: FeaturedViewDelegate {
+    func featuredView(_ view: FeaturedView, didTapWatchTrailerForMovieId movieId: Int) {
+        delegate?.homeContentView(self, didTapWatchTrailerForMovieId: movieId)
     }
 }

@@ -4,6 +4,7 @@ protocol HomeBusinessLogic {
     func fetchContent(request: HomeModels.FetchContent.Request)
     func refresh()
     func selectGenre(request: HomeModels.SelectGenre.Request)
+    func watchTrailer(request: HomeModels.WatchTrailer.Request)
 }
 
 final class HomeInteractor {
@@ -45,6 +46,22 @@ extension HomeInteractor: HomeBusinessLogic {
         selectedGenreIndex = request.index
         guard let cachedHomeContent else { return }
         presentFilteredContent(from: cachedHomeContent)
+    }
+
+    func watchTrailer(request: HomeModels.WatchTrailer.Request) {
+        Task {
+            let response: HomeModels.WatchTrailer.Response
+            do {
+                if let youtubeKey = try await repository.fetchTrailerKey(for: request.movieId) {
+                    response = .success(youtubeKey: youtubeKey)
+                } else {
+                    response = .unavailable
+                }
+            } catch {
+                response = .unavailable
+            }
+            await MainActor.run { presenter.presentWatchTrailer(response: response) }
+        }
     }
 
     private func loadContent() async {

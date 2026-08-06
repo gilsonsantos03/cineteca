@@ -5,6 +5,7 @@ protocol HomeViewDelegate: AnyObject {
     func homeViewDidRequestRefresh(_ view: HomeView)
     func homeViewDidRequestRetry(_ view: HomeView)
     func didSelectGenreAt(_ index: Int)
+    func homeViewDidRequestWatchTrailer(_ view: HomeView, movieId: Int)
 }
 
 final class HomeView: UIView {
@@ -114,6 +115,10 @@ extension HomeView: HomeContentViewDelegate {
 
     func homeContentView(_ view: HomeContentView, didSelectGenreAt index: Int) {
         delegate?.didSelectGenreAt(index)
+    }
+
+    func homeContentView(_ view: HomeContentView, didTapWatchTrailerForMovieId movieId: Int) {
+        delegate?.homeViewDidRequestWatchTrailer(self, movieId: movieId)
     }
 }
 

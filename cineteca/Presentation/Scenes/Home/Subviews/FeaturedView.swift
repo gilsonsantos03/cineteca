@@ -1,7 +1,16 @@
 import UIKit
 import Cartography
 
+protocol FeaturedViewDelegate: AnyObject {
+    func featuredView(_ view: FeaturedView, didTapWatchTrailerForMovieId movieId: Int)
+}
+
 final class FeaturedView: UIView {
+
+    // MARK: - Properties
+
+    weak var delegate: FeaturedViewDelegate?
+    private var movieId: Int?
 
     // MARK: - UI Components
 
@@ -87,6 +96,7 @@ final class FeaturedView: UIView {
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
         button.backgroundColor = .accentYellow
         button.layer.cornerRadius = 22
+        button.addTarget(self, action: #selector(didTapWatchTrailer), for: .touchUpInside)
         return button
     }()
 
@@ -237,6 +247,7 @@ final class FeaturedView: UIView {
     // MARK: - Configure
 
     func configure(viewModel: FeaturedViewModel) {
+        movieId = viewModel.movieId
         backdropImageView.loadImage(from: viewModel.backdropURL)
         titleLabel.text = viewModel.title
         imdbRatingLabel.text = viewModel.rating
@@ -247,6 +258,13 @@ final class FeaturedView: UIView {
             let chip = makeGenreChip(genre)
             genreChipStack.addArrangedSubview(chip)
         }
+    }
+
+    // MARK: - Actions
+
+    @objc private func didTapWatchTrailer() {
+        guard let movieId else { return }
+        delegate?.featuredView(self, didTapWatchTrailerForMovieId: movieId)
     }
 
     // MARK: - Helpers

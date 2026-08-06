@@ -4,12 +4,14 @@ protocol HomePresentationLogic {
     func presentContent(response: HomeModels.FetchContent.Response)
     func presentLoading()
     func presentError(_ error: Error)
+    func presentWatchTrailer(response: HomeModels.WatchTrailer.Response)
 }
 
 protocol HomeDisplayLogic: AnyObject {
     func displayContent(viewModel: HomeModels.FetchContent.ViewModel)
     func displayLoading()
     func displayError(viewModel: HomeModels.ErrorState.ViewModel)
+    func displayWatchTrailer(viewModel: HomeModels.WatchTrailer.ViewModel)
 }
 
 final class HomePresenter {
@@ -39,8 +41,22 @@ extension HomePresenter: HomePresentationLogic {
         view?.displayError(viewModel: HomeModels.ErrorState.ViewModel())
     }
 
+    func presentWatchTrailer(response: HomeModels.WatchTrailer.Response) {
+        let viewModel: HomeModels.WatchTrailer.ViewModel = switch response {
+        case let .success(youtubeKey):
+            .success(youtubeKey: youtubeKey)
+        case .unavailable:
+            .unavailable(
+                title: Strings.HomeScene.TrailerUnavailable.title,
+                message: Strings.HomeScene.TrailerUnavailable.message
+            )
+        }
+        view?.displayWatchTrailer(viewModel: viewModel)
+    }
+
     private func makeFeaturedViewModel(from movie: Movie) -> FeaturedViewModel {
         FeaturedViewModel(
+            movieId: movie.id,
             title: movie.title,
             year: movie.releaseYear,
             rating: formatRating(movie.rating),

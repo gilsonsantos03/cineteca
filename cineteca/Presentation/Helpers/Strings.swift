@@ -24,6 +24,12 @@ enum Strings {
             static let watchlistButton = NSLocalizedString("HomeScene.Featured.WatchlistButton.Text", comment: "")
         }
 
+        enum TrailerUnavailable {
+            static let title = NSLocalizedString("HomeScene.TrailerUnavailable.Title", comment: "")
+            static let message = NSLocalizedString("HomeScene.TrailerUnavailable.Message", comment: "")
+            static let okButton = NSLocalizedString("HomeScene.TrailerUnavailable.OkButton.Text", comment: "")
+        }
+
         enum Card {
             static let trendingBadge = NSLocalizedString("HomeScene.Card.TrendingBadge.Text", comment: "")
         }

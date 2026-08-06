@@ -40,6 +40,17 @@ extension HomeViewController: HomeDisplayLogic {
         customView.showError()
         customView.endRefreshing()
     }
+
+    func displayWatchTrailer(viewModel: HomeModels.WatchTrailer.ViewModel) {
+        switch viewModel {
+        case let .success(youtubeKey):
+            router.routeToTrailer(youtubeKey: youtubeKey)
+        case let .unavailable(title, message):
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: Strings.HomeScene.TrailerUnavailable.okButton, style: .default))
+            present(alert, animated: true)
+        }
+    }
 }
 
 // MARK: - HomeViewDelegate
@@ -55,5 +66,9 @@ extension HomeViewController: HomeViewDelegate {
 
     func didSelectGenreAt(_ index: Int) {
         interactor.selectGenre(request: .init(index: index))
+    }
+
+    func homeViewDidRequestWatchTrailer(_ view: HomeView, movieId: Int) {
+        interactor.watchTrailer(request: .init(movieId: movieId))
     }
 }

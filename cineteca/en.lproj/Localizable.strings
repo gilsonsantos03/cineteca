@@ -12,6 +12,10 @@
 "HomeScene.Featured.WatchTrailerButton.Text" = "  Watch Trailer";
 "HomeScene.Featured.WatchlistButton.Text" = "  Watchlist";
 
+"HomeScene.TrailerUnavailable.Title" = "Trailer unavailable";
+"HomeScene.TrailerUnavailable.Message" = "We couldn't find a trailer for this movie right now.";
+"HomeScene.TrailerUnavailable.OkButton.Text" = "OK";
+
 "HomeScene.Card.TrendingBadge.Text" = "Trending";
 
 "HomeScene.WeeklyDigest.Title" = "Your weekly digest";
