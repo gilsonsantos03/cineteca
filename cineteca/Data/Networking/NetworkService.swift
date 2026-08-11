@@ -6,17 +6,20 @@ protocol NetworkServiceProtocol: Sendable {
 
 final class NetworkService: NetworkServiceProtocol {
     private let configuration: NetworkConfiguration
+    private let localeProvider: LocaleProviderProtocol
     private let session: URLSession
     private let decoder: JSONDecoder
     private let encoder: JSONEncoder
 
     init(
         configuration: NetworkConfiguration,
+        localeProvider: LocaleProviderProtocol = LocaleProvider(),
         session: URLSession = .shared,
         decoder: JSONDecoder = .snakeCase,
         encoder: JSONEncoder = .snakeCase
     ) {
         self.configuration = configuration
+        self.localeProvider = localeProvider
         self.session = session
         self.decoder = decoder
         self.encoder = encoder
@@ -59,8 +62,13 @@ final class NetworkService: NetworkServiceProtocol {
             throw NetworkError.invalidResponse
         }
 
-        if !builder.queryItems.isEmpty {
-            components.queryItems = (components.queryItems ?? []) + builder.queryItems
+        var queryItems = builder.queryItems
+        if builder.requiresLanguage {
+            queryItems.append(URLQueryItem(name: "language", value: localeProvider.apiLanguage))
+        }
+
+        if !queryItems.isEmpty {
+            components.queryItems = (components.queryItems ?? []) + queryItems
         }
 
         guard let finalURL = components.url else {

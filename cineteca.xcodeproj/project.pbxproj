@@ -180,7 +180,6 @@
 			isa = PBXGroup;
 			children = (
 				442CB0512FF6027B004FCC82 /* AppDependencies.swift */,
-				442CB0902FFC8401004FCC82 /* LocaleProvider.swift */,
 				AA100001000000000000010B /* MovieDetailsBuilding.swift */,
 			);
 			path = Application;
@@ -325,6 +324,7 @@
 			isa = PBXGroup;
 			children = (
 				442CB0582FF603BE004FCC82 /* APIKeys.swift */,
+				442CB0902FFC8401004FCC82 /* LocaleProvider.swift */,
 				442CB0592FF603BE004FCC82 /* NetworkConfiguration.swift */,
 				448D4D592FEA1C310008718A /* HTTPMethod.swift */,
 				448D4D5A2FEA1C310008718A /* NetworkError.swift */,

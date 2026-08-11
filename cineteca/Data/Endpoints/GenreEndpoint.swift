@@ -1,7 +1,7 @@
 import Foundation
 
 enum GenreEndpoint: URLRequestBuilder, Sendable {
-    case movieList(language: String)
+    case movieList
 
     var path: String {
         switch self {
@@ -10,11 +10,4 @@ enum GenreEndpoint: URLRequestBuilder, Sendable {
     }
 
     var method: HTTPMethod { .get }
-
-    var queryItems: [URLQueryItem] {
-        switch self {
-        case let .movieList(language):
-            return [URLQueryItem(name: "language", value: language)]
-        }
-    }
 }

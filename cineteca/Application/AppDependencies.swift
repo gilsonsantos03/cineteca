@@ -7,16 +7,8 @@ final class AppDependencies {
 
     init() {
         let networkService = AppDependencies.makeTMDBNetworkService()
-        let localeProvider = LocaleProvider()
-        let genreRepository = GenreRepository(
-            networkService: networkService,
-            localeProvider: localeProvider
-        )
-        self.genreRepository = genreRepository
-        self.movieRepository = MovieRepository(
-            networkService: networkService,
-            localeProvider: localeProvider
-        )
+        self.genreRepository = GenreRepository(networkService: networkService)
+        self.movieRepository = MovieRepository(networkService: networkService)
     }
 
     private static func makeTMDBNetworkService() -> NetworkServiceProtocol {
