@@ -23,7 +23,7 @@ extension HomePresenter: HomePresentationLogic {
         let viewModel = HomeModels.FetchContent.ViewModel(
             featured: makeFeaturedViewModel(from: response.featured),
             genreFilter: GenreFilterViewModel(
-                options: response.genreFilter.options,
+                options: [Strings.HomeScene.GenreFilter.all] + response.genreFilter.genres.map(\.name),
                 selectedIndex: response.genreFilter.selectedIndex
             ),
             nowPlaying: response.nowPlaying.map { makeCardViewModel(from: $0) },
@@ -60,7 +60,7 @@ extension HomePresenter: HomePresentationLogic {
             title: movie.title,
             year: movie.releaseYear,
             rating: formatRating(movie.rating),
-            genres: Array(movie.genres.prefix(3)),
+            genres: Array(movie.genres.prefix(3)).map(\.name),
             backdropURL: movie.backdropURL
         )
     }

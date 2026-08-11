@@ -7,6 +7,6 @@ struct Movie: Sendable {
     let backdropURL: URL?
     let releaseYear: String
     let rating: Double
-    let genres: [String]
+    let genres: [Genre]
     let runtime: Int?
 }

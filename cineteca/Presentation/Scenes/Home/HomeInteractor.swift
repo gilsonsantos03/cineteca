@@ -13,7 +13,7 @@ final class HomeInteractor {
     private let genreRepository: GenreRepositoryProtocol
 
     private var cachedHomeContent: CachedHomeContent?
-    private var genreOptions: [String] = []
+    private var sortedGenres: [Genre] = []
     private var selectedGenreIndex = 0
 
     init(
@@ -42,7 +42,7 @@ extension HomeInteractor: HomeBusinessLogic {
 
     func selectGenre(request: HomeModels.SelectGenre.Request) {
         guard request.index != selectedGenreIndex else { return }
-        guard request.index >= 0, request.index < genreOptions.count else { return }
+        guard request.index >= 0, request.index <= sortedGenres.count else { return }
         selectedGenreIndex = request.index
         guard let cachedHomeContent else { return }
         presentFilteredContent(from: cachedHomeContent)
@@ -66,12 +66,12 @@ extension HomeInteractor: HomeBusinessLogic {
 
     private func loadContent() async {
         do {
-            let genreMap = try await genreRepository.genres()
+            let genres = try await genreRepository.genres()
 
-            async let featured = repository.fetchFeatured(genreMap: genreMap)
-            async let nowPlaying = repository.fetchNowPlaying(genreMap: genreMap)
-            async let trending = repository.fetchTrending(genreMap: genreMap)
-            async let topRated = repository.fetchTopRated(genreMap: genreMap)
+            async let featured = repository.fetchFeatured(genres: genres)
+            async let nowPlaying = repository.fetchNowPlaying(genres: genres)
+            async let trending = repository.fetchTrending(genres: genres)
+            async let topRated = repository.fetchTopRated(genres: genres)
 
             let (featuredMovies, nowPlayingMovies, trendingMovies, topRatedMovies) = try await (
                 featured, nowPlaying, trending, topRated
@@ -82,7 +82,7 @@ extension HomeInteractor: HomeBusinessLogic {
                 return
             }
 
-            genreOptions = buildGenreOptions(from: genreMap)
+            sortedGenres = genres.sorted { $0.name < $1.name }
             let content = CachedHomeContent(
                 featured: featuredMovie,
                 nowPlaying: nowPlayingMovies,
@@ -97,40 +97,37 @@ extension HomeInteractor: HomeBusinessLogic {
     }
 
     private func presentFilteredContent(from content: CachedHomeContent) {
-        let genreName = selectedGenreName
+        let selectedGenre = selectedGenre
         let response = HomeModels.FetchContent.Response(
-            featured: resolveFeatured(from: content, genreName: genreName),
-            nowPlaying: filter(content.nowPlaying, by: genreName),
-            trending: filter(content.trending, by: genreName),
-            topRated: filter(content.topRated, by: genreName),
-            genreFilter: GenreFilter(options: genreOptions, selectedIndex: selectedGenreIndex)
+            featured: resolveFeatured(from: content, genre: selectedGenre),
+            nowPlaying: filter(content.nowPlaying, by: selectedGenre),
+            trending: filter(content.trending, by: selectedGenre),
+            topRated: filter(content.topRated, by: selectedGenre),
+            genreFilter: GenreFilter(genres: sortedGenres, selectedIndex: selectedGenreIndex)
         )
         presenter.presentContent(response: response)
     }
 
-    private func buildGenreOptions(from genreMap: [Int: String]) -> [String] {
-        let names = genreMap.values.sorted()
-        return [Strings.HomeScene.GenreFilter.all] + names
+    private var selectedGenre: Genre? {
+        guard selectedGenreIndex > 0, selectedGenreIndex <= sortedGenres.count else { return nil }
+        return sortedGenres[selectedGenreIndex - 1]
     }
 
-    private var selectedGenreName: String? {
-        guard selectedGenreIndex > 0, selectedGenreIndex < genreOptions.count else { return nil }
-        return genreOptions[selectedGenreIndex]
+    private func filter(_ movies: [Movie], by genre: Genre?) -> [Movie] {
+        guard let genre else { return movies }
+        return movies.filter { movie in
+            movie.genres.contains { $0.id == genre.id }
+        }
     }
 
-    private func filter(_ movies: [Movie], by genreName: String?) -> [Movie] {
-        guard let genreName else { return movies }
-        return movies.filter { $0.genres.contains(genreName) }
-    }
-
-    private func resolveFeatured(from content: CachedHomeContent, genreName: String?) -> Movie {
-        guard let genreName else { return content.featured }
-        if content.featured.genres.contains(genreName) {
+    private func resolveFeatured(from content: CachedHomeContent, genre: Genre?) -> Movie {
+        guard let genre else { return content.featured }
+        if content.featured.genres.contains(where: { $0.id == genre.id }) {
             return content.featured
         }
-        return filter(content.nowPlaying, by: genreName).first
-            ?? filter(content.trending, by: genreName).first
-            ?? filter(content.topRated, by: genreName).first
+        return filter(content.nowPlaying, by: genre).first
+            ?? filter(content.trending, by: genre).first
+            ?? filter(content.topRated, by: genre).first
             ?? content.featured
     }
 }

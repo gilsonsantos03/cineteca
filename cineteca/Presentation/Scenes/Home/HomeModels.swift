@@ -49,7 +49,7 @@ struct HomeModels {
 }
 
 struct GenreFilter {
-    let options: [String]
+    let genres: [Genre]
     let selectedIndex: Int
 }
 

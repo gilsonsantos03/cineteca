@@ -38,7 +38,7 @@ extension MovieDetailsPresenter: MovieDetailsPresentationLogic {
             backdropURL: movie.backdropURL,
             metadata: metadata,
             certification: formatCertification(movie.certification),
-            genres: Array(movie.genres.prefix(3)),
+            genres: Array(movie.genres.prefix(3)).map(\.name),
             rating: String(format: "%.1f", movie.rating),
             cast: movie.cast.map { makeCastViewModel(from: $0) },
             crew: movie.crew.map { makeCrewViewModel(from: $0) },

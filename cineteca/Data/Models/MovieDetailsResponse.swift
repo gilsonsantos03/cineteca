@@ -1,6 +1,6 @@
 import Foundation
 
-struct MovieDetailsDTO: Decodable, Sendable {
+struct MovieDetailsResponse: Decodable, Sendable {
     let id: Int
     let title: String
     let overview: String
@@ -9,15 +9,15 @@ struct MovieDetailsDTO: Decodable, Sendable {
     let releaseDate: String?
     let voteAverage: Double
     let runtime: Int?
-    let genres: [GenreDTO]
+    let genres: [GenreResponse]
 }
 
-struct CreditsResponseDTO: Decodable, Sendable {
-    let cast: [CastMemberDTO]
-    let crew: [CrewMemberDTO]
+struct CreditsResponse: Decodable, Sendable {
+    let cast: [CastMemberResponse]
+    let crew: [CrewMemberResponse]
 }
 
-struct CastMemberDTO: Decodable, Sendable {
+struct CastMemberResponse: Decodable, Sendable {
     let id: Int
     let name: String
     let character: String
@@ -25,49 +25,49 @@ struct CastMemberDTO: Decodable, Sendable {
     let order: Int
 }
 
-struct CrewMemberDTO: Decodable, Sendable {
+struct CrewMemberResponse: Decodable, Sendable {
     let id: Int
     let name: String
     let job: String
 }
 
-struct WatchProvidersResponseDTO: Decodable, Sendable {
-    let results: [String: WatchProvidersCountryDTO]
+struct WatchProvidersResponse: Decodable, Sendable {
+    let results: [String: WatchProvidersCountryResponse]
 }
 
-struct WatchProvidersCountryDTO: Decodable, Sendable {
-    let flatrate: [WatchProviderDTO]?
-    let rent: [WatchProviderDTO]?
-    let buy: [WatchProviderDTO]?
+struct WatchProvidersCountryResponse: Decodable, Sendable {
+    let flatrate: [WatchProviderResponse]?
+    let rent: [WatchProviderResponse]?
+    let buy: [WatchProviderResponse]?
 
-    var allProviders: [WatchProviderDTO] {
+    var allProviders: [WatchProviderResponse] {
         let combined = (flatrate ?? []) + (rent ?? []) + (buy ?? [])
         var seenProviderIDs = Set<Int>()
         return combined.filter { seenProviderIDs.insert($0.providerID).inserted }
     }
 }
 
-struct WatchProviderDTO: Decodable, Sendable {
+struct WatchProviderResponse: Decodable, Sendable {
     let providerID: Int
     let providerName: String
     let logoPath: String?
 }
 
-struct ReleaseDatesResponseDTO: Decodable, Sendable {
-    let results: [ReleaseDatesCountryDTO]
+struct ReleaseDatesResponse: Decodable, Sendable {
+    let results: [ReleaseDatesCountryResponse]
 }
 
-struct ReleaseDatesCountryDTO: Decodable, Sendable {
+struct ReleaseDatesCountryResponse: Decodable, Sendable {
     let iso31661: String
-    let releaseDates: [ReleaseDateDTO]
+    let releaseDates: [ReleaseDateResponse]
 }
 
-struct ReleaseDateDTO: Decodable, Sendable {
+struct ReleaseDateResponse: Decodable, Sendable {
     let certification: String
 }
 
-extension MovieDetailsDTO {
-    func asDomain(
+extension MovieDetailsResponse {
+    func toDomain(
         certification: String?,
         cast: [MovieCastMember],
         crew: [MovieCrewMember],
@@ -84,7 +84,7 @@ extension MovieDetailsDTO {
             runtime: runtime,
             certification: certification,
             rating: voteAverage,
-            genres: genres.map(\.name),
+            genres: genres.map { $0.toDomain() },
             cast: cast,
             crew: crew,
             watchProviders: watchProviders,
@@ -93,8 +93,8 @@ extension MovieDetailsDTO {
     }
 }
 
-extension CastMemberDTO {
-    func asDomain() -> MovieCastMember {
+extension CastMemberResponse {
+    func toDomain() -> MovieCastMember {
         MovieCastMember(
             id: id,
             name: name,
@@ -104,14 +104,14 @@ extension CastMemberDTO {
     }
 }
 
-extension CrewMemberDTO {
-    func asDomain() -> MovieCrewMember {
+extension CrewMemberResponse {
+    func toDomain() -> MovieCrewMember {
         MovieCrewMember(id: id, name: name, job: job)
     }
 }
 
-extension WatchProviderDTO {
-    func asDomain() -> WatchProvider {
+extension WatchProviderResponse {
+    func toDomain() -> WatchProvider {
         WatchProvider(
             name: providerName,
             logoURL: logoPath.flatMap { URL(string: TMDBImage.providerLogoBaseURL + $0) }

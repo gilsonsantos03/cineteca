@@ -25,9 +25,10 @@
 		442CB0862FFC8306004FCC82 /* WeeklyDigestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CB0762FFC8306004FCC82 /* WeeklyDigestView.swift */; };
 		442CB0912FFC8401004FCC82 /* LocaleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CB0902FFC8401004FCC82 /* LocaleProvider.swift */; };
 		442CB0932FFC8402004FCC82 /* GenreEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CB0922FFC8402004FCC82 /* GenreEndpoint.swift */; };
-		442CB0952FFC8403004FCC82 /* GenreDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CB0942FFC8403004FCC82 /* GenreDTO.swift */; };
+		442CB0952FFC8403004FCC82 /* GenreResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CB0942FFC8403004FCC82 /* GenreResponse.swift */; };
 		442CB0972FFC8404004FCC82 /* GenreRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CB0962FFC8404004FCC82 /* GenreRepositoryProtocol.swift */; };
 		442CB0992FFC8405004FCC82 /* GenreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CB0982FFC8405004FCC82 /* GenreRepository.swift */; };
+		BB000001000000000000001A /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000001000000000000001B /* Genre.swift */; };
 		442CB0B12FFC8501004FCC82 /* ShimmerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CB0A12FFC8501004FCC82 /* ShimmerView.swift */; };
 		442CB0B72FFC8507004FCC82 /* HomeErrorStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CB0A72FFC8507004FCC82 /* HomeErrorStateView.swift */; };
 		442CB0B82FFC8508004FCC82 /* HomeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CB0A82FFC8508004FCC82 /* HomeContentView.swift */; };
@@ -54,10 +55,10 @@
 		CC000001000000000000007C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC000001000000000000007D /* Localizable.strings */; };
 		CC000001000000000000007A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC000001000000000000007B /* Assets.xcassets */; };
 		CC00000100000000000000AA /* MovieRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC00000100000000000000AB /* MovieRepository.swift */; };
-		DD000001000000000000001A /* MovieDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD000001000000000000001B /* MovieDTO.swift */; };
+		DD000001000000000000001A /* MovieResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD000001000000000000001B /* MovieResponse.swift */; };
 		DD000001000000000000002A /* MovieRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD000001000000000000002B /* MovieRepositoryProtocol.swift */; };
 		AA100001000000000000001A /* MovieDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000001B /* MovieDetails.swift */; };
-		AA100001000000000000002A /* MovieDetailsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000002B /* MovieDetailsDTO.swift */; };
+		AA100001000000000000002A /* MovieDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000002B /* MovieDetailsResponse.swift */; };
 		AA100001000000000000003A /* MovieDetailsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000003B /* MovieDetailsModels.swift */; };
 		AA100001000000000000004A /* MovieDetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000004B /* MovieDetailsInteractor.swift */; };
 		AA100001000000000000005A /* MovieDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000005B /* MovieDetailsPresenter.swift */; };
@@ -102,9 +103,10 @@
 		442CB0762FFC8306004FCC82 /* WeeklyDigestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyDigestView.swift; sourceTree = "<group>"; };
 		442CB0902FFC8401004FCC82 /* LocaleProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaleProvider.swift; sourceTree = "<group>"; };
 		442CB0922FFC8402004FCC82 /* GenreEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreEndpoint.swift; sourceTree = "<group>"; };
-		442CB0942FFC8403004FCC82 /* GenreDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreDTO.swift; sourceTree = "<group>"; };
+		442CB0942FFC8403004FCC82 /* GenreResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreResponse.swift; sourceTree = "<group>"; };
 		442CB0962FFC8404004FCC82 /* GenreRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreRepositoryProtocol.swift; sourceTree = "<group>"; };
 		442CB0982FFC8405004FCC82 /* GenreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreRepository.swift; sourceTree = "<group>"; };
+		BB000001000000000000001B /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		442CB0A12FFC8501004FCC82 /* ShimmerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerView.swift; sourceTree = "<group>"; };
 		442CB0A72FFC8507004FCC82 /* HomeErrorStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeErrorStateView.swift; sourceTree = "<group>"; };
 		442CB0A82FFC8508004FCC82 /* HomeContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContentView.swift; sourceTree = "<group>"; };
@@ -133,10 +135,10 @@
 		CC000001000000000000006B /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		CC000001000000000000007B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CC00000100000000000000AB /* MovieRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepository.swift; sourceTree = "<group>"; };
-		DD000001000000000000001B /* MovieDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDTO.swift; sourceTree = "<group>"; };
+		DD000001000000000000001B /* MovieResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieResponse.swift; sourceTree = "<group>"; };
 		DD000001000000000000002B /* MovieRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepositoryProtocol.swift; sourceTree = "<group>"; };
 		AA100001000000000000001B /* MovieDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetails.swift; sourceTree = "<group>"; };
-		AA100001000000000000002B /* MovieDetailsDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsDTO.swift; sourceTree = "<group>"; };
+		AA100001000000000000002B /* MovieDetailsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsResponse.swift; sourceTree = "<group>"; };
 		AA100001000000000000003B /* MovieDetailsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsModels.swift; sourceTree = "<group>"; };
 		AA100001000000000000004B /* MovieDetailsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsInteractor.swift; sourceTree = "<group>"; };
 		AA100001000000000000005B /* MovieDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsPresenter.swift; sourceTree = "<group>"; };
@@ -292,9 +294,20 @@
 		448D4C262FEA0A870008718A /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				BB000001000000000000001C /* Models */,
 				CC00000100000000000000CB /* Repositories */,
 			);
 			path = Domain;
+			sourceTree = "<group>";
+		};
+		BB000001000000000000001C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BB000001000000000000001B /* Genre.swift */,
+				CC000001000000000000001B /* Movie.swift */,
+				AA100001000000000000001B /* MovieDetails.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		448D4C272FEA0A8C0008718A /* Data */ = {
@@ -406,11 +419,9 @@
 		CC000001000000000000010B /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				CC000001000000000000001B /* Movie.swift */,
-				AA100001000000000000001B /* MovieDetails.swift */,
-				DD000001000000000000001B /* MovieDTO.swift */,
-				AA100001000000000000002B /* MovieDetailsDTO.swift */,
-				442CB0942FFC8403004FCC82 /* GenreDTO.swift */,
+				DD000001000000000000001B /* MovieResponse.swift */,
+				AA100001000000000000002B /* MovieDetailsResponse.swift */,
+				442CB0942FFC8403004FCC82 /* GenreResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -529,9 +540,10 @@
 				442CB0862FFC8306004FCC82 /* WeeklyDigestView.swift in Sources */,
 				442CB0912FFC8401004FCC82 /* LocaleProvider.swift in Sources */,
 				442CB0932FFC8402004FCC82 /* GenreEndpoint.swift in Sources */,
-				442CB0952FFC8403004FCC82 /* GenreDTO.swift in Sources */,
+				442CB0952FFC8403004FCC82 /* GenreResponse.swift in Sources */,
 				442CB0972FFC8404004FCC82 /* GenreRepositoryProtocol.swift in Sources */,
 				442CB0992FFC8405004FCC82 /* GenreRepository.swift in Sources */,
+				BB000001000000000000001A /* Genre.swift in Sources */,
 				442CB0B12FFC8501004FCC82 /* ShimmerView.swift in Sources */,
 				442CB0B72FFC8507004FCC82 /* HomeErrorStateView.swift in Sources */,
 				442CB0B82FFC8508004FCC82 /* HomeContentView.swift in Sources */,
@@ -542,10 +554,10 @@
 				CC000001000000000000005C /* Strings.swift in Sources */,
 				CC000001000000000000006A /* MainTabBarController.swift in Sources */,
 				CC00000100000000000000AA /* MovieRepository.swift in Sources */,
-				DD000001000000000000001A /* MovieDTO.swift in Sources */,
+				DD000001000000000000001A /* MovieResponse.swift in Sources */,
 				DD000001000000000000002A /* MovieRepositoryProtocol.swift in Sources */,
 				AA100001000000000000001A /* MovieDetails.swift in Sources */,
-				AA100001000000000000002A /* MovieDetailsDTO.swift in Sources */,
+				AA100001000000000000002A /* MovieDetailsResponse.swift in Sources */,
 				AA100001000000000000003A /* MovieDetailsModels.swift in Sources */,
 				AA100001000000000000004A /* MovieDetailsInteractor.swift in Sources */,
 				AA100001000000000000005A /* MovieDetailsPresenter.swift in Sources */,

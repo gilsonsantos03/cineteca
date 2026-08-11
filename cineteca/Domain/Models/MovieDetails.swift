@@ -10,7 +10,7 @@ struct MovieDetails: Sendable {
     let runtime: Int?
     let certification: String?
     let rating: Double
-    let genres: [String]
+    let genres: [Genre]
     let cast: [MovieCastMember]
     let crew: [MovieCrewMember]
     let watchProviders: [WatchProvider]

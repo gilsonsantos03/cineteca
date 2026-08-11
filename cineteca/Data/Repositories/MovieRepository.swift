@@ -12,38 +12,38 @@ final class MovieRepository: MovieRepositoryProtocol {
         self.localeProvider = localeProvider
     }
 
-    func fetchNowPlaying(genreMap: [Int: String]) async throws -> [Movie] {
-        try await fetchMovies(from: .nowPlaying(language: localeProvider.apiLanguage), genreMap: genreMap)
+    func fetchNowPlaying(genres: [Genre]) async throws -> [Movie] {
+        try await fetchMovies(from: .nowPlaying(language: localeProvider.apiLanguage), genres: genres)
     }
 
-    func fetchTrending(genreMap: [Int: String]) async throws -> [Movie] {
-        try await fetchMovies(from: .trending(language: localeProvider.apiLanguage), genreMap: genreMap)
+    func fetchTrending(genres: [Genre]) async throws -> [Movie] {
+        try await fetchMovies(from: .trending(language: localeProvider.apiLanguage), genres: genres)
     }
 
-    func fetchTopRated(genreMap: [Int: String]) async throws -> [Movie] {
-        try await fetchMovies(from: .topRated(language: localeProvider.apiLanguage), genreMap: genreMap)
+    func fetchTopRated(genres: [Genre]) async throws -> [Movie] {
+        try await fetchMovies(from: .topRated(language: localeProvider.apiLanguage), genres: genres)
     }
 
-    func fetchFeatured(genreMap: [Int: String]) async throws -> [Movie] {
-        try await fetchMovies(from: .featured(language: localeProvider.apiLanguage), genreMap: genreMap)
+    func fetchFeatured(genres: [Genre]) async throws -> [Movie] {
+        try await fetchMovies(from: .featured(language: localeProvider.apiLanguage), genres: genres)
     }
 
     func fetchMovieDetails(for movieId: Int) async throws -> MovieDetails {
         let language = localeProvider.apiLanguage
-        async let creditsTask: CreditsResponseDTO? = try? networkService.request(
+        async let creditsTask: CreditsResponse? = try? networkService.request(
             MovieEndpoint.credits(movieId: movieId, language: language)
         )
-        async let providersTask: WatchProvidersResponseDTO? = try? networkService.request(
+        async let providersTask: WatchProvidersResponse? = try? networkService.request(
             MovieEndpoint.watchProviders(movieId: movieId)
         )
-        async let releaseDatesTask: ReleaseDatesResponseDTO? = try? networkService.request(
+        async let releaseDatesTask: ReleaseDatesResponse? = try? networkService.request(
             MovieEndpoint.releaseDates(movieId: movieId)
         )
-        async let similarTask: MovieResponseDTO? = try? networkService.request(
+        async let similarTask: MovieListResponse? = try? networkService.request(
             MovieEndpoint.similar(movieId: movieId, language: language)
         )
 
-        let detailsResponse: MovieDetailsDTO = try await networkService.request(
+        let detailsResponse: MovieDetailsResponse = try await networkService.request(
             MovieEndpoint.details(movieId: movieId, language: language)
         )
         let (credits, providers, releaseDates, similar) = await (
@@ -53,26 +53,27 @@ final class MovieRepository: MovieRepositoryProtocol {
             similarTask
         )
 
-        return detailsResponse.asDomain(
+        return detailsResponse.toDomain(
             certification: certification(from: releaseDates, for: regionCode),
-            cast: (credits?.cast ?? []).sorted { $0.order < $1.order }.prefix(10).map { $0.asDomain() },
+            cast: (credits?.cast ?? []).sorted { $0.order < $1.order }.prefix(10).map { $0.toDomain() },
             crew: (credits?.crew ?? [])
                 .filter { $0.job == "Director" || $0.job == "Writer" || $0.job == "Screenplay" }
-                .map { $0.asDomain() },
-            watchProviders: providers?.results[regionCode]?.allProviders.map { $0.asDomain() } ?? [],
-            similarMovies: (similar?.results ?? []).map { $0.asDomain(genreMap: [:]) }
+                .map { $0.toDomain() },
+            watchProviders: providers?.results[regionCode]?.allProviders.map { $0.toDomain() } ?? [],
+            similarMovies: (similar?.results ?? []).map { $0.toDomain(genreLookup: [:]) }
         )
     }
 
     func fetchTrailerKey(for movieId: Int) async throws -> String? {
         let endpoint = MovieEndpoint.videos(movieId: movieId, language: localeProvider.apiLanguage)
-        let response: VideoListResponseDTO = try await networkService.request(endpoint)
+        let response: VideoListResponse = try await networkService.request(endpoint)
         return response.youtubeTrailerKey()
     }
 
-    private func fetchMovies(from endpoint: MovieEndpoint, genreMap: [Int: String]) async throws -> [Movie] {
-        let response: MovieResponseDTO = try await networkService.request(endpoint)
-        return response.results.map { $0.asDomain(genreMap: genreMap) }
+    private func fetchMovies(from endpoint: MovieEndpoint, genres: [Genre]) async throws -> [Movie] {
+        let genreLookup = genres.lookupById
+        let response: MovieListResponse = try await networkService.request(endpoint)
+        return response.results.map { $0.toDomain(genreLookup: genreLookup) }
     }
 
     private var regionCode: String {
@@ -80,7 +81,7 @@ final class MovieRepository: MovieRepositoryProtocol {
     }
 
     private func certification(
-        from response: ReleaseDatesResponseDTO?,
+        from response: ReleaseDatesResponse?,
         for regionCode: String
     ) -> String? {
         let matchingCountry = response?.results.first { $0.iso31661 == regionCode }

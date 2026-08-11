@@ -24,6 +24,15 @@ Padrão igual ao habit-stack: `en.lproj/Localizable.strings`, `pt-BR.lproj/Local
 - **UI** (labels, botões, chip "All"): idioma do dispositivo via `Strings`.
 - **API TMDB** (nomes de gênero nos filmes): `LocaleProvider.apiLanguage` nos repositórios.
 
+## Modelos de domínio vs Responses da API
+
+| Pasta | Conteúdo |
+|---|---|
+| `Domain/Models/` | Entidades: `Genre`, `Movie`, `MovieDetails` (+ cast, crew, providers) |
+| `Data/Models/` | Responses da API: `GenreResponse`, `MovieResponse`, `MovieDetailsResponse` |
+
+O mapping Response → domínio acontece na camada Data (extensions `toDomain()`). A Presentation recebe apenas entidades ou view models derivados delas.
+
 ## Home
 
 A Home carrega quatro listas do TMDB (popular, now playing, trending, top rated) e os gêneros (`/genre/movie/list`). O filtro por gênero é **client-side**: os filmes completos ficam em cache no `HomeInteractor` e são refiltrados ao trocar o chip, sem nova chamada à API.
@@ -54,9 +63,9 @@ O presenter e as views recebem `HomeModels.FetchContent.Response` — listas já
 ### Carregamento
 
 1. `fetchContent()` ou `refresh()` → `loadContent()`.
-2. `genreRepository.genres()` — uma request de gêneros (com cache no repositório).
-3. Quatro requests de filmes em paralelo, recebendo o `genreMap` como parâmetro.
-4. `genreOptions` = `Strings.HomeScene.GenreFilter.all` + gêneros da API ordenados.
+2. `genreRepository.genres()` — uma request de gêneros (retorna `[Genre]`, com cache no repositório).
+3. Quatro requests de filmes em paralelo, recebendo `[Genre]` como parâmetro.
+4. `sortedGenres` = gêneros da API ordenados por nome; chip "All/Todos" no índice 0.
 5. Salva `CachedHomeContent` em `cachedHomeContent`.
 6. `presentFilteredContent(from:)` aplica o gênero atual.
 
@@ -70,7 +79,7 @@ O presenter e as views recebem `HomeModels.FetchContent.Response` — listas já
 **Regras:**
 
 - Índice 0 (`All` / `Todos`): sem filtro.
-- Demais: filmes cujo `Movie.genres` contém o nome do gênero (idioma da API).
+- Demais: filmes cujo `Movie.genres` contém um `Genre` com o mesmo `id`.
 
 **Filme em destaque ao filtrar:**
 

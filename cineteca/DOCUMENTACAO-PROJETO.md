@@ -1,7 +1,7 @@
 # Cineteca — Documentação do Projeto
 
 > Documento de referência para discussão técnica com engenheiro iOS especialista.  
-> Última atualização: julho/2026.
+> Última atualização: agosto/2026.
 
 ---
 
@@ -34,7 +34,7 @@
 |---|---|
 | **Propósito** | Exibir filmes populares, em cartaz, em alta e mais bem avaliados, com filtro por gênero |
 | **Público** | App pessoal/portfólio com UI dark polida |
-| **Estado atual** | Apenas a aba **Home** está implementada; Search, Lists, Stats e Profile são placeholders |
+| **Estado atual** | Home e **Movie Details** implementadas; Search, Lists, Stats e Profile são placeholders |
 | **Bundle ID** | `com.gilson.cineteca` |
 | **Versão** | 1.0 (1) |
 | **iOS mínimo** | 17.0 |
@@ -49,8 +49,8 @@
 
 ### O que ainda não faz
 
-- Detalhe do filme, busca, listas, estatísticas, perfil
-- Watchlist, trailer, "Ver tudo", notificações
+- Navega para detalhe do filme e assiste trailer (YouTube)
+- Watchlist, "Ver tudo", notificações
 - Persistência local, testes automatizados, CI/CD
 
 ---
@@ -96,10 +96,11 @@ O projeto segue as diretrizes documentadas em `architecture.md`, alinhadas ao pa
 │  + Router (stub) + Configurator (DI da cena)           │
 ├─────────────────────────────────────────────────────────┤
 │                      DOMAIN                             │
+│  Entidades (Genre, Movie, MovieDetails)                │
 │  Protocolos de repositório (Movie, Genre)              │
 ├─────────────────────────────────────────────────────────┤
 │                       DATA                              │
-│  Repositórios, DTOs, Endpoints, NetworkService           │
+│  Repositórios, Responses, Endpoints, NetworkService      │
 ├─────────────────────────────────────────────────────────┤
 │                   APPLICATION                           │
 │  AppDependencies (composition root), LocaleProvider        │
@@ -109,8 +110,8 @@ O projeto segue as diretrizes documentadas em `architecture.md`, alinhadas ao pa
 | Camada | Responsabilidade | Depende de |
 |---|---|---|
 | **Presentation** | UI, eventos do usuário, formatação para exibição | Protocolos de Domain/Data |
-| **Domain** | Contratos (`*RepositoryProtocol`) | Nada de UIKit ou networking |
-| **Data** | Implementação de repositórios, DTOs, HTTP | Infra de rede |
+| **Domain** | Entidades e contratos (`*RepositoryProtocol`) | Nada de UIKit ou networking |
+| **Data** | Implementação de repositórios, Responses da API, HTTP | Infra de rede |
 | **Application** | Wiring global do app | Todas as camadas |
 
 ### 3.2 Padrão VIP na cena Home
@@ -143,10 +144,10 @@ HomeView + Subviews                ← renderização pura
 ```swift
 // Fluxo típico de dados
 HomeInteractor
-    → GenreRepository.genres()  // actor com cache; chamado uma vez
-    → MovieRepository.fetchNowPlaying(genreMap:)
+    → GenreRepository.genres()  // actor com cache; retorna [Genre]
+    → MovieRepository.fetchNowPlaying(genres:)
         → NetworkService.request(MovieEndpoint.nowPlaying)
-        → MovieDTO.asDomain(genreMap:)
+        → MovieResponse.toDomain(genreLookup:)
 ```
 
 **Por que não há UseCase?** A regra de negócio (filtro por gênero, resolução do featured) vive no `HomeInteractor`, que já orquestra dois repositórios. Um UseCase que apenas repassasse chamadas ao repositório não agregaria valor — conforme `architecture.md`.
@@ -182,18 +183,23 @@ cineteca/
     │   ├── AppDependencies.swift         # Composition root
     │   └── LocaleProvider.swift          # Device locale → TMDB language
     │
-    ├── Domain/Repositories/
-    │   ├── MovieRepositoryProtocol.swift
-    │   └── GenreRepositoryProtocol.swift
+    ├── Domain/
+    │   ├── Models/
+    │   │   ├── Genre.swift               # Entidade de domínio
+    │   │   ├── Movie.swift               # Entidade de domínio
+    │   │   └── MovieDetails.swift        # Entidade de domínio (+ cast, crew, providers)
+    │   └── Repositories/
+    │       ├── MovieRepositoryProtocol.swift
+    │       └── GenreRepositoryProtocol.swift
     │
     ├── Data/
     │   ├── Endpoints/
     │   │   ├── MovieEndpoint.swift
     │   │   └── GenreEndpoint.swift
     │   ├── Models/
-    │   │   ├── Movie.swift               # Entidade de domínio
-    │   │   ├── MovieDTO.swift            # DTO + mapping
-    │   │   └── GenreDTO.swift
+    │   │   ├── MovieResponse.swift         # Response + mapping → Movie
+    │   │   ├── MovieDetailsResponse.swift  # Response + mapping → MovieDetails
+    │   │   └── GenreResponse.swift         # Response + mapping → Genre
     │   ├── Networking/
     │   │   ├── NetworkService.swift
     │   │   ├── NetworkConfiguration.swift
@@ -213,23 +219,17 @@ cineteca/
     │   │   └── UIImageView+AsyncLoad.swift
     │   └── Scenes/
     │       ├── TabBar/MainTabBarController.swift
-    │       └── Home/                     # Única cena completa
-    │           ├── HomeConfigurator.swift
-    │           ├── HomeInteractor.swift
-    │           ├── HomePresenter.swift
-    │           ├── HomeRouter.swift
-    │           ├── HomeModels.swift
-    │           ├── HomeViewController.swift
-    │           ├── HomeView.swift
-    │           └── Subviews/
-    │               ├── FeaturedView.swift
-    │               ├── GenreFilterView.swift
-    │               ├── MovieSectionView.swift
-    │               ├── MovieCardCell.swift
-    │               ├── WeeklyDigestView.swift
-    │               ├── HomeContentView.swift
-    │               ├── HomeErrorStateView.swift
-    │               └── Skeleton/...
+    │       └── Home/                     # Cena Home (VIP)
+    │           ├── ...
+    │       └── MovieDetails/             # Cena Movie Details (VIP)
+    │           ├── MovieDetailsConfigurator.swift
+    │           ├── MovieDetailsInteractor.swift
+    │           ├── MovieDetailsPresenter.swift
+    │           ├── MovieDetailsRouter.swift
+    │           ├── MovieDetailsModels.swift
+    │           ├── MovieDetailsViewController.swift
+    │           ├── MovieDetailsView.swift
+    │           └── Subviews/...
     │
     ├── Assets.xcassets/                  # Cores: AppBackground, CardBackground, AccentYellow, TextSecondary
     ├── en.lproj/Localizable.strings
@@ -252,7 +252,9 @@ cineteca/
 | **Feed da Home** | Hero + 3 seções horizontais + weekly digest | `HomeView`, subviews |
 | **Carregamento da Home** | 1 request de gêneros + 4 requests de filmes em paralelo | `HomeInteractor.loadContent()` |
 | **Pull-to-refresh** | Invalida cache de gêneros e recarrega tudo | `HomeInteractor.refresh()` |
-| **Filtro por gênero** | Chips horizontais; filtro instantâneo no cliente | `HomeInteractor`, `GenreFilterView` |
+| **Filtro por gênero** | Chips horizontais; filtro instantâneo no cliente por `Genre.id` | `HomeInteractor`, `GenreFilterView` |
+| **Detalhe do filme** | Tela VIP com overview, cast, crew, providers e similares | `MovieDetails/` |
+| **Trailer** | Abre YouTube (app ou web) a partir da Home ou Movie Details | `HomeRouter`, `MovieDetailsRouter` |
 | **Skeleton loading** | Shimmer placeholders no layout final | `HomeSkeletonView` |
 | **Estado de erro** | Tela cheia com botão retry | `HomeErrorStateView` |
 | **Imagens assíncronas** | Posters/backdrops do CDN TMDB | `UIImageView+AsyncLoad` |
@@ -277,19 +279,27 @@ cineteca/
 | Aba Lists | `UIViewController` vazio |
 | Aba Stats | `UIViewController` vazio |
 | Aba Profile | `UIViewController` vazio |
-| Botão Watch Trailer | UI only |
-| Botão Watchlist | UI only |
-| Botões "Ver tudo" | UI only |
-| Sino de notificações | UI only |
-| Tap em card de filme | Sem navegação |
-| `HomeRouter` | Protocolo vazio |
+| Botão Watch Trailer | Funcional (Home e Movie Details) |
+| Tap em card de filme | Navega para Movie Details |
+| `HomeRouter` | Navega para Movie Details e trailer |
 | Weekly Digest | Strings hardcoded |
 
 ---
 
 ## 6. Modelos de dados
 
-### 6.1 Entidade de domínio: `Movie`
+### 6.1 Entidades de domínio (`Domain/Models/`)
+
+**`Genre`**
+
+```swift
+struct Genre: Sendable, Hashable {
+    let id: Int
+    let name: String
+}
+```
+
+**`Movie`**
 
 ```swift
 struct Movie: Sendable {
@@ -299,21 +309,29 @@ struct Movie: Sendable {
     let backdropURL: URL?     // TMDB CDN w780
     let releaseYear: String   // Primeiros 4 chars de releaseDate
     let rating: Double        // voteAverage
-    let genres: [String]      // Nomes resolvidos via genreMap
+    let genres: [Genre]       // Resolvidos via genreLookup no mapping
     let runtime: Int?         // Presente no model; não populado pelos endpoints de lista
 }
 ```
 
-### 6.2 DTOs da API
+**`MovieDetails`** — agrega `Movie` + overview, cast, crew, watch providers e filmes similares. Tipos auxiliares: `MovieCastMember`, `MovieCrewMember`, `WatchProvider`.
+
+**Regra de organização:** entidades de domínio ficam em `Domain/Models/`; Responses da API ficam em `Data/Models/`.
+
+### 6.2 Responses da API
 
 | Tipo | Campos principais |
 |---|---|
-| `MovieDTO` | `id`, `title`, `posterPath`, `backdropPath`, `releaseDate`, `voteAverage`, `genreIds`, `runtime` |
-| `MovieResponseDTO` | `results: [MovieDTO]` |
-| `GenreDTO` | `id`, `name` |
-| `GenreListResponseDTO` | `genres: [GenreDTO]` |
+| `MovieResponse` | `id`, `title`, `posterPath`, `backdropPath`, `releaseDate`, `voteAverage`, `genreIds`, `runtime` |
+| `MovieListResponse` | `results: [MovieResponse]` |
+| `GenreResponse` | `id`, `name` |
+| `GenreListResponse` | `genres: [GenreResponse]` |
 
-**Mapping:** `MovieDTO.asDomain(genreMap:)` constrói URLs de imagem e resolve `genreIds` → nomes localizados.
+**Mapping:**
+
+- `GenreResponse.toDomain()` → `Genre`
+- `MovieResponse.toDomain(genreLookup:)` constrói URLs de imagem e resolve `genreIds` → `[Genre]`
+- `MovieDetailsResponse.toDomain(...)` mapeia gêneros, cast, crew e providers
 
 ### 6.3 View Models (Presentation)
 
@@ -321,7 +339,7 @@ struct Movie: Sendable {
 |---|---|
 | `FeaturedViewModel` | Seção hero (title, year, rating, genres, backdropURL) |
 | `MovieCardViewModel` | Card horizontal (id, title, rating, posterURL, isTrending) |
-| `GenreFilter` / `GenreFilterViewModel` | Opções de chip + índice selecionado |
+| `GenreFilter` / `GenreFilterViewModel` | `[Genre]` no domínio/interactor; opções de chip (`[String]`) + índice selecionado na UI |
 | `HomeModels.FetchContent.*` | Request/Response/ViewModel do fluxo VIP |
 | `HomeModels.SelectGenre.Request` | Índice do chip selecionado |
 
@@ -383,19 +401,21 @@ Carregadas via `UIImageView.loadImage(from:)` com `URLSession.shared`.
 
 ```swift
 protocol MovieRepositoryProtocol {
-    func fetchNowPlaying(genreMap: [Int: String]) async throws -> [Movie]
-    func fetchTrending(genreMap: [Int: String]) async throws -> [Movie]
-    func fetchTopRated(genreMap: [Int: String]) async throws -> [Movie]
-    func fetchFeatured(genreMap: [Int: String]) async throws -> [Movie]
+    func fetchNowPlaying(genres: [Genre]) async throws -> [Movie]
+    func fetchTrending(genres: [Genre]) async throws -> [Movie]
+    func fetchTopRated(genres: [Genre]) async throws -> [Movie]
+    func fetchFeatured(genres: [Genre]) async throws -> [Movie]
+    func fetchMovieDetails(for movieId: Int) async throws -> MovieDetails
+    func fetchTrailerKey(for movieId: Int) async throws -> String?
 }
 
 protocol GenreRepositoryProtocol {
-    func genres() async throws -> [Int: String]   // id → nome
+    func genres() async throws -> [Genre]
     func invalidateCache() async
 }
 ```
 
-O `HomeInteractor` chama `genres()` uma vez e repassa o `genreMap` para cada `fetch*` do `MovieRepository`. O `MovieRepository` não depende de `GenreRepository`.
+O `HomeInteractor` chama `genres()` uma vez e repassa `[Genre]` para cada `fetch*` do `MovieRepository`. O filtro por gênero usa `genre.id`, não o nome. O `MovieRepository` não depende de `GenreRepository`.
 
 ---
 
@@ -409,8 +429,8 @@ O `HomeInteractor` chama `genres()` uma vez e repassa o `genreMap` para cada `fe
 3. presenter.presentLoading() → skeleton
 4. loadContent():
    a. genreRepository.genres() — uma request (ou cache hit)
-   b. 4 async let em paralelo: fetchFeatured/NowPlaying/Trending/TopRated(genreMap:)
-5. buildGenreOptions() → ["All/Todos"] + gêneros ordenados
+   b. 4 async let em paralelo: fetchFeatured/NowPlaying/Trending/TopRated(genres:)
+5. sortedGenres = gêneros ordenados por nome; chip "All/Todos" no índice 0
 6. Salva CachedHomeContent
 7. presentFilteredContent() → aplica filtro atual
 8. presenter.presentContent() → HomeView exibe conteúdo
@@ -430,7 +450,7 @@ O `HomeInteractor` chama `genres()` uma vez e repassa o `genreMap` para cada `fe
 **Regras de filtro:**
 
 - Índice 0 ("All"/"Todos"): sem filtro
-- Demais índices: `Movie.genres.contains(nomeDoGênero)`
+- Demais índices: filmes cujo `Movie.genres` contém um `Genre` com o mesmo `id`
 
 **Regras do featured ao filtrar:**
 
@@ -465,8 +485,8 @@ loadContent() catch → presenter.presentError(error)
 
 | Estado | Dono | Mecanismo |
 |---|---|---|
-| Cache de conteúdo da Home | `HomeInteractor` | `cachedHomeContent`, `genreOptions`, `selectedGenreIndex` |
-| Cache de gêneros da API | `GenreRepository` (actor) | `cache` in-memory |
+| Cache de conteúdo da Home | `HomeInteractor` | `cachedHomeContent`, `sortedGenres`, `selectedGenreIndex` |
+| Cache de gêneros da API | `GenreRepository` (actor) | `cache: [Genre]?` in-memory |
 | Estado visual (loading/content/error) | `HomeView` | `enum State { loading, content, error }` |
 | Seleção de chip | `GenreFilterView` | `options` + `selectedIndex` via `configure` |
 
@@ -484,7 +504,7 @@ User → Delegate → ViewController → Interactor → Repository
 - `async/await` em repositórios e interactor
 - `GenreRepository` é `actor` — thread-safe para cache
 - UI updates via `await MainActor.run { ... }` no interactor
-- `Sendable` em protocolos, DTOs e `Movie`
+- `Sendable` em protocolos, Responses da API e entidades de domínio (`Genre`, `Movie`, `MovieDetails`)
 
 ### 9.4 Por que filtrar no cliente?
 
@@ -512,7 +532,7 @@ AppDelegate
 ### 10.2 Home
 
 - Navigation bar oculta (`setNavigationBarHidden(true)`)
-- `HomeRouter` existe mas está vazio — ponto de extensão para detalhe do filme
+- `HomeRouter` navega para Movie Details e abre trailer no YouTube
 - Sem deep linking, sem Coordinator pattern
 - Sem SceneDelegate — lifecycle clássico via `AppDelegate`
 
@@ -641,7 +661,7 @@ Sugestões de tópicos para a conversa com o engenheiro iOS:
 |---|---|
 | `HomeInteractor` | Filtro por gênero, resolução do featured, reuso de cache |
 | `HomePresenter` | Formatação de rating, mapeamento para ViewModels |
-| `MovieRepository` | DTO → domain com mock de `NetworkService` |
+| `MovieRepository` | Response → domain com mock de `NetworkService` |
 | `GenreRepository` | Cache hit, `invalidateCache` |
 | `NetworkService` | Mapeamento de status codes, erros de decoding |
 | `LocaleProvider` | `pt` → `pt-BR`, fallback → `en-US` |
@@ -823,22 +843,22 @@ sequenceDiagram
 
     Interactor->>GenreRepo: genres()
     GenreRepo->>API: GET /genre/movie/list
-    API-->>GenreRepo: GenreListResponseDTO
-    GenreRepo-->>Interactor: genreMap
+    API-->>GenreRepo: GenreListResponse
+    GenreRepo-->>Interactor: [Genre]
 
     par Requisições de filmes em paralelo
-        Interactor->>MovieRepo: fetchFeatured(genreMap:)
-        Interactor->>MovieRepo: fetchNowPlaying(genreMap:)
-        Interactor->>MovieRepo: fetchTrending(genreMap:)
-        Interactor->>MovieRepo: fetchTopRated(genreMap:)
+        Interactor->>MovieRepo: fetchFeatured(genres:)
+        Interactor->>MovieRepo: fetchNowPlaying(genres:)
+        Interactor->>MovieRepo: fetchTrending(genres:)
+        Interactor->>MovieRepo: fetchTopRated(genres:)
     end
 
     MovieRepo->>API: GET /movie/popular, /now_playing, etc.
-    API-->>MovieRepo: MovieResponseDTO
+    API-->>MovieRepo: MovieListResponse
 
     MovieRepo-->>Interactor: [Movie]
 
-    Interactor->>Interactor: buildGenreOptions() + cache
+    Interactor->>Interactor: sortedGenres + cache
     Interactor->>Interactor: presentFilteredContent()
     Interactor->>Presenter: presentContent(response)
     Presenter->>HomeVC: displayContent(viewModel)
@@ -864,6 +884,7 @@ graph TB
     end
 
     subgraph Domain
+        ENT[Entities: Genre, Movie, MovieDetails]
         MRP[MovieRepositoryProtocol]
         GRP[GenreRepositoryProtocol]
     end
@@ -873,7 +894,7 @@ graph TB
         GR[GenreRepository actor]
         NS[NetworkService]
         EP[Endpoints]
-        DTO[DTOs]
+        RES[API Responses]
     end
 
     subgraph Application
@@ -896,7 +917,7 @@ graph TB
     GR -.-> GRP
     MR & GR --> NS
     NS --> EP
-    MR --> DTO
+    MR --> RES
     AD --> MR & GR & LP
     NS --> TMDB
     V --> CDN
@@ -921,6 +942,7 @@ classDiagram
         -repository: MovieRepositoryProtocol
         -genreRepository: GenreRepositoryProtocol
         -cachedHomeContent: CachedHomeContent?
+        -sortedGenres: [Genre]
         -selectedGenreIndex: Int
         +fetchContent()
         +refresh()
@@ -941,14 +963,16 @@ classDiagram
     class MovieRepository {
         -networkService: NetworkServiceProtocol
         -localeProvider: LocaleProviderProtocol
-        +fetchFeatured(genreMap:)
-        +fetchNowPlaying(genreMap:)
-        +fetchTrending(genreMap:)
-        +fetchTopRated(genreMap:)
+        +fetchFeatured(genres:)
+        +fetchNowPlaying(genres:)
+        +fetchTrending(genres:)
+        +fetchTopRated(genres:)
+        +fetchMovieDetails(for:)
+        +fetchTrailerKey(for:)
     }
 
     class GenreRepository {
-        -cache: [Int:String]?
+        -cache: [Genre]?
         +genres()
         +invalidateCache()
     }

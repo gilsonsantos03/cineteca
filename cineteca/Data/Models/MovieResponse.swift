@@ -1,6 +1,6 @@
 import Foundation
 
-struct MovieDTO: Decodable, Sendable {
+struct MovieResponse: Decodable, Sendable {
     let id: Int
     let title: String
     let posterPath: String?
@@ -11,11 +11,11 @@ struct MovieDTO: Decodable, Sendable {
     let runtime: Int?
 }
 
-struct MovieResponseDTO: Decodable, Sendable {
-    let results: [MovieDTO]
+struct MovieListResponse: Decodable, Sendable {
+    let results: [MovieResponse]
 }
 
-struct VideoDTO: Decodable, Sendable {
+struct VideoResponse: Decodable, Sendable {
     let key: String
     let site: String
     let type: String
@@ -23,11 +23,11 @@ struct VideoDTO: Decodable, Sendable {
     let publishedAt: String?
 }
 
-struct VideoListResponseDTO: Decodable, Sendable {
-    let results: [VideoDTO]
+struct VideoListResponse: Decodable, Sendable {
+    let results: [VideoResponse]
 }
 
-extension VideoListResponseDTO {
+extension VideoListResponse {
     func youtubeTrailerKey() -> String? {
         let trailers = results.filter { $0.site == "YouTube" && $0.type == "Trailer" }
         let selected = trailers.first(where: { $0.official == true }) ?? trailers.first
@@ -42,8 +42,8 @@ enum TMDBImage {
     static let providerLogoBaseURL = "https://image.tmdb.org/t/p/w45"
 }
 
-extension MovieDTO {
-    func asDomain(genreMap: [Int: String]) -> Movie {
+extension MovieResponse {
+    func toDomain(genreLookup: [Int: Genre]) -> Movie {
         Movie(
             id: id,
             title: title,
@@ -51,7 +51,7 @@ extension MovieDTO {
             backdropURL: backdropPath.flatMap { URL(string: TMDBImage.backdropBaseURL + $0) },
             releaseYear: releaseDate?.prefix(4).description ?? "",
             rating: voteAverage,
-            genres: genreIds.compactMap { genreMap[$0] },
+            genres: genreIds.compactMap { genreLookup[$0] },
             runtime: runtime
         )
     }
