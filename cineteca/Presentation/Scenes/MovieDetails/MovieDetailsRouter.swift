@@ -1,12 +1,13 @@
 import UIKit
 
-protocol HomeRoutingLogic {
+protocol MovieDetailsRoutingLogic {
+    func routeBack()
     func routeToTrailer(youtubeKey: String)
     func routeToMovieDetails(movieId: Int)
 }
 
-final class HomeRouter {
-    weak var viewController: HomeViewController?
+final class MovieDetailsRouter {
+    weak var viewController: MovieDetailsViewController?
     private let movieDetailsBuilder: MovieDetailsBuilding
 
     init(movieDetailsBuilder: MovieDetailsBuilding) {
@@ -14,7 +15,11 @@ final class HomeRouter {
     }
 }
 
-extension HomeRouter: HomeRoutingLogic {
+extension MovieDetailsRouter: MovieDetailsRoutingLogic {
+    func routeBack() {
+        viewController?.navigationController?.popViewController(animated: true)
+    }
+
     func routeToTrailer(youtubeKey: String) {
         guard
             let appURL = URL(string: "youtube://watch?v=\(youtubeKey)"),

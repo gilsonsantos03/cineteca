@@ -1,6 +1,10 @@
 import Foundation
 
 enum Strings {
+    enum UI {
+        static let watchTrailer = NSLocalizedString("UI.WatchTrailerButton.Title", comment: "")
+    }
+
     enum HomeScene {
         enum GenreFilter {
             static let all = NSLocalizedString("HomeScene.GenreFilter.All.Text", comment: "")
@@ -20,7 +24,7 @@ enum Strings {
         }
 
         enum Featured {
-            static let watchTrailerButton = NSLocalizedString("HomeScene.Featured.WatchTrailerButton.Text", comment: "")
+            static let watchTrailerButton = Strings.UI.watchTrailer
             static let watchlistButton = NSLocalizedString("HomeScene.Featured.WatchlistButton.Text", comment: "")
         }
 
@@ -46,5 +50,64 @@ enum Strings {
         static let lists = NSLocalizedString("TabBar.Lists.Title", comment: "")
         static let stats = NSLocalizedString("TabBar.Stats.Title", comment: "")
         static let profile = NSLocalizedString("TabBar.Profile.Title", comment: "")
+    }
+
+    enum MovieDetailsScene {
+        enum Action {
+            static let rate = NSLocalizedString("MovieDetailsScene.Action.Rate.Text", comment: "")
+            static let favorite = NSLocalizedString("MovieDetailsScene.Action.Favorite.Text", comment: "")
+            static let watchlist = NSLocalizedString("MovieDetailsScene.Action.Watchlist.Text", comment: "")
+            static let readMore = NSLocalizedString("MovieDetailsScene.Action.ReadMore.Text", comment: "")
+            static let watchTrailer = Strings.UI.watchTrailer
+        }
+
+        enum Section {
+            static let whereToWatch = NSLocalizedString("MovieDetailsScene.Section.WhereToWatch.Title", comment: "")
+            static let synopsis = NSLocalizedString("MovieDetailsScene.Section.Synopsis.Title", comment: "")
+            static let cast = NSLocalizedString("MovieDetailsScene.Section.Cast.Title", comment: "")
+            static let crew = NSLocalizedString("MovieDetailsScene.Section.Crew.Title", comment: "")
+            static let similar = NSLocalizedString("MovieDetailsScene.Section.Similar.Title", comment: "")
+        }
+
+        enum Rating {
+            static let tmdb = NSLocalizedString("MovieDetailsScene.Rating.TMDB.Text", comment: "")
+        }
+
+        enum Certification {
+            static func age(_ value: String) -> String {
+                String(format: NSLocalizedString("MovieDetailsScene.Certification.Age.Format", comment: ""), value)
+            }
+
+            static var accessibilityLabel: String {
+                NSLocalizedString("MovieDetailsScene.Certification.Accessibility.Label", comment: "")
+            }
+        }
+
+        enum Crew {
+            static func job(_ key: String) -> String {
+                switch key {
+                case "Director":
+                    NSLocalizedString("MovieDetailsScene.Crew.Job.Director", comment: "")
+                case "Writer":
+                    NSLocalizedString("MovieDetailsScene.Crew.Job.Writer", comment: "")
+                case "Screenplay":
+                    NSLocalizedString("MovieDetailsScene.Crew.Job.Screenplay", comment: "")
+                default:
+                    key
+                }
+            }
+        }
+
+        enum Error {
+            static let title = NSLocalizedString("MovieDetailsScene.Error.Title", comment: "")
+            static let message = NSLocalizedString("MovieDetailsScene.Error.Message", comment: "")
+            static let retry = NSLocalizedString("MovieDetailsScene.Error.Retry.Text", comment: "")
+        }
+
+        enum TrailerUnavailable {
+            static let title = NSLocalizedString("MovieDetailsScene.TrailerUnavailable.Title", comment: "")
+            static let message = NSLocalizedString("MovieDetailsScene.TrailerUnavailable.Message", comment: "")
+            static let okButton = NSLocalizedString("MovieDetailsScene.TrailerUnavailable.OkButton.Text", comment: "")
+        }
     }
 }

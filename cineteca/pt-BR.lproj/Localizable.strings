@@ -9,7 +9,7 @@
 "HomeScene.Error.Subtitle" = "Não foi possível carregar sua home. Verifique sua conexão e tente novamente.";
 "HomeScene.Error.RetryButton.Text" = "Tentar novamente";
 
-"HomeScene.Featured.WatchTrailerButton.Text" = "  Ver trailer";
+"UI.WatchTrailerButton.Title" = "Ver trailer";
 "HomeScene.Featured.WatchlistButton.Text" = "  Minha lista";
 
 "HomeScene.TrailerUnavailable.Title" = "Trailer indisponível";
@@ -26,3 +26,31 @@
 "TabBar.Lists.Title" = "Listas";
 "TabBar.Stats.Title" = "Stats";
 "TabBar.Profile.Title" = "Perfil";
+
+"MovieDetailsScene.Action.Rate.Text" = "Avaliar";
+"MovieDetailsScene.Action.Favorite.Text" = "Favoritar";
+"MovieDetailsScene.Action.Watchlist.Text" = "Minha lista";
+"MovieDetailsScene.Action.ReadMore.Text" = "Ler mais";
+
+"MovieDetailsScene.Section.WhereToWatch.Title" = "Onde assistir";
+"MovieDetailsScene.Section.Synopsis.Title" = "Sinopse";
+"MovieDetailsScene.Section.Cast.Title" = "Elenco";
+"MovieDetailsScene.Section.Crew.Title" = "Equipe";
+"MovieDetailsScene.Section.Similar.Title" = "Filmes similares";
+
+"MovieDetailsScene.Crew.Job.Director" = "Diretor";
+"MovieDetailsScene.Crew.Job.Writer" = "Roteirista";
+"MovieDetailsScene.Crew.Job.Screenplay" = "Roteiro";
+
+"MovieDetailsScene.Rating.TMDB.Text" = "Nota TMDB";
+
+"MovieDetailsScene.Certification.Age.Format" = "%@ anos";
+"MovieDetailsScene.Certification.Accessibility.Label" = "Classificação indicativa";
+
+"MovieDetailsScene.Error.Title" = "Não foi possível carregar este filme";
+"MovieDetailsScene.Error.Message" = "Verifique sua conexão e tente novamente.";
+"MovieDetailsScene.Error.Retry.Text" = "Tentar novamente";
+
+"MovieDetailsScene.TrailerUnavailable.Title" = "Trailer indisponível";
+"MovieDetailsScene.TrailerUnavailable.Message" = "Não encontramos um trailer para este filme no momento.";
+"MovieDetailsScene.TrailerUnavailable.OkButton.Text" = "OK";

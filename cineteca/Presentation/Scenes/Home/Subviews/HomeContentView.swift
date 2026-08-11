@@ -5,6 +5,7 @@ protocol HomeContentViewDelegate: AnyObject {
     func homeContentViewDidRequestRefresh(_ view: HomeContentView)
     func homeContentView(_ view: HomeContentView, didSelectGenreAt index: Int)
     func homeContentView(_ view: HomeContentView, didTapWatchTrailerForMovieId movieId: Int)
+    func homeContentView(_ view: HomeContentView, didSelectMovieId movieId: Int)
 }
 
 final class HomeContentView: UIView {
@@ -60,6 +61,9 @@ final class HomeContentView: UIView {
         backgroundColor = .appBackground
         genreFilterView.delegate = self
         featuredView.delegate = self
+        nowPlayingSectionView.delegate = self
+        trendingSectionView.delegate = self
+        topRatedSectionView.delegate = self
         setupSubviews()
         setupConstraints()
     }
@@ -144,5 +148,17 @@ extension HomeContentView: GenreFilterViewDelegate {
 extension HomeContentView: FeaturedViewDelegate {
     func featuredView(_ view: FeaturedView, didTapWatchTrailerForMovieId movieId: Int) {
         delegate?.homeContentView(self, didTapWatchTrailerForMovieId: movieId)
+    }
+
+    func featuredView(_ view: FeaturedView, didSelectMovieId movieId: Int) {
+        delegate?.homeContentView(self, didSelectMovieId: movieId)
+    }
+}
+
+// MARK: - MovieSectionViewDelegate
+
+extension HomeContentView: MovieSectionViewDelegate {
+    func movieSectionView(_ view: MovieSectionView, didSelectMovieId movieId: Int) {
+        delegate?.homeContentView(self, didSelectMovieId: movieId)
     }
 }

@@ -21,11 +21,6 @@ struct VideoDTO: Decodable, Sendable {
     let type: String
     let official: Bool?
     let publishedAt: String?
-
-    enum CodingKeys: String, CodingKey {
-        case key, site, type, official
-        case publishedAt = "published_at"
-    }
 }
 
 struct VideoListResponseDTO: Decodable, Sendable {
@@ -40,9 +35,11 @@ extension VideoListResponseDTO {
     }
 }
 
-private enum TMDBImage {
+enum TMDBImage {
     static let posterBaseURL = "https://image.tmdb.org/t/p/w500"
     static let backdropBaseURL = "https://image.tmdb.org/t/p/w780"
+    static let profileBaseURL = "https://image.tmdb.org/t/p/w185"
+    static let providerLogoBaseURL = "https://image.tmdb.org/t/p/w45"
 }
 
 extension MovieDTO {

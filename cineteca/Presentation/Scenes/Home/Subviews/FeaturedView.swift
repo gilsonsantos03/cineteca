@@ -3,6 +3,7 @@ import Cartography
 
 protocol FeaturedViewDelegate: AnyObject {
     func featuredView(_ view: FeaturedView, didTapWatchTrailerForMovieId movieId: Int)
+    func featuredView(_ view: FeaturedView, didSelectMovieId movieId: Int)
 }
 
 final class FeaturedView: UIView {
@@ -86,17 +87,9 @@ final class FeaturedView: UIView {
         return stack
     }()
 
-    private lazy var watchTrailerButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle(Strings.HomeScene.Featured.watchTrailerButton, for: .normal)
-        let config = UIImage.SymbolConfiguration(pointSize: 14, weight: .semibold)
-        button.setImage(UIImage(systemName: "play.fill", withConfiguration: config), for: .normal)
-        button.tintColor = .black
-        button.setTitleColor(.black, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
-        button.backgroundColor = .accentYellow
-        button.layer.cornerRadius = 22
-        button.addTarget(self, action: #selector(didTapWatchTrailer), for: .touchUpInside)
+    private lazy var watchTrailerButton: WatchTrailerButton = {
+        let button = WatchTrailerButton()
+        button.delegate = self
         return button
     }()
 
@@ -153,6 +146,10 @@ final class FeaturedView: UIView {
         setupGradient()
         setupSubviews()
         setupConstraints()
+        backdropImageView.isUserInteractionEnabled = true
+        backdropImageView.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(didTapMovie))
+        )
     }
 
     private func setupGradient() {
@@ -262,9 +259,14 @@ final class FeaturedView: UIView {
 
     // MARK: - Actions
 
-    @objc private func didTapWatchTrailer() {
+    private func didTapWatchTrailer() {
         guard let movieId else { return }
         delegate?.featuredView(self, didTapWatchTrailerForMovieId: movieId)
+    }
+
+    @objc private func didTapMovie() {
+        guard let movieId else { return }
+        delegate?.featuredView(self, didSelectMovieId: movieId)
     }
 
     // MARK: - Helpers
@@ -289,5 +291,13 @@ final class FeaturedView: UIView {
             label.right == container.right - 10
         }
         return container
+    }
+}
+
+// MARK: - WatchTrailerButtonDelegate
+
+extension FeaturedView: WatchTrailerButtonDelegate {
+    func watchTrailerButtonDidTap(_ button: WatchTrailerButton) {
+        didTapWatchTrailer()
     }
 }

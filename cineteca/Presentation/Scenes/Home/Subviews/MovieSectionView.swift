@@ -1,10 +1,15 @@
 import UIKit
 import Cartography
 
+protocol MovieSectionViewDelegate: AnyObject {
+    func movieSectionView(_ view: MovieSectionView, didSelectMovieId movieId: Int)
+}
+
 final class MovieSectionView: UIView {
 
     // MARK: - Properties
 
+    weak var delegate: MovieSectionViewDelegate?
     private let sectionTitle: String
     private var movies: [MovieCardViewModel] = []
 
@@ -37,6 +42,7 @@ final class MovieSectionView: UIView {
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         collectionView.register(MovieCardCell.self, forCellWithReuseIdentifier: MovieCardCell.reuseId)
         collectionView.dataSource = self
+        collectionView.delegate = self
         return collectionView
     }()
 
@@ -113,5 +119,13 @@ extension MovieSectionView: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCardCell.reuseId, for: indexPath) as! MovieCardCell
         cell.configure(viewModel: movies[indexPath.item])
         return cell
+    }
+}
+
+// MARK: - UICollectionViewDelegate
+
+extension MovieSectionView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.movieSectionView(self, didSelectMovieId: movies[indexPath.item].id)
     }
 }

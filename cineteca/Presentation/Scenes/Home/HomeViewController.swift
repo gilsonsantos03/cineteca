@@ -71,4 +71,8 @@ extension HomeViewController: HomeViewDelegate {
     func homeViewDidRequestWatchTrailer(_ view: HomeView, movieId: Int) {
         interactor.watchTrailer(request: .init(movieId: movieId))
     }
+
+    func homeView(_ view: HomeView, didSelectMovieId movieId: Int) {
+        router.routeToMovieDetails(movieId: movieId)
+    }
 }

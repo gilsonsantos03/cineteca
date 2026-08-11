@@ -3,10 +3,16 @@ import UIKit
 final class MainTabBarController: UITabBarController {
     private let repository: MovieRepositoryProtocol
     private let genreRepository: GenreRepositoryProtocol
+    private let movieDetailsBuilder: MovieDetailsBuilding
 
-    init(repository: MovieRepositoryProtocol, genreRepository: GenreRepositoryProtocol) {
+    init(
+        repository: MovieRepositoryProtocol,
+        genreRepository: GenreRepositoryProtocol,
+        movieDetailsBuilder: MovieDetailsBuilding
+    ) {
         self.repository = repository
         self.genreRepository = genreRepository
+        self.movieDetailsBuilder = movieDetailsBuilder
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -40,7 +46,11 @@ final class MainTabBarController: UITabBarController {
     }
 
     private func setupTabs() {
-        let homeVC = HomeConfigurator.resolve(repository: repository, genreRepository: genreRepository)
+        let homeVC = HomeConfigurator.resolve(
+            repository: repository,
+            genreRepository: genreRepository,
+            movieDetailsBuilder: movieDetailsBuilder
+        )
         homeVC.tabBarItem = UITabBarItem(title: Strings.TabBar.home, image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill"))
 
         let searchVC = makePlaceholder(title: Strings.TabBar.search, icon: "magnifyingglass")

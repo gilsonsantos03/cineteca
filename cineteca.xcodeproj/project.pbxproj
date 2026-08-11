@@ -56,6 +56,31 @@
 		CC00000100000000000000AA /* MovieRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC00000100000000000000AB /* MovieRepository.swift */; };
 		DD000001000000000000001A /* MovieDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD000001000000000000001B /* MovieDTO.swift */; };
 		DD000001000000000000002A /* MovieRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD000001000000000000002B /* MovieRepositoryProtocol.swift */; };
+		AA100001000000000000001A /* MovieDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000001B /* MovieDetails.swift */; };
+		AA100001000000000000002A /* MovieDetailsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000002B /* MovieDetailsDTO.swift */; };
+		AA100001000000000000003A /* MovieDetailsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000003B /* MovieDetailsModels.swift */; };
+		AA100001000000000000004A /* MovieDetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000004B /* MovieDetailsInteractor.swift */; };
+		AA100001000000000000005A /* MovieDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000005B /* MovieDetailsPresenter.swift */; };
+		AA100001000000000000006A /* MovieDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000006B /* MovieDetailsRouter.swift */; };
+		AA100001000000000000007A /* MovieDetailsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000007B /* MovieDetailsConfigurator.swift */; };
+		AA100001000000000000008A /* MovieDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000008B /* MovieDetailsView.swift */; };
+		AA100001000000000000009A /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000009B /* MovieDetailsViewController.swift */; };
+		AA100001000000000000010A /* MovieDetailsBuilding.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000010B /* MovieDetailsBuilding.swift */; };
+		AA100001000000000000011A /* MovieDetailsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000011B /* MovieDetailsHeaderView.swift */; };
+		AA100001000000000000020A /* MovieDetailsActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000020B /* MovieDetailsActionsView.swift */; };
+		AA100001000000000000021A /* MovieDetailsRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000021B /* MovieDetailsRatingView.swift */; };
+		AA100001000000000000022A /* MovieDetailsOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000022B /* MovieDetailsOverviewView.swift */; };
+		AA100001000000000000023A /* MovieDetailsProviderCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000023B /* MovieDetailsProviderCardView.swift */; };
+		AA100001000000000000013A /* MovieDetailsProvidersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000013B /* MovieDetailsProvidersView.swift */; };
+		AA100001000000000000024A /* MovieDetailsCastCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000024B /* MovieDetailsCastCardView.swift */; };
+		AA100001000000000000025A /* MovieDetailsCrewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000025B /* MovieDetailsCrewCardView.swift */; };
+		AA100001000000000000026A /* MovieDetailsSimilarMovieCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000026B /* MovieDetailsSimilarMovieCardView.swift */; };
+		AA100001000000000000014A /* MovieDetailsCastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000014B /* MovieDetailsCastView.swift */; };
+		AA100001000000000000027A /* WatchTrailerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000027B /* WatchTrailerButton.swift */; };
+		AA100001000000000000028A /* MovieDetailsCardMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000028B /* MovieDetailsCardMetrics.swift */; };
+		AA100001000000000000015A /* MovieDetailsCrewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000015B /* MovieDetailsCrewView.swift */; };
+		AA100001000000000000017A /* MovieDetailsSimilarMoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000017B /* MovieDetailsSimilarMoviesView.swift */; };
+		AA100001000000000000018A /* MovieDetailsErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000018B /* MovieDetailsErrorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -110,6 +135,31 @@
 		CC00000100000000000000AB /* MovieRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepository.swift; sourceTree = "<group>"; };
 		DD000001000000000000001B /* MovieDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDTO.swift; sourceTree = "<group>"; };
 		DD000001000000000000002B /* MovieRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepositoryProtocol.swift; sourceTree = "<group>"; };
+		AA100001000000000000001B /* MovieDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetails.swift; sourceTree = "<group>"; };
+		AA100001000000000000002B /* MovieDetailsDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsDTO.swift; sourceTree = "<group>"; };
+		AA100001000000000000003B /* MovieDetailsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsModels.swift; sourceTree = "<group>"; };
+		AA100001000000000000004B /* MovieDetailsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsInteractor.swift; sourceTree = "<group>"; };
+		AA100001000000000000005B /* MovieDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsPresenter.swift; sourceTree = "<group>"; };
+		AA100001000000000000006B /* MovieDetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsRouter.swift; sourceTree = "<group>"; };
+		AA100001000000000000007B /* MovieDetailsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsConfigurator.swift; sourceTree = "<group>"; };
+		AA100001000000000000008B /* MovieDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsView.swift; sourceTree = "<group>"; };
+		AA100001000000000000009B /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewController.swift; sourceTree = "<group>"; };
+		AA100001000000000000010B /* MovieDetailsBuilding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsBuilding.swift; sourceTree = "<group>"; };
+		AA100001000000000000011B /* MovieDetailsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsHeaderView.swift; sourceTree = "<group>"; };
+		AA100001000000000000020B /* MovieDetailsActionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsActionsView.swift; sourceTree = "<group>"; };
+		AA100001000000000000021B /* MovieDetailsRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsRatingView.swift; sourceTree = "<group>"; };
+		AA100001000000000000022B /* MovieDetailsOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsOverviewView.swift; sourceTree = "<group>"; };
+		AA100001000000000000023B /* MovieDetailsProviderCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsProviderCardView.swift; sourceTree = "<group>"; };
+		AA100001000000000000013B /* MovieDetailsProvidersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsProvidersView.swift; sourceTree = "<group>"; };
+		AA100001000000000000024B /* MovieDetailsCastCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsCastCardView.swift; sourceTree = "<group>"; };
+		AA100001000000000000025B /* MovieDetailsCrewCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsCrewCardView.swift; sourceTree = "<group>"; };
+		AA100001000000000000026B /* MovieDetailsSimilarMovieCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsSimilarMovieCardView.swift; sourceTree = "<group>"; };
+		AA100001000000000000014B /* MovieDetailsCastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsCastView.swift; sourceTree = "<group>"; };
+		AA100001000000000000027B /* WatchTrailerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchTrailerButton.swift; sourceTree = "<group>"; };
+		AA100001000000000000028B /* MovieDetailsCardMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsCardMetrics.swift; sourceTree = "<group>"; };
+		AA100001000000000000015B /* MovieDetailsCrewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsCrewView.swift; sourceTree = "<group>"; };
+		AA100001000000000000017B /* MovieDetailsSimilarMoviesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsSimilarMoviesView.swift; sourceTree = "<group>"; };
+		AA100001000000000000018B /* MovieDetailsErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsErrorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +179,7 @@
 			children = (
 				442CB0512FF6027B004FCC82 /* AppDependencies.swift */,
 				442CB0902FFC8401004FCC82 /* LocaleProvider.swift */,
+				AA100001000000000000010B /* MovieDetailsBuilding.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -137,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				442CB05D2FFC81ED004FCC82 /* Home */,
+				AA10000100000000000000CA /* MovieDetails */,
 				CC000001000000000000008B /* TabBar */,
 			);
 			path = Scenes;
@@ -173,6 +225,41 @@
 			path = Subviews;
 			sourceTree = "<group>";
 		};
+		AA10000100000000000000CA /* MovieDetails */ = {
+			isa = PBXGroup;
+			children = (
+				AA10000100000000000000DA /* Subviews */,
+				AA100001000000000000003B /* MovieDetailsModels.swift */,
+				AA100001000000000000009B /* MovieDetailsViewController.swift */,
+				AA100001000000000000008B /* MovieDetailsView.swift */,
+				AA100001000000000000004B /* MovieDetailsInteractor.swift */,
+				AA100001000000000000005B /* MovieDetailsPresenter.swift */,
+				AA100001000000000000006B /* MovieDetailsRouter.swift */,
+				AA100001000000000000007B /* MovieDetailsConfigurator.swift */,
+			);
+			path = MovieDetails;
+			sourceTree = "<group>";
+		};
+		AA10000100000000000000DA /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				AA100001000000000000011B /* MovieDetailsHeaderView.swift */,
+				AA100001000000000000020B /* MovieDetailsActionsView.swift */,
+				AA100001000000000000021B /* MovieDetailsRatingView.swift */,
+				AA100001000000000000022B /* MovieDetailsOverviewView.swift */,
+				AA100001000000000000023B /* MovieDetailsProviderCardView.swift */,
+				AA100001000000000000013B /* MovieDetailsProvidersView.swift */,
+				AA100001000000000000024B /* MovieDetailsCastCardView.swift */,
+				AA100001000000000000014B /* MovieDetailsCastView.swift */,
+				AA100001000000000000025B /* MovieDetailsCrewCardView.swift */,
+				AA100001000000000000015B /* MovieDetailsCrewView.swift */,
+				AA100001000000000000026B /* MovieDetailsSimilarMovieCardView.swift */,
+				AA100001000000000000017B /* MovieDetailsSimilarMoviesView.swift */,
+				AA100001000000000000018B /* MovieDetailsErrorView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
 		442CB2B230008A98004FCC82 /* Skeleton */ = {
 			isa = PBXGroup;
 			children = (
@@ -186,10 +273,20 @@
 		448D4C252FEA0A800008718A /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				AA100001000000000000027C /* UI */,
 				442CB05C2FFC8020004FCC82 /* Scenes */,
 				CC000001000000000000009B /* Helpers */,
 			);
 			path = Presentation;
+			sourceTree = "<group>";
+		};
+		AA100001000000000000027C /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				AA100001000000000000028B /* MovieDetailsCardMetrics.swift */,
+				AA100001000000000000027B /* WatchTrailerButton.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		448D4C262FEA0A870008718A /* Domain */ = {
@@ -310,7 +407,9 @@
 			isa = PBXGroup;
 			children = (
 				CC000001000000000000001B /* Movie.swift */,
+				AA100001000000000000001B /* MovieDetails.swift */,
 				DD000001000000000000001B /* MovieDTO.swift */,
+				AA100001000000000000002B /* MovieDetailsDTO.swift */,
 				442CB0942FFC8403004FCC82 /* GenreDTO.swift */,
 			);
 			path = Models;
@@ -445,6 +544,31 @@
 				CC00000100000000000000AA /* MovieRepository.swift in Sources */,
 				DD000001000000000000001A /* MovieDTO.swift in Sources */,
 				DD000001000000000000002A /* MovieRepositoryProtocol.swift in Sources */,
+				AA100001000000000000001A /* MovieDetails.swift in Sources */,
+				AA100001000000000000002A /* MovieDetailsDTO.swift in Sources */,
+				AA100001000000000000003A /* MovieDetailsModels.swift in Sources */,
+				AA100001000000000000004A /* MovieDetailsInteractor.swift in Sources */,
+				AA100001000000000000005A /* MovieDetailsPresenter.swift in Sources */,
+				AA100001000000000000006A /* MovieDetailsRouter.swift in Sources */,
+				AA100001000000000000007A /* MovieDetailsConfigurator.swift in Sources */,
+				AA100001000000000000008A /* MovieDetailsView.swift in Sources */,
+				AA100001000000000000009A /* MovieDetailsViewController.swift in Sources */,
+				AA100001000000000000010A /* MovieDetailsBuilding.swift in Sources */,
+				AA100001000000000000011A /* MovieDetailsHeaderView.swift in Sources */,
+				AA100001000000000000020A /* MovieDetailsActionsView.swift in Sources */,
+				AA100001000000000000021A /* MovieDetailsRatingView.swift in Sources */,
+				AA100001000000000000022A /* MovieDetailsOverviewView.swift in Sources */,
+				AA100001000000000000023A /* MovieDetailsProviderCardView.swift in Sources */,
+				AA100001000000000000013A /* MovieDetailsProvidersView.swift in Sources */,
+				AA100001000000000000024A /* MovieDetailsCastCardView.swift in Sources */,
+				AA100001000000000000014A /* MovieDetailsCastView.swift in Sources */,
+				AA100001000000000000025A /* MovieDetailsCrewCardView.swift in Sources */,
+				AA100001000000000000028A /* MovieDetailsCardMetrics.swift in Sources */,
+				AA100001000000000000027A /* WatchTrailerButton.swift in Sources */,
+				AA100001000000000000015A /* MovieDetailsCrewView.swift in Sources */,
+				AA100001000000000000026A /* MovieDetailsSimilarMovieCardView.swift in Sources */,
+				AA100001000000000000017A /* MovieDetailsSimilarMoviesView.swift in Sources */,
+				AA100001000000000000018A /* MovieDetailsErrorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

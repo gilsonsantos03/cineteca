@@ -44,7 +44,18 @@ extension AppDependencies {
     func makeRootViewController() -> UIViewController {
         MainTabBarController(
             repository: movieRepository,
-            genreRepository: genreRepository
+            genreRepository: genreRepository,
+            movieDetailsBuilder: self
+        )
+    }
+}
+
+extension AppDependencies: MovieDetailsBuilding {
+    func makeMovieDetails(movieId: Int) -> UIViewController {
+        MovieDetailsConfigurator.resolve(
+            movieId: movieId,
+            repository: movieRepository,
+            movieDetailsBuilder: self
         )
     }
 }
