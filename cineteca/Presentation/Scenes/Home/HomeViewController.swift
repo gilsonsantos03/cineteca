@@ -27,18 +27,18 @@ final class HomeViewController: UIViewController {
 }
 
 extension HomeViewController: HomeDisplayLogic {
-    func displayContent(viewModel: HomeModels.FetchContent.ViewModel) {
-        customView.showContent(viewModel: viewModel)
+    func displayFetchContent(viewModel: HomeModels.FetchContent.ViewModel) {
+        switch viewModel {
+        case let .content(content):
+            customView.showContent(content: content)
+        case .error:
+            customView.showError()
+        }
         customView.endRefreshing()
     }
 
     func displayLoading() {
         customView.showLoading()
-    }
-
-    func displayError(viewModel: HomeModels.ErrorState.ViewModel) {
-        customView.showError()
-        customView.endRefreshing()
     }
 
     func displayWatchTrailer(viewModel: HomeModels.WatchTrailer.ViewModel) {
@@ -56,23 +56,23 @@ extension HomeViewController: HomeDisplayLogic {
 // MARK: - HomeViewDelegate
 
 extension HomeViewController: HomeViewDelegate {
-    func homeViewDidRequestRefresh(_ view: HomeView) {
+    func didRequestRefresh() {
         interactor.refresh()
     }
 
-    func homeViewDidRequestRetry(_ view: HomeView) {
+    func didRequestRetry() {
         interactor.fetchContent(request: .init())
     }
 
-    func didSelectGenreAt(_ index: Int) {
+    func didSelectGenre(at index: Int) {
         interactor.selectGenre(request: .init(index: index))
     }
 
-    func homeViewDidRequestWatchTrailer(_ view: HomeView, movieId: Int) {
+    func didRequestWatchTrailer(movieId: Int) {
         interactor.watchTrailer(request: .init(movieId: movieId))
     }
 
-    func homeView(_ view: HomeView, didSelectMovieId movieId: Int) {
+    func didSelectMovie(id movieId: Int) {
         router.routeToMovieDetails(movieId: movieId)
     }
 }

@@ -2,11 +2,11 @@ import UIKit
 import Cartography
 
 protocol HomeViewDelegate: AnyObject {
-    func homeViewDidRequestRefresh(_ view: HomeView)
-    func homeViewDidRequestRetry(_ view: HomeView)
-    func didSelectGenreAt(_ index: Int)
-    func homeViewDidRequestWatchTrailer(_ view: HomeView, movieId: Int)
-    func homeView(_ view: HomeView, didSelectMovieId movieId: Int)
+    func didRequestRefresh()
+    func didRequestRetry()
+    func didSelectGenre(at index: Int)
+    func didRequestWatchTrailer(movieId: Int)
+    func didSelectMovie(id movieId: Int)
 }
 
 final class HomeView: UIView {
@@ -85,8 +85,8 @@ final class HomeView: UIView {
         setState(.loading)
     }
 
-    func showContent(viewModel: HomeModels.FetchContent.ViewModel) {
-        homeContentView.configure(viewModel: viewModel)
+    func showContent(content: HomeModels.FetchContent.ViewModel.Content) {
+        homeContentView.configure(content: content)
         setState(.content)
     }
 
@@ -110,27 +110,27 @@ final class HomeView: UIView {
 // MARK: - HomeContentViewDelegate
 
 extension HomeView: HomeContentViewDelegate {
-    func homeContentViewDidRequestRefresh(_ view: HomeContentView) {
-        delegate?.homeViewDidRequestRefresh(self)
+    func didRequestRefresh() {
+        delegate?.didRequestRefresh()
     }
 
-    func homeContentView(_ view: HomeContentView, didSelectGenreAt index: Int) {
-        delegate?.didSelectGenreAt(index)
+    func didSelectGenre(at index: Int) {
+        delegate?.didSelectGenre(at: index)
     }
 
-    func homeContentView(_ view: HomeContentView, didTapWatchTrailerForMovieId movieId: Int) {
-        delegate?.homeViewDidRequestWatchTrailer(self, movieId: movieId)
+    func didRequestWatchTrailer(movieId: Int) {
+        delegate?.didRequestWatchTrailer(movieId: movieId)
     }
 
-    func homeContentView(_ view: HomeContentView, didSelectMovieId movieId: Int) {
-        delegate?.homeView(self, didSelectMovieId: movieId)
+    func didSelectMovie(id movieId: Int) {
+        delegate?.didSelectMovie(id: movieId)
     }
 }
 
 // MARK: - HomeErrorStateViewDelegate
 
 extension HomeView: HomeErrorStateViewDelegate {
-    func homeErrorStateViewDidRequestRetry(_ view: HomeErrorStateView) {
-        delegate?.homeViewDidRequestRetry(self)
+    func didRequestRetry() {
+        delegate?.didRequestRetry()
     }
 }

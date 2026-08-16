@@ -2,7 +2,7 @@ import UIKit
 import Cartography
 
 protocol MovieDetailsSimilarMovieCardViewDelegate: AnyObject {
-    func similarMovieCardView(_ view: MovieDetailsSimilarMovieCardView, didSelectMovie movieId: Int)
+    func didSelectMovie(id movieId: Int)
 }
 
 final class MovieDetailsSimilarMovieCardView: UIButton {
@@ -92,6 +92,6 @@ final class MovieDetailsSimilarMovieCardView: UIButton {
 
     @objc private func didTap() {
         guard let movieId else { return }
-        delegate?.similarMovieCardView(self, didSelectMovie: movieId)
+        delegate?.didSelectMovie(id: movieId)
     }
 }

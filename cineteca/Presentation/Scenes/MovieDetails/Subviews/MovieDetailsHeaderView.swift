@@ -2,7 +2,7 @@ import UIKit
 import Cartography
 
 protocol MovieDetailsHeaderViewDelegate: AnyObject {
-    func movieDetailsHeaderDidTapBack()
+    func didTapBack()
 }
 
 final class MovieDetailsHeaderView: UIView {
@@ -226,7 +226,7 @@ final class MovieDetailsHeaderView: UIView {
     // MARK: - Actions
 
     @objc private func didTapBack() {
-        delegate?.movieDetailsHeaderDidTapBack()
+        delegate?.didTapBack()
     }
 
     // MARK: - Helpers

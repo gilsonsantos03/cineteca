@@ -193,6 +193,35 @@ func configure(viewModel: FeaturedViewModel) {
 - One public `configure(viewModel:)` per view. If the view has to expose more than one setter, that is a signal the parent should own the state instead.
 - View models come from the scene's `Presenter` (see [architecture.md](architecture.md) — VIP section). Views never reach into repositories, services, or `HomeModels.Response`.
 
+## Delegates
+
+Each subview that emits user actions exposes a `<Component>Delegate` protocol. The protocol name identifies **who** sends events; method names describe **what happened**.
+
+```swift
+protocol SearchBarViewDelegate: AnyObject {
+    func didChangeText(_ text: String)
+    func didSubmitQuery(_ query: String)
+    func didTapFilter()
+}
+```
+
+**Rules:**
+
+- Name methods after the action (`didSelectMovie`, `didRequestRetry`, `didUpdateFilters`), not after the sender type.
+- Do **not** prefix methods with the component name (`searchBarView(_:didChangeText:)` ❌).
+- Do **not** pass the sender as the first parameter — the protocol already scopes the callback.
+- Use `did` + verb for user-driven events; keep parameter labels readable (`at index:`, `id movieId:`, `from yearFrom:to yearTo:`).
+
+```swift
+// ✅ caller
+delegate?.didUpdateFilters(filters)
+
+// ✅ conforming type
+func didUpdateFilters(_ filters: SearchFilters) {
+    interactor.updateFilters(request: .init(filters: filters))
+}
+```
+
 ## Cell Reuse
 
 Cells register and dequeue via a static `reuseId` matching the class name:

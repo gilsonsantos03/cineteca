@@ -4,20 +4,28 @@ struct HomeModels {
     enum FetchContent {
         struct Request {}
 
-        struct Response {
-            let featured: Movie
-            let nowPlaying: [Movie]
-            let trending: [Movie]
-            let topRated: [Movie]
-            let genreFilter: GenreFilter
+        enum Response {
+            case content(
+                featured: Movie,
+                nowPlaying: [Movie],
+                trending: [Movie],
+                topRated: [Movie],
+                genreFilter: GenreFilter
+            )
+            case error
         }
 
-        struct ViewModel {
-            let featured: FeaturedViewModel
-            let genreFilter: GenreFilterViewModel
-            let nowPlaying: [MovieCardViewModel]
-            let trending: [MovieCardViewModel]
-            let topRated: [MovieCardViewModel]
+        enum ViewModel {
+            case content(Content)
+            case error
+
+            struct Content {
+                let featured: FeaturedViewModel
+                let genreFilter: GenreFilterViewModel
+                let nowPlaying: [MovieCardViewModel]
+                let trending: [MovieCardViewModel]
+                let topRated: [MovieCardViewModel]
+            }
         }
     }
 
@@ -25,10 +33,6 @@ struct HomeModels {
         struct Request {
             let index: Int
         }
-    }
-
-    enum ErrorState {
-        struct ViewModel {}
     }
 
     enum WatchTrailer {

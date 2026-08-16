@@ -53,7 +53,17 @@ final class MainTabBarController: UITabBarController {
         )
         homeVC.tabBarItem = UITabBarItem(title: Strings.TabBar.home, image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill"))
 
-        let searchVC = makePlaceholder(title: Strings.TabBar.search, icon: "magnifyingglass")
+        let searchVC = SearchConfigurator.resolve(
+            repository: repository,
+            genreRepository: genreRepository,
+            movieDetailsBuilder: movieDetailsBuilder
+        )
+        searchVC.tabBarItem = UITabBarItem(
+            title: Strings.TabBar.search,
+            image: UIImage(systemName: "magnifyingglass"),
+            selectedImage: UIImage(systemName: "magnifyingglass")
+        )
+
         let listsVC  = makePlaceholder(title: Strings.TabBar.lists,  icon: "bookmark")
         let statsVC  = makePlaceholder(title: Strings.TabBar.stats,  icon: "chart.bar")
         let profileVC = makePlaceholder(title: Strings.TabBar.profile, icon: "person")

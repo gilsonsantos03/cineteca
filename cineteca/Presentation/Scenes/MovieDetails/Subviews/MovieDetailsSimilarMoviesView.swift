@@ -2,7 +2,7 @@ import UIKit
 import Cartography
 
 protocol MovieDetailsSimilarMoviesViewDelegate: AnyObject {
-    func movieDetailsSimilarMoviesView(_ view: MovieDetailsSimilarMoviesView, didSelectMovie movieId: Int)
+    func didSelectMovie(id movieId: Int)
 }
 
 final class MovieDetailsSimilarMoviesView: UIStackView {
@@ -99,7 +99,7 @@ final class MovieDetailsSimilarMoviesView: UIStackView {
 // MARK: - MovieDetailsSimilarMovieCardViewDelegate
 
 extension MovieDetailsSimilarMoviesView: MovieDetailsSimilarMovieCardViewDelegate {
-    func similarMovieCardView(_ view: MovieDetailsSimilarMovieCardView, didSelectMovie movieId: Int) {
-        delegate?.movieDetailsSimilarMoviesView(self, didSelectMovie: movieId)
+    func didSelectMovie(id movieId: Int) {
+        delegate?.didSelectMovie(id: movieId)
     }
 }

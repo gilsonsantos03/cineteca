@@ -1,16 +1,14 @@
 import Foundation
 
 protocol HomePresentationLogic {
-    func presentContent(response: HomeModels.FetchContent.Response)
+    func presentFetchContent(response: HomeModels.FetchContent.Response)
     func presentLoading()
-    func presentError(_ error: Error)
     func presentWatchTrailer(response: HomeModels.WatchTrailer.Response)
 }
 
 protocol HomeDisplayLogic: AnyObject {
-    func displayContent(viewModel: HomeModels.FetchContent.ViewModel)
+    func displayFetchContent(viewModel: HomeModels.FetchContent.ViewModel)
     func displayLoading()
-    func displayError(viewModel: HomeModels.ErrorState.ViewModel)
     func displayWatchTrailer(viewModel: HomeModels.WatchTrailer.ViewModel)
 }
 
@@ -19,26 +17,29 @@ final class HomePresenter {
 }
 
 extension HomePresenter: HomePresentationLogic {
-    func presentContent(response: HomeModels.FetchContent.Response) {
-        let viewModel = HomeModels.FetchContent.ViewModel(
-            featured: makeFeaturedViewModel(from: response.featured),
-            genreFilter: GenreFilterViewModel(
-                options: [Strings.HomeScene.GenreFilter.all] + response.genreFilter.genres.map(\.name),
-                selectedIndex: response.genreFilter.selectedIndex
-            ),
-            nowPlaying: response.nowPlaying.map { makeCardViewModel(from: $0) },
-            trending: response.trending.map { makeCardViewModel(from: $0, isTrending: true) },
-            topRated: response.topRated.map { makeCardViewModel(from: $0) }
-        )
-        view?.displayContent(viewModel: viewModel)
+    func presentFetchContent(response: HomeModels.FetchContent.Response) {
+        let viewModel: HomeModels.FetchContent.ViewModel = switch response {
+        case let .content(featured, nowPlaying, trending, topRated, genreFilter):
+            .content(
+                HomeModels.FetchContent.ViewModel.Content(
+                    featured: makeFeaturedViewModel(from: featured),
+                    genreFilter: GenreFilterViewModel(
+                        options: [Strings.HomeScene.GenreFilter.all] + genreFilter.genres.map(\.name),
+                        selectedIndex: genreFilter.selectedIndex
+                    ),
+                    nowPlaying: nowPlaying.map { makeCardViewModel(from: $0) },
+                    trending: trending.map { makeCardViewModel(from: $0, isTrending: true) },
+                    topRated: topRated.map { makeCardViewModel(from: $0) }
+                )
+            )
+        case .error:
+            .error
+        }
+        view?.displayFetchContent(viewModel: viewModel)
     }
 
     func presentLoading() {
         view?.displayLoading()
-    }
-
-    func presentError(_ error: Error) {
-        view?.displayError(viewModel: HomeModels.ErrorState.ViewModel())
     }
 
     func presentWatchTrailer(response: HomeModels.WatchTrailer.Response) {

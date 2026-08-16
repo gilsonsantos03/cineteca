@@ -2,10 +2,10 @@ import UIKit
 import Cartography
 
 protocol HomeContentViewDelegate: AnyObject {
-    func homeContentViewDidRequestRefresh(_ view: HomeContentView)
-    func homeContentView(_ view: HomeContentView, didSelectGenreAt index: Int)
-    func homeContentView(_ view: HomeContentView, didTapWatchTrailerForMovieId movieId: Int)
-    func homeContentView(_ view: HomeContentView, didSelectMovieId movieId: Int)
+    func didRequestRefresh()
+    func didSelectGenre(at index: Int)
+    func didRequestWatchTrailer(movieId: Int)
+    func didSelectMovie(id movieId: Int)
 }
 
 final class HomeContentView: UIView {
@@ -107,12 +107,12 @@ final class HomeContentView: UIView {
 
     // MARK: - Configure
 
-    func configure(viewModel: HomeModels.FetchContent.ViewModel) {
-        featuredView.configure(viewModel: viewModel.featured)
-        genreFilterView.configure(viewModel: viewModel.genreFilter)
-        nowPlayingSectionView.configure(movies: viewModel.nowPlaying)
-        trendingSectionView.configure(movies: viewModel.trending)
-        topRatedSectionView.configure(movies: viewModel.topRated)
+    func configure(content: HomeModels.FetchContent.ViewModel.Content) {
+        featuredView.configure(viewModel: content.featured)
+        genreFilterView.configure(viewModel: content.genreFilter)
+        nowPlayingSectionView.configure(movies: content.nowPlaying)
+        trendingSectionView.configure(movies: content.trending)
+        topRatedSectionView.configure(movies: content.topRated)
     }
 
     func endRefreshing() {
@@ -122,7 +122,7 @@ final class HomeContentView: UIView {
     // MARK: - Actions
 
     @objc private func didPullToRefresh() {
-        delegate?.homeContentViewDidRequestRefresh(self)
+        delegate?.didRequestRefresh()
     }
 
     // MARK: - Helpers
@@ -138,27 +138,19 @@ final class HomeContentView: UIView {
 // MARK: - GenreFilterViewDelegate
 
 extension HomeContentView: GenreFilterViewDelegate {
-    func genreFilterView(_ view: GenreFilterView, didSelectGenreAt index: Int) {
-        delegate?.homeContentView(self, didSelectGenreAt: index)
+    func didSelectGenre(at index: Int) {
+        delegate?.didSelectGenre(at: index)
     }
 }
 
-// MARK: - FeaturedViewDelegate
+// MARK: - FeaturedViewDelegate, MovieSectionViewDelegate
 
-extension HomeContentView: FeaturedViewDelegate {
-    func featuredView(_ view: FeaturedView, didTapWatchTrailerForMovieId movieId: Int) {
-        delegate?.homeContentView(self, didTapWatchTrailerForMovieId: movieId)
+extension HomeContentView: FeaturedViewDelegate, MovieSectionViewDelegate {
+    func didRequestWatchTrailer(movieId: Int) {
+        delegate?.didRequestWatchTrailer(movieId: movieId)
     }
 
-    func featuredView(_ view: FeaturedView, didSelectMovieId movieId: Int) {
-        delegate?.homeContentView(self, didSelectMovieId: movieId)
-    }
-}
-
-// MARK: - MovieSectionViewDelegate
-
-extension HomeContentView: MovieSectionViewDelegate {
-    func movieSectionView(_ view: MovieSectionView, didSelectMovieId movieId: Int) {
-        delegate?.homeContentView(self, didSelectMovieId: movieId)
+    func didSelectMovie(id movieId: Int) {
+        delegate?.didSelectMovie(id: movieId)
     }
 }

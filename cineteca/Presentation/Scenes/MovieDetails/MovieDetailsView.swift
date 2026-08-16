@@ -2,10 +2,10 @@ import UIKit
 import Cartography
 
 protocol MovieDetailsViewDelegate: AnyObject {
-    func movieDetailsViewDidRequestRetry(_ view: MovieDetailsView)
-    func movieDetailsViewDidRequestBack(_ view: MovieDetailsView)
-    func movieDetailsView(_ view: MovieDetailsView, didTapTrailerFor movieId: Int)
-    func movieDetailsView(_ view: MovieDetailsView, didSelectSimilarMovie movieId: Int)
+    func didRequestRetry()
+    func didRequestBack()
+    func didRequestTrailer(for movieId: Int)
+    func didSelectSimilarMovie(id movieId: Int)
 }
 
 final class MovieDetailsView: UIView {
@@ -186,36 +186,36 @@ final class MovieDetailsView: UIView {
 
     private func requestTrailer() {
         guard let movieId else { return }
-        delegate?.movieDetailsView(self, didTapTrailerFor: movieId)
+        delegate?.didRequestTrailer(for: movieId)
     }
 
     private func selectSimilarMovie(_ movieId: Int) {
-        delegate?.movieDetailsView(self, didSelectSimilarMovie: movieId)
+        delegate?.didSelectSimilarMovie(id: movieId)
     }
 }
 
 // MARK: - MovieDetailsHeaderViewDelegate
 
 extension MovieDetailsView: MovieDetailsHeaderViewDelegate {
-    func movieDetailsHeaderDidTapBack() {
-        delegate?.movieDetailsViewDidRequestBack(self)
+    func didTapBack() {
+        delegate?.didRequestBack()
     }
 }
 
 // MARK: - MovieDetailsActionsViewDelegate
 
 extension MovieDetailsView: MovieDetailsActionsViewDelegate {
-    func movieDetailsActionsView(_ view: MovieDetailsActionsView, didTapRate button: UIButton) {}
+    func didTapRate() {}
 
-    func movieDetailsActionsView(_ view: MovieDetailsActionsView, didTapFavorite button: UIButton) {}
+    func didTapFavorite() {}
 
-    func movieDetailsActionsView(_ view: MovieDetailsActionsView, didTapWatchlist button: UIButton) {}
+    func didTapWatchlist() {}
 }
 
 // MARK: - WatchTrailerButtonDelegate
 
 extension MovieDetailsView: WatchTrailerButtonDelegate {
-    func watchTrailerButtonDidTap(_ button: WatchTrailerButton) {
+    func didTap() {
         requestTrailer()
     }
 }
@@ -223,7 +223,7 @@ extension MovieDetailsView: WatchTrailerButtonDelegate {
 // MARK: - MovieDetailsSimilarMoviesViewDelegate
 
 extension MovieDetailsView: MovieDetailsSimilarMoviesViewDelegate {
-    func movieDetailsSimilarMoviesView(_ view: MovieDetailsSimilarMoviesView, didSelectMovie movieId: Int) {
+    func didSelectMovie(id movieId: Int) {
         selectSimilarMovie(movieId)
     }
 }
@@ -231,7 +231,7 @@ extension MovieDetailsView: MovieDetailsSimilarMoviesViewDelegate {
 // MARK: - MovieDetailsErrorViewDelegate
 
 extension MovieDetailsView: MovieDetailsErrorViewDelegate {
-    func movieDetailsErrorViewDidRequestRetry(_ view: MovieDetailsErrorView) {
-        delegate?.movieDetailsViewDidRequestRetry(self)
+    func didRequestRetry() {
+        delegate?.didRequestRetry()
     }
 }

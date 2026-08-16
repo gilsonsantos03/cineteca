@@ -2,7 +2,7 @@ import UIKit
 import Cartography
 
 protocol WatchTrailerButtonDelegate: AnyObject {
-    func watchTrailerButtonDidTap(_ button: WatchTrailerButton)
+    func didTap()
 }
 
 final class WatchTrailerButton: UIButton {
@@ -61,6 +61,6 @@ final class WatchTrailerButton: UIButton {
     // MARK: - Actions
 
     @objc private func didTap() {
-        delegate?.watchTrailerButtonDidTap(self)
+        delegate?.didTap()
     }
 }

@@ -2,7 +2,7 @@ import UIKit
 import Cartography
 
 protocol MovieSectionViewDelegate: AnyObject {
-    func movieSectionView(_ view: MovieSectionView, didSelectMovieId movieId: Int)
+    func didSelectMovie(id movieId: Int)
 }
 
 final class MovieSectionView: UIView {
@@ -126,6 +126,6 @@ extension MovieSectionView: UICollectionViewDataSource {
 
 extension MovieSectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.movieSectionView(self, didSelectMovieId: movies[indexPath.item].id)
+        delegate?.didSelectMovie(id: movies[indexPath.item].id)
     }
 }

@@ -2,9 +2,9 @@ import UIKit
 import Cartography
 
 protocol MovieDetailsActionsViewDelegate: AnyObject {
-    func movieDetailsActionsView(_ view: MovieDetailsActionsView, didTapRate button: UIButton)
-    func movieDetailsActionsView(_ view: MovieDetailsActionsView, didTapFavorite button: UIButton)
-    func movieDetailsActionsView(_ view: MovieDetailsActionsView, didTapWatchlist button: UIButton)
+    func didTapRate()
+    func didTapFavorite()
+    func didTapWatchlist()
 }
 
 final class MovieDetailsActionsView: UIStackView {
@@ -94,17 +94,17 @@ final class MovieDetailsActionsView: UIStackView {
 
     @objc private func didTapRate(_ sender: UIButton) {
         toggle(sender, kind: .rate)
-        delegate?.movieDetailsActionsView(self, didTapRate: sender)
+        delegate?.didTapRate()
     }
 
     @objc private func didTapFavorite(_ sender: UIButton) {
         toggle(sender, kind: .favorite)
-        delegate?.movieDetailsActionsView(self, didTapFavorite: sender)
+        delegate?.didTapFavorite()
     }
 
     @objc private func didTapWatchlist(_ sender: UIButton) {
         toggle(sender, kind: .watchlist)
-        delegate?.movieDetailsActionsView(self, didTapWatchlist: sender)
+        delegate?.didTapWatchlist()
     }
 
     // MARK: - Helpers

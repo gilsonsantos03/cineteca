@@ -78,7 +78,7 @@ extension HomeInteractor: HomeBusinessLogic {
             )
 
             guard let featuredMovie = featuredMovies.first else {
-                await MainActor.run { presenter.presentError(NoContentError()) }
+                await MainActor.run { presenter.presentFetchContent(response: .error) }
                 return
             }
 
@@ -92,20 +92,21 @@ extension HomeInteractor: HomeBusinessLogic {
             cachedHomeContent = content
             await MainActor.run { presentFilteredContent(from: content) }
         } catch {
-            await MainActor.run { presenter.presentError(error) }
+            await MainActor.run { presenter.presentFetchContent(response: .error) }
         }
     }
 
     private func presentFilteredContent(from content: CachedHomeContent) {
         let selectedGenre = selectedGenre
-        let response = HomeModels.FetchContent.Response(
-            featured: resolveFeatured(from: content, genre: selectedGenre),
-            nowPlaying: filter(content.nowPlaying, by: selectedGenre),
-            trending: filter(content.trending, by: selectedGenre),
-            topRated: filter(content.topRated, by: selectedGenre),
-            genreFilter: GenreFilter(genres: sortedGenres, selectedIndex: selectedGenreIndex)
+        presenter.presentFetchContent(
+            response: .content(
+                featured: resolveFeatured(from: content, genre: selectedGenre),
+                nowPlaying: filter(content.nowPlaying, by: selectedGenre),
+                trending: filter(content.trending, by: selectedGenre),
+                topRated: filter(content.topRated, by: selectedGenre),
+                genreFilter: GenreFilter(genres: sortedGenres, selectedIndex: selectedGenreIndex)
+            )
         )
-        presenter.presentContent(response: response)
     }
 
     private var selectedGenre: Genre? {
@@ -138,5 +139,3 @@ private struct CachedHomeContent {
     let trending: [Movie]
     let topRated: [Movie]
 }
-
-private struct NoContentError: Error {}

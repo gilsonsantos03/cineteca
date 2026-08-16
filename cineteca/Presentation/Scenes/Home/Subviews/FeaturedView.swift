@@ -2,8 +2,8 @@ import UIKit
 import Cartography
 
 protocol FeaturedViewDelegate: AnyObject {
-    func featuredView(_ view: FeaturedView, didTapWatchTrailerForMovieId movieId: Int)
-    func featuredView(_ view: FeaturedView, didSelectMovieId movieId: Int)
+    func didRequestWatchTrailer(movieId: Int)
+    func didSelectMovie(id movieId: Int)
 }
 
 final class FeaturedView: UIView {
@@ -261,12 +261,12 @@ final class FeaturedView: UIView {
 
     private func didTapWatchTrailer() {
         guard let movieId else { return }
-        delegate?.featuredView(self, didTapWatchTrailerForMovieId: movieId)
+        delegate?.didRequestWatchTrailer(movieId: movieId)
     }
 
     @objc private func didTapMovie() {
         guard let movieId else { return }
-        delegate?.featuredView(self, didSelectMovieId: movieId)
+        delegate?.didSelectMovie(id: movieId)
     }
 
     // MARK: - Helpers
@@ -297,7 +297,7 @@ final class FeaturedView: UIView {
 // MARK: - WatchTrailerButtonDelegate
 
 extension FeaturedView: WatchTrailerButtonDelegate {
-    func watchTrailerButtonDidTap(_ button: WatchTrailerButton) {
+    func didTap() {
         didTapWatchTrailer()
     }
 }

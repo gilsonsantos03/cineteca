@@ -2,7 +2,7 @@ import UIKit
 import Cartography
 
 protocol GenreFilterViewDelegate: AnyObject {
-    func genreFilterView(_ view: GenreFilterView, didSelectGenreAt index: Int)
+    func didSelectGenre(at index: Int)
 }
 
 final class GenreFilterView: UIView {
@@ -97,6 +97,6 @@ extension GenreFilterView: UICollectionViewDataSource, UICollectionViewDelegate 
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard indexPath.item != selectedIndex else { return }
-        delegate?.genreFilterView(self, didSelectGenreAt: indexPath.item)
+        delegate?.didSelectGenre(at: indexPath.item)
     }
 }

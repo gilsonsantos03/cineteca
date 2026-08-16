@@ -52,6 +52,34 @@ enum Strings {
         static let profile = NSLocalizedString("TabBar.Profile.Title", comment: "")
     }
 
+    enum SearchScene {
+        enum SearchBar {
+            static let placeholder = NSLocalizedString("SearchScene.SearchBar.Placeholder", comment: "")
+        }
+
+        enum Section {
+            static let suggested = NSLocalizedString("SearchScene.Section.Suggested", comment: "")
+            static let results = NSLocalizedString("SearchScene.Section.Results", comment: "")
+        }
+
+        enum Filters {
+            static let title = NSLocalizedString("SearchScene.Filters.Title", comment: "")
+            static let genre = NSLocalizedString("SearchScene.Filters.Genre", comment: "")
+            static let year = NSLocalizedString("SearchScene.Filters.Year", comment: "")
+            static let minRating = NSLocalizedString("SearchScene.Filters.MinRating", comment: "")
+            static let language = NSLocalizedString("SearchScene.Filters.Language", comment: "")
+            static let cancel = NSLocalizedString("SearchScene.Filters.Cancel", comment: "")
+
+            enum Language {
+                static let all = NSLocalizedString("SearchScene.Filters.Language.All", comment: "")
+                static let english = NSLocalizedString("SearchScene.Filters.Language.English", comment: "")
+                static let portuguese = NSLocalizedString("SearchScene.Filters.Language.Portuguese", comment: "")
+                static let spanish = NSLocalizedString("SearchScene.Filters.Language.Spanish", comment: "")
+                static let french = NSLocalizedString("SearchScene.Filters.Language.French", comment: "")
+            }
+        }
+    }
+
     enum MovieDetailsScene {
         enum Action {
             static let rate = NSLocalizedString("MovieDetailsScene.Action.Rate.Text", comment: "")

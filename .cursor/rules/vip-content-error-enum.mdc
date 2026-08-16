@@ -1,0 +1,46 @@
+---
+description: VIP scene models — unify content and error in a single enum
+globs: cineteca/Presentation/Scenes/**/*Models.swift,cineteca/Presentation/Scenes/**/*Presenter.swift,cineteca/Presentation/Scenes/**/*Interactor.swift,cineteca/Presentation/Scenes/**/*ViewController.swift
+alwaysApply: false
+---
+
+# VIP: content + error enum
+
+When a VIP use case can return data or fail, unify both outcomes in one enum for `Response` and `ViewModel`. Keep `loading` separate.
+
+## Pattern
+
+```swift
+enum FetchSomething {
+    struct Request {}
+
+    enum Response {
+        case content(/* domain data */)
+        case error
+    }
+
+    enum ViewModel {
+        case content(/* formatted data */)
+        case error
+    }
+}
+```
+
+For many fields, nest a `Content` struct inside `ViewModel`.
+
+## Wiring
+
+- Interactor: `presenter.presentFetchSomething(response: .content(...))` or `.error`
+- Presenter: one method maps `Response` → `ViewModel` via `switch`
+- ViewController: one `displayFetchSomething(viewModel:)` switches on the enum
+
+## Avoid
+
+- `ErrorState` with empty `ViewModel {}`
+- `presentContent` + `presentError` for the same flow
+- `displayContent` + `displayError` for the same flow
+- Putting `loading` inside the content/error enum
+
+## Exceptions
+
+Use cases without a content/error outcome (e.g. `ShowFilters`, `SelectGenre`) keep their own shape — no forced enum.

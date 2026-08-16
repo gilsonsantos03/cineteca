@@ -63,19 +63,19 @@ extension MovieDetailsViewController: MovieDetailsDisplayLogic {
 // MARK: - MovieDetailsViewDelegate
 
 extension MovieDetailsViewController: MovieDetailsViewDelegate {
-    func movieDetailsViewDidRequestRetry(_ view: MovieDetailsView) {
+    func didRequestRetry() {
         interactor.fetchDetails(request: .init(movieId: movieId))
     }
 
-    func movieDetailsViewDidRequestBack(_ view: MovieDetailsView) {
+    func didRequestBack() {
         router.routeBack()
     }
 
-    func movieDetailsView(_ view: MovieDetailsView, didTapTrailerFor movieId: Int) {
+    func didRequestTrailer(for movieId: Int) {
         interactor.watchTrailer(request: .init(movieId: movieId))
     }
 
-    func movieDetailsView(_ view: MovieDetailsView, didSelectSimilarMovie movieId: Int) {
+    func didSelectSimilarMovie(id movieId: Int) {
         router.routeToMovieDetails(movieId: movieId)
     }
 }

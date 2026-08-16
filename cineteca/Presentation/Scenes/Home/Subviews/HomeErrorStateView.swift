@@ -2,7 +2,7 @@ import UIKit
 import Cartography
 
 protocol HomeErrorStateViewDelegate: AnyObject {
-    func homeErrorStateViewDidRequestRetry(_ view: HomeErrorStateView)
+    func didRequestRetry()
 }
 
 final class HomeErrorStateView: UIView {
@@ -120,6 +120,6 @@ final class HomeErrorStateView: UIView {
     // MARK: - Actions
 
     @objc private func didTapRetry() {
-        delegate?.homeErrorStateViewDidRequestRetry(self)
+        delegate?.didRequestRetry()
     }
 }

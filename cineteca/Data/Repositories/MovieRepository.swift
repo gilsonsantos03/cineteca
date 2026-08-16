@@ -23,6 +23,14 @@ final class MovieRepository: MovieRepositoryProtocol {
         try await fetchMovies(from: .featured, genres: genres)
     }
 
+    func searchMovies(query: String, genres: [Genre]) async throws -> [Movie] {
+        try await fetchMovies(from: .search(query: query), genres: genres)
+    }
+
+    func discoverMovies(filters: SearchFilters, query: String?, genres: [Genre]) async throws -> [Movie] {
+        try await fetchMovies(from: .discover(filters: filters, query: query), genres: genres)
+    }
+
     func fetchMovieDetails(for movieId: Int) async throws -> MovieDetails {
         async let creditsTask: CreditsResponse? = try? networkService.request(
             MovieEndpoint.credits(movieId: movieId)

@@ -82,6 +82,21 @@
 		AA100001000000000000015A /* MovieDetailsCrewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000015B /* MovieDetailsCrewView.swift */; };
 		AA100001000000000000017A /* MovieDetailsSimilarMoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000017B /* MovieDetailsSimilarMoviesView.swift */; };
 		AA100001000000000000018A /* MovieDetailsErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000018B /* MovieDetailsErrorView.swift */; };
+		SS000001000000000000001A /* SearchFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = SS000001000000000000001B /* SearchFilters.swift */; };
+		SS000001000000000000003A /* SearchModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = SS000001000000000000003B /* SearchModels.swift */; };
+		SS000001000000000000004A /* SearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = SS000001000000000000004B /* SearchInteractor.swift */; };
+		SS000001000000000000005A /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = SS000001000000000000005B /* SearchPresenter.swift */; };
+		SS000001000000000000006A /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = SS000001000000000000006B /* SearchRouter.swift */; };
+		SS000001000000000000007A /* SearchConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = SS000001000000000000007B /* SearchConfigurator.swift */; };
+		SS000001000000000000008A /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SS000001000000000000008B /* SearchView.swift */; };
+		SS000001000000000000009A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = SS000001000000000000009B /* SearchViewController.swift */; };
+		SS000001000000000000010A /* SearchFiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = SS000001000000000000010B /* SearchFiltersViewController.swift */; };
+		SS000001000000000000011A /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SS000001000000000000011B /* SearchBarView.swift */; };
+		SS000001000000000000014A /* SearchMovieGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = SS000001000000000000014B /* SearchMovieGridCell.swift */; };
+		SS000001000000000000015A /* SearchRatingPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SS000001000000000000015B /* SearchRatingPickerView.swift */; };
+		SS000001000000000000018A /* SearchYearRangeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SS000001000000000000018B /* SearchYearRangeSliderView.swift */; };
+		SS000001000000000000016A /* SearchFiltersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SS000001000000000000016B /* SearchFiltersView.swift */; };
+		SS000001000000000000017A /* SearchContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SS000001000000000000017B /* SearchContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -162,6 +177,21 @@
 		AA100001000000000000015B /* MovieDetailsCrewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsCrewView.swift; sourceTree = "<group>"; };
 		AA100001000000000000017B /* MovieDetailsSimilarMoviesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsSimilarMoviesView.swift; sourceTree = "<group>"; };
 		AA100001000000000000018B /* MovieDetailsErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsErrorView.swift; sourceTree = "<group>"; };
+		SS000001000000000000001B /* SearchFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilters.swift; sourceTree = "<group>"; };
+		SS000001000000000000003B /* SearchModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModels.swift; sourceTree = "<group>"; };
+		SS000001000000000000004B /* SearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInteractor.swift; sourceTree = "<group>"; };
+		SS000001000000000000005B /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
+		SS000001000000000000006B /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
+		SS000001000000000000007B /* SearchConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchConfigurator.swift; sourceTree = "<group>"; };
+		SS000001000000000000008B /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		SS000001000000000000009B /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		SS000001000000000000010B /* SearchFiltersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFiltersViewController.swift; sourceTree = "<group>"; };
+		SS000001000000000000011B /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
+		SS000001000000000000014B /* SearchMovieGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieGridCell.swift; sourceTree = "<group>"; };
+		SS000001000000000000015B /* SearchRatingPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRatingPickerView.swift; sourceTree = "<group>"; };
+		SS000001000000000000018B /* SearchYearRangeSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchYearRangeSliderView.swift; sourceTree = "<group>"; };
+		SS000001000000000000016B /* SearchFiltersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFiltersView.swift; sourceTree = "<group>"; };
+		SS000001000000000000017B /* SearchContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +220,7 @@
 			children = (
 				442CB05D2FFC81ED004FCC82 /* Home */,
 				AA10000100000000000000CA /* MovieDetails */,
+				SS00000100000000000000CA /* Search */,
 				CC000001000000000000008B /* TabBar */,
 			);
 			path = Scenes;
@@ -261,6 +292,35 @@
 			path = Subviews;
 			sourceTree = "<group>";
 		};
+		SS00000100000000000000CA /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				SS00000100000000000000DA /* Subviews */,
+				SS000001000000000000003B /* SearchModels.swift */,
+				SS000001000000000000009B /* SearchViewController.swift */,
+				SS000001000000000000008B /* SearchView.swift */,
+				SS000001000000000000004B /* SearchInteractor.swift */,
+				SS000001000000000000005B /* SearchPresenter.swift */,
+				SS000001000000000000006B /* SearchRouter.swift */,
+				SS000001000000000000007B /* SearchConfigurator.swift */,
+				SS000001000000000000010B /* SearchFiltersViewController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		SS00000100000000000000DA /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				SS000001000000000000011B /* SearchBarView.swift */,
+				SS000001000000000000017B /* SearchContentView.swift */,
+				SS000001000000000000014B /* SearchMovieGridCell.swift */,
+				SS000001000000000000015B /* SearchRatingPickerView.swift */,
+				SS000001000000000000018B /* SearchYearRangeSliderView.swift */,
+				SS000001000000000000016B /* SearchFiltersView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
 		442CB2B230008A98004FCC82 /* Skeleton */ = {
 			isa = PBXGroup;
 			children = (
@@ -305,6 +365,7 @@
 				BB000001000000000000001B /* Genre.swift */,
 				CC000001000000000000001B /* Movie.swift */,
 				AA100001000000000000001B /* MovieDetails.swift */,
+				SS000001000000000000001B /* SearchFilters.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -581,6 +642,21 @@
 				AA100001000000000000026A /* MovieDetailsSimilarMovieCardView.swift in Sources */,
 				AA100001000000000000017A /* MovieDetailsSimilarMoviesView.swift in Sources */,
 				AA100001000000000000018A /* MovieDetailsErrorView.swift in Sources */,
+				SS000001000000000000001A /* SearchFilters.swift in Sources */,
+				SS000001000000000000003A /* SearchModels.swift in Sources */,
+				SS000001000000000000004A /* SearchInteractor.swift in Sources */,
+				SS000001000000000000005A /* SearchPresenter.swift in Sources */,
+				SS000001000000000000006A /* SearchRouter.swift in Sources */,
+				SS000001000000000000007A /* SearchConfigurator.swift in Sources */,
+				SS000001000000000000008A /* SearchView.swift in Sources */,
+				SS000001000000000000009A /* SearchViewController.swift in Sources */,
+				SS000001000000000000010A /* SearchFiltersViewController.swift in Sources */,
+				SS000001000000000000011A /* SearchBarView.swift in Sources */,
+				SS000001000000000000014A /* SearchMovieGridCell.swift in Sources */,
+				SS000001000000000000015A /* SearchRatingPickerView.swift in Sources */,
+				SS000001000000000000018A /* SearchYearRangeSliderView.swift in Sources */,
+				SS000001000000000000016A /* SearchFiltersView.swift in Sources */,
+				SS000001000000000000017A /* SearchContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

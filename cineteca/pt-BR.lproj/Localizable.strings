@@ -27,6 +27,21 @@
 "TabBar.Stats.Title" = "Stats";
 "TabBar.Profile.Title" = "Perfil";
 
+"SearchScene.SearchBar.Placeholder" = "Filmes, diretores, atores...";
+"SearchScene.Section.Suggested" = "Sugeridos para você";
+"SearchScene.Section.Results" = "Resultados";
+"SearchScene.Filters.Title" = "Filtros";
+"SearchScene.Filters.Genre" = "Gênero";
+"SearchScene.Filters.Year" = "Ano";
+"SearchScene.Filters.MinRating" = "Nota mínima";
+"SearchScene.Filters.Language" = "Idioma";
+"SearchScene.Filters.Cancel" = "Cancelar";
+"SearchScene.Filters.Language.All" = "Todos os idiomas";
+"SearchScene.Filters.Language.English" = "Inglês";
+"SearchScene.Filters.Language.Portuguese" = "Português";
+"SearchScene.Filters.Language.Spanish" = "Espanhol";
+"SearchScene.Filters.Language.French" = "Francês";
+
 "MovieDetailsScene.Action.Rate.Text" = "Avaliar";
 "MovieDetailsScene.Action.Favorite.Text" = "Favoritar";
 "MovieDetailsScene.Action.Watchlist.Text" = "Minha lista";

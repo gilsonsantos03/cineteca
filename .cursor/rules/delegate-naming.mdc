@@ -1,0 +1,29 @@
+---
+description: Delegate method names describe the action, not the sender type
+globs: cineteca/Presentation/**/*.swift
+alwaysApply: false
+---
+
+# Delegate naming
+
+Protocol: `<Component>Delegate`. Methods: action verbs only.
+
+```swift
+protocol GenreFilterViewDelegate: AnyObject {
+    func didSelectGenre(at index: Int)
+}
+```
+
+Avoid UIKit-style sender prefixes:
+
+```swift
+// ❌
+func genreFilterView(_ view: GenreFilterView, didSelectGenreAt index: Int)
+
+// ✅
+func didSelectGenre(at index: Int)
+```
+
+Do not pass the sender as the first parameter. Call with `delegate?.didSelectGenre(at: index)`.
+
+See [view-conventions.md](../../cineteca/view-conventions.md) — Delegates section.

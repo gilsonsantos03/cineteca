@@ -87,6 +87,48 @@ Flow: `ViewController -> Interactor -> Presenter -> ViewController`.
 | Router | `<Scene>RoutingLogic` | `<Scene>Router` | `<Scene>Router.swift` |
 | Scene models | n/a | enum `<Scene>Models` (nested Request/Response/ViewModel) | `<Scene>Models.swift` |
 
+#### Scene models: content + error
+
+When a use case can succeed with data or fail, **unify `content` and `error` in a single enum** for both `Response` and `ViewModel`. Keep `loading` as a separate use case when the UI needs a distinct loading state.
+
+```swift
+enum FetchContent {
+    struct Request {}
+
+    enum Response {
+        case content(featured: Movie, nowPlaying: [Movie], /* ... */)
+        case error
+    }
+
+    enum ViewModel {
+        case content(Content)
+        case error
+
+        struct Content {
+            let featured: FeaturedViewModel
+            let nowPlaying: [MovieCardViewModel]
+            // ...
+        }
+    }
+}
+
+enum Loading {
+    struct ViewModel {}
+}
+```
+
+**Do:**
+- One presenter method per unified flow (e.g. `presentFetchContent(response:)`)
+- One display method on the view controller (e.g. `displayFetchContent(viewModel:)`)
+- `switch` on the enum in Presenter, ViewController, and View
+
+**Don't:**
+- Separate `ErrorState` enums with empty `ViewModel` structs
+- Split `presentContent` / `presentError` or `displayContent` / `displayError` for the same flow
+- Merge `loading` into the content/error enum — it represents transient UI state, not a fetch outcome
+
+Use cases that only show/hide filters, navigate, or submit without a content/error outcome (e.g. `ShowFilters`) do not need this pattern.
+
 ### MVVM (SwiftUI)
 
 | Component | Naming |

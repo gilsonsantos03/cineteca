@@ -2,7 +2,7 @@ import UIKit
 import Cartography
 
 protocol MovieDetailsErrorViewDelegate: AnyObject {
-    func movieDetailsErrorViewDidRequestRetry(_ view: MovieDetailsErrorView)
+    func didRequestRetry()
 }
 
 final class MovieDetailsErrorView: UIStackView {
@@ -76,6 +76,6 @@ final class MovieDetailsErrorView: UIStackView {
     // MARK: - Actions
 
     @objc private func didTapRetry() {
-        delegate?.movieDetailsErrorViewDidRequestRetry(self)
+        delegate?.didRequestRetry()
     }
 }
