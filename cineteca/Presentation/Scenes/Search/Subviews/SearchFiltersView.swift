@@ -1,7 +1,7 @@
 import UIKit
 import Cartography
 
-protocol    : AnyObject {
+protocol SearchFiltersViewDelegate: AnyObject {
     func didUpdateFilters(_ filters: SearchFilters)
 }
 
