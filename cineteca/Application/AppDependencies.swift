@@ -4,11 +4,16 @@ import UIKit
 final class AppDependencies {
     let movieRepository: MovieRepositoryProtocol
     let genreRepository: GenreRepositoryProtocol
+    let userRepository: UserRepositoryProtocol
+
+    private let coreDataStack: CoreDataStack
 
     init() {
         let networkService = AppDependencies.makeTMDBNetworkService()
+        self.coreDataStack = CoreDataStack()
         self.genreRepository = GenreRepository(networkService: networkService)
         self.movieRepository = MovieRepository(networkService: networkService)
+        self.userRepository = UserRepository(coreDataStack: coreDataStack)
     }
 
     private static func makeTMDBNetworkService() -> NetworkServiceProtocol {
@@ -37,6 +42,7 @@ extension AppDependencies {
         MainTabBarController(
             repository: movieRepository,
             genreRepository: genreRepository,
+            userRepository: userRepository,
             movieDetailsBuilder: self
         )
     }

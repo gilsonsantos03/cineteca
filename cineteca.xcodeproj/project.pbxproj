@@ -97,6 +97,29 @@
 		SS000001000000000000018A /* SearchYearRangeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SS000001000000000000018B /* SearchYearRangeSliderView.swift */; };
 		SS000001000000000000016A /* SearchFiltersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SS000001000000000000016B /* SearchFiltersView.swift */; };
 		SS000001000000000000017A /* SearchContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SS000001000000000000017B /* SearchContentView.swift */; };
+		PP000001000000000000001B000000000000001A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000001B /* User.swift */; };
+		PP000001000000000000002B000000000000001A /* UserRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000002B /* UserRepositoryProtocol.swift */; };
+		PP000001000000000000003B000000000000001A /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000003B /* CoreDataStack.swift */; };
+		PP000001000000000000004B000000000000001A /* ProfileSeedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000004B /* ProfileSeedData.swift */; };
+		PP000001000000000000005B000000000000001A /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000005B /* UserEntity.swift */; };
+		PP000001000000000000006B000000000000001A /* ReviewEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000006B /* ReviewEntity.swift */; };
+		PP000001000000000000007B000000000000001A /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000007B /* UserRepository.swift */; };
+		PP000001000000000000008B000000000000001A /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000008B /* StarRatingView.swift */; };
+		PP000001000000000000009B000000000000001A /* ProfileModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000009B /* ProfileModels.swift */; };
+		PP00000100000000000000AB000000000000001A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP00000100000000000000AB /* ProfileViewController.swift */; };
+		PP00000100000000000000BB000000000000001A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP00000100000000000000BB /* ProfileView.swift */; };
+		PP00000100000000000000CB000000000000001A /* ProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP00000100000000000000CB /* ProfileInteractor.swift */; };
+		PP00000100000000000000DB000000000000001A /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP00000100000000000000DB /* ProfilePresenter.swift */; };
+		PP00000100000000000000EB000000000000001A /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP00000100000000000000EB /* ProfileRouter.swift */; };
+		PP00000100000000000000FB000000000000001A /* ProfileConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP00000100000000000000FB /* ProfileConfigurator.swift */; };
+		PP000001000000000000010C000000000000001A /* ProfileContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000010C /* ProfileContentView.swift */; };
+		PP000001000000000000011C000000000000001A /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000011C /* ProfileHeaderView.swift */; };
+		PP000001000000000000012C000000000000001A /* ProfileFavoriteFilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000012C /* ProfileFavoriteFilmView.swift */; };
+		PP000001000000000000013C000000000000001A /* ProfileStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000013C /* ProfileStatsView.swift */; };
+		PP000001000000000000014C000000000000001A /* ProfileReviewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000014C /* ProfileReviewCardView.swift */; };
+		PP000001000000000000015C000000000000001A /* ProfileRecentReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000015C /* ProfileRecentReviewsView.swift */; };
+		PP000001000000000000016C000000000000001A /* ProfileSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000016C /* ProfileSettingsView.swift */; };
+		PP000001000000000000017A /* Cineteca.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000017B /* Cineteca.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -192,6 +215,30 @@
 		SS000001000000000000018B /* SearchYearRangeSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchYearRangeSliderView.swift; sourceTree = "<group>"; };
 		SS000001000000000000016B /* SearchFiltersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFiltersView.swift; sourceTree = "<group>"; };
 		SS000001000000000000017B /* SearchContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchContentView.swift; sourceTree = "<group>"; };
+		PP000001000000000000001B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		PP000001000000000000002B /* UserRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryProtocol.swift; sourceTree = "<group>"; };
+		PP000001000000000000003B /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		PP000001000000000000004B /* ProfileSeedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSeedData.swift; sourceTree = "<group>"; };
+		PP000001000000000000005B /* UserEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
+		PP000001000000000000006B /* ReviewEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewEntity.swift; sourceTree = "<group>"; };
+		PP000001000000000000007B /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		PP000001000000000000008B /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
+		PP000001000000000000009B /* ProfileModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModels.swift; sourceTree = "<group>"; };
+		PP00000100000000000000AB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		PP00000100000000000000BB /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		PP00000100000000000000CB /* ProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInteractor.swift; sourceTree = "<group>"; };
+		PP00000100000000000000DB /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
+		PP00000100000000000000EB /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
+		PP00000100000000000000FB /* ProfileConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileConfigurator.swift; sourceTree = "<group>"; };
+		PP000001000000000000010C /* ProfileContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileContentView.swift; sourceTree = "<group>"; };
+		PP000001000000000000011C /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		PP000001000000000000012C /* ProfileFavoriteFilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFavoriteFilmView.swift; sourceTree = "<group>"; };
+		PP000001000000000000013C /* ProfileStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStatsView.swift; sourceTree = "<group>"; };
+		PP000001000000000000014C /* ProfileReviewCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileReviewCardView.swift; sourceTree = "<group>"; };
+		PP000001000000000000015C /* ProfileRecentReviewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRecentReviewsView.swift; sourceTree = "<group>"; };
+		PP000001000000000000016C /* ProfileSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsView.swift; sourceTree = "<group>"; };
+		PP000001000000000000018B /* Cineteca.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Cineteca.xcdatamodel; sourceTree = "<group>"; };
+		PP000001000000000000017B /* Cineteca.xcdatamodeld */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodeld; path = Cineteca.xcdatamodeld; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				442CB05D2FFC81ED004FCC82 /* Home */,
+				PP000001000000000000012G /* Profile */,
 				AA10000100000000000000CA /* MovieDetails */,
 				SS00000100000000000000CA /* Search */,
 				CC000001000000000000008B /* TabBar */,
@@ -344,6 +392,7 @@
 		AA100001000000000000027C /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				PP000001000000000000008B /* StarRatingView.swift */,
 				AA100001000000000000028B /* MovieDetailsCardMetrics.swift */,
 				AA100001000000000000027B /* WatchTrailerButton.swift */,
 			);
@@ -362,6 +411,7 @@
 		BB000001000000000000001C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				PP000001000000000000001B /* User.swift */,
 				BB000001000000000000001B /* Genre.swift */,
 				CC000001000000000000001B /* Movie.swift */,
 				AA100001000000000000001B /* MovieDetails.swift */,
@@ -373,6 +423,7 @@
 		448D4C272FEA0A8C0008718A /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				PP000001000000000000010G /* Persistence */,
 				448D4D582FEA1C280008718A /* Networking */,
 				CC000001000000000000010B /* Models */,
 				CC000001000000000000011B /* Endpoints */,
@@ -462,6 +513,7 @@
 		CC00000100000000000000BB /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				PP000001000000000000007B /* UserRepository.swift */,
 				CC00000100000000000000AB /* MovieRepository.swift */,
 				442CB0982FFC8405004FCC82 /* GenreRepository.swift */,
 			);
@@ -471,6 +523,7 @@
 		CC00000100000000000000CB /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				PP000001000000000000002B /* UserRepositoryProtocol.swift */,
 				DD000001000000000000002B /* MovieRepositoryProtocol.swift */,
 				442CB0962FFC8404004FCC82 /* GenreRepositoryProtocol.swift */,
 			);
@@ -494,6 +547,56 @@
 				442CB0922FFC8402004FCC82 /* GenreEndpoint.swift */,
 			);
 			path = Endpoints;
+			sourceTree = "<group>";
+		};
+
+		PP000001000000000000010G /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				PP000001000000000000003B /* CoreDataStack.swift */,
+				PP000001000000000000004B /* ProfileSeedData.swift */,
+				PP000001000000000000017B /* Cineteca.xcdatamodeld */,
+				PP000001000000000000011G /* Entities */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		PP000001000000000000011G /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				PP000001000000000000005B /* UserEntity.swift */,
+				PP000001000000000000006B /* ReviewEntity.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		PP000001000000000000012G /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				PP000001000000000000013G /* Subviews */,
+				PP000001000000000000009B /* ProfileModels.swift */,
+				PP00000100000000000000AB /* ProfileViewController.swift */,
+				PP00000100000000000000BB /* ProfileView.swift */,
+				PP00000100000000000000CB /* ProfileInteractor.swift */,
+				PP00000100000000000000DB /* ProfilePresenter.swift */,
+				PP00000100000000000000EB /* ProfileRouter.swift */,
+				PP00000100000000000000FB /* ProfileConfigurator.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		PP000001000000000000013G /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				PP000001000000000000010C /* ProfileContentView.swift */,
+				PP000001000000000000011C /* ProfileHeaderView.swift */,
+				PP000001000000000000012C /* ProfileFavoriteFilmView.swift */,
+				PP000001000000000000013C /* ProfileStatsView.swift */,
+				PP000001000000000000014C /* ProfileReviewCardView.swift */,
+				PP000001000000000000015C /* ProfileRecentReviewsView.swift */,
+				PP000001000000000000016C /* ProfileSettingsView.swift */,
+			);
+			path = Subviews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -657,6 +760,29 @@
 				SS000001000000000000018A /* SearchYearRangeSliderView.swift in Sources */,
 				SS000001000000000000016A /* SearchFiltersView.swift in Sources */,
 				SS000001000000000000017A /* SearchContentView.swift in Sources */,
+				PP000001000000000000001B000000000000001A /* User.swift in Sources */,
+				PP000001000000000000002B000000000000001A /* UserRepositoryProtocol.swift in Sources */,
+				PP000001000000000000003B000000000000001A /* CoreDataStack.swift in Sources */,
+				PP000001000000000000004B000000000000001A /* ProfileSeedData.swift in Sources */,
+				PP000001000000000000005B000000000000001A /* UserEntity.swift in Sources */,
+				PP000001000000000000006B000000000000001A /* ReviewEntity.swift in Sources */,
+				PP000001000000000000007B000000000000001A /* UserRepository.swift in Sources */,
+				PP000001000000000000008B000000000000001A /* StarRatingView.swift in Sources */,
+				PP000001000000000000009B000000000000001A /* ProfileModels.swift in Sources */,
+				PP00000100000000000000AB000000000000001A /* ProfileViewController.swift in Sources */,
+				PP00000100000000000000BB000000000000001A /* ProfileView.swift in Sources */,
+				PP00000100000000000000CB000000000000001A /* ProfileInteractor.swift in Sources */,
+				PP00000100000000000000DB000000000000001A /* ProfilePresenter.swift in Sources */,
+				PP00000100000000000000EB000000000000001A /* ProfileRouter.swift in Sources */,
+				PP00000100000000000000FB000000000000001A /* ProfileConfigurator.swift in Sources */,
+				PP000001000000000000010C000000000000001A /* ProfileContentView.swift in Sources */,
+				PP000001000000000000011C000000000000001A /* ProfileHeaderView.swift in Sources */,
+				PP000001000000000000012C000000000000001A /* ProfileFavoriteFilmView.swift in Sources */,
+				PP000001000000000000013C000000000000001A /* ProfileStatsView.swift in Sources */,
+				PP000001000000000000014C000000000000001A /* ProfileReviewCardView.swift in Sources */,
+				PP000001000000000000015C000000000000001A /* ProfileRecentReviewsView.swift in Sources */,
+				PP000001000000000000016C000000000000001A /* ProfileSettingsView.swift in Sources */,
+				PP000001000000000000017A /* Cineteca.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -850,6 +976,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+
+/* Begin XCVersionGroup section */
+		PP000001000000000000017B /* Cineteca.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				PP000001000000000000018B /* Cineteca.xcdatamodel */,
+			);
+			currentVersion = PP000001000000000000018B /* Cineteca.xcdatamodel */;
+			path = Cineteca.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */

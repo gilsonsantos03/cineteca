@@ -18,13 +18,12 @@ final class SearchPresenter {
 
 extension SearchPresenter: SearchPresentationLogic {
     func presentMovies(response: SearchModels.Movies.Response) {
-        let viewModel: SearchModels.Movies.ViewModel = switch response {
+        switch response {
         case let .content(movies, mode):
-            .content(movies: movies.map(makeGridViewModel), mode: mode)
+            view?.displayMovies(viewModel: .content(movies: movies.map(makeGridViewModel), mode: mode))
         case .error:
-            .error
+            view?.displayMovies(viewModel: .error)
         }
-        view?.displayMovies(viewModel: viewModel)
     }
 
     func presentLoading(mode: SearchDisplayMode) {

@@ -69,3 +69,17 @@
 "MovieDetailsScene.TrailerUnavailable.Title" = "Trailer indisponível";
 "MovieDetailsScene.TrailerUnavailable.Message" = "Não encontramos um trailer para este filme no momento.";
 "MovieDetailsScene.TrailerUnavailable.OkButton.Text" = "OK";
+
+"ProfileScene.MemberSince.Format" = "Membro desde %@";
+"ProfileScene.SignOut.Text" = "Sair";
+"ProfileScene.FavoriteFilm.Badge" = "MEU FILME FAVORITO";
+"ProfileScene.Stats.Films" = "FILMES";
+"ProfileScene.Stats.Hours" = "HORAS";
+"ProfileScene.Stats.Reviews" = "REVIEWS";
+"ProfileScene.RecentReviews.Title" = "Reviews recentes";
+"ProfileScene.RecentReviews.SeeAll" = "Ver tudo";
+"ProfileScene.Settings.Account" = "Conta";
+"ProfileScene.Settings.Notifications" = "Notificações";
+"ProfileScene.Settings.Appearance" = "Aparência";
+"ProfileScene.Settings.Language" = "Idioma";
+"ProfileScene.Settings.Privacy" = "Privacidade";

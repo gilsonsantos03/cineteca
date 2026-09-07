@@ -3,15 +3,18 @@ import UIKit
 final class MainTabBarController: UITabBarController {
     private let repository: MovieRepositoryProtocol
     private let genreRepository: GenreRepositoryProtocol
+    private let userRepository: UserRepositoryProtocol
     private let movieDetailsBuilder: MovieDetailsBuilding
 
     init(
         repository: MovieRepositoryProtocol,
         genreRepository: GenreRepositoryProtocol,
+        userRepository: UserRepositoryProtocol,
         movieDetailsBuilder: MovieDetailsBuilding
     ) {
         self.repository = repository
         self.genreRepository = genreRepository
+        self.userRepository = userRepository
         self.movieDetailsBuilder = movieDetailsBuilder
         super.init(nibName: nil, bundle: nil)
     }
@@ -66,7 +69,12 @@ final class MainTabBarController: UITabBarController {
 
         let listsVC  = makePlaceholder(title: Strings.TabBar.lists,  icon: "bookmark")
         let statsVC  = makePlaceholder(title: Strings.TabBar.stats,  icon: "chart.bar")
-        let profileVC = makePlaceholder(title: Strings.TabBar.profile, icon: "person")
+        let profileVC = ProfileConfigurator.resolve(userRepository: userRepository)
+        profileVC.tabBarItem = UITabBarItem(
+            title: Strings.TabBar.profile,
+            image: UIImage(systemName: "person"),
+            selectedImage: UIImage(systemName: "person.fill")
+        )
 
         viewControllers = [homeVC, searchVC, listsVC, statsVC, profileVC].map {
             UINavigationController(rootViewController: $0)

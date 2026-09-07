@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22758" systemVersion="23F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ReviewEntity" representedClassName="ReviewEntity" syncable="YES">
+        <attribute name="movieId" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="posterPath" optional="YES" attributeType="String"/>
+        <attribute name="rating" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="reviewText" attributeType="String"/>
+        <attribute name="sortOrder" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="title" attributeType="String"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserEntity" inverseName="reviews" inverseEntity="UserEntity"/>
+    </entity>
+    <entity name="UserEntity" representedClassName="UserEntity" syncable="YES">
+        <attribute name="avatarImageName" optional="YES" attributeType="String"/>
+        <attribute name="favoriteBackdropPath" optional="YES" attributeType="String"/>
+        <attribute name="favoriteFilmTitle" attributeType="String"/>
+        <attribute name="favoriteMovieId" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="filmsCount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="hoursWatched" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="memberSince" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="reviewsCount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="username" attributeType="String"/>
+        <relationship name="reviews" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="ReviewEntity" inverseName="user" inverseEntity="ReviewEntity"/>
+    </entity>
+</model>

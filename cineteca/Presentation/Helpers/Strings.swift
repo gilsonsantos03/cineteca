@@ -80,6 +80,34 @@ enum Strings {
         }
     }
 
+    enum ProfileScene {
+        static let memberSinceFormat = NSLocalizedString("ProfileScene.MemberSince.Format", comment: "")
+        static let signOut = NSLocalizedString("ProfileScene.SignOut.Text", comment: "")
+
+        enum FavoriteFilm {
+            static let badge = NSLocalizedString("ProfileScene.FavoriteFilm.Badge", comment: "")
+        }
+
+        enum Stats {
+            static let films = NSLocalizedString("ProfileScene.Stats.Films", comment: "")
+            static let hours = NSLocalizedString("ProfileScene.Stats.Hours", comment: "")
+            static let reviews = NSLocalizedString("ProfileScene.Stats.Reviews", comment: "")
+        }
+
+        enum RecentReviews {
+            static let title = NSLocalizedString("ProfileScene.RecentReviews.Title", comment: "")
+            static let seeAll = NSLocalizedString("ProfileScene.RecentReviews.SeeAll", comment: "")
+        }
+
+        enum Settings {
+            static let account = NSLocalizedString("ProfileScene.Settings.Account", comment: "")
+            static let notifications = NSLocalizedString("ProfileScene.Settings.Notifications", comment: "")
+            static let appearance = NSLocalizedString("ProfileScene.Settings.Appearance", comment: "")
+            static let language = NSLocalizedString("ProfileScene.Settings.Language", comment: "")
+            static let privacy = NSLocalizedString("ProfileScene.Settings.Privacy", comment: "")
+        }
+    }
+
     enum MovieDetailsScene {
         enum Action {
             static let rate = NSLocalizedString("MovieDetailsScene.Action.Rate.Text", comment: "")

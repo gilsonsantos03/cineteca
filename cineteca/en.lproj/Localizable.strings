@@ -69,3 +69,17 @@
 "MovieDetailsScene.TrailerUnavailable.Title" = "Trailer unavailable";
 "MovieDetailsScene.TrailerUnavailable.Message" = "We couldn't find a trailer for this movie right now.";
 "MovieDetailsScene.TrailerUnavailable.OkButton.Text" = "OK";
+
+"ProfileScene.MemberSince.Format" = "Member since %@";
+"ProfileScene.SignOut.Text" = "Sign Out";
+"ProfileScene.FavoriteFilm.Badge" = "MY FAVORITE FILM";
+"ProfileScene.Stats.Films" = "FILMS";
+"ProfileScene.Stats.Hours" = "HOURS";
+"ProfileScene.Stats.Reviews" = "REVIEWS";
+"ProfileScene.RecentReviews.Title" = "Recent Reviews";
+"ProfileScene.RecentReviews.SeeAll" = "See all";
+"ProfileScene.Settings.Account" = "Account";
+"ProfileScene.Settings.Notifications" = "Notifications";
+"ProfileScene.Settings.Appearance" = "Appearance";
+"ProfileScene.Settings.Language" = "Language";
+"ProfileScene.Settings.Privacy" = "Privacy";

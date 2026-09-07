@@ -18,24 +18,25 @@ final class HomePresenter {
 
 extension HomePresenter: HomePresentationLogic {
     func presentFetchContent(response: HomeModels.FetchContent.Response) {
-        let viewModel: HomeModels.FetchContent.ViewModel = switch response {
+        switch response {
         case let .content(featured, nowPlaying, trending, topRated, genreFilter):
-            .content(
-                HomeModels.FetchContent.ViewModel.Content(
-                    featured: makeFeaturedViewModel(from: featured),
-                    genreFilter: GenreFilterViewModel(
-                        options: [Strings.HomeScene.GenreFilter.all] + genreFilter.genres.map(\.name),
-                        selectedIndex: genreFilter.selectedIndex
-                    ),
-                    nowPlaying: nowPlaying.map { makeCardViewModel(from: $0) },
-                    trending: trending.map { makeCardViewModel(from: $0, isTrending: true) },
-                    topRated: topRated.map { makeCardViewModel(from: $0) }
+            view?.displayFetchContent(
+                viewModel: .content(
+                    HomeModels.FetchContent.ViewModel.Content(
+                        featured: makeFeaturedViewModel(from: featured),
+                        genreFilter: GenreFilterViewModel(
+                            options: [Strings.HomeScene.GenreFilter.all] + genreFilter.genres.map(\.name),
+                            selectedIndex: genreFilter.selectedIndex
+                        ),
+                        nowPlaying: nowPlaying.map { makeCardViewModel(from: $0) },
+                        trending: trending.map { makeCardViewModel(from: $0, isTrending: true) },
+                        topRated: topRated.map { makeCardViewModel(from: $0) }
+                    )
                 )
             )
         case .error:
-            .error
+            view?.displayFetchContent(viewModel: .error)
         }
-        view?.displayFetchContent(viewModel: viewModel)
     }
 
     func presentLoading() {
@@ -43,16 +44,17 @@ extension HomePresenter: HomePresentationLogic {
     }
 
     func presentWatchTrailer(response: HomeModels.WatchTrailer.Response) {
-        let viewModel: HomeModels.WatchTrailer.ViewModel = switch response {
+        switch response {
         case let .success(youtubeKey):
-            .success(youtubeKey: youtubeKey)
+            view?.displayWatchTrailer(viewModel: .success(youtubeKey: youtubeKey))
         case .unavailable:
-            .unavailable(
-                title: Strings.HomeScene.TrailerUnavailable.title,
-                message: Strings.HomeScene.TrailerUnavailable.message
+            view?.displayWatchTrailer(
+                viewModel: .unavailable(
+                    title: Strings.HomeScene.TrailerUnavailable.title,
+                    message: Strings.HomeScene.TrailerUnavailable.message
+                )
             )
         }
-        view?.displayWatchTrailer(viewModel: viewModel)
     }
 
     private func makeFeaturedViewModel(from movie: Movie) -> FeaturedViewModel {

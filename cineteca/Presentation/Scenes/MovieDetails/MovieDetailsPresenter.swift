@@ -57,16 +57,17 @@ extension MovieDetailsPresenter: MovieDetailsPresentationLogic {
     }
 
     func presentWatchTrailer(response: MovieDetailsModels.WatchTrailer.Response) {
-        let viewModel: MovieDetailsModels.WatchTrailer.ViewModel = switch response {
+        switch response {
         case let .success(youtubeKey):
-            .success(youtubeKey: youtubeKey)
+            view?.displayWatchTrailer(viewModel: .success(youtubeKey: youtubeKey))
         case .unavailable:
-            .unavailable(
-                title: Strings.MovieDetailsScene.TrailerUnavailable.title,
-                message: Strings.MovieDetailsScene.TrailerUnavailable.message
+            view?.displayWatchTrailer(
+                viewModel: .unavailable(
+                    title: Strings.MovieDetailsScene.TrailerUnavailable.title,
+                    message: Strings.MovieDetailsScene.TrailerUnavailable.message
+                )
             )
         }
-        view?.displayWatchTrailer(viewModel: viewModel)
     }
 
     private func makeCastViewModel(from member: MovieCastMember) -> MovieDetailsModels.CastViewModel {
