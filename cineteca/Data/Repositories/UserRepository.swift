@@ -27,6 +27,18 @@ final class UserRepository: UserRepositoryProtocol {
         }
     }
 
+    func updatePassword(_ update: UserPasswordUpdate) async throws {
+        let context = coreDataStack.viewContext
+        try await context.perform {
+            let entity = try Self.fetchUserEntity(in: context)
+            guard entity.password == update.currentPassword else {
+                throw UserRepositoryError.invalidCurrentPassword
+            }
+            entity.password = update.newPassword
+            try context.save()
+        }
+    }
+
     private static func fetchUserEntity(in context: NSManagedObjectContext) throws -> UserEntity {
         let request = UserEntity.fetchRequest()
         request.fetchLimit = 1
@@ -39,4 +51,5 @@ final class UserRepository: UserRepositoryProtocol {
 
 enum UserRepositoryError: Error {
     case userNotFound
+    case invalidCurrentPassword
 }

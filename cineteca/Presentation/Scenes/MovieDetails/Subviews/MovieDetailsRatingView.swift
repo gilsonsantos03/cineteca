@@ -8,7 +8,7 @@ final class MovieDetailsRatingView: UIView {
     private lazy var valueLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 17, weight: .bold)
-        label.textColor = .white
+        label.textColor = .textPrimary
         return label
     }()
 

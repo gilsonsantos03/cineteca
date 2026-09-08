@@ -22,7 +22,6 @@ final class MovieDetailsHeaderView: UIView {
 
     private let gradientLayer: CAGradientLayer = {
         let gradient = CAGradientLayer()
-        gradient.colors = [UIColor.clear.cgColor, UIColor.appBackground.cgColor]
         gradient.locations = [0.3, 1]
         return gradient
     }()
@@ -108,6 +107,13 @@ final class MovieDetailsHeaderView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         gradientLayer.frame = backdropImageView.bounds
+        updateGradientColors()
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        guard traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) else { return }
+        updateGradientColors()
     }
 
     // MARK: - Setup
@@ -126,6 +132,12 @@ final class MovieDetailsHeaderView: UIView {
         certificationBadge.addSubview(certificationLabel)
         addSubview(genresStack)
         addSubview(backButton)
+        updateGradientColors()
+    }
+
+    private func updateGradientColors() {
+        let background = UIColor.appBackground.resolvedColor(with: traitCollection)
+        gradientLayer.colors = [UIColor.clear.cgColor, background.cgColor]
     }
 
     private func setupConstraints() {

@@ -4,6 +4,7 @@ struct User: Sendable {
     let username: String
     let displayName: String
     let bio: String
+    let email: String
     let memberSince: Date
     let avatarImageName: String?
     let favoriteFilm: UserFavoriteFilm?

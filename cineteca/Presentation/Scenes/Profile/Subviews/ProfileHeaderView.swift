@@ -17,8 +17,8 @@ final class ProfileHeaderView: UIView {
         let button = UIButton(type: .system)
         let config = UIImage.SymbolConfiguration(pointSize: 14, weight: .medium)
         button.setImage(UIImage(systemName: "pencil", withConfiguration: config), for: .normal)
-        button.tintColor = .white
-        button.backgroundColor = UIColor.white.withAlphaComponent(0.12)
+        button.tintColor = .textPrimary
+        button.backgroundColor = .surfaceOverlay
         button.layer.cornerRadius = 18
         button.addTarget(self, action: #selector(didTapEdit), for: .touchUpInside)
         return button
@@ -45,7 +45,7 @@ final class ProfileHeaderView: UIView {
     private lazy var usernameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 22, weight: .bold)
-        label.textColor = .white
+        label.textColor = .textPrimary
         label.textAlignment = .center
         return label
     }()

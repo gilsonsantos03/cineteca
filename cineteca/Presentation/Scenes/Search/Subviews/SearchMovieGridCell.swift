@@ -18,7 +18,7 @@ final class SearchMovieGridCell: UICollectionViewCell {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13, weight: .medium)
-        label.textColor = .white
+        label.textColor = .textPrimary
         label.numberOfLines = 2
         return label
     }()
@@ -33,7 +33,7 @@ final class SearchMovieGridCell: UICollectionViewCell {
     private lazy var ratingLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12, weight: .medium)
-        label.textColor = .white
+        label.textColor = .textPrimary
         return label
     }()
 

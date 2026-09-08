@@ -1,7 +1,15 @@
 import UIKit
 import Cartography
 
+protocol ProfileSettingsViewDelegate: AnyObject {
+    func didSelectSetting(_ setting: ProfileSetting)
+}
+
 final class ProfileSettingsView: UIView {
+
+    // MARK: - Properties
+
+    weak var delegate: ProfileSettingsViewDelegate?
 
     // MARK: - UI Components
 
@@ -72,20 +80,28 @@ final class ProfileSettingsView: UIView {
             $0.removeFromSuperview()
         }
 
-        for (index, title) in viewModel.rowTitles.enumerated() {
-            let row = ProfileSettingsRowView()
-            row.configure(title: title, showsSeparator: index < viewModel.rowTitles.count - 1)
-            rowsStack.addArrangedSubview(row)
+        for (index, row) in viewModel.rows.enumerated() {
+            let rowView = ProfileSettingsRowView()
+            rowView.configure(
+                title: row.title,
+                showsSeparator: index < viewModel.rows.count - 1
+            )
+            rowView.onTap = { [weak self] in
+                self?.delegate?.didSelectSetting(row.setting)
+            }
+            rowsStack.addArrangedSubview(rowView)
         }
     }
 }
 
 private final class ProfileSettingsRowView: UIView {
 
+    var onTap: (() -> Void)?
+
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16)
-        label.textColor = .white
+        label.textColor = .textPrimary
         return label
     }()
 
@@ -99,15 +115,16 @@ private final class ProfileSettingsRowView: UIView {
 
     private lazy var separatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.white.withAlphaComponent(0.08)
+        view.backgroundColor = .separator
         return view
     }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        isUserInteractionEnabled = false
         setupSubviews()
         setupConstraints()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        addGestureRecognizer(tapGesture)
     }
 
     required init?(coder: NSCoder) { nil }
@@ -159,5 +176,9 @@ private final class ProfileSettingsRowView: UIView {
     func configure(title: String, showsSeparator: Bool) {
         titleLabel.text = title
         separatorView.isHidden = !showsSeparator
+    }
+
+    @objc private func handleTap() {
+        onTap?()
     }
 }

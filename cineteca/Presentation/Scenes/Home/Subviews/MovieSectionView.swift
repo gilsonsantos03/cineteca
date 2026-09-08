@@ -19,7 +19,7 @@ final class MovieSectionView: UIView {
         let label = UILabel()
         label.text = sectionTitle
         label.font = .systemFont(ofSize: 18, weight: .bold)
-        label.textColor = .white
+        label.textColor = .textPrimary
         return label
     }()
 

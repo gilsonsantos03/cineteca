@@ -15,7 +15,7 @@ final class MovieDetailsCrewCardView: UIView {
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12, weight: .semibold)
-        label.textColor = .white
+        label.textColor = .textPrimary
         label.numberOfLines = 2
         return label
     }()

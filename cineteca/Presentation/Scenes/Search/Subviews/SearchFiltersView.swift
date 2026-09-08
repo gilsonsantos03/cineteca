@@ -28,7 +28,7 @@ final class SearchFiltersView: UIView {
         let label = UILabel()
         label.text = Strings.SearchScene.Filters.title
         label.font = .systemFont(ofSize: 22, weight: .bold)
-        label.textColor = .white
+        label.textColor = .textPrimary
         return label
     }()
 
@@ -79,7 +79,7 @@ final class SearchFiltersView: UIView {
         button.layer.cornerRadius = 12
         button.contentHorizontalAlignment = .left
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.textPrimary, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16)
         button.addTarget(self, action: #selector(languageTapped), for: .touchUpInside)
         return button

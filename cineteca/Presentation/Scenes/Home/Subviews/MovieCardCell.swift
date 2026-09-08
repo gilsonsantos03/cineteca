@@ -26,7 +26,7 @@ final class MovieCardCell: UICollectionViewCell {
         let label = UILabel()
         label.text = Strings.HomeScene.Card.trendingBadge
         label.font = .systemFont(ofSize: 10, weight: .semibold)
-        label.textColor = .white
+        label.textColor = .textPrimary
         return label
     }()
 
@@ -48,7 +48,7 @@ final class MovieCardCell: UICollectionViewCell {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12, weight: .medium)
-        label.textColor = .white
+        label.textColor = .textPrimary
         label.numberOfLines = 1
         return label
     }()
@@ -56,7 +56,7 @@ final class MovieCardCell: UICollectionViewCell {
     private lazy var ratingLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12, weight: .medium)
-        label.textColor = .white
+        label.textColor = .textPrimary
         return label
     }()
 

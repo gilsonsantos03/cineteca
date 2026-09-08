@@ -130,6 +130,68 @@
 		EP000001000000000000011C000000000000001A /* EditProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EP000001000000000000011C /* EditProfileHeaderView.swift */; };
 		EP000001000000000000012C000000000000001A /* EditProfileAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EP000001000000000000012C /* EditProfileAvatarView.swift */; };
 		EP000001000000000000013C000000000000001A /* EditProfileFormFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EP000001000000000000013C /* EditProfileFormFieldView.swift */; };
+		UI000001000000000000001B000000000000001A /* BackNavigationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = UI000001000000000000001B /* BackNavigationHeaderView.swift */; };
+		UI000001000000000000002B000000000000001A /* PasswordFormFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = UI000001000000000000002B /* PasswordFormFieldView.swift */; };
+		AC000001000000000000009B000000000000001A /* AccountModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC000001000000000000009B /* AccountModels.swift */; };
+		AC00000100000000000000AB000000000000001A /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC00000100000000000000AB /* AccountViewController.swift */; };
+		AC00000100000000000000BB000000000000001A /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC00000100000000000000BB /* AccountView.swift */; };
+		AC00000100000000000000CB000000000000001A /* AccountInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC00000100000000000000CB /* AccountInteractor.swift */; };
+		AC00000100000000000000DB000000000000001A /* AccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC00000100000000000000DB /* AccountPresenter.swift */; };
+		AC00000100000000000000EB000000000000001A /* AccountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC00000100000000000000EB /* AccountRouter.swift */; };
+		AC00000100000000000000FB000000000000001A /* AccountConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC00000100000000000000FB /* AccountConfigurator.swift */; };
+		AC000001000000000000010C000000000000001A /* AccountContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC000001000000000000010C /* AccountContentView.swift */; };
+		AC000001000000000000011C000000000000001A /* AccountProfileCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC000001000000000000011C /* AccountProfileCardView.swift */; };
+		AC000001000000000000012C000000000000001A /* AccountSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC000001000000000000012C /* AccountSectionView.swift */; };
+		CP000001000000000000009B000000000000001A /* ChangePasswordModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = CP000001000000000000009B /* ChangePasswordModels.swift */; };
+		CP00000100000000000000AB000000000000001A /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CP00000100000000000000AB /* ChangePasswordViewController.swift */; };
+		CP00000100000000000000BB000000000000001A /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CP00000100000000000000BB /* ChangePasswordView.swift */; };
+		CP00000100000000000000CB000000000000001A /* ChangePasswordInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CP00000100000000000000CB /* ChangePasswordInteractor.swift */; };
+		CP00000100000000000000DB000000000000001A /* ChangePasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CP00000100000000000000DB /* ChangePasswordPresenter.swift */; };
+		CP00000100000000000000EB000000000000001A /* ChangePasswordRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CP00000100000000000000EB /* ChangePasswordRouter.swift */; };
+		CP00000100000000000000FB000000000000001A /* ChangePasswordConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CP00000100000000000000FB /* ChangePasswordConfigurator.swift */; };
+		CP000001000000000000010C000000000000001A /* ChangePasswordContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CP000001000000000000010C /* ChangePasswordContentView.swift */; };
+		AT000001000000000000001B000000000000001A /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AT000001000000000000001B /* AppTheme.swift */; };
+		AR000001000000000000002B000000000000001A /* AppearanceRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AR000001000000000000002B /* AppearanceRepositoryProtocol.swift */; };
+		AR000001000000000000007B000000000000001A /* AppearanceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AR000001000000000000007B /* AppearanceRepository.swift */; };
+		TM000001000000000000005E000000000000001A /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = TM000001000000000000005E /* ThemeManager.swift */; };
+		AP000001000000000000009B000000000000001A /* AppearanceModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AP000001000000000000009B /* AppearanceModels.swift */; };
+		AP00000100000000000000AB000000000000001A /* AppearanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AP00000100000000000000AB /* AppearanceViewController.swift */; };
+		AP00000100000000000000BB000000000000001A /* AppearanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AP00000100000000000000BB /* AppearanceView.swift */; };
+		AP00000100000000000000CB000000000000001A /* AppearanceInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AP00000100000000000000CB /* AppearanceInteractor.swift */; };
+		AP00000100000000000000DB000000000000001A /* AppearancePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AP00000100000000000000DB /* AppearancePresenter.swift */; };
+		AP00000100000000000000EB000000000000001A /* AppearanceRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AP00000100000000000000EB /* AppearanceRouter.swift */; };
+		AP00000100000000000000FB000000000000001A /* AppearanceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AP00000100000000000000FB /* AppearanceConfigurator.swift */; };
+		AP000001000000000000010C000000000000001A /* AppearanceContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AP000001000000000000010C /* AppearanceContentView.swift */; };
+		AP000001000000000000011C000000000000001A /* AppearanceThemeSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AP000001000000000000011C /* AppearanceThemeSectionView.swift */; };
+		AL000001000000000000001B000000000000001A /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AL000001000000000000001B /* AppLanguage.swift */; };
+		LR000001000000000000002B000000000000001A /* LanguageRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = LR000001000000000000002B /* LanguageRepositoryProtocol.swift */; };
+		LR000001000000000000007B000000000000001A /* LanguageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = LR000001000000000000007B /* LanguageRepository.swift */; };
+		LC000001000000000000005E000000000000001A /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = LC000001000000000000005E /* Localization.swift */; };
+		LM000001000000000000005E000000000000001A /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = LM000001000000000000005E /* LanguageManager.swift */; };
+		LG000001000000000000009B000000000000001A /* LanguageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = LG000001000000000000009B /* LanguageModels.swift */; };
+		LG00000100000000000000AB000000000000001A /* LanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = LG00000100000000000000AB /* LanguageViewController.swift */; };
+		LG00000100000000000000BB000000000000001A /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LG00000100000000000000BB /* LanguageView.swift */; };
+		LG00000100000000000000CB000000000000001A /* LanguageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = LG00000100000000000000CB /* LanguageInteractor.swift */; };
+		LG00000100000000000000DB000000000000001A /* LanguagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = LG00000100000000000000DB /* LanguagePresenter.swift */; };
+		LG00000100000000000000EB000000000000001A /* LanguageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = LG00000100000000000000EB /* LanguageRouter.swift */; };
+		LG00000100000000000000FB000000000000001A /* LanguageConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = LG00000100000000000000FB /* LanguageConfigurator.swift */; };
+		LG000001000000000000010C000000000000001A /* LanguageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LG000001000000000000010C /* LanguageContentView.swift */; };
+		LG000001000000000000011C000000000000001A /* LanguageOptionSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LG000001000000000000011C /* LanguageOptionSectionView.swift */; };
+		LE000001000000000000009B000000000000001A /* LegalModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = LE000001000000000000009B /* LegalModels.swift */; };
+		LE00000100000000000000AB000000000000001A /* LegalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = LE00000100000000000000AB /* LegalViewController.swift */; };
+		LE00000100000000000000BB000000000000001A /* LegalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LE00000100000000000000BB /* LegalView.swift */; };
+		LE00000100000000000000CB000000000000001A /* LegalInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = LE00000100000000000000CB /* LegalInteractor.swift */; };
+		LE00000100000000000000DB000000000000001A /* LegalPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = LE00000100000000000000DB /* LegalPresenter.swift */; };
+		LE00000100000000000000EB000000000000001A /* LegalRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = LE00000100000000000000EB /* LegalRouter.swift */; };
+		LE00000100000000000000FB000000000000001A /* LegalConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = LE00000100000000000000FB /* LegalConfigurator.swift */; };
+		LE000001000000000000010C000000000000001A /* LegalContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LE000001000000000000010C /* LegalContentView.swift */; };
+		LE000001000000000000011C000000000000001A /* LegalLinksSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LE000001000000000000011C /* LegalLinksSectionView.swift */; };
+		LE000001000000000000012C000000000000001A /* LegalDocumentContentBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = LE000001000000000000012C /* LegalDocumentContentBuilder.swift */; };
+		LE000001000000000000013C000000000000001A /* LegalDocumentRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = LE000001000000000000013C /* LegalDocumentRouter.swift */; };
+		LE000001000000000000014C000000000000001A /* LegalDocumentConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = LE000001000000000000014C /* LegalDocumentConfigurator.swift */; };
+		LE000001000000000000015C000000000000001A /* LegalDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = LE000001000000000000015C /* LegalDocumentViewController.swift */; };
+		LE000001000000000000016C000000000000001A /* LegalDocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LE000001000000000000016C /* LegalDocumentView.swift */; };
+		LE000001000000000000017C000000000000001A /* LegalDocumentContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LE000001000000000000017C /* LegalDocumentContentView.swift */; };
 		PP000001000000000000017A /* Cineteca.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000017B /* Cineteca.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -259,6 +321,68 @@
 		EP000001000000000000011C /* EditProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileHeaderView.swift; sourceTree = "<group>"; };
 		EP000001000000000000012C /* EditProfileAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileAvatarView.swift; sourceTree = "<group>"; };
 		EP000001000000000000013C /* EditProfileFormFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileFormFieldView.swift; sourceTree = "<group>"; };
+		UI000001000000000000001B /* BackNavigationHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackNavigationHeaderView.swift; sourceTree = "<group>"; };
+		UI000001000000000000002B /* PasswordFormFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFormFieldView.swift; sourceTree = "<group>"; };
+		AC000001000000000000009B /* AccountModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModels.swift; sourceTree = "<group>"; };
+		AC00000100000000000000AB /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		AC00000100000000000000BB /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		AC00000100000000000000CB /* AccountInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInteractor.swift; sourceTree = "<group>"; };
+		AC00000100000000000000DB /* AccountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPresenter.swift; sourceTree = "<group>"; };
+		AC00000100000000000000EB /* AccountRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRouter.swift; sourceTree = "<group>"; };
+		AC00000100000000000000FB /* AccountConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountConfigurator.swift; sourceTree = "<group>"; };
+		AC000001000000000000010C /* AccountContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountContentView.swift; sourceTree = "<group>"; };
+		AC000001000000000000011C /* AccountProfileCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountProfileCardView.swift; sourceTree = "<group>"; };
+		AC000001000000000000012C /* AccountSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSectionView.swift; sourceTree = "<group>"; };
+		CP000001000000000000009B /* ChangePasswordModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordModels.swift; sourceTree = "<group>"; };
+		CP00000100000000000000AB /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		CP00000100000000000000BB /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
+		CP00000100000000000000CB /* ChangePasswordInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordInteractor.swift; sourceTree = "<group>"; };
+		CP00000100000000000000DB /* ChangePasswordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordPresenter.swift; sourceTree = "<group>"; };
+		CP00000100000000000000EB /* ChangePasswordRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordRouter.swift; sourceTree = "<group>"; };
+		CP00000100000000000000FB /* ChangePasswordConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordConfigurator.swift; sourceTree = "<group>"; };
+		CP000001000000000000010C /* ChangePasswordContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordContentView.swift; sourceTree = "<group>"; };
+		AT000001000000000000001B /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		AR000001000000000000002B /* AppearanceRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceRepositoryProtocol.swift; sourceTree = "<group>"; };
+		AR000001000000000000007B /* AppearanceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceRepository.swift; sourceTree = "<group>"; };
+		TM000001000000000000005E /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
+		AP000001000000000000009B /* AppearanceModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceModels.swift; sourceTree = "<group>"; };
+		AP00000100000000000000AB /* AppearanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceViewController.swift; sourceTree = "<group>"; };
+		AP00000100000000000000BB /* AppearanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceView.swift; sourceTree = "<group>"; };
+		AP00000100000000000000CB /* AppearanceInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceInteractor.swift; sourceTree = "<group>"; };
+		AP00000100000000000000DB /* AppearancePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearancePresenter.swift; sourceTree = "<group>"; };
+		AP00000100000000000000EB /* AppearanceRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceRouter.swift; sourceTree = "<group>"; };
+		AP00000100000000000000FB /* AppearanceConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceConfigurator.swift; sourceTree = "<group>"; };
+		AP000001000000000000010C /* AppearanceContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceContentView.swift; sourceTree = "<group>"; };
+		AP000001000000000000011C /* AppearanceThemeSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceThemeSectionView.swift; sourceTree = "<group>"; };
+		AL000001000000000000001B /* AppLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguage.swift; sourceTree = "<group>"; };
+		LR000001000000000000002B /* LanguageRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageRepositoryProtocol.swift; sourceTree = "<group>"; };
+		LR000001000000000000007B /* LanguageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageRepository.swift; sourceTree = "<group>"; };
+		LC000001000000000000005E /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
+		LM000001000000000000005E /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
+		LG000001000000000000009B /* LanguageModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageModels.swift; sourceTree = "<group>"; };
+		LG00000100000000000000AB /* LanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageViewController.swift; sourceTree = "<group>"; };
+		LG00000100000000000000BB /* LanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageView.swift; sourceTree = "<group>"; };
+		LG00000100000000000000CB /* LanguageInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageInteractor.swift; sourceTree = "<group>"; };
+		LG00000100000000000000DB /* LanguagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagePresenter.swift; sourceTree = "<group>"; };
+		LG00000100000000000000EB /* LanguageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageRouter.swift; sourceTree = "<group>"; };
+		LG00000100000000000000FB /* LanguageConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageConfigurator.swift; sourceTree = "<group>"; };
+		LG000001000000000000010C /* LanguageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageContentView.swift; sourceTree = "<group>"; };
+		LG000001000000000000011C /* LanguageOptionSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageOptionSectionView.swift; sourceTree = "<group>"; };
+		LE000001000000000000009B /* LegalModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalModels.swift; sourceTree = "<group>"; };
+		LE00000100000000000000AB /* LegalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalViewController.swift; sourceTree = "<group>"; };
+		LE00000100000000000000BB /* LegalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalView.swift; sourceTree = "<group>"; };
+		LE00000100000000000000CB /* LegalInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalInteractor.swift; sourceTree = "<group>"; };
+		LE00000100000000000000DB /* LegalPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalPresenter.swift; sourceTree = "<group>"; };
+		LE00000100000000000000EB /* LegalRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalRouter.swift; sourceTree = "<group>"; };
+		LE00000100000000000000FB /* LegalConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalConfigurator.swift; sourceTree = "<group>"; };
+		LE000001000000000000010C /* LegalContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalContentView.swift; sourceTree = "<group>"; };
+		LE000001000000000000011C /* LegalLinksSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalLinksSectionView.swift; sourceTree = "<group>"; };
+		LE000001000000000000012C /* LegalDocumentContentBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalDocumentContentBuilder.swift; sourceTree = "<group>"; };
+		LE000001000000000000013C /* LegalDocumentRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalDocumentRouter.swift; sourceTree = "<group>"; };
+		LE000001000000000000014C /* LegalDocumentConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalDocumentConfigurator.swift; sourceTree = "<group>"; };
+		LE000001000000000000015C /* LegalDocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalDocumentViewController.swift; sourceTree = "<group>"; };
+		LE000001000000000000016C /* LegalDocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalDocumentView.swift; sourceTree = "<group>"; };
+		LE000001000000000000017C /* LegalDocumentContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalDocumentContentView.swift; sourceTree = "<group>"; };
 		PP000001000000000000018B /* Cineteca.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Cineteca.xcdatamodel; sourceTree = "<group>"; };
 		PP000001000000000000017B /* Cineteca.xcdatamodeld */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodeld; path = Cineteca.xcdatamodeld; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -289,7 +413,6 @@
 			children = (
 				442CB05D2FFC81ED004FCC82 /* Home */,
 				PP000001000000000000012G /* Profile */,
-				EP000001000000000000001G /* EditProfile */,
 				AA10000100000000000000CA /* MovieDetails */,
 				SS00000100000000000000CA /* Search */,
 				CC000001000000000000008B /* TabBar */,
@@ -418,6 +541,8 @@
 				PP000001000000000000008B /* StarRatingView.swift */,
 				AA100001000000000000028B /* MovieDetailsCardMetrics.swift */,
 				AA100001000000000000027B /* WatchTrailerButton.swift */,
+				UI000001000000000000001B /* BackNavigationHeaderView.swift */,
+				UI000001000000000000002B /* PasswordFormFieldView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -435,6 +560,8 @@
 			isa = PBXGroup;
 			children = (
 				PP000001000000000000001B /* User.swift */,
+				AT000001000000000000001B /* AppTheme.swift */,
+				AL000001000000000000001B /* AppLanguage.swift */,
 				BB000001000000000000001B /* Genre.swift */,
 				CC000001000000000000001B /* Movie.swift */,
 				AA100001000000000000001B /* MovieDetails.swift */,
@@ -519,6 +646,9 @@
 			children = (
 				CC000001000000000000005B /* UIImageView+AsyncLoad.swift */,
 				CC000001000000000000005D /* Strings.swift */,
+				LC000001000000000000005E /* Localization.swift */,
+				TM000001000000000000005E /* ThemeManager.swift */,
+				LM000001000000000000005E /* LanguageManager.swift */,
 				442CB0A12FFC8501004FCC82 /* ShimmerView.swift */,
 			);
 			path = Helpers;
@@ -537,6 +667,8 @@
 			isa = PBXGroup;
 			children = (
 				PP000001000000000000007B /* UserRepository.swift */,
+				AR000001000000000000007B /* AppearanceRepository.swift */,
+				LR000001000000000000007B /* LanguageRepository.swift */,
 				CC00000100000000000000AB /* MovieRepository.swift */,
 				442CB0982FFC8405004FCC82 /* GenreRepository.swift */,
 			);
@@ -547,6 +679,8 @@
 			isa = PBXGroup;
 			children = (
 				PP000001000000000000002B /* UserRepositoryProtocol.swift */,
+				AR000001000000000000002B /* AppearanceRepositoryProtocol.swift */,
+				LR000001000000000000002B /* LanguageRepositoryProtocol.swift */,
 				DD000001000000000000002B /* MovieRepositoryProtocol.swift */,
 				442CB0962FFC8404004FCC82 /* GenreRepositoryProtocol.swift */,
 			);
@@ -597,6 +731,7 @@
 			isa = PBXGroup;
 			children = (
 				PP000001000000000000013G /* Subviews */,
+				PP000001000000000000014G /* Scenes */,
 				PP000001000000000000009B /* ProfileModels.swift */,
 				PP00000100000000000000AB /* ProfileViewController.swift */,
 				PP00000100000000000000BB /* ProfileView.swift */,
@@ -606,6 +741,19 @@
 				PP00000100000000000000FB /* ProfileConfigurator.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		PP000001000000000000014G /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				EP000001000000000000001G /* EditProfile */,
+				AC000001000000000000001G /* Account */,
+				CP000001000000000000001G /* ChangePassword */,
+				AP000001000000000000001G /* Appearance */,
+				LG000001000000000000001G /* Language */,
+				LE000001000000000000001G /* Legal */,
+			);
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		PP000001000000000000013G /* Subviews */ = {
@@ -644,6 +792,132 @@
 				EP000001000000000000011C /* EditProfileHeaderView.swift */,
 				EP000001000000000000012C /* EditProfileAvatarView.swift */,
 				EP000001000000000000013C /* EditProfileFormFieldView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		AC000001000000000000001G /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				AC000001000000000000002G /* Subviews */,
+				AC000001000000000000009B /* AccountModels.swift */,
+				AC00000100000000000000AB /* AccountViewController.swift */,
+				AC00000100000000000000BB /* AccountView.swift */,
+				AC00000100000000000000CB /* AccountInteractor.swift */,
+				AC00000100000000000000DB /* AccountPresenter.swift */,
+				AC00000100000000000000EB /* AccountRouter.swift */,
+				AC00000100000000000000FB /* AccountConfigurator.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		AC000001000000000000002G /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				AC000001000000000000010C /* AccountContentView.swift */,
+				AC000001000000000000011C /* AccountProfileCardView.swift */,
+				AC000001000000000000012C /* AccountSectionView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		CP000001000000000000001G /* ChangePassword */ = {
+			isa = PBXGroup;
+			children = (
+				CP000001000000000000002G /* Subviews */,
+				CP000001000000000000009B /* ChangePasswordModels.swift */,
+				CP00000100000000000000AB /* ChangePasswordViewController.swift */,
+				CP00000100000000000000BB /* ChangePasswordView.swift */,
+				CP00000100000000000000CB /* ChangePasswordInteractor.swift */,
+				CP00000100000000000000DB /* ChangePasswordPresenter.swift */,
+				CP00000100000000000000EB /* ChangePasswordRouter.swift */,
+				CP00000100000000000000FB /* ChangePasswordConfigurator.swift */,
+			);
+			path = ChangePassword;
+			sourceTree = "<group>";
+		};
+		CP000001000000000000002G /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				CP000001000000000000010C /* ChangePasswordContentView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		AP000001000000000000001G /* Appearance */ = {
+			isa = PBXGroup;
+			children = (
+				AP000001000000000000002G /* Subviews */,
+				AP000001000000000000009B /* AppearanceModels.swift */,
+				AP00000100000000000000AB /* AppearanceViewController.swift */,
+				AP00000100000000000000BB /* AppearanceView.swift */,
+				AP00000100000000000000CB /* AppearanceInteractor.swift */,
+				AP00000100000000000000DB /* AppearancePresenter.swift */,
+				AP00000100000000000000EB /* AppearanceRouter.swift */,
+				AP00000100000000000000FB /* AppearanceConfigurator.swift */,
+			);
+			path = Appearance;
+			sourceTree = "<group>";
+		};
+		AP000001000000000000002G /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				AP000001000000000000010C /* AppearanceContentView.swift */,
+				AP000001000000000000011C /* AppearanceThemeSectionView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		LG000001000000000000001G /* Language */ = {
+			isa = PBXGroup;
+			children = (
+				LG000001000000000000002G /* Subviews */,
+				LG000001000000000000009B /* LanguageModels.swift */,
+				LG00000100000000000000AB /* LanguageViewController.swift */,
+				LG00000100000000000000BB /* LanguageView.swift */,
+				LG00000100000000000000CB /* LanguageInteractor.swift */,
+				LG00000100000000000000DB /* LanguagePresenter.swift */,
+				LG00000100000000000000EB /* LanguageRouter.swift */,
+				LG00000100000000000000FB /* LanguageConfigurator.swift */,
+			);
+			path = Language;
+			sourceTree = "<group>";
+		};
+		LG000001000000000000002G /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				LG000001000000000000010C /* LanguageContentView.swift */,
+				LG000001000000000000011C /* LanguageOptionSectionView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		LE000001000000000000001G /* Legal */ = {
+			isa = PBXGroup;
+			children = (
+				LE000001000000000000002G /* Subviews */,
+				LE000001000000000000009B /* LegalModels.swift */,
+				LE00000100000000000000AB /* LegalViewController.swift */,
+				LE00000100000000000000BB /* LegalView.swift */,
+				LE00000100000000000000CB /* LegalInteractor.swift */,
+				LE00000100000000000000DB /* LegalPresenter.swift */,
+				LE00000100000000000000EB /* LegalRouter.swift */,
+				LE00000100000000000000FB /* LegalConfigurator.swift */,
+				LE000001000000000000012C /* LegalDocumentContentBuilder.swift */,
+				LE000001000000000000013C /* LegalDocumentRouter.swift */,
+				LE000001000000000000014C /* LegalDocumentConfigurator.swift */,
+				LE000001000000000000015C /* LegalDocumentViewController.swift */,
+				LE000001000000000000016C /* LegalDocumentView.swift */,
+			);
+			path = Legal;
+			sourceTree = "<group>";
+		};
+		LE000001000000000000002G /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				LE000001000000000000010C /* LegalContentView.swift */,
+				LE000001000000000000011C /* LegalLinksSectionView.swift */,
+				LE000001000000000000017C /* LegalDocumentContentView.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -842,6 +1116,68 @@
 				EP000001000000000000011C000000000000001A /* EditProfileHeaderView.swift in Sources */,
 				EP000001000000000000012C000000000000001A /* EditProfileAvatarView.swift in Sources */,
 				EP000001000000000000013C000000000000001A /* EditProfileFormFieldView.swift in Sources */,
+				UI000001000000000000001B000000000000001A /* BackNavigationHeaderView.swift in Sources */,
+				UI000001000000000000002B000000000000001A /* PasswordFormFieldView.swift in Sources */,
+				AC000001000000000000009B000000000000001A /* AccountModels.swift in Sources */,
+				AC00000100000000000000AB000000000000001A /* AccountViewController.swift in Sources */,
+				AC00000100000000000000BB000000000000001A /* AccountView.swift in Sources */,
+				AC00000100000000000000CB000000000000001A /* AccountInteractor.swift in Sources */,
+				AC00000100000000000000DB000000000000001A /* AccountPresenter.swift in Sources */,
+				AC00000100000000000000EB000000000000001A /* AccountRouter.swift in Sources */,
+				AC00000100000000000000FB000000000000001A /* AccountConfigurator.swift in Sources */,
+				AC000001000000000000010C000000000000001A /* AccountContentView.swift in Sources */,
+				AC000001000000000000011C000000000000001A /* AccountProfileCardView.swift in Sources */,
+				AC000001000000000000012C000000000000001A /* AccountSectionView.swift in Sources */,
+				CP000001000000000000009B000000000000001A /* ChangePasswordModels.swift in Sources */,
+				CP00000100000000000000AB000000000000001A /* ChangePasswordViewController.swift in Sources */,
+				CP00000100000000000000BB000000000000001A /* ChangePasswordView.swift in Sources */,
+				CP00000100000000000000CB000000000000001A /* ChangePasswordInteractor.swift in Sources */,
+				CP00000100000000000000DB000000000000001A /* ChangePasswordPresenter.swift in Sources */,
+				CP00000100000000000000EB000000000000001A /* ChangePasswordRouter.swift in Sources */,
+				CP00000100000000000000FB000000000000001A /* ChangePasswordConfigurator.swift in Sources */,
+				CP000001000000000000010C000000000000001A /* ChangePasswordContentView.swift in Sources */,
+				AT000001000000000000001B000000000000001A /* AppTheme.swift in Sources */,
+				AR000001000000000000002B000000000000001A /* AppearanceRepositoryProtocol.swift in Sources */,
+				AR000001000000000000007B000000000000001A /* AppearanceRepository.swift in Sources */,
+				TM000001000000000000005E000000000000001A /* ThemeManager.swift in Sources */,
+				AP000001000000000000009B000000000000001A /* AppearanceModels.swift in Sources */,
+				AP00000100000000000000AB000000000000001A /* AppearanceViewController.swift in Sources */,
+				AP00000100000000000000BB000000000000001A /* AppearanceView.swift in Sources */,
+				AP00000100000000000000CB000000000000001A /* AppearanceInteractor.swift in Sources */,
+				AP00000100000000000000DB000000000000001A /* AppearancePresenter.swift in Sources */,
+				AP00000100000000000000EB000000000000001A /* AppearanceRouter.swift in Sources */,
+				AP00000100000000000000FB000000000000001A /* AppearanceConfigurator.swift in Sources */,
+				AP000001000000000000010C000000000000001A /* AppearanceContentView.swift in Sources */,
+				AP000001000000000000011C000000000000001A /* AppearanceThemeSectionView.swift in Sources */,
+				AL000001000000000000001B000000000000001A /* AppLanguage.swift in Sources */,
+				LR000001000000000000002B000000000000001A /* LanguageRepositoryProtocol.swift in Sources */,
+				LR000001000000000000007B000000000000001A /* LanguageRepository.swift in Sources */,
+				LC000001000000000000005E000000000000001A /* Localization.swift in Sources */,
+				LM000001000000000000005E000000000000001A /* LanguageManager.swift in Sources */,
+				LG000001000000000000009B000000000000001A /* LanguageModels.swift in Sources */,
+				LG00000100000000000000AB000000000000001A /* LanguageViewController.swift in Sources */,
+				LG00000100000000000000BB000000000000001A /* LanguageView.swift in Sources */,
+				LG00000100000000000000CB000000000000001A /* LanguageInteractor.swift in Sources */,
+				LG00000100000000000000DB000000000000001A /* LanguagePresenter.swift in Sources */,
+				LG00000100000000000000EB000000000000001A /* LanguageRouter.swift in Sources */,
+				LG00000100000000000000FB000000000000001A /* LanguageConfigurator.swift in Sources */,
+				LG000001000000000000010C000000000000001A /* LanguageContentView.swift in Sources */,
+				LG000001000000000000011C000000000000001A /* LanguageOptionSectionView.swift in Sources */,
+				LE000001000000000000009B000000000000001A /* LegalModels.swift in Sources */,
+				LE00000100000000000000AB000000000000001A /* LegalViewController.swift in Sources */,
+				LE00000100000000000000BB000000000000001A /* LegalView.swift in Sources */,
+				LE00000100000000000000CB000000000000001A /* LegalInteractor.swift in Sources */,
+				LE00000100000000000000DB000000000000001A /* LegalPresenter.swift in Sources */,
+				LE00000100000000000000EB000000000000001A /* LegalRouter.swift in Sources */,
+				LE00000100000000000000FB000000000000001A /* LegalConfigurator.swift in Sources */,
+				LE000001000000000000010C000000000000001A /* LegalContentView.swift in Sources */,
+				LE000001000000000000011C000000000000001A /* LegalLinksSectionView.swift in Sources */,
+				LE000001000000000000012C000000000000001A /* LegalDocumentContentBuilder.swift in Sources */,
+				LE000001000000000000013C000000000000001A /* LegalDocumentRouter.swift in Sources */,
+				LE000001000000000000014C000000000000001A /* LegalDocumentConfigurator.swift in Sources */,
+				LE000001000000000000015C000000000000001A /* LegalDocumentViewController.swift in Sources */,
+				LE000001000000000000016C000000000000001A /* LegalDocumentView.swift in Sources */,
+				LE000001000000000000017C000000000000001A /* LegalDocumentContentView.swift in Sources */,
 				PP000001000000000000017A /* Cineteca.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

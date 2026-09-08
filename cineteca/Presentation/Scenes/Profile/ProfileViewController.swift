@@ -53,4 +53,19 @@ extension ProfileViewController: ProfileViewDelegate {
     func didTapEdit() {
         router.routeToEditProfile()
     }
+
+    func didSelectSetting(_ setting: ProfileSetting) {
+        switch setting {
+        case .account:
+            router.routeToAccount()
+        case .appearance:
+            router.routeToAppearance()
+        case .language:
+            router.routeToLanguage()
+        case .legal:
+            router.routeToLegal()
+        case .notifications:
+            break
+        }
+    }
 }

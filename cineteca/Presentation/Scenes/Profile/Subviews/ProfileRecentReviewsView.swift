@@ -9,7 +9,7 @@ final class ProfileRecentReviewsView: UIView {
         let label = UILabel()
         label.text = Strings.ProfileScene.RecentReviews.title
         label.font = .systemFont(ofSize: 18, weight: .bold)
-        label.textColor = .white
+        label.textColor = .textPrimary
         return label
     }()
 

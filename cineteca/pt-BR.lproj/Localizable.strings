@@ -82,7 +82,7 @@
 "ProfileScene.Settings.Notifications" = "Notificações";
 "ProfileScene.Settings.Appearance" = "Aparência";
 "ProfileScene.Settings.Language" = "Idioma";
-"ProfileScene.Settings.Privacy" = "Privacidade";
+"ProfileScene.Settings.Legal" = "Legal";
 
 "EditProfileScene.Title" = "Editar perfil";
 "EditProfileScene.ChangePhotoHint" = "Toque na câmera para alterar a foto";
@@ -91,3 +91,90 @@
 "EditProfileScene.Field.Username" = "NOME DE USUÁRIO";
 "EditProfileScene.Field.DisplayName" = "NOME DE EXIBIÇÃO";
 "EditProfileScene.Field.Bio" = "BIO";
+
+"AccountScene.Title" = "Conta";
+"AccountScene.Section.Profile" = "PERFIL";
+"AccountScene.Section.Security" = "SEGURANÇA";
+"AccountScene.Section.DangerZone" = "ZONA DE PERIGO";
+"AccountScene.Row.Username" = "Nome de usuário";
+"AccountScene.Row.DisplayName" = "Nome de exibição";
+"AccountScene.Row.Bio" = "Bio";
+"AccountScene.Row.Email" = "E-mail";
+"AccountScene.Row.ChangePassword" = "Alterar senha";
+"AccountScene.Row.DeleteAccount" = "Excluir conta";
+
+"ChangePasswordScene.Title" = "Alterar senha";
+"ChangePasswordScene.UpdatePassword" = "Atualizar senha";
+"ChangePasswordScene.Field.CurrentPassword" = "Senha atual";
+"ChangePasswordScene.Field.CurrentPasswordPlaceholder" = "Digite sua senha atual";
+"ChangePasswordScene.Field.NewPassword" = "Nova senha";
+"ChangePasswordScene.Field.NewPasswordPlaceholder" = "Pelo menos 8 caracteres";
+"ChangePasswordScene.Field.ConfirmPassword" = "Confirmar nova senha";
+"ChangePasswordScene.Field.ConfirmPasswordPlaceholder" = "Repita a nova senha";
+"ChangePasswordScene.Error.OkButton" = "OK";
+"ChangePasswordScene.Error.InvalidCurrentPasswordTitle" = "Senha incorreta";
+"ChangePasswordScene.Error.InvalidCurrentPasswordMessage" = "A senha atual informada está incorreta.";
+"ChangePasswordScene.Error.PasswordTooShortTitle" = "Senha muito curta";
+"ChangePasswordScene.Error.PasswordTooShortMessage" = "A nova senha deve ter pelo menos 8 caracteres.";
+"ChangePasswordScene.Error.PasswordMismatchTitle" = "Senhas não coincidem";
+"ChangePasswordScene.Error.PasswordMismatchMessage" = "A nova senha e a confirmação devem ser iguais.";
+"ChangePasswordScene.Error.GenericTitle" = "Algo deu errado";
+"ChangePasswordScene.Error.GenericMessage" = "Não foi possível atualizar sua senha. Tente novamente.";
+
+"AppearanceScene.Title" = "Aparência";
+"AppearanceScene.Section.Theme" = "TEMA";
+"AppearanceScene.Theme.Dark" = "Escuro";
+"AppearanceScene.Theme.Light" = "Claro";
+"AppearanceScene.Theme.System" = "Sistema";
+"AppearanceScene.Cancel" = "Cancelar";
+
+"LanguageScene.Title" = "Idioma";
+"LanguageScene.Section.AppLanguage" = "IDIOMA DO APP";
+"LanguageScene.Cancel" = "Cancelar";
+
+"LegalScene.Title" = "Legal";
+"LegalScene.Section.Legal" = "LEGAL";
+"LegalScene.Row.PrivacyPolicy" = "Política de privacidade";
+"LegalScene.Row.TermsOfService" = "Termos de uso";
+
+"LegalDocumentScene.LastUpdated" = "Última atualização: 8 de setembro de 2026";
+
+"LegalDocumentScene.PrivacyPolicy.Title" = "Política de privacidade";
+"LegalDocumentScene.PrivacyPolicy.Section1.Title" = "1. Informações que coletamos";
+"LegalDocumentScene.PrivacyPolicy.Section1.Body" = "Coletamos informações que você fornece diretamente, como nome, e-mail e dados de perfil ao criar uma conta. Também coletamos dados de uso, incluindo filmes assistidos, avaliados ou adicionados às suas listas.";
+"LegalDocumentScene.PrivacyPolicy.Section2.Title" = "2. Como usamos suas informações";
+"LegalDocumentScene.PrivacyPolicy.Section2.Body" = "Usamos suas informações para fornecer e melhorar nossos serviços, personalizar sua experiência, enviar notificações sobre novos lançamentos e analisar padrões de uso para aprimorar o app.";
+"LegalDocumentScene.PrivacyPolicy.Section3.Title" = "3. Compartilhamento de informações";
+"LegalDocumentScene.PrivacyPolicy.Section3.Body" = "Não vendemos suas informações pessoais. Podemos compartilhar dados com prestadores de serviço que nos ajudam a operar o app e quando exigido por lei.";
+"LegalDocumentScene.PrivacyPolicy.Section4.Title" = "4. Seus direitos";
+"LegalDocumentScene.PrivacyPolicy.Section4.Body" = "Você pode acessar, atualizar ou excluir as informações da sua conta a qualquer momento em Configurações → Legal. Também pode solicitar uma cópia dos seus dados entrando em contato conosco.";
+"LegalDocumentScene.PrivacyPolicy.Section5.Title" = "5. Retenção de dados";
+"LegalDocumentScene.PrivacyPolicy.Section5.Body" = "Mantemos suas informações enquanto sua conta estiver ativa. Se você excluir sua conta, removeremos seus dados pessoais em até 30 dias.";
+"LegalDocumentScene.PrivacyPolicy.Section6.Title" = "6. Segurança";
+"LegalDocumentScene.PrivacyPolicy.Section6.Body" = "Implementamos medidas de segurança padrão do setor para proteger suas informações, incluindo criptografia de dados em trânsito e em repouso.";
+"LegalDocumentScene.PrivacyPolicy.Section7.Title" = "7. Alterações nesta política";
+"LegalDocumentScene.PrivacyPolicy.Section7.Body" = "Podemos atualizar esta política periodicamente. Notificaremos você sobre mudanças significativas pelo app ou por e-mail.";
+"LegalDocumentScene.PrivacyPolicy.Section8.Title" = "8. Contato";
+"LegalDocumentScene.PrivacyPolicy.Section8.Body" = "Se tiver dúvidas sobre esta política de privacidade, entre em contato em privacy@cineteca.app";
+
+"LegalDocumentScene.TermsOfService.Title" = "Termos de uso";
+"LegalDocumentScene.TermsOfService.Section1.Title" = "1. Aceitação dos termos";
+"LegalDocumentScene.TermsOfService.Section1.Body" = "Ao acessar ou usar a Cineteca, você concorda com estes Termos de Uso. Se não concordar, por favor não utilize o app.";
+"LegalDocumentScene.TermsOfService.Section2.Title" = "2. Sua conta";
+"LegalDocumentScene.TermsOfService.Section2.Body" = "Você é responsável por manter a confidencialidade das credenciais da sua conta e por todas as atividades realizadas nela.";
+"LegalDocumentScene.TermsOfService.Section3.Title" = "3. Uso aceitável";
+"LegalDocumentScene.TermsOfService.Section3.Body" = "Você concorda em não usar indevidamente o app, incluindo tentar acessar contas de outros usuários, enviar conteúdo prejudicial ou usar sistemas automatizados para extrair dados.";
+"LegalDocumentScene.TermsOfService.Section4.Title" = "4. Seu conteúdo";
+"LegalDocumentScene.TermsOfService.Section4.Body" = "Você mantém a propriedade das avaliações e listas que criar. Ao publicar conteúdo, concede à Cineteca uma licença não exclusiva para exibi-lo no app.";
+"LegalDocumentScene.TermsOfService.Section5.Title" = "5. Conteúdo da Cineteca";
+"LegalDocumentScene.TermsOfService.Section5.Body" = "Informações de filmes, pôsteres e trailers são fornecidos por serviços de terceiros e estão sujeitos aos respectivos termos. Todas as marcas pertencem aos seus proprietários.";
+"LegalDocumentScene.TermsOfService.Section6.Title" = "6. Encerramento";
+"LegalDocumentScene.TermsOfService.Section6.Body" = "Podemos suspender ou encerrar sua conta se você violar estes termos. Você pode excluir sua conta a qualquer momento nas Configurações.";
+"LegalDocumentScene.TermsOfService.Section7.Title" = "7. Isenção de responsabilidade";
+"LegalDocumentScene.TermsOfService.Section7.Body" = "A Cineteca é fornecida \"no estado em que se encontra\", sem garantias de qualquer tipo. Não garantimos acesso ininterrupto ou a precisão das informações dos filmes.";
+"LegalDocumentScene.TermsOfService.Section8.Title" = "8. Limitação de responsabilidade";
+"LegalDocumentScene.TermsOfService.Section8.Body" = "Na máxima extensão permitida por lei, a Cineteca não será responsável por danos indiretos, incidentais ou consequenciais decorrentes do uso do app.";
+"LegalDocumentScene.TermsOfService.Section9.Title" = "9. Alterações nestes termos";
+"LegalDocumentScene.TermsOfService.Section9.Body" = "Reservamo-nos o direito de modificar estes termos a qualquer momento. O uso contínuo do app após as alterações constitui aceitação dos novos termos.";
+"LegalDocumentScene.TermsOfService.Section10.Title" = "10. Contato";
+"LegalDocumentScene.TermsOfService.Section10.Body" = "Para dúvidas sobre estes termos, entre em contato em legal@cineteca.app";

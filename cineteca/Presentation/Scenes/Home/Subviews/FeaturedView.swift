@@ -138,6 +138,7 @@ final class FeaturedView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         gradientLayer.frame = backdropImageView.bounds
+        updateGradientColors()
     }
 
     // MARK: - Setup
@@ -152,14 +153,25 @@ final class FeaturedView: UIView {
         )
     }
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        guard traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) else { return }
+        updateGradientColors()
+    }
+
     private func setupGradient() {
-        gradientLayer.colors = [
-            UIColor.clear.cgColor,
-            UIColor.appBackground.withAlphaComponent(0.7).cgColor,
-            UIColor.appBackground.cgColor
-        ]
         gradientLayer.locations = [0.3, 0.7, 1.0]
         backdropImageView.layer.addSublayer(gradientLayer)
+        updateGradientColors()
+    }
+
+    private func updateGradientColors() {
+        let background = UIColor.appBackground.resolvedColor(with: traitCollection)
+        gradientLayer.colors = [
+            UIColor.clear.cgColor,
+            background.withAlphaComponent(0.7).cgColor,
+            background.cgColor
+        ]
     }
 
     private func setupSubviews() {

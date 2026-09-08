@@ -4,17 +4,23 @@ final class MainTabBarController: UITabBarController {
     private let repository: MovieRepositoryProtocol
     private let genreRepository: GenreRepositoryProtocol
     private let userRepository: UserRepositoryProtocol
+    private let appearanceRepository: AppearanceRepositoryProtocol
+    private let languageRepository: LanguageRepositoryProtocol
     private let movieDetailsBuilder: MovieDetailsBuilding
 
     init(
         repository: MovieRepositoryProtocol,
         genreRepository: GenreRepositoryProtocol,
         userRepository: UserRepositoryProtocol,
+        appearanceRepository: AppearanceRepositoryProtocol,
+        languageRepository: LanguageRepositoryProtocol,
         movieDetailsBuilder: MovieDetailsBuilding
     ) {
         self.repository = repository
         self.genreRepository = genreRepository
         self.userRepository = userRepository
+        self.appearanceRepository = appearanceRepository
+        self.languageRepository = languageRepository
         self.movieDetailsBuilder = movieDetailsBuilder
         super.init(nibName: nil, bundle: nil)
     }
@@ -25,12 +31,32 @@ final class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         setupAppearance()
         setupTabs()
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleThemeDidChange),
+            name: ThemeManager.themeDidChangeNotification,
+            object: nil
+        )
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        guard traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) else { return }
+        setupAppearance()
+    }
+
+    @objc private func handleThemeDidChange() {
+        setupAppearance()
     }
 
     private func setupAppearance() {
         let appearance = UITabBarAppearance()
         appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor(red: 0.08, green: 0.08, blue: 0.08, alpha: 1)
+        appearance.backgroundColor = .appBackground
 
         let normalAttr: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.textSecondary
@@ -69,7 +95,11 @@ final class MainTabBarController: UITabBarController {
 
         let listsVC  = makePlaceholder(title: Strings.TabBar.lists,  icon: "bookmark")
         let statsVC  = makePlaceholder(title: Strings.TabBar.stats,  icon: "chart.bar")
-        let profileVC = ProfileConfigurator.resolve(userRepository: userRepository)
+        let profileVC = ProfileConfigurator.resolve(
+            userRepository: userRepository,
+            appearanceRepository: appearanceRepository,
+            languageRepository: languageRepository
+        )
         profileVC.tabBarItem = UITabBarItem(
             title: Strings.TabBar.profile,
             image: UIImage(systemName: "person"),

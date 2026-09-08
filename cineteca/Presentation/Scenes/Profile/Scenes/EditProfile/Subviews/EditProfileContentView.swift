@@ -65,13 +65,17 @@ final class EditProfileContentView: UIView {
     private lazy var cancelButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle(Strings.EditProfileScene.cancel, for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.textPrimary, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
         button.backgroundColor = .cardBackground
         button.layer.cornerRadius = 22
         button.addTarget(self, action: #selector(didTapCancel), for: .touchUpInside)
         return button
     }()
+
+    private var savedDisplayName = ""
+    private var savedBio = ""
+    private var isSaveEnabled = false
 
     // MARK: - Initialization
 
@@ -88,6 +92,12 @@ final class EditProfileContentView: UIView {
         backgroundColor = .appBackground
         headerView.delegate = self
         avatarView.delegate = self
+        displayNameField.onTextChange = { [weak self] in
+            self?.evaluateChanges()
+        }
+        bioField.onTextChange = { [weak self] in
+            self?.evaluateChanges()
+        }
         setupSubviews()
         setupConstraints()
     }
@@ -130,16 +140,19 @@ final class EditProfileContentView: UIView {
     // MARK: - Configure
 
     func configure(content: EditProfileModels.FetchProfile.ViewModel.Content) {
+        savedDisplayName = content.displayName
+        savedBio = content.bio
         avatarView.configure(avatarImageName: content.avatarImageName)
         usernameField.configure(text: content.username)
         displayNameField.configure(text: content.displayName)
         bioField.configure(text: content.bio)
+        updateSaveButton(isEnabled: false)
     }
 
     func setSaving(_ isSaving: Bool) {
-        saveButton.isEnabled = !isSaving
+        saveButton.isEnabled = !isSaving && isSaveEnabled
         cancelButton.isEnabled = !isSaving
-        saveButton.alpha = isSaving ? 0.6 : 1
+        saveButton.alpha = isSaving ? 0.6 : (isSaveEnabled ? 1 : 0.6)
     }
 
     // MARK: - Actions
@@ -186,6 +199,21 @@ final class EditProfileContentView: UIView {
             spacer.height == height
         }
         return view
+    }
+
+    private func evaluateChanges() {
+        let displayName = displayNameField.currentText().trimmingCharacters(in: .whitespacesAndNewlines)
+        let bio = bioField.currentText().trimmingCharacters(in: .whitespacesAndNewlines)
+        let savedDisplayName = savedDisplayName.trimmingCharacters(in: .whitespacesAndNewlines)
+        let savedBio = savedBio.trimmingCharacters(in: .whitespacesAndNewlines)
+        let hasChanges = displayName != savedDisplayName || bio != savedBio
+        updateSaveButton(isEnabled: hasChanges)
+    }
+
+    private func updateSaveButton(isEnabled: Bool) {
+        isSaveEnabled = isEnabled
+        saveButton.isEnabled = isEnabled
+        saveButton.alpha = isEnabled ? 1 : 0.6
     }
 }
 

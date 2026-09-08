@@ -17,7 +17,7 @@ final class MovieDetailsSimilarMoviesView: UIStackView {
         let label = UILabel()
         label.text = Strings.MovieDetailsScene.Section.similar
         label.font = .systemFont(ofSize: 16, weight: .bold)
-        label.textColor = .white
+        label.textColor = .textPrimary
         return label
     }()
 

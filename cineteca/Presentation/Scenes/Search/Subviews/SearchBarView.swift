@@ -25,7 +25,7 @@ final class SearchBarView: UIView {
     private lazy var searchTextField: UITextField = {
         let textField = UITextField()
         textField.font = .systemFont(ofSize: 16)
-        textField.textColor = .white
+        textField.textColor = .textPrimary
         textField.tintColor = .accentYellow
         textField.attributedPlaceholder = NSAttributedString(
             string: Strings.SearchScene.SearchBar.placeholder,
@@ -47,7 +47,7 @@ final class SearchBarView: UIView {
     private lazy var filterButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "slider.horizontal.3"), for: .normal)
-        button.tintColor = .white
+        button.tintColor = .textPrimary
         button.backgroundColor = .cardBackground
         button.layer.cornerRadius = 12
         button.addTarget(self, action: #selector(filterTapped), for: .touchUpInside)

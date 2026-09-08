@@ -22,6 +22,8 @@ enum ProfileSeedData {
         user.username = "@mariadot"
         user.displayName = "Maria Dot"
         user.bio = "Film lover. 127 films logged."
+        user.email = "maria.dot@gmail.com"
+        user.password = "password123"
         user.memberSince = makeMemberSinceDate()
         user.avatarImageName = "profile-avatar"
         user.filmsCount = 127
@@ -81,6 +83,14 @@ enum ProfileSeedData {
         }
         if user.bio?.isEmpty != false {
             user.bio = "Film lover. 127 films logged."
+            needsSave = true
+        }
+        if user.email?.isEmpty != false {
+            user.email = "maria.dot@gmail.com"
+            needsSave = true
+        }
+        if user.password?.isEmpty != false {
+            user.password = "password123"
             needsSave = true
         }
 

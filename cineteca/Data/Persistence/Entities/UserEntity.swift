@@ -5,6 +5,8 @@ final class UserEntity: NSManagedObject {
     @NSManaged var username: String
     @NSManaged var displayName: String?
     @NSManaged var bio: String?
+    @NSManaged var email: String?
+    @NSManaged var password: String?
     @NSManaged var memberSince: Date
     @NSManaged var avatarImageName: String?
     @NSManaged var filmsCount: Int32
@@ -40,6 +42,7 @@ extension UserEntity {
             username: username,
             displayName: displayName ?? "",
             bio: bio ?? "",
+            email: email ?? "",
             memberSince: memberSince,
             avatarImageName: avatarImageName,
             favoriteFilm: favoriteFilm,

@@ -17,7 +17,7 @@ final class ProfileReviewCardView: UIView {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 15, weight: .semibold)
-        label.textColor = .white
+        label.textColor = .textPrimary
         return label
     }()
 

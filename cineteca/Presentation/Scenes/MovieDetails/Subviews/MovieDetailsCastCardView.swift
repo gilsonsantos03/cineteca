@@ -17,7 +17,7 @@ final class MovieDetailsCastCardView: UIView {
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 10, weight: .semibold)
-        label.textColor = .white
+        label.textColor = .textPrimary
         label.numberOfLines = 2
         label.textAlignment = .center
         return label

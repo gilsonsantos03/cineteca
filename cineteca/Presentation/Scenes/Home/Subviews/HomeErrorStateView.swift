@@ -25,7 +25,7 @@ final class HomeErrorStateView: UIView {
         let label = UILabel()
         label.text = Strings.HomeScene.Error.title
         label.font = .systemFont(ofSize: 20, weight: .semibold)
-        label.textColor = .white
+        label.textColor = .textPrimary
         label.textAlignment = .center
         label.numberOfLines = 0
         return label

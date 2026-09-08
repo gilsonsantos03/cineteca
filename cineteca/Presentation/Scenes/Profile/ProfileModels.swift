@@ -53,5 +53,18 @@ struct ProfileRecentReviewsViewModel {
 }
 
 struct ProfileSettingsViewModel {
-    let rowTitles: [String]
+    let rows: [ProfileSettingRowViewModel]
+}
+
+struct ProfileSettingRowViewModel {
+    let title: String
+    let setting: ProfileSetting
+}
+
+enum ProfileSetting {
+    case account
+    case notifications
+    case appearance
+    case language
+    case legal
 }

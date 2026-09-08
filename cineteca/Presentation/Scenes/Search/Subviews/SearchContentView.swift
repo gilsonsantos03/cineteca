@@ -25,7 +25,7 @@ final class SearchContentView: UIView {
     private lazy var sectionTitleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18, weight: .bold)
-        label.textColor = .white
+        label.textColor = .textPrimary
         return label
     }()
 

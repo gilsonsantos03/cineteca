@@ -9,7 +9,7 @@ final class MovieDetailsProvidersView: UIStackView {
         let label = UILabel()
         label.text = Strings.MovieDetailsScene.Section.whereToWatch
         label.font = .systemFont(ofSize: 16, weight: .bold)
-        label.textColor = .white
+        label.textColor = .textPrimary
         return label
     }()
 

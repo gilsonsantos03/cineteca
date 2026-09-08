@@ -66,12 +66,12 @@ extension ProfilePresenter: ProfilePresentationLogic {
                 }
             ),
             settings: ProfileSettingsViewModel(
-                rowTitles: [
-                    Strings.ProfileScene.Settings.account,
-                    Strings.ProfileScene.Settings.notifications,
-                    Strings.ProfileScene.Settings.appearance,
-                    Strings.ProfileScene.Settings.language,
-                    Strings.ProfileScene.Settings.privacy
+                rows: [
+                    ProfileSettingRowViewModel(title: Strings.ProfileScene.Settings.account, setting: .account),
+                    ProfileSettingRowViewModel(title: Strings.ProfileScene.Settings.notifications, setting: .notifications),
+                    ProfileSettingRowViewModel(title: Strings.ProfileScene.Settings.appearance, setting: .appearance),
+                    ProfileSettingRowViewModel(title: Strings.ProfileScene.Settings.language, setting: .language),
+                    ProfileSettingRowViewModel(title: Strings.ProfileScene.Settings.legal, setting: .legal)
                 ]
             )
         )

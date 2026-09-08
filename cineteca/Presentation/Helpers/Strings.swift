@@ -2,153 +2,323 @@ import Foundation
 
 enum Strings {
     enum UI {
-        static let watchTrailer = NSLocalizedString("UI.WatchTrailerButton.Title", comment: "")
+        static var watchTrailer: String { Localization.string("UI.WatchTrailerButton.Title") }
     }
 
     enum HomeScene {
         enum GenreFilter {
-            static let all = NSLocalizedString("HomeScene.GenreFilter.All.Text", comment: "")
+            static var all: String { Localization.string("HomeScene.GenreFilter.All.Text") }
         }
 
         enum Section {
-            static let nowPlaying = NSLocalizedString("HomeScene.Section.NowPlaying.Title", comment: "")
-            static let trending = NSLocalizedString("HomeScene.Section.Trending.Title", comment: "")
-            static let topRated = NSLocalizedString("HomeScene.Section.TopRated.Title", comment: "")
-            static let seeAll = NSLocalizedString("HomeScene.Section.SeeAll.Text", comment: "")
+            static var nowPlaying: String { Localization.string("HomeScene.Section.NowPlaying.Title") }
+            static var trending: String { Localization.string("HomeScene.Section.Trending.Title") }
+            static var topRated: String { Localization.string("HomeScene.Section.TopRated.Title") }
+            static var seeAll: String { Localization.string("HomeScene.Section.SeeAll.Text") }
         }
 
         enum Error {
-            static let title = NSLocalizedString("HomeScene.Error.Title", comment: "")
-            static let subtitle = NSLocalizedString("HomeScene.Error.Subtitle", comment: "")
-            static let retryButton = NSLocalizedString("HomeScene.Error.RetryButton.Text", comment: "")
+            static var title: String { Localization.string("HomeScene.Error.Title") }
+            static var subtitle: String { Localization.string("HomeScene.Error.Subtitle") }
+            static var retryButton: String { Localization.string("HomeScene.Error.RetryButton.Text") }
         }
 
         enum Featured {
-            static let watchTrailerButton = Strings.UI.watchTrailer
-            static let watchlistButton = NSLocalizedString("HomeScene.Featured.WatchlistButton.Text", comment: "")
+            static var watchTrailerButton: String { Strings.UI.watchTrailer }
+            static var watchlistButton: String { Localization.string("HomeScene.Featured.WatchlistButton.Text") }
         }
 
         enum TrailerUnavailable {
-            static let title = NSLocalizedString("HomeScene.TrailerUnavailable.Title", comment: "")
-            static let message = NSLocalizedString("HomeScene.TrailerUnavailable.Message", comment: "")
-            static let okButton = NSLocalizedString("HomeScene.TrailerUnavailable.OkButton.Text", comment: "")
+            static var title: String { Localization.string("HomeScene.TrailerUnavailable.Title") }
+            static var message: String { Localization.string("HomeScene.TrailerUnavailable.Message") }
+            static var okButton: String { Localization.string("HomeScene.TrailerUnavailable.OkButton.Text") }
         }
 
         enum Card {
-            static let trendingBadge = NSLocalizedString("HomeScene.Card.TrendingBadge.Text", comment: "")
+            static var trendingBadge: String { Localization.string("HomeScene.Card.TrendingBadge.Text") }
         }
 
         enum WeeklyDigest {
-            static let title = NSLocalizedString("HomeScene.WeeklyDigest.Title", comment: "")
-            static let subtitle = NSLocalizedString("HomeScene.WeeklyDigest.Subtitle", comment: "")
+            static var title: String { Localization.string("HomeScene.WeeklyDigest.Title") }
+            static var subtitle: String { Localization.string("HomeScene.WeeklyDigest.Subtitle") }
         }
     }
 
     enum TabBar {
-        static let home = NSLocalizedString("TabBar.Home.Title", comment: "")
-        static let search = NSLocalizedString("TabBar.Search.Title", comment: "")
-        static let lists = NSLocalizedString("TabBar.Lists.Title", comment: "")
-        static let stats = NSLocalizedString("TabBar.Stats.Title", comment: "")
-        static let profile = NSLocalizedString("TabBar.Profile.Title", comment: "")
+        static var home: String { Localization.string("TabBar.Home.Title") }
+        static var search: String { Localization.string("TabBar.Search.Title") }
+        static var lists: String { Localization.string("TabBar.Lists.Title") }
+        static var stats: String { Localization.string("TabBar.Stats.Title") }
+        static var profile: String { Localization.string("TabBar.Profile.Title") }
     }
 
     enum SearchScene {
         enum SearchBar {
-            static let placeholder = NSLocalizedString("SearchScene.SearchBar.Placeholder", comment: "")
+            static var placeholder: String { Localization.string("SearchScene.SearchBar.Placeholder") }
         }
 
         enum Section {
-            static let suggested = NSLocalizedString("SearchScene.Section.Suggested", comment: "")
-            static let results = NSLocalizedString("SearchScene.Section.Results", comment: "")
+            static var suggested: String { Localization.string("SearchScene.Section.Suggested") }
+            static var results: String { Localization.string("SearchScene.Section.Results") }
         }
 
         enum Filters {
-            static let title = NSLocalizedString("SearchScene.Filters.Title", comment: "")
-            static let genre = NSLocalizedString("SearchScene.Filters.Genre", comment: "")
-            static let year = NSLocalizedString("SearchScene.Filters.Year", comment: "")
-            static let minRating = NSLocalizedString("SearchScene.Filters.MinRating", comment: "")
-            static let language = NSLocalizedString("SearchScene.Filters.Language", comment: "")
-            static let cancel = NSLocalizedString("SearchScene.Filters.Cancel", comment: "")
+            static var title: String { Localization.string("SearchScene.Filters.Title") }
+            static var genre: String { Localization.string("SearchScene.Filters.Genre") }
+            static var year: String { Localization.string("SearchScene.Filters.Year") }
+            static var minRating: String { Localization.string("SearchScene.Filters.MinRating") }
+            static var language: String { Localization.string("SearchScene.Filters.Language") }
+            static var cancel: String { Localization.string("SearchScene.Filters.Cancel") }
 
             enum Language {
-                static let all = NSLocalizedString("SearchScene.Filters.Language.All", comment: "")
-                static let english = NSLocalizedString("SearchScene.Filters.Language.English", comment: "")
-                static let portuguese = NSLocalizedString("SearchScene.Filters.Language.Portuguese", comment: "")
-                static let spanish = NSLocalizedString("SearchScene.Filters.Language.Spanish", comment: "")
-                static let french = NSLocalizedString("SearchScene.Filters.Language.French", comment: "")
+                static var all: String { Localization.string("SearchScene.Filters.Language.All") }
+                static var english: String { Localization.string("SearchScene.Filters.Language.English") }
+                static var portuguese: String { Localization.string("SearchScene.Filters.Language.Portuguese") }
+                static var spanish: String { Localization.string("SearchScene.Filters.Language.Spanish") }
+                static var french: String { Localization.string("SearchScene.Filters.Language.French") }
             }
         }
     }
 
     enum ProfileScene {
-        static let memberSinceFormat = NSLocalizedString("ProfileScene.MemberSince.Format", comment: "")
-        static let signOut = NSLocalizedString("ProfileScene.SignOut.Text", comment: "")
+        static var memberSinceFormat: String { Localization.string("ProfileScene.MemberSince.Format") }
+        static var signOut: String { Localization.string("ProfileScene.SignOut.Text") }
 
         enum FavoriteFilm {
-            static let badge = NSLocalizedString("ProfileScene.FavoriteFilm.Badge", comment: "")
+            static var badge: String { Localization.string("ProfileScene.FavoriteFilm.Badge") }
         }
 
         enum Stats {
-            static let films = NSLocalizedString("ProfileScene.Stats.Films", comment: "")
-            static let hours = NSLocalizedString("ProfileScene.Stats.Hours", comment: "")
-            static let reviews = NSLocalizedString("ProfileScene.Stats.Reviews", comment: "")
+            static var films: String { Localization.string("ProfileScene.Stats.Films") }
+            static var hours: String { Localization.string("ProfileScene.Stats.Hours") }
+            static var reviews: String { Localization.string("ProfileScene.Stats.Reviews") }
         }
 
         enum RecentReviews {
-            static let title = NSLocalizedString("ProfileScene.RecentReviews.Title", comment: "")
-            static let seeAll = NSLocalizedString("ProfileScene.RecentReviews.SeeAll", comment: "")
+            static var title: String { Localization.string("ProfileScene.RecentReviews.Title") }
+            static var seeAll: String { Localization.string("ProfileScene.RecentReviews.SeeAll") }
         }
 
         enum Settings {
-            static let account = NSLocalizedString("ProfileScene.Settings.Account", comment: "")
-            static let notifications = NSLocalizedString("ProfileScene.Settings.Notifications", comment: "")
-            static let appearance = NSLocalizedString("ProfileScene.Settings.Appearance", comment: "")
-            static let language = NSLocalizedString("ProfileScene.Settings.Language", comment: "")
-            static let privacy = NSLocalizedString("ProfileScene.Settings.Privacy", comment: "")
+            static var account: String { Localization.string("ProfileScene.Settings.Account") }
+            static var notifications: String { Localization.string("ProfileScene.Settings.Notifications") }
+            static var appearance: String { Localization.string("ProfileScene.Settings.Appearance") }
+            static var language: String { Localization.string("ProfileScene.Settings.Language") }
+            static var legal: String { Localization.string("ProfileScene.Settings.Legal") }
+        }
+    }
+
+    enum LegalScene {
+        static var title: String { Localization.string("LegalScene.Title") }
+
+        enum Section {
+            static var legal: String { Localization.string("LegalScene.Section.Legal") }
+        }
+
+        enum Row {
+            static var privacyPolicy: String { Localization.string("LegalScene.Row.PrivacyPolicy") }
+            static var termsOfService: String { Localization.string("LegalScene.Row.TermsOfService") }
+        }
+    }
+
+    enum LegalDocumentScene {
+        static var lastUpdated: String { Localization.string("LegalDocumentScene.LastUpdated") }
+
+        enum PrivacyPolicy {
+            static var title: String { Localization.string("LegalDocumentScene.PrivacyPolicy.Title") }
+
+            enum Section1 {
+                static var title: String { Localization.string("LegalDocumentScene.PrivacyPolicy.Section1.Title") }
+                static var body: String { Localization.string("LegalDocumentScene.PrivacyPolicy.Section1.Body") }
+            }
+            enum Section2 {
+                static var title: String { Localization.string("LegalDocumentScene.PrivacyPolicy.Section2.Title") }
+                static var body: String { Localization.string("LegalDocumentScene.PrivacyPolicy.Section2.Body") }
+            }
+            enum Section3 {
+                static var title: String { Localization.string("LegalDocumentScene.PrivacyPolicy.Section3.Title") }
+                static var body: String { Localization.string("LegalDocumentScene.PrivacyPolicy.Section3.Body") }
+            }
+            enum Section4 {
+                static var title: String { Localization.string("LegalDocumentScene.PrivacyPolicy.Section4.Title") }
+                static var body: String { Localization.string("LegalDocumentScene.PrivacyPolicy.Section4.Body") }
+            }
+            enum Section5 {
+                static var title: String { Localization.string("LegalDocumentScene.PrivacyPolicy.Section5.Title") }
+                static var body: String { Localization.string("LegalDocumentScene.PrivacyPolicy.Section5.Body") }
+            }
+            enum Section6 {
+                static var title: String { Localization.string("LegalDocumentScene.PrivacyPolicy.Section6.Title") }
+                static var body: String { Localization.string("LegalDocumentScene.PrivacyPolicy.Section6.Body") }
+            }
+            enum Section7 {
+                static var title: String { Localization.string("LegalDocumentScene.PrivacyPolicy.Section7.Title") }
+                static var body: String { Localization.string("LegalDocumentScene.PrivacyPolicy.Section7.Body") }
+            }
+            enum Section8 {
+                static var title: String { Localization.string("LegalDocumentScene.PrivacyPolicy.Section8.Title") }
+                static var body: String { Localization.string("LegalDocumentScene.PrivacyPolicy.Section8.Body") }
+            }
+        }
+
+        enum TermsOfService {
+            static var title: String { Localization.string("LegalDocumentScene.TermsOfService.Title") }
+
+            enum Section1 {
+                static var title: String { Localization.string("LegalDocumentScene.TermsOfService.Section1.Title") }
+                static var body: String { Localization.string("LegalDocumentScene.TermsOfService.Section1.Body") }
+            }
+            enum Section2 {
+                static var title: String { Localization.string("LegalDocumentScene.TermsOfService.Section2.Title") }
+                static var body: String { Localization.string("LegalDocumentScene.TermsOfService.Section2.Body") }
+            }
+            enum Section3 {
+                static var title: String { Localization.string("LegalDocumentScene.TermsOfService.Section3.Title") }
+                static var body: String { Localization.string("LegalDocumentScene.TermsOfService.Section3.Body") }
+            }
+            enum Section4 {
+                static var title: String { Localization.string("LegalDocumentScene.TermsOfService.Section4.Title") }
+                static var body: String { Localization.string("LegalDocumentScene.TermsOfService.Section4.Body") }
+            }
+            enum Section5 {
+                static var title: String { Localization.string("LegalDocumentScene.TermsOfService.Section5.Title") }
+                static var body: String { Localization.string("LegalDocumentScene.TermsOfService.Section5.Body") }
+            }
+            enum Section6 {
+                static var title: String { Localization.string("LegalDocumentScene.TermsOfService.Section6.Title") }
+                static var body: String { Localization.string("LegalDocumentScene.TermsOfService.Section6.Body") }
+            }
+            enum Section7 {
+                static var title: String { Localization.string("LegalDocumentScene.TermsOfService.Section7.Title") }
+                static var body: String { Localization.string("LegalDocumentScene.TermsOfService.Section7.Body") }
+            }
+            enum Section8 {
+                static var title: String { Localization.string("LegalDocumentScene.TermsOfService.Section8.Title") }
+                static var body: String { Localization.string("LegalDocumentScene.TermsOfService.Section8.Body") }
+            }
+            enum Section9 {
+                static var title: String { Localization.string("LegalDocumentScene.TermsOfService.Section9.Title") }
+                static var body: String { Localization.string("LegalDocumentScene.TermsOfService.Section9.Body") }
+            }
+            enum Section10 {
+                static var title: String { Localization.string("LegalDocumentScene.TermsOfService.Section10.Title") }
+                static var body: String { Localization.string("LegalDocumentScene.TermsOfService.Section10.Body") }
+            }
+        }
+    }
+
+    enum AppearanceScene {
+        static var title: String { Localization.string("AppearanceScene.Title") }
+
+        enum Section {
+            static var theme: String { Localization.string("AppearanceScene.Section.Theme") }
+        }
+
+        enum Theme {
+            static var dark: String { Localization.string("AppearanceScene.Theme.Dark") }
+            static var light: String { Localization.string("AppearanceScene.Theme.Light") }
+            static var system: String { Localization.string("AppearanceScene.Theme.System") }
+        }
+
+        static var cancel: String { Localization.string("AppearanceScene.Cancel") }
+    }
+
+    enum LanguageScene {
+        static var title: String { Localization.string("LanguageScene.Title") }
+
+        enum Section {
+            static var appLanguage: String { Localization.string("LanguageScene.Section.AppLanguage") }
+        }
+
+        static var cancel: String { Localization.string("LanguageScene.Cancel") }
+    }
+
+    enum AccountScene {
+        static var title: String { Localization.string("AccountScene.Title") }
+
+        enum Section {
+            static var profile: String { Localization.string("AccountScene.Section.Profile") }
+            static var security: String { Localization.string("AccountScene.Section.Security") }
+            static var dangerZone: String { Localization.string("AccountScene.Section.DangerZone") }
+        }
+
+        enum Row {
+            static var username: String { Localization.string("AccountScene.Row.Username") }
+            static var displayName: String { Localization.string("AccountScene.Row.DisplayName") }
+            static var bio: String { Localization.string("AccountScene.Row.Bio") }
+            static var email: String { Localization.string("AccountScene.Row.Email") }
+            static var changePassword: String { Localization.string("AccountScene.Row.ChangePassword") }
+            static var deleteAccount: String { Localization.string("AccountScene.Row.DeleteAccount") }
+        }
+    }
+
+    enum ChangePasswordScene {
+        static var title: String { Localization.string("ChangePasswordScene.Title") }
+        static var updatePassword: String { Localization.string("ChangePasswordScene.UpdatePassword") }
+
+        enum Field {
+            static var currentPassword: String { Localization.string("ChangePasswordScene.Field.CurrentPassword") }
+            static var currentPasswordPlaceholder: String { Localization.string("ChangePasswordScene.Field.CurrentPasswordPlaceholder") }
+            static var newPassword: String { Localization.string("ChangePasswordScene.Field.NewPassword") }
+            static var newPasswordPlaceholder: String { Localization.string("ChangePasswordScene.Field.NewPasswordPlaceholder") }
+            static var confirmPassword: String { Localization.string("ChangePasswordScene.Field.ConfirmPassword") }
+            static var confirmPasswordPlaceholder: String { Localization.string("ChangePasswordScene.Field.ConfirmPasswordPlaceholder") }
+        }
+
+        enum Error {
+            static var okButton: String { Localization.string("ChangePasswordScene.Error.OkButton") }
+            static var invalidCurrentPasswordTitle: String { Localization.string("ChangePasswordScene.Error.InvalidCurrentPasswordTitle") }
+            static var invalidCurrentPasswordMessage: String { Localization.string("ChangePasswordScene.Error.InvalidCurrentPasswordMessage") }
+            static var passwordTooShortTitle: String { Localization.string("ChangePasswordScene.Error.PasswordTooShortTitle") }
+            static var passwordTooShortMessage: String { Localization.string("ChangePasswordScene.Error.PasswordTooShortMessage") }
+            static var passwordMismatchTitle: String { Localization.string("ChangePasswordScene.Error.PasswordMismatchTitle") }
+            static var passwordMismatchMessage: String { Localization.string("ChangePasswordScene.Error.PasswordMismatchMessage") }
+            static var genericTitle: String { Localization.string("ChangePasswordScene.Error.GenericTitle") }
+            static var genericMessage: String { Localization.string("ChangePasswordScene.Error.GenericMessage") }
         }
     }
 
     enum EditProfileScene {
-        static let title = NSLocalizedString("EditProfileScene.Title", comment: "")
-        static let changePhotoHint = NSLocalizedString("EditProfileScene.ChangePhotoHint", comment: "")
-        static let saveChanges = NSLocalizedString("EditProfileScene.SaveChanges", comment: "")
-        static let cancel = NSLocalizedString("EditProfileScene.Cancel", comment: "")
+        static var title: String { Localization.string("EditProfileScene.Title") }
+        static var changePhotoHint: String { Localization.string("EditProfileScene.ChangePhotoHint") }
+        static var saveChanges: String { Localization.string("EditProfileScene.SaveChanges") }
+        static var cancel: String { Localization.string("EditProfileScene.Cancel") }
 
         enum Field {
-            static let username = NSLocalizedString("EditProfileScene.Field.Username", comment: "")
-            static let displayName = NSLocalizedString("EditProfileScene.Field.DisplayName", comment: "")
-            static let bio = NSLocalizedString("EditProfileScene.Field.Bio", comment: "")
+            static var username: String { Localization.string("EditProfileScene.Field.Username") }
+            static var displayName: String { Localization.string("EditProfileScene.Field.DisplayName") }
+            static var bio: String { Localization.string("EditProfileScene.Field.Bio") }
         }
     }
 
     enum MovieDetailsScene {
         enum Action {
-            static let rate = NSLocalizedString("MovieDetailsScene.Action.Rate.Text", comment: "")
-            static let favorite = NSLocalizedString("MovieDetailsScene.Action.Favorite.Text", comment: "")
-            static let watchlist = NSLocalizedString("MovieDetailsScene.Action.Watchlist.Text", comment: "")
-            static let readMore = NSLocalizedString("MovieDetailsScene.Action.ReadMore.Text", comment: "")
-            static let watchTrailer = Strings.UI.watchTrailer
+            static var rate: String { Localization.string("MovieDetailsScene.Action.Rate.Text") }
+            static var favorite: String { Localization.string("MovieDetailsScene.Action.Favorite.Text") }
+            static var watchlist: String { Localization.string("MovieDetailsScene.Action.Watchlist.Text") }
+            static var readMore: String { Localization.string("MovieDetailsScene.Action.ReadMore.Text") }
+            static var watchTrailer: String { Strings.UI.watchTrailer }
         }
 
         enum Section {
-            static let whereToWatch = NSLocalizedString("MovieDetailsScene.Section.WhereToWatch.Title", comment: "")
-            static let synopsis = NSLocalizedString("MovieDetailsScene.Section.Synopsis.Title", comment: "")
-            static let cast = NSLocalizedString("MovieDetailsScene.Section.Cast.Title", comment: "")
-            static let crew = NSLocalizedString("MovieDetailsScene.Section.Crew.Title", comment: "")
-            static let similar = NSLocalizedString("MovieDetailsScene.Section.Similar.Title", comment: "")
+            static var whereToWatch: String { Localization.string("MovieDetailsScene.Section.WhereToWatch.Title") }
+            static var synopsis: String { Localization.string("MovieDetailsScene.Section.Synopsis.Title") }
+            static var cast: String { Localization.string("MovieDetailsScene.Section.Cast.Title") }
+            static var crew: String { Localization.string("MovieDetailsScene.Section.Crew.Title") }
+            static var similar: String { Localization.string("MovieDetailsScene.Section.Similar.Title") }
         }
 
         enum Rating {
-            static let tmdb = NSLocalizedString("MovieDetailsScene.Rating.TMDB.Text", comment: "")
+            static var tmdb: String { Localization.string("MovieDetailsScene.Rating.TMDB.Text") }
         }
 
         enum Certification {
             static func age(_ value: String) -> String {
-                String(format: NSLocalizedString("MovieDetailsScene.Certification.Age.Format", comment: ""), value)
+                String(format: Localization.string("MovieDetailsScene.Certification.Age.Format", comment: ""), value)
             }
 
             static var accessibilityLabel: String {
-                NSLocalizedString("MovieDetailsScene.Certification.Accessibility.Label", comment: "")
+                Localization.string("MovieDetailsScene.Certification.Accessibility.Label", comment: "")
             }
         }
 
@@ -156,11 +326,11 @@ enum Strings {
             static func job(_ key: String) -> String {
                 switch key {
                 case "Director":
-                    NSLocalizedString("MovieDetailsScene.Crew.Job.Director", comment: "")
+                    Localization.string("MovieDetailsScene.Crew.Job.Director", comment: "")
                 case "Writer":
-                    NSLocalizedString("MovieDetailsScene.Crew.Job.Writer", comment: "")
+                    Localization.string("MovieDetailsScene.Crew.Job.Writer", comment: "")
                 case "Screenplay":
-                    NSLocalizedString("MovieDetailsScene.Crew.Job.Screenplay", comment: "")
+                    Localization.string("MovieDetailsScene.Crew.Job.Screenplay", comment: "")
                 default:
                     key
                 }
@@ -168,15 +338,15 @@ enum Strings {
         }
 
         enum Error {
-            static let title = NSLocalizedString("MovieDetailsScene.Error.Title", comment: "")
-            static let message = NSLocalizedString("MovieDetailsScene.Error.Message", comment: "")
-            static let retry = NSLocalizedString("MovieDetailsScene.Error.Retry.Text", comment: "")
+            static var title: String { Localization.string("MovieDetailsScene.Error.Title") }
+            static var message: String { Localization.string("MovieDetailsScene.Error.Message") }
+            static var retry: String { Localization.string("MovieDetailsScene.Error.Retry.Text") }
         }
 
         enum TrailerUnavailable {
-            static let title = NSLocalizedString("MovieDetailsScene.TrailerUnavailable.Title", comment: "")
-            static let message = NSLocalizedString("MovieDetailsScene.TrailerUnavailable.Message", comment: "")
-            static let okButton = NSLocalizedString("MovieDetailsScene.TrailerUnavailable.OkButton.Text", comment: "")
+            static var title: String { Localization.string("MovieDetailsScene.TrailerUnavailable.Title") }
+            static var message: String { Localization.string("MovieDetailsScene.TrailerUnavailable.Message") }
+            static var okButton: String { Localization.string("MovieDetailsScene.TrailerUnavailable.OkButton.Text") }
         }
     }
 }

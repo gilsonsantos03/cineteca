@@ -3,6 +3,7 @@ import Cartography
 
 protocol ProfileContentViewDelegate: AnyObject {
     func didTapEdit()
+    func didSelectSetting(_ setting: ProfileSetting)
 }
 
 final class ProfileContentView: UIView {
@@ -57,6 +58,7 @@ final class ProfileContentView: UIView {
     private func setup() {
         backgroundColor = .appBackground
         headerView.delegate = self
+        settingsView.delegate = self
         setupSubviews()
         setupConstraints()
     }
@@ -128,5 +130,11 @@ final class ProfileContentView: UIView {
 extension ProfileContentView: ProfileHeaderViewDelegate {
     func didTapEdit() {
         delegate?.didTapEdit()
+    }
+}
+
+extension ProfileContentView: ProfileSettingsViewDelegate {
+    func didSelectSetting(_ setting: ProfileSetting) {
+        delegate?.didSelectSetting(setting)
     }
 }

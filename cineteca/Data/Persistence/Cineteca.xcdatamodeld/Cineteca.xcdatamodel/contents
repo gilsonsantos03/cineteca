@@ -13,6 +13,8 @@
         <attribute name="avatarImageName" optional="YES" attributeType="String"/>
         <attribute name="bio" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="displayName" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="email" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="password" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="favoriteBackdropPath" optional="YES" attributeType="String"/>
         <attribute name="favoriteFilmTitle" attributeType="String"/>
         <attribute name="favoriteMovieId" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>

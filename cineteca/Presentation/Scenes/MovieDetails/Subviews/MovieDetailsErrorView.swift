@@ -16,7 +16,7 @@ final class MovieDetailsErrorView: UIStackView {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20, weight: .bold)
-        label.textColor = .white
+        label.textColor = .textPrimary
         label.numberOfLines = 0
         return label
     }()

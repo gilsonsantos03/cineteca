@@ -1,17 +1,11 @@
 import UIKit
 import Cartography
 
-enum EditProfileFormFieldStyle {
-    case singleLine
-    case multiline
-}
-
-final class EditProfileFormFieldView: UIView, UITextViewDelegate {
+final class PasswordFormFieldView: UIView {
 
     // MARK: - Properties
 
-    private let style: EditProfileFormFieldStyle
-    private let isEditable: Bool
+    private var isSecure = true
 
     // MARK: - UI Components
 
@@ -25,23 +19,21 @@ final class EditProfileFormFieldView: UIView, UITextViewDelegate {
     private lazy var textField: UITextField = {
         let textField = UITextField()
         textField.font = .systemFont(ofSize: 16)
-        textField.textColor = .white
+        textField.textColor = .textPrimary
         textField.tintColor = .accentYellow
-        textField.isEnabled = isEditable
+        textField.isSecureTextEntry = true
+        textField.autocorrectionType = .no
+        textField.autocapitalizationType = .none
         return textField
     }()
 
-    private lazy var textView: UITextView = {
-        let textView = UITextView()
-        textView.font = .systemFont(ofSize: 16)
-        textView.textColor = .white
-        textView.tintColor = .accentYellow
-        textView.backgroundColor = .clear
-        textView.isScrollEnabled = false
-        textView.textContainerInset = .zero
-        textView.textContainer.lineFragmentPadding = 0
-        textView.delegate = self
-        return textView
+    private lazy var visibilityButton: UIButton = {
+        let button = UIButton(type: .system)
+        let config = UIImage.SymbolConfiguration(pointSize: 14, weight: .medium)
+        button.setImage(UIImage(systemName: "eye.slash", withConfiguration: config), for: .normal)
+        button.tintColor = .textSecondary
+        button.addTarget(self, action: #selector(didTapVisibility), for: .touchUpInside)
+        return button
     }()
 
     private lazy var inputContainerView: UIView = {
@@ -53,11 +45,13 @@ final class EditProfileFormFieldView: UIView, UITextViewDelegate {
 
     // MARK: - Initialization
 
-    init(title: String, style: EditProfileFormFieldStyle, isEditable: Bool = true) {
-        self.style = style
-        self.isEditable = isEditable
+    init(title: String, placeholder: String) {
         super.init(frame: .zero)
         titleLabel.text = title
+        textField.attributedPlaceholder = NSAttributedString(
+            string: placeholder,
+            attributes: [.foregroundColor: UIColor.textSecondary]
+        )
         setup()
     }
 
@@ -74,24 +68,15 @@ final class EditProfileFormFieldView: UIView, UITextViewDelegate {
     private func setupSubviews() {
         addSubview(titleLabel)
         addSubview(inputContainerView)
-
-        switch style {
-        case .singleLine:
-            inputContainerView.addSubview(textField)
-        case .multiline:
-            inputContainerView.addSubview(textView)
-        }
+        inputContainerView.addSubview(textField)
+        inputContainerView.addSubview(visibilityButton)
     }
 
     private func setupConstraints() {
         constrainTitleLabel()
         constrainInputContainerView()
-        switch style {
-        case .singleLine:
-            constrainTextField()
-        case .multiline:
-            constrainTextView()
-        }
+        constrainTextField()
+        constrainVisibilityButton()
     }
 
     private func constrainTitleLabel() {
@@ -112,41 +97,40 @@ final class EditProfileFormFieldView: UIView, UITextViewDelegate {
     }
 
     private func constrainTextField() {
-        constrain(textField, inputContainerView) { textField, container in
+        constrain(textField, visibilityButton, inputContainerView) { textField, button, container in
             textField.top == container.top + 14
             textField.bottom == container.bottom - 14
             textField.left == container.left + 14
-            textField.right == container.right - 14
+            textField.right == button.left - 8
         }
     }
 
-    private func constrainTextView() {
-        constrain(textView, inputContainerView) { textView, container in
-            textView.top == container.top + 12
-            textView.bottom == container.bottom - 12
-            textView.left == container.left + 14
-            textView.right == container.right - 14
-            textView.height >= 88
+    private func constrainVisibilityButton() {
+        constrain(visibilityButton, inputContainerView) { button, container in
+            button.centerY == container.centerY
+            button.right == container.right - 14
+            button.width == 24
+            button.height == 24
         }
     }
 
-    // MARK: - Configure
-
-    func configure(text: String) {
-        switch style {
-        case .singleLine:
-            textField.text = text
-        case .multiline:
-            textView.text = text
-        }
-    }
+    // MARK: - Public API
 
     func currentText() -> String {
-        switch style {
-        case .singleLine:
-            return textField.text ?? ""
-        case .multiline:
-            return textView.text ?? ""
-        }
+        textField.text ?? ""
+    }
+
+    func clear() {
+        textField.text = ""
+    }
+
+    // MARK: - Actions
+
+    @objc private func didTapVisibility() {
+        isSecure.toggle()
+        textField.isSecureTextEntry = isSecure
+        let symbolName = isSecure ? "eye.slash" : "eye"
+        let config = UIImage.SymbolConfiguration(pointSize: 14, weight: .medium)
+        visibilityButton.setImage(UIImage(systemName: symbolName, withConfiguration: config), for: .normal)
     }
 }

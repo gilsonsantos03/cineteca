@@ -9,7 +9,7 @@ final class WeeklyDigestView: UIView {
         let label = UILabel()
         label.text = Strings.HomeScene.WeeklyDigest.title
         label.font = .systemFont(ofSize: 15, weight: .semibold)
-        label.textColor = .white
+        label.textColor = .textPrimary
         return label
     }()
 

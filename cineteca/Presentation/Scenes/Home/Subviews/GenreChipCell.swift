@@ -4,6 +4,8 @@ import Cartography
 final class GenreChipCell: UICollectionViewCell {
     static let reuseId = "GenreChipCell"
 
+    private var isSelectedChip = false
+
     // MARK: - UI Components
 
     private lazy var titleLabel: UILabel = {
@@ -50,15 +52,26 @@ final class GenreChipCell: UICollectionViewCell {
     // MARK: - Configure
 
     func configure(title: String, isSelected: Bool) {
+        isSelectedChip = isSelected
         titleLabel.text = title
+        applyStyle(isSelected: isSelected)
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        guard traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) else { return }
+        applyStyle(isSelected: isSelectedChip)
+    }
+
+    private func applyStyle(isSelected: Bool) {
         if isSelected {
             contentView.backgroundColor = .accentYellow
             contentView.layer.borderColor = UIColor.accentYellow.cgColor
             titleLabel.textColor = .black
         } else {
             contentView.backgroundColor = .clear
-            contentView.layer.borderColor = UIColor.white.withAlphaComponent(0.3).cgColor
-            titleLabel.textColor = .white
+            contentView.layer.borderColor = UIColor.borderSubtle.resolvedColor(with: traitCollection).cgColor
+            titleLabel.textColor = .textPrimary
         }
     }
 }

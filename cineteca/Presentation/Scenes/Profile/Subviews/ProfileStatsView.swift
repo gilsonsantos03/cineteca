@@ -69,7 +69,7 @@ private final class ProfileStatCardView: UIView {
     private lazy var valueLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 22, weight: .bold)
-        label.textColor = .white
+        label.textColor = .textPrimary
         label.textAlignment = .center
         return label
     }()

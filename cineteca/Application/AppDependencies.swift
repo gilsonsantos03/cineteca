@@ -5,18 +5,24 @@ final class AppDependencies {
     let movieRepository: MovieRepositoryProtocol
     let genreRepository: GenreRepositoryProtocol
     let userRepository: UserRepositoryProtocol
+    let appearanceRepository: AppearanceRepositoryProtocol
+    let languageRepository: LanguageRepositoryProtocol
 
     private let coreDataStack: CoreDataStack
 
     init() {
-        let networkService = AppDependencies.makeTMDBNetworkService()
+        self.languageRepository = LanguageRepository()
+        let networkService = AppDependencies.makeTMDBNetworkService(languageRepository: languageRepository)
         self.coreDataStack = CoreDataStack()
         self.genreRepository = GenreRepository(networkService: networkService)
         self.movieRepository = MovieRepository(networkService: networkService)
         self.userRepository = UserRepository(coreDataStack: coreDataStack)
+        self.appearanceRepository = AppearanceRepository()
     }
 
-    private static func makeTMDBNetworkService() -> NetworkServiceProtocol {
+    private static func makeTMDBNetworkService(
+        languageRepository: LanguageRepositoryProtocol
+    ) -> NetworkServiceProtocol {
         guard let token = APIKeys.apiKey, !token.isEmpty else {
             fatalError("Missing TMDB token. Add API_KEY to Keys.plist.")
         }
@@ -33,7 +39,10 @@ final class AppDependencies {
             ]
         )
 
-        return NetworkService(configuration: configuration)
+        return NetworkService(
+            configuration: configuration,
+            localeProvider: LocaleProvider(languageRepository: languageRepository)
+        )
     }
 }
 
@@ -43,6 +52,8 @@ extension AppDependencies {
             repository: movieRepository,
             genreRepository: genreRepository,
             userRepository: userRepository,
+            appearanceRepository: appearanceRepository,
+            languageRepository: languageRepository,
             movieDetailsBuilder: self
         )
     }

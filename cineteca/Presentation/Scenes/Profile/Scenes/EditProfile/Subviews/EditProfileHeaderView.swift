@@ -17,8 +17,8 @@ final class EditProfileHeaderView: UIView {
         let button = UIButton(type: .system)
         let config = UIImage.SymbolConfiguration(pointSize: 14, weight: .semibold)
         button.setImage(UIImage(systemName: "chevron.left", withConfiguration: config), for: .normal)
-        button.tintColor = .white
-        button.backgroundColor = UIColor.white.withAlphaComponent(0.12)
+        button.tintColor = .textPrimary
+        button.backgroundColor = .surfaceOverlay
         button.layer.cornerRadius = 18
         button.addTarget(self, action: #selector(didTapBack), for: .touchUpInside)
         return button
@@ -28,7 +28,7 @@ final class EditProfileHeaderView: UIView {
         let label = UILabel()
         label.text = Strings.EditProfileScene.title
         label.font = .systemFont(ofSize: 17, weight: .semibold)
-        label.textColor = .white
+        label.textColor = .textPrimary
         label.textAlignment = .center
         return label
     }()

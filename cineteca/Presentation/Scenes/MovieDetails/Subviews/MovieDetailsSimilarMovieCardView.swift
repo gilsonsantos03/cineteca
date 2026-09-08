@@ -27,7 +27,7 @@ final class MovieDetailsSimilarMovieCardView: UIButton {
     private lazy var movieTitleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 11, weight: .medium)
-        label.textColor = .white
+        label.textColor = .textPrimary
         label.numberOfLines = 2
         label.isUserInteractionEnabled = false
         return label
