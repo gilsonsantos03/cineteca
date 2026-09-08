@@ -83,3 +83,11 @@
 "ProfileScene.Settings.Appearance" = "Aparência";
 "ProfileScene.Settings.Language" = "Idioma";
 "ProfileScene.Settings.Privacy" = "Privacidade";
+
+"EditProfileScene.Title" = "Editar perfil";
+"EditProfileScene.ChangePhotoHint" = "Toque na câmera para alterar a foto";
+"EditProfileScene.SaveChanges" = "Salvar alterações";
+"EditProfileScene.Cancel" = "Cancelar";
+"EditProfileScene.Field.Username" = "NOME DE USUÁRIO";
+"EditProfileScene.Field.DisplayName" = "NOME DE EXIBIÇÃO";
+"EditProfileScene.Field.Bio" = "BIO";

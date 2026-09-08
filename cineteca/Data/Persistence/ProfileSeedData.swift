@@ -13,10 +13,15 @@ enum ProfileSeedData {
     static func seedIfNeeded(in context: NSManagedObjectContext) throws {
         let request = UserEntity.fetchRequest()
         request.fetchLimit = 1
-        if try context.count(for: request) > 0 { return }
+        if try context.count(for: request) > 0 {
+            try backfillProfileFieldsIfNeeded(in: context)
+            return
+        }
 
         let user = UserEntity(context: context)
         user.username = "@mariadot"
+        user.displayName = "Maria Dot"
+        user.bio = "Film lover. 127 films logged."
         user.memberSince = makeMemberSinceDate()
         user.avatarImageName = "profile-avatar"
         user.filmsCount = 127
@@ -62,6 +67,26 @@ enum ProfileSeedData {
         }
 
         try context.save()
+    }
+
+    private static func backfillProfileFieldsIfNeeded(in context: NSManagedObjectContext) throws {
+        let request = UserEntity.fetchRequest()
+        request.fetchLimit = 1
+        guard let user = try context.fetch(request).first else { return }
+
+        var needsSave = false
+        if user.displayName?.isEmpty != false {
+            user.displayName = "Maria Dot"
+            needsSave = true
+        }
+        if user.bio?.isEmpty != false {
+            user.bio = "Film lover. 127 films logged."
+            needsSave = true
+        }
+
+        if needsSave {
+            try context.save()
+        }
     }
 
     private static func makeMemberSinceDate() -> Date {

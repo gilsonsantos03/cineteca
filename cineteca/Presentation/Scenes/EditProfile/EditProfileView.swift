@@ -1,19 +1,22 @@
 import UIKit
 import Cartography
 
-protocol ProfileViewDelegate: AnyObject {
-    func didTapEdit()
+protocol EditProfileViewDelegate: AnyObject {
+    func didTapBack()
+    func didTapCancel()
+    func didTapSave(displayName: String, bio: String)
+    func didTapChangePhoto()
 }
 
-final class ProfileView: UIView {
+final class EditProfileView: UIView {
 
     // MARK: - Properties
 
-    weak var delegate: ProfileViewDelegate?
+    weak var delegate: EditProfileViewDelegate?
 
     // MARK: - UI Components
 
-    private lazy var contentView = ProfileContentView()
+    private lazy var contentView = EditProfileContentView()
 
     private lazy var loadingIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .large)
@@ -70,7 +73,7 @@ final class ProfileView: UIView {
         loadingIndicator.startAnimating()
     }
 
-    func showContent(content: ProfileModels.FetchProfile.ViewModel.Content) {
+    func showContent(content: EditProfileModels.FetchProfile.ViewModel.Content) {
         loadingIndicator.stopAnimating()
         contentView.configure(content: content)
         contentView.isHidden = false
@@ -80,12 +83,32 @@ final class ProfileView: UIView {
         loadingIndicator.stopAnimating()
         contentView.isHidden = true
     }
+
+    func showSaveError() {
+        contentView.setSaving(false)
+    }
+
+    func setSaving(_ isSaving: Bool) {
+        contentView.setSaving(isSaving)
+    }
 }
 
-// MARK: - ProfileContentViewDelegate
+// MARK: - EditProfileContentViewDelegate
 
-extension ProfileView: ProfileContentViewDelegate {
-    func didTapEdit() {
-        delegate?.didTapEdit()
+extension EditProfileView: EditProfileContentViewDelegate {
+    func didTapBack() {
+        delegate?.didTapBack()
+    }
+
+    func didTapCancel() {
+        delegate?.didTapCancel()
+    }
+
+    func didTapSave(displayName: String, bio: String) {
+        delegate?.didTapSave(displayName: displayName, bio: bio)
+    }
+
+    func didTapChangePhoto() {
+        delegate?.didTapChangePhoto()
     }
 }

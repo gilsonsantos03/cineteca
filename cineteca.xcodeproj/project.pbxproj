@@ -119,6 +119,17 @@
 		PP000001000000000000014C000000000000001A /* ProfileReviewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000014C /* ProfileReviewCardView.swift */; };
 		PP000001000000000000015C000000000000001A /* ProfileRecentReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000015C /* ProfileRecentReviewsView.swift */; };
 		PP000001000000000000016C000000000000001A /* ProfileSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000016C /* ProfileSettingsView.swift */; };
+		EP000001000000000000009B000000000000001A /* EditProfileModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = EP000001000000000000009B /* EditProfileModels.swift */; };
+		EP00000100000000000000AB000000000000001A /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EP00000100000000000000AB /* EditProfileViewController.swift */; };
+		EP00000100000000000000BB000000000000001A /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EP00000100000000000000BB /* EditProfileView.swift */; };
+		EP00000100000000000000CB000000000000001A /* EditProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EP00000100000000000000CB /* EditProfileInteractor.swift */; };
+		EP00000100000000000000DB000000000000001A /* EditProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EP00000100000000000000DB /* EditProfilePresenter.swift */; };
+		EP00000100000000000000EB000000000000001A /* EditProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EP00000100000000000000EB /* EditProfileRouter.swift */; };
+		EP00000100000000000000FB000000000000001A /* EditProfileConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EP00000100000000000000FB /* EditProfileConfigurator.swift */; };
+		EP000001000000000000010C000000000000001A /* EditProfileContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EP000001000000000000010C /* EditProfileContentView.swift */; };
+		EP000001000000000000011C000000000000001A /* EditProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EP000001000000000000011C /* EditProfileHeaderView.swift */; };
+		EP000001000000000000012C000000000000001A /* EditProfileAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EP000001000000000000012C /* EditProfileAvatarView.swift */; };
+		EP000001000000000000013C000000000000001A /* EditProfileFormFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EP000001000000000000013C /* EditProfileFormFieldView.swift */; };
 		PP000001000000000000017A /* Cineteca.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000017B /* Cineteca.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -237,6 +248,17 @@
 		PP000001000000000000014C /* ProfileReviewCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileReviewCardView.swift; sourceTree = "<group>"; };
 		PP000001000000000000015C /* ProfileRecentReviewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRecentReviewsView.swift; sourceTree = "<group>"; };
 		PP000001000000000000016C /* ProfileSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsView.swift; sourceTree = "<group>"; };
+		EP000001000000000000009B /* EditProfileModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileModels.swift; sourceTree = "<group>"; };
+		EP00000100000000000000AB /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		EP00000100000000000000BB /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		EP00000100000000000000CB /* EditProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileInteractor.swift; sourceTree = "<group>"; };
+		EP00000100000000000000DB /* EditProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfilePresenter.swift; sourceTree = "<group>"; };
+		EP00000100000000000000EB /* EditProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileRouter.swift; sourceTree = "<group>"; };
+		EP00000100000000000000FB /* EditProfileConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileConfigurator.swift; sourceTree = "<group>"; };
+		EP000001000000000000010C /* EditProfileContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileContentView.swift; sourceTree = "<group>"; };
+		EP000001000000000000011C /* EditProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileHeaderView.swift; sourceTree = "<group>"; };
+		EP000001000000000000012C /* EditProfileAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileAvatarView.swift; sourceTree = "<group>"; };
+		EP000001000000000000013C /* EditProfileFormFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileFormFieldView.swift; sourceTree = "<group>"; };
 		PP000001000000000000018B /* Cineteca.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Cineteca.xcdatamodel; sourceTree = "<group>"; };
 		PP000001000000000000017B /* Cineteca.xcdatamodeld */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodeld; path = Cineteca.xcdatamodeld; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -267,6 +289,7 @@
 			children = (
 				442CB05D2FFC81ED004FCC82 /* Home */,
 				PP000001000000000000012G /* Profile */,
+				EP000001000000000000001G /* EditProfile */,
 				AA10000100000000000000CA /* MovieDetails */,
 				SS00000100000000000000CA /* Search */,
 				CC000001000000000000008B /* TabBar */,
@@ -599,6 +622,32 @@
 			path = Subviews;
 			sourceTree = "<group>";
 		};
+		EP000001000000000000001G /* EditProfile */ = {
+			isa = PBXGroup;
+			children = (
+				EP000001000000000000002G /* Subviews */,
+				EP000001000000000000009B /* EditProfileModels.swift */,
+				EP00000100000000000000AB /* EditProfileViewController.swift */,
+				EP00000100000000000000BB /* EditProfileView.swift */,
+				EP00000100000000000000CB /* EditProfileInteractor.swift */,
+				EP00000100000000000000DB /* EditProfilePresenter.swift */,
+				EP00000100000000000000EB /* EditProfileRouter.swift */,
+				EP00000100000000000000FB /* EditProfileConfigurator.swift */,
+			);
+			path = EditProfile;
+			sourceTree = "<group>";
+		};
+		EP000001000000000000002G /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				EP000001000000000000010C /* EditProfileContentView.swift */,
+				EP000001000000000000011C /* EditProfileHeaderView.swift */,
+				EP000001000000000000012C /* EditProfileAvatarView.swift */,
+				EP000001000000000000013C /* EditProfileFormFieldView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -782,6 +831,17 @@
 				PP000001000000000000014C000000000000001A /* ProfileReviewCardView.swift in Sources */,
 				PP000001000000000000015C000000000000001A /* ProfileRecentReviewsView.swift in Sources */,
 				PP000001000000000000016C000000000000001A /* ProfileSettingsView.swift in Sources */,
+				EP000001000000000000009B000000000000001A /* EditProfileModels.swift in Sources */,
+				EP00000100000000000000AB000000000000001A /* EditProfileViewController.swift in Sources */,
+				EP00000100000000000000BB000000000000001A /* EditProfileView.swift in Sources */,
+				EP00000100000000000000CB000000000000001A /* EditProfileInteractor.swift in Sources */,
+				EP00000100000000000000DB000000000000001A /* EditProfilePresenter.swift in Sources */,
+				EP00000100000000000000EB000000000000001A /* EditProfileRouter.swift in Sources */,
+				EP00000100000000000000FB000000000000001A /* EditProfileConfigurator.swift in Sources */,
+				EP000001000000000000010C000000000000001A /* EditProfileContentView.swift in Sources */,
+				EP000001000000000000011C000000000000001A /* EditProfileHeaderView.swift in Sources */,
+				EP000001000000000000012C000000000000001A /* EditProfileAvatarView.swift in Sources */,
+				EP000001000000000000013C000000000000001A /* EditProfileFormFieldView.swift in Sources */,
 				PP000001000000000000017A /* Cineteca.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

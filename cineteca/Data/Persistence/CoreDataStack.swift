@@ -11,9 +11,15 @@ final class CoreDataStack {
 
     init(inMemory: Bool = false) {
         persistentContainer = NSPersistentContainer(name: Self.modelName)
-        if inMemory {
-            persistentContainer.persistentStoreDescriptions.first?.url = URL(fileURLWithPath: "/dev/null")
+
+        if let description = persistentContainer.persistentStoreDescriptions.first {
+            description.setOption(true as NSNumber, forKey: NSMigratePersistentStoresAutomaticallyOption)
+            description.setOption(true as NSNumber, forKey: NSInferMappingModelAutomaticallyOption)
+            if inMemory {
+                description.url = URL(fileURLWithPath: "/dev/null")
+            }
         }
+
         persistentContainer.loadPersistentStores { _, error in
             if let error {
                 fatalError("Core Data store failed to load: \(error.localizedDescription)")

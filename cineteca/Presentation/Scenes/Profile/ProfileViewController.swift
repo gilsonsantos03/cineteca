@@ -3,10 +3,16 @@ import UIKit
 final class ProfileViewController: UIViewController {
     private let customView: ProfileView
     private let interactor: ProfileBusinessLogic
+    private let router: ProfileRoutingLogic
 
-    init(customView: ProfileView, interactor: ProfileBusinessLogic) {
+    init(
+        customView: ProfileView,
+        interactor: ProfileBusinessLogic,
+        router: ProfileRoutingLogic
+    ) {
         self.customView = customView
         self.interactor = interactor
+        self.router = router
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -19,6 +25,11 @@ final class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: false)
+        customView.delegate = self
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         interactor.fetchProfile(request: .init())
     }
 }
@@ -35,5 +46,11 @@ extension ProfileViewController: ProfileDisplayLogic {
 
     func displayLoading() {
         customView.showLoading()
+    }
+}
+
+extension ProfileViewController: ProfileViewDelegate {
+    func didTapEdit() {
+        router.routeToEditProfile()
     }
 }

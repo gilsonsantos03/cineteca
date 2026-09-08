@@ -1,7 +1,15 @@
 import UIKit
 import Cartography
 
+protocol ProfileHeaderViewDelegate: AnyObject {
+    func didTapEdit()
+}
+
 final class ProfileHeaderView: UIView {
+
+    // MARK: - Properties
+
+    weak var delegate: ProfileHeaderViewDelegate?
 
     // MARK: - UI Components
 
@@ -12,7 +20,7 @@ final class ProfileHeaderView: UIView {
         button.tintColor = .white
         button.backgroundColor = UIColor.white.withAlphaComponent(0.12)
         button.layer.cornerRadius = 18
-        button.isUserInteractionEnabled = false
+        button.addTarget(self, action: #selector(didTapEdit), for: .touchUpInside)
         return button
     }()
 
@@ -134,5 +142,11 @@ final class ProfileHeaderView: UIView {
         } else {
             avatarImageView.image = UIImage(systemName: "person.fill")
         }
+    }
+
+    // MARK: - Actions
+
+    @objc private func didTapEdit() {
+        delegate?.didTapEdit()
     }
 }

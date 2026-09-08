@@ -1,15 +1,15 @@
 import UIKit
 
-final class ProfileConfigurator {
+final class EditProfileConfigurator {
     static func resolve(userRepository: UserRepositoryProtocol) -> UIViewController {
-        let presenter = ProfilePresenter()
-        let interactor = ProfileInteractor(
+        let presenter = EditProfilePresenter()
+        let interactor = EditProfileInteractor(
             presenter: presenter,
             userRepository: userRepository
         )
-        let router = ProfileRouter(userRepository: userRepository)
-        let view = ProfileView()
-        let viewController = ProfileViewController(
+        let router = EditProfileRouter()
+        let view = EditProfileView()
+        let viewController = EditProfileViewController(
             customView: view,
             interactor: interactor,
             router: router

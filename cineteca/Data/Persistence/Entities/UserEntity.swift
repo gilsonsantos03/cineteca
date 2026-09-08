@@ -3,6 +3,8 @@ import CoreData
 @objc(UserEntity)
 final class UserEntity: NSManagedObject {
     @NSManaged var username: String
+    @NSManaged var displayName: String?
+    @NSManaged var bio: String?
     @NSManaged var memberSince: Date
     @NSManaged var avatarImageName: String?
     @NSManaged var filmsCount: Int32
@@ -36,6 +38,8 @@ extension UserEntity {
 
         return User(
             username: username,
+            displayName: displayName ?? "",
+            bio: bio ?? "",
             memberSince: memberSince,
             avatarImageName: avatarImageName,
             favoriteFilm: favoriteFilm,

@@ -108,6 +108,19 @@ enum Strings {
         }
     }
 
+    enum EditProfileScene {
+        static let title = NSLocalizedString("EditProfileScene.Title", comment: "")
+        static let changePhotoHint = NSLocalizedString("EditProfileScene.ChangePhotoHint", comment: "")
+        static let saveChanges = NSLocalizedString("EditProfileScene.SaveChanges", comment: "")
+        static let cancel = NSLocalizedString("EditProfileScene.Cancel", comment: "")
+
+        enum Field {
+            static let username = NSLocalizedString("EditProfileScene.Field.Username", comment: "")
+            static let displayName = NSLocalizedString("EditProfileScene.Field.DisplayName", comment: "")
+            static let bio = NSLocalizedString("EditProfileScene.Field.Bio", comment: "")
+        }
+    }
+
     enum MovieDetailsScene {
         enum Action {
             static let rate = NSLocalizedString("MovieDetailsScene.Action.Rate.Text", comment: "")

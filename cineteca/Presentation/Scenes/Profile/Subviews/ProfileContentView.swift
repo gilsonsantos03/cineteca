@@ -1,7 +1,15 @@
 import UIKit
 import Cartography
 
+protocol ProfileContentViewDelegate: AnyObject {
+    func didTapEdit()
+}
+
 final class ProfileContentView: UIView {
+
+    // MARK: - Properties
+
+    weak var delegate: ProfileContentViewDelegate?
 
     // MARK: - UI Components
 
@@ -48,6 +56,7 @@ final class ProfileContentView: UIView {
 
     private func setup() {
         backgroundColor = .appBackground
+        headerView.delegate = self
         setupSubviews()
         setupConstraints()
     }
@@ -111,5 +120,13 @@ final class ProfileContentView: UIView {
             spacer.height == height
         }
         return view
+    }
+}
+
+// MARK: - ProfileHeaderViewDelegate
+
+extension ProfileContentView: ProfileHeaderViewDelegate {
+    func didTapEdit() {
+        delegate?.didTapEdit()
     }
 }

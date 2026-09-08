@@ -85,10 +85,11 @@ final class MovieDetailsHeaderView: UIView {
 
     private lazy var backButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        let config = UIImage.SymbolConfiguration(pointSize: 14, weight: .semibold)
+        button.setImage(UIImage(systemName: "chevron.left", withConfiguration: config), for: .normal)
         button.tintColor = .white
-        button.backgroundColor = UIColor.black.withAlphaComponent(0.35)
-        button.layer.cornerRadius = 20
+        button.backgroundColor = UIColor.white.withAlphaComponent(0.12)
+        button.layer.cornerRadius = 18
         button.addTarget(self, action: #selector(didTapBack), for: .touchUpInside)
         return button
     }()
@@ -145,10 +146,10 @@ final class MovieDetailsHeaderView: UIView {
 
     private func constrainBackButton() {
         constrain(backButton, self) { button, superview in
-            button.top == superview.top + 54
+            button.top == superview.safeAreaLayoutGuide.top + 8
             button.left == superview.left + 20
-            button.width == 40
-            button.height == 40
+            button.width == 36
+            button.height == 36
         }
     }
 

@@ -45,7 +45,7 @@ extension ProfilePresenter: ProfilePresentationLogic {
 
         return ProfileModels.FetchProfile.ViewModel.Content(
             header: ProfileHeaderViewModel(
-                username: user.username,
+                username: user.displayName.isEmpty ? user.username : user.displayName,
                 memberSinceText: memberSinceText,
                 avatarImageName: user.avatarImageName
             ),
