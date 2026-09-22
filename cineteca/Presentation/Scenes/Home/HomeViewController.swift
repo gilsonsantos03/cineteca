@@ -1,5 +1,11 @@
 import UIKit
 
+protocol HomeDisplayLogic: AnyObject {
+    func displayFetchContent(viewModel: HomeModels.FetchContent.ViewModel)
+    func displayLoading()
+    func displayWatchTrailer(viewModel: HomeModels.WatchTrailer.ViewModel)
+}
+
 final class HomeViewController: UIViewController {
     private let customView: HomeView
     private let interactor: HomeBusinessLogic

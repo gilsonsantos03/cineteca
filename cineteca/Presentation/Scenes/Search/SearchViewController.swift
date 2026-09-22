@@ -1,5 +1,11 @@
 import UIKit
 
+protocol SearchDisplayLogic: AnyObject {
+    func displayMovies(viewModel: SearchModels.Movies.ViewModel)
+    func displayLoading(viewModel: SearchModels.Loading.ViewModel)
+    func displayFilters(viewModel: SearchModels.ShowFilters.ViewModel)
+}
+
 final class SearchViewController: UIViewController {
     private let customView: SearchView
     private let interactor: SearchBusinessLogic

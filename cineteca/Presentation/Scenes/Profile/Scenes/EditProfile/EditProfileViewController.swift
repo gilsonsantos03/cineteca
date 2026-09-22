@@ -1,5 +1,11 @@
 import UIKit
 
+protocol EditProfileDisplayLogic: AnyObject {
+    func displayFetchProfile(viewModel: EditProfileModels.FetchProfile.ViewModel)
+    func displaySaveProfile(viewModel: EditProfileModels.SaveProfile.ViewModel)
+    func displayLoading()
+}
+
 final class EditProfileViewController: UIViewController {
     private let customView: EditProfileView
     private let interactor: EditProfileBusinessLogic

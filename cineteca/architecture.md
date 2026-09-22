@@ -48,6 +48,33 @@ The default choice is **repository only** — no use case, no data source. Add l
 | Domain (optional) | Entities, business rules, repository interfaces, optional use cases | Domain entities/contracts and repository interfaces | UIKit/SwiftUI, API/DB frameworks |
 | Data | Repository implementations, optional data sources, DTO mapping, persistence/network | Infra + utils + interface contracts | UI concerns, direct view logic |
 
+### Read models and projections
+
+Not every domain struct is an entity. An entity has a stable identity, lifecycle,
+and behavior or invariants that must be preserved. A query result or screen
+projection should not be persisted as an entity merely because it has a
+dedicated struct.
+
+`YearInFilmStats` is a read model (an immutable aggregate/projection), not a
+Core Data entity. It represents the result needed by the Stats scene after film
+history has been aggregated by year. It has no independent identity, lifecycle,
+or persistence requirements.
+
+The repository may initially return mocked data and later build the same
+read model from watch history, movies, reviews, and credits. If that
+aggregation becomes complex or combines multiple repositories, move the
+orchestration into a `YearInFilmStatsUseCase`; keep the read model contract
+unchanged so the Presentation layer does not depend on the data source.
+
+Domain read models must contain domain data only. Localization, UIKit colors,
+layout choices, and other visual concerns belong to the Presenter or View.
+
+Application preferences that are shared by repositories and Presentation belong
+in `Domain/Preferences`, not in `Domain/Models`. `AppTheme` and `AppLanguage`
+are value-based configuration types, not entities. The `Models` folder is
+reserved for business entities and domain read models; `Preferences` makes the
+configuration role explicit.
+
 ## Presentation Patterns
 
 ### UIKit: VIP
@@ -58,6 +85,17 @@ Flow: `ViewController -> Interactor -> Presenter -> ViewController`.
 - `Presenter` is optional for trivial mappings; use when formatting logic is non-trivial.
 - `Router` is optional; simple scenes can navigate directly with RouterService contracts.
 - Keep detached `View` objects — avoid bloated `UIViewController` classes.
+
+VIP scene protocols follow the responsibility of the receiving component:
+
+- `*BusinessLogic` is declared with and implemented by the Interactor.
+- `*PresentationLogic` is declared with and implemented by the Presenter.
+- `*DisplayLogic` is declared in the ViewController file and implemented by the ViewController.
+- `*RoutingLogic` is declared with and implemented by the Router.
+
+The Presenter holds a weak reference to `*DisplayLogic`, but does not own the
+display protocol. This keeps the ViewController's input contract beside the
+component that receives and renders its ViewModels.
 
 ### SwiftUI: MVVM
 

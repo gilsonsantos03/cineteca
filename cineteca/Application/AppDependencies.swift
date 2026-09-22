@@ -5,6 +5,7 @@ final class AppDependencies {
     let movieRepository: MovieRepositoryProtocol
     let genreRepository: GenreRepositoryProtocol
     let userRepository: UserRepositoryProtocol
+    let statsRepository: StatsRepositoryProtocol
     let appearanceRepository: AppearanceRepositoryProtocol
     let languageRepository: LanguageRepositoryProtocol
 
@@ -17,6 +18,7 @@ final class AppDependencies {
         self.genreRepository = GenreRepository(networkService: networkService)
         self.movieRepository = MovieRepository(networkService: networkService)
         self.userRepository = UserRepository(coreDataStack: coreDataStack)
+        self.statsRepository = StatsRepository()
         self.appearanceRepository = AppearanceRepository()
     }
 
@@ -52,6 +54,7 @@ extension AppDependencies {
             repository: movieRepository,
             genreRepository: genreRepository,
             userRepository: userRepository,
+            statsRepository: statsRepository,
             appearanceRepository: appearanceRepository,
             languageRepository: languageRepository,
             movieDetailsBuilder: self

@@ -1,5 +1,11 @@
 import UIKit
 
+protocol LanguageDisplayLogic: AnyObject {
+    func displayFetchLanguage(viewModel: LanguageModels.FetchLanguage.ViewModel)
+    func displayPreviewLanguage(viewModel: LanguageModels.PreviewLanguage.ViewModel)
+    func displayApplyLanguage(viewModel: LanguageModels.ApplyLanguage.ViewModel)
+}
+
 final class LanguageViewController: UIViewController {
     private let customView: LanguageView
     private let interactor: LanguageBusinessLogic

@@ -1,5 +1,10 @@
 import UIKit
 
+protocol AccountDisplayLogic: AnyObject {
+    func displayFetchAccount(viewModel: AccountModels.FetchAccount.ViewModel)
+    func displayLoading()
+}
+
 final class AccountViewController: UIViewController {
     private let customView: AccountView
     private let interactor: AccountBusinessLogic

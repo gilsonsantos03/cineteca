@@ -27,6 +27,19 @@
 "TabBar.Stats.Title" = "Stats";
 "TabBar.Profile.Title" = "Perfil";
 
+"StatsScene.Title" = "Seu ano em filmes";
+"StatsScene.FilmsWatched.Format" = "%d filmes assistidos";
+"StatsScene.GenreDistribution.Title" = "Distribuição por gênero";
+"StatsScene.Genre.Drama" = "Drama";
+"StatsScene.Genre.SciFi" = "Sci-Fi";
+"StatsScene.Genre.Thriller" = "Thriller";
+"StatsScene.Genre.Comedy" = "Comédia";
+"StatsScene.Genre.Other" = "Outros";
+"StatsScene.TopDirector.Title" = "Diretor em destaque";
+"StatsScene.TopActor.Title" = "Ator em destaque";
+"StatsScene.MonthlyActivity.Title" = "Atividade mensal";
+"StatsScene.MonthlyActivity.Subtitle" = "Filmes assistidos por mês";
+
 "SearchScene.SearchBar.Placeholder" = "Filmes, diretores, atores...";
 "SearchScene.Section.Suggested" = "Sugeridos para você";
 "SearchScene.Section.Results" = "Resultados";

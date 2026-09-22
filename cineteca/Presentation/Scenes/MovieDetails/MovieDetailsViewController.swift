@@ -1,5 +1,12 @@
 import UIKit
 
+protocol MovieDetailsDisplayLogic: AnyObject {
+    func displayLoading()
+    func displayDetails(viewModel: MovieDetailsModels.FetchDetails.ViewModel)
+    func displayError(viewModel: MovieDetailsModels.ErrorState.ViewModel)
+    func displayWatchTrailer(viewModel: MovieDetailsModels.WatchTrailer.ViewModel)
+}
+
 final class MovieDetailsViewController: UIViewController {
     private let movieId: Int
     private let customView: MovieDetailsView

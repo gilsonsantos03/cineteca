@@ -1,5 +1,11 @@
 import UIKit
 
+protocol AppearanceDisplayLogic: AnyObject {
+    func displayFetchAppearance(viewModel: AppearanceModels.FetchAppearance.ViewModel)
+    func displayPreviewTheme(viewModel: AppearanceModels.PreviewTheme.ViewModel)
+    func displayApplyAppearance(viewModel: AppearanceModels.ApplyAppearance.ViewModel)
+}
+
 final class AppearanceViewController: UIViewController {
     private let customView: AppearanceView
     private let interactor: AppearanceBusinessLogic

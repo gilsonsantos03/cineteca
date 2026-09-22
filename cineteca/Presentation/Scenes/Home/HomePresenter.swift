@@ -6,12 +6,6 @@ protocol HomePresentationLogic {
     func presentWatchTrailer(response: HomeModels.WatchTrailer.Response)
 }
 
-protocol HomeDisplayLogic: AnyObject {
-    func displayFetchContent(viewModel: HomeModels.FetchContent.ViewModel)
-    func displayLoading()
-    func displayWatchTrailer(viewModel: HomeModels.WatchTrailer.ViewModel)
-}
-
 final class HomePresenter {
     weak var view: HomeDisplayLogic?
 }

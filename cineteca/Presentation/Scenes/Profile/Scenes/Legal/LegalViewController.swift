@@ -1,5 +1,9 @@
 import UIKit
 
+protocol LegalDisplayLogic: AnyObject {
+    func displayFetchLegal(viewModel: LegalModels.FetchLegal.ViewModel)
+}
+
 final class LegalViewController: UIViewController {
     private let customView: LegalView
     private let interactor: LegalBusinessLogic

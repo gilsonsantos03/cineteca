@@ -5,11 +5,6 @@ protocol ProfilePresentationLogic {
     func presentLoading()
 }
 
-protocol ProfileDisplayLogic: AnyObject {
-    func displayFetchProfile(viewModel: ProfileModels.FetchProfile.ViewModel)
-    func displayLoading()
-}
-
 final class ProfilePresenter {
     weak var view: ProfileDisplayLogic?
 

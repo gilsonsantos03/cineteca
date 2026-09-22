@@ -1,5 +1,10 @@
 import UIKit
 
+protocol ProfileDisplayLogic: AnyObject {
+    func displayFetchProfile(viewModel: ProfileModels.FetchProfile.ViewModel)
+    func displayLoading()
+}
+
 final class ProfileViewController: UIViewController {
     private let customView: ProfileView
     private let interactor: ProfileBusinessLogic

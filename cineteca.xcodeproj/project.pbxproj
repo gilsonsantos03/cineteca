@@ -97,6 +97,22 @@
 		SS000001000000000000018A /* SearchYearRangeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SS000001000000000000018B /* SearchYearRangeSliderView.swift */; };
 		SS000001000000000000016A /* SearchFiltersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SS000001000000000000016B /* SearchFiltersView.swift */; };
 		SS000001000000000000017A /* SearchContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SS000001000000000000017B /* SearchContentView.swift */; };
+		ST000001000000000000001B000000000000001A /* YearInFilmStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000001B /* YearInFilmStats.swift */; };
+		ST000001000000000000002B000000000000001A /* StatsRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000002B /* StatsRepositoryProtocol.swift */; };
+		ST000001000000000000007B000000000000001A /* StatsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000007B /* StatsRepository.swift */; };
+		ST000001000000000000003B000000000000001A /* StatsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000003B /* StatsModels.swift */; };
+		ST000001000000000000004B000000000000001A /* StatsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000004B /* StatsInteractor.swift */; };
+		ST000001000000000000005B000000000000001A /* StatsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000005B /* StatsPresenter.swift */; };
+		ST000001000000000000007C000000000000001A /* StatsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000007C /* StatsConfigurator.swift */; };
+		ST000001000000000000008B000000000000001A /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000008B /* StatsView.swift */; };
+		ST000001000000000000009B000000000000001A /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000009B /* StatsViewController.swift */; };
+		ST000001000000000000010C000000000000001A /* StatsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000010C /* StatsContentView.swift */; };
+		ST000001000000000000011C000000000000001A /* StatsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000011C /* StatsHeaderView.swift */; };
+		ST000001000000000000012C000000000000001A /* StatsGenreDistributionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000012C /* StatsGenreDistributionView.swift */; };
+		ST000001000000000000013C000000000000001A /* StatsGenreRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000013C /* StatsGenreRowView.swift */; };
+		ST000001000000000000014C000000000000001A /* StatsTopPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000014C /* StatsTopPersonView.swift */; };
+		ST000001000000000000015C000000000000001A /* StatsMonthlyActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000015C /* StatsMonthlyActivityView.swift */; };
+		ST000001000000000000016C000000000000001A /* StatsMonthlyBarColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000016C /* StatsMonthlyBarColumnView.swift */; };
 		PP000001000000000000001B000000000000001A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000001B /* User.swift */; };
 		PP000001000000000000002B000000000000001A /* UserRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000002B /* UserRepositoryProtocol.swift */; };
 		PP000001000000000000003B000000000000001A /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000003B /* CoreDataStack.swift */; };
@@ -288,6 +304,22 @@
 		SS000001000000000000018B /* SearchYearRangeSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchYearRangeSliderView.swift; sourceTree = "<group>"; };
 		SS000001000000000000016B /* SearchFiltersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFiltersView.swift; sourceTree = "<group>"; };
 		SS000001000000000000017B /* SearchContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchContentView.swift; sourceTree = "<group>"; };
+		ST000001000000000000001B /* YearInFilmStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearInFilmStats.swift; sourceTree = "<group>"; };
+		ST000001000000000000002B /* StatsRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsRepositoryProtocol.swift; sourceTree = "<group>"; };
+		ST000001000000000000007B /* StatsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsRepository.swift; sourceTree = "<group>"; };
+		ST000001000000000000003B /* StatsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsModels.swift; sourceTree = "<group>"; };
+		ST000001000000000000004B /* StatsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsInteractor.swift; sourceTree = "<group>"; };
+		ST000001000000000000005B /* StatsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsPresenter.swift; sourceTree = "<group>"; };
+		ST000001000000000000007C /* StatsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsConfigurator.swift; sourceTree = "<group>"; };
+		ST000001000000000000008B /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
+		ST000001000000000000009B /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
+		ST000001000000000000010C /* StatsContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsContentView.swift; sourceTree = "<group>"; };
+		ST000001000000000000011C /* StatsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsHeaderView.swift; sourceTree = "<group>"; };
+		ST000001000000000000012C /* StatsGenreDistributionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGenreDistributionView.swift; sourceTree = "<group>"; };
+		ST000001000000000000013C /* StatsGenreRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGenreRowView.swift; sourceTree = "<group>"; };
+		ST000001000000000000014C /* StatsTopPersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTopPersonView.swift; sourceTree = "<group>"; };
+		ST000001000000000000015C /* StatsMonthlyActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsMonthlyActivityView.swift; sourceTree = "<group>"; };
+		ST000001000000000000016C /* StatsMonthlyBarColumnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsMonthlyBarColumnView.swift; sourceTree = "<group>"; };
 		PP000001000000000000001B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		PP000001000000000000002B /* UserRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryProtocol.swift; sourceTree = "<group>"; };
 		PP000001000000000000003B /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -415,6 +447,7 @@
 				PP000001000000000000012G /* Profile */,
 				AA10000100000000000000CA /* MovieDetails */,
 				SS00000100000000000000CA /* Search */,
+				ST000001000000000000001G /* Stats */,
 				CC000001000000000000008B /* TabBar */,
 			);
 			path = Scenes;
@@ -551,6 +584,7 @@
 			isa = PBXGroup;
 			children = (
 				BB000001000000000000001C /* Models */,
+				DD000001000000000000001C /* Preferences */,
 				CC00000100000000000000CB /* Repositories */,
 			);
 			path = Domain;
@@ -560,14 +594,22 @@
 			isa = PBXGroup;
 			children = (
 				PP000001000000000000001B /* User.swift */,
-				AT000001000000000000001B /* AppTheme.swift */,
-				AL000001000000000000001B /* AppLanguage.swift */,
+				ST000001000000000000001B /* YearInFilmStats.swift */,
 				BB000001000000000000001B /* Genre.swift */,
 				CC000001000000000000001B /* Movie.swift */,
 				AA100001000000000000001B /* MovieDetails.swift */,
 				SS000001000000000000001B /* SearchFilters.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		DD000001000000000000001C /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				AT000001000000000000001B /* AppTheme.swift */,
+				AL000001000000000000001B /* AppLanguage.swift */,
+			);
+			path = Preferences;
 			sourceTree = "<group>";
 		};
 		448D4C272FEA0A8C0008718A /* Data */ = {
@@ -633,6 +675,34 @@
 			);
 			sourceTree = "<group>";
 		};
+		ST000001000000000000001G /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				ST000001000000000000002G /* Subviews */,
+				ST000001000000000000003B /* StatsModels.swift */,
+				ST000001000000000000009B /* StatsViewController.swift */,
+				ST000001000000000000008B /* StatsView.swift */,
+				ST000001000000000000004B /* StatsInteractor.swift */,
+				ST000001000000000000005B /* StatsPresenter.swift */,
+				ST000001000000000000007C /* StatsConfigurator.swift */,
+			);
+			path = Stats;
+			sourceTree = "<group>";
+		};
+		ST000001000000000000002G /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				ST000001000000000000010C /* StatsContentView.swift */,
+				ST000001000000000000011C /* StatsHeaderView.swift */,
+				ST000001000000000000012C /* StatsGenreDistributionView.swift */,
+				ST000001000000000000013C /* StatsGenreRowView.swift */,
+				ST000001000000000000014C /* StatsTopPersonView.swift */,
+				ST000001000000000000015C /* StatsMonthlyActivityView.swift */,
+				ST000001000000000000016C /* StatsMonthlyBarColumnView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
 		CC000001000000000000008B /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -670,6 +740,7 @@
 				AR000001000000000000007B /* AppearanceRepository.swift */,
 				LR000001000000000000007B /* LanguageRepository.swift */,
 				CC00000100000000000000AB /* MovieRepository.swift */,
+				ST000001000000000000007B /* StatsRepository.swift */,
 				442CB0982FFC8405004FCC82 /* GenreRepository.swift */,
 			);
 			path = Repositories;
@@ -682,6 +753,7 @@
 				AR000001000000000000002B /* AppearanceRepositoryProtocol.swift */,
 				LR000001000000000000002B /* LanguageRepositoryProtocol.swift */,
 				DD000001000000000000002B /* MovieRepositoryProtocol.swift */,
+				ST000001000000000000002B /* StatsRepositoryProtocol.swift */,
 				442CB0962FFC8404004FCC82 /* GenreRepositoryProtocol.swift */,
 			);
 			path = Repositories;
@@ -1083,6 +1155,22 @@
 				SS000001000000000000018A /* SearchYearRangeSliderView.swift in Sources */,
 				SS000001000000000000016A /* SearchFiltersView.swift in Sources */,
 				SS000001000000000000017A /* SearchContentView.swift in Sources */,
+				ST000001000000000000001B000000000000001A /* YearInFilmStats.swift in Sources */,
+				ST000001000000000000002B000000000000001A /* StatsRepositoryProtocol.swift in Sources */,
+				ST000001000000000000007B000000000000001A /* StatsRepository.swift in Sources */,
+				ST000001000000000000003B000000000000001A /* StatsModels.swift in Sources */,
+				ST000001000000000000004B000000000000001A /* StatsInteractor.swift in Sources */,
+				ST000001000000000000005B000000000000001A /* StatsPresenter.swift in Sources */,
+				ST000001000000000000007C000000000000001A /* StatsConfigurator.swift in Sources */,
+				ST000001000000000000008B000000000000001A /* StatsView.swift in Sources */,
+				ST000001000000000000009B000000000000001A /* StatsViewController.swift in Sources */,
+				ST000001000000000000010C000000000000001A /* StatsContentView.swift in Sources */,
+				ST000001000000000000011C000000000000001A /* StatsHeaderView.swift in Sources */,
+				ST000001000000000000012C000000000000001A /* StatsGenreDistributionView.swift in Sources */,
+				ST000001000000000000013C000000000000001A /* StatsGenreRowView.swift in Sources */,
+				ST000001000000000000014C000000000000001A /* StatsTopPersonView.swift in Sources */,
+				ST000001000000000000015C000000000000001A /* StatsMonthlyActivityView.swift in Sources */,
+				ST000001000000000000016C000000000000001A /* StatsMonthlyBarColumnView.swift in Sources */,
 				PP000001000000000000001B000000000000001A /* User.swift in Sources */,
 				PP000001000000000000002B000000000000001A /* UserRepositoryProtocol.swift in Sources */,
 				PP000001000000000000003B000000000000001A /* CoreDataStack.swift in Sources */,

@@ -52,6 +52,36 @@ enum Strings {
         static var profile: String { Localization.string("TabBar.Profile.Title") }
     }
 
+    enum StatsScene {
+        static var title: String { Localization.string("StatsScene.Title") }
+        static var filmsWatchedFormat: String { Localization.string("StatsScene.FilmsWatched.Format") }
+
+        enum GenreDistribution {
+            static var title: String { Localization.string("StatsScene.GenreDistribution.Title") }
+        }
+
+        enum Genre {
+            static var drama: String { Localization.string("StatsScene.Genre.Drama") }
+            static var sciFi: String { Localization.string("StatsScene.Genre.SciFi") }
+            static var thriller: String { Localization.string("StatsScene.Genre.Thriller") }
+            static var comedy: String { Localization.string("StatsScene.Genre.Comedy") }
+            static var other: String { Localization.string("StatsScene.Genre.Other") }
+        }
+
+        enum TopDirector {
+            static var title: String { Localization.string("StatsScene.TopDirector.Title") }
+        }
+
+        enum TopActor {
+            static var title: String { Localization.string("StatsScene.TopActor.Title") }
+        }
+
+        enum MonthlyActivity {
+            static var title: String { Localization.string("StatsScene.MonthlyActivity.Title") }
+            static var subtitle: String { Localization.string("StatsScene.MonthlyActivity.Subtitle") }
+        }
+    }
+
     enum SearchScene {
         enum SearchBar {
             static var placeholder: String { Localization.string("SearchScene.SearchBar.Placeholder") }

@@ -4,10 +4,6 @@ protocol ChangePasswordPresentationLogic {
     func presentUpdatePassword(response: ChangePasswordModels.UpdatePassword.Response)
 }
 
-protocol ChangePasswordDisplayLogic: AnyObject {
-    func displayUpdatePassword(viewModel: ChangePasswordModels.UpdatePassword.ViewModel)
-}
-
 final class ChangePasswordPresenter {
     weak var view: ChangePasswordDisplayLogic?
 }

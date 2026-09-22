@@ -6,12 +6,6 @@ protocol EditProfilePresentationLogic {
     func presentLoading()
 }
 
-protocol EditProfileDisplayLogic: AnyObject {
-    func displayFetchProfile(viewModel: EditProfileModels.FetchProfile.ViewModel)
-    func displaySaveProfile(viewModel: EditProfileModels.SaveProfile.ViewModel)
-    func displayLoading()
-}
-
 final class EditProfilePresenter {
     weak var view: EditProfileDisplayLogic?
 }

@@ -1,5 +1,9 @@
 import UIKit
 
+protocol ChangePasswordDisplayLogic: AnyObject {
+    func displayUpdatePassword(viewModel: ChangePasswordModels.UpdatePassword.ViewModel)
+}
+
 final class ChangePasswordViewController: UIViewController {
     private let customView: ChangePasswordView
     private let interactor: ChangePasswordBusinessLogic

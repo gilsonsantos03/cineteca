@@ -4,10 +4,6 @@ protocol LegalPresentationLogic {
     func presentFetchLegal(response: LegalModels.FetchLegal.Response)
 }
 
-protocol LegalDisplayLogic: AnyObject {
-    func displayFetchLegal(viewModel: LegalModels.FetchLegal.ViewModel)
-}
-
 final class LegalPresenter {
     weak var view: LegalDisplayLogic?
 }

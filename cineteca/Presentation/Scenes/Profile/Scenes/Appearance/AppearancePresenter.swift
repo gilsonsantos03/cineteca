@@ -6,12 +6,6 @@ protocol AppearancePresentationLogic {
     func presentApplyAppearance(response: AppearanceModels.ApplyAppearance.Response)
 }
 
-protocol AppearanceDisplayLogic: AnyObject {
-    func displayFetchAppearance(viewModel: AppearanceModels.FetchAppearance.ViewModel)
-    func displayPreviewTheme(viewModel: AppearanceModels.PreviewTheme.ViewModel)
-    func displayApplyAppearance(viewModel: AppearanceModels.ApplyAppearance.ViewModel)
-}
-
 final class AppearancePresenter {
     weak var view: AppearanceDisplayLogic?
 }

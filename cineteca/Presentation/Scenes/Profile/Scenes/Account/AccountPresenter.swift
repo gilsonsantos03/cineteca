@@ -5,11 +5,6 @@ protocol AccountPresentationLogic {
     func presentLoading()
 }
 
-protocol AccountDisplayLogic: AnyObject {
-    func displayFetchAccount(viewModel: AccountModels.FetchAccount.ViewModel)
-    func displayLoading()
-}
-
 final class AccountPresenter {
     weak var view: AccountDisplayLogic?
 }

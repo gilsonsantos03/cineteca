@@ -6,12 +6,6 @@ protocol SearchPresentationLogic {
     func presentFilters(response: SearchModels.ShowFilters.Response)
 }
 
-protocol SearchDisplayLogic: AnyObject {
-    func displayMovies(viewModel: SearchModels.Movies.ViewModel)
-    func displayLoading(viewModel: SearchModels.Loading.ViewModel)
-    func displayFilters(viewModel: SearchModels.ShowFilters.ViewModel)
-}
-
 final class SearchPresenter {
     weak var view: SearchDisplayLogic?
 }

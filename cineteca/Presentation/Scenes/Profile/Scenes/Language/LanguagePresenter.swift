@@ -6,12 +6,6 @@ protocol LanguagePresentationLogic {
     func presentApplyLanguage(response: LanguageModels.ApplyLanguage.Response)
 }
 
-protocol LanguageDisplayLogic: AnyObject {
-    func displayFetchLanguage(viewModel: LanguageModels.FetchLanguage.ViewModel)
-    func displayPreviewLanguage(viewModel: LanguageModels.PreviewLanguage.ViewModel)
-    func displayApplyLanguage(viewModel: LanguageModels.ApplyLanguage.ViewModel)
-}
-
 final class LanguagePresenter {
     weak var view: LanguageDisplayLogic?
 }

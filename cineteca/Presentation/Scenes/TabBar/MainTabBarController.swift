@@ -4,6 +4,7 @@ final class MainTabBarController: UITabBarController {
     private let repository: MovieRepositoryProtocol
     private let genreRepository: GenreRepositoryProtocol
     private let userRepository: UserRepositoryProtocol
+    private let statsRepository: StatsRepositoryProtocol
     private let appearanceRepository: AppearanceRepositoryProtocol
     private let languageRepository: LanguageRepositoryProtocol
     private let movieDetailsBuilder: MovieDetailsBuilding
@@ -12,6 +13,7 @@ final class MainTabBarController: UITabBarController {
         repository: MovieRepositoryProtocol,
         genreRepository: GenreRepositoryProtocol,
         userRepository: UserRepositoryProtocol,
+        statsRepository: StatsRepositoryProtocol,
         appearanceRepository: AppearanceRepositoryProtocol,
         languageRepository: LanguageRepositoryProtocol,
         movieDetailsBuilder: MovieDetailsBuilding
@@ -19,6 +21,7 @@ final class MainTabBarController: UITabBarController {
         self.repository = repository
         self.genreRepository = genreRepository
         self.userRepository = userRepository
+        self.statsRepository = statsRepository
         self.appearanceRepository = appearanceRepository
         self.languageRepository = languageRepository
         self.movieDetailsBuilder = movieDetailsBuilder
@@ -94,7 +97,12 @@ final class MainTabBarController: UITabBarController {
         )
 
         let listsVC  = makePlaceholder(title: Strings.TabBar.lists,  icon: "bookmark")
-        let statsVC  = makePlaceholder(title: Strings.TabBar.stats,  icon: "chart.bar")
+        let statsVC = StatsConfigurator.resolve(statsRepository: statsRepository)
+        statsVC.tabBarItem = UITabBarItem(
+            title: Strings.TabBar.stats,
+            image: UIImage(systemName: "chart.bar"),
+            selectedImage: UIImage(systemName: "chart.bar.fill")
+        )
         let profileVC = ProfileConfigurator.resolve(
             userRepository: userRepository,
             appearanceRepository: appearanceRepository,
