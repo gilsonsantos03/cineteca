@@ -131,7 +131,7 @@
 		PP000001000000000000010C000000000000001A /* ProfileContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000010C /* ProfileContentView.swift */; };
 		PP000001000000000000011C000000000000001A /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000011C /* ProfileHeaderView.swift */; };
 		PP000001000000000000012C000000000000001A /* ProfileFavoriteFilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000012C /* ProfileFavoriteFilmView.swift */; };
-		PP000001000000000000013C000000000000001A /* ProfileStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000013C /* ProfileStatsView.swift */; };
+		PP000001000000000000013C000000000000001A /* StatCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000013C /* StatCardsView.swift */; };
 		PP000001000000000000014C000000000000001A /* ProfileReviewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000014C /* ProfileReviewCardView.swift */; };
 		PP000001000000000000015C000000000000001A /* ProfileRecentReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000015C /* ProfileRecentReviewsView.swift */; };
 		PP000001000000000000016C000000000000001A /* ProfileSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000016C /* ProfileSettingsView.swift */; };
@@ -338,7 +338,7 @@
 		PP000001000000000000010C /* ProfileContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileContentView.swift; sourceTree = "<group>"; };
 		PP000001000000000000011C /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		PP000001000000000000012C /* ProfileFavoriteFilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFavoriteFilmView.swift; sourceTree = "<group>"; };
-		PP000001000000000000013C /* ProfileStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStatsView.swift; sourceTree = "<group>"; };
+		PP000001000000000000013C /* StatCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatCardsView.swift; sourceTree = "<group>"; };
 		PP000001000000000000014C /* ProfileReviewCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileReviewCardView.swift; sourceTree = "<group>"; };
 		PP000001000000000000015C /* ProfileRecentReviewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRecentReviewsView.swift; sourceTree = "<group>"; };
 		PP000001000000000000016C /* ProfileSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsView.swift; sourceTree = "<group>"; };
@@ -572,6 +572,7 @@
 			isa = PBXGroup;
 			children = (
 				PP000001000000000000008B /* StarRatingView.swift */,
+				PP000001000000000000013C /* StatCardsView.swift */,
 				AA100001000000000000028B /* MovieDetailsCardMetrics.swift */,
 				AA100001000000000000027B /* WatchTrailerButton.swift */,
 				UI000001000000000000001B /* BackNavigationHeaderView.swift */,
@@ -834,7 +835,6 @@
 				PP000001000000000000010C /* ProfileContentView.swift */,
 				PP000001000000000000011C /* ProfileHeaderView.swift */,
 				PP000001000000000000012C /* ProfileFavoriteFilmView.swift */,
-				PP000001000000000000013C /* ProfileStatsView.swift */,
 				PP000001000000000000014C /* ProfileReviewCardView.swift */,
 				PP000001000000000000015C /* ProfileRecentReviewsView.swift */,
 				PP000001000000000000016C /* ProfileSettingsView.swift */,
@@ -1189,7 +1189,7 @@
 				PP000001000000000000010C000000000000001A /* ProfileContentView.swift in Sources */,
 				PP000001000000000000011C000000000000001A /* ProfileHeaderView.swift in Sources */,
 				PP000001000000000000012C000000000000001A /* ProfileFavoriteFilmView.swift in Sources */,
-				PP000001000000000000013C000000000000001A /* ProfileStatsView.swift in Sources */,
+				PP000001000000000000013C000000000000001A /* StatCardsView.swift in Sources */,
 				PP000001000000000000014C000000000000001A /* ProfileReviewCardView.swift in Sources */,
 				PP000001000000000000015C000000000000001A /* ProfileRecentReviewsView.swift in Sources */,
 				PP000001000000000000016C000000000000001A /* ProfileSettingsView.swift in Sources */,

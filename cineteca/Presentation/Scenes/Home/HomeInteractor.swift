@@ -104,7 +104,7 @@ extension HomeInteractor: HomeBusinessLogic {
                 nowPlaying: filter(content.nowPlaying, by: selectedGenre),
                 trending: filter(content.trending, by: selectedGenre),
                 topRated: filter(content.topRated, by: selectedGenre),
-                genreFilter: GenreFilter(genres: sortedGenres, selectedIndex: selectedGenreIndex)
+                genreFilter: HomeModels.GenreFilter(genres: sortedGenres, selectedIndex: selectedGenreIndex)
             )
         )
     }

@@ -15,14 +15,14 @@ extension LegalPresenter: LegalPresentationLogic {
             view?.displayFetchLegal(
                 viewModel: .content(
                     LegalModels.FetchLegal.ViewModel.Content(
-                        linksSection: LegalLinksSectionViewModel(
+                        linksSection: LegalModels.LinksSectionViewModel(
                             title: Strings.LegalScene.Section.legal,
                             rows: [
-                                LegalLinkRowViewModel(
+                                LegalModels.LinkRowViewModel(
                                     title: Strings.LegalScene.Row.privacyPolicy,
                                     action: .privacyPolicy
                                 ),
-                                LegalLinkRowViewModel(
+                                LegalModels.LinkRowViewModel(
                                     title: Strings.LegalScene.Row.termsOfService,
                                     action: .termsOfService
                                 )

@@ -1,0 +1,45 @@
+---
+description: Nest scene view models inside enum SceneModels; do not share them across scenes
+globs: cineteca/Presentation/Scenes/**/*Models.swift,cineteca/Presentation/Scenes/**/*Presenter.swift,cineteca/Presentation/Scenes/**/*View.swift,cineteca/Presentation/UI/**/*.swift
+alwaysApply: false
+---
+
+# VIP: view models live in SceneModels
+
+`<Scene>Models` is an `enum` namespace. Scene view models, row models, and scene-only actions are nested **inside** it — never at module root.
+
+```swift
+enum HomeModels {
+    enum FetchContent {
+        enum ViewModel {
+            case content(Content)
+            case error
+            struct Content {
+                let featured: FeaturedViewModel
+            }
+        }
+    }
+
+    struct FeaturedViewModel {
+        let title: String
+    }
+}
+```
+
+## Do
+
+- Use-case envelope: `<Scene>Models.<UseCase>.Request` / `Response` / `ViewModel`
+- Subview models: siblings of the use cases (`HomeModels.MovieCardViewModel`)
+- Short names inside the namespace (`CastViewModel`, not `MovieDetailsCastViewModel`)
+- Each scene owns its type even when fields match (`ProfileModels.StatsViewModel` vs `StatsModels.SummaryViewModel`)
+
+## Shared UI
+
+A view used by two or more scenes lives in `Presentation/UI/` and owns `SomeView.ViewModel`. Presenters emit scene models; the scene content view maps at the view boundary.
+
+## Avoid
+
+- `struct FeaturedViewModel` at file root next to `HomeModels`
+- `struct HomeModels` (use `enum`)
+- Stats importing `ProfileModels` (or the reverse) to reuse a view model
+- Configuring `Presentation/UI/` views with another scene's nested type

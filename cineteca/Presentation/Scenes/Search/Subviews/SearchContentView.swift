@@ -12,7 +12,7 @@ final class SearchContentView: UIView {
 
     weak var delegate: SearchContentViewDelegate?
 
-    private var movies: [SearchMovieGridViewModel] = []
+    private var movies: [SearchModels.MovieGridViewModel] = []
 
     private enum GridState {
         case loading
@@ -116,12 +116,12 @@ final class SearchContentView: UIView {
 
     // MARK: - Public API
 
-    func showLoading(mode: SearchDisplayMode) {
+    func showLoading(mode: SearchModels.DisplayMode) {
         updateSectionTitle(for: mode)
         setGridState(.loading)
     }
 
-    func showMovies(movies: [SearchMovieGridViewModel], mode: SearchDisplayMode) {
+    func showMovies(movies: [SearchModels.MovieGridViewModel], mode: SearchModels.DisplayMode) {
         self.movies = movies
         updateSectionTitle(for: mode)
         collectionView.reloadData()
@@ -134,7 +134,7 @@ final class SearchContentView: UIView {
 
     // MARK: - Helpers
 
-    private func updateSectionTitle(for mode: SearchDisplayMode) {
+    private func updateSectionTitle(for mode: SearchModels.DisplayMode) {
         sectionTitleLabel.text = mode == .suggested
             ? Strings.SearchScene.Section.suggested
             : Strings.SearchScene.Section.results

@@ -1,11 +1,6 @@
 import Foundation
 
-enum AccountRowAction: Equatable {
-    case changePassword
-    case deleteAccount
-}
-
-struct AccountModels {
+enum AccountModels {
     enum FetchAccount {
         struct Request {}
 
@@ -19,28 +14,33 @@ struct AccountModels {
             case error
 
             struct Content {
-                let profileCard: AccountProfileCardViewModel
-                let profileSection: AccountSectionViewModel
-                let securitySection: AccountSectionViewModel
-                let dangerSection: AccountSectionViewModel
+                let profileCard: ProfileCardViewModel
+                let profileSection: SectionViewModel
+                let securitySection: SectionViewModel
+                let dangerSection: SectionViewModel
             }
         }
     }
-}
 
-struct AccountProfileCardViewModel {
-    let username: String
-    let email: String
-    let avatarImageName: String?
-}
+    enum RowAction: Equatable {
+        case changePassword
+        case deleteAccount
+    }
 
-struct AccountSectionViewModel {
-    let title: String
-    let rows: [AccountRowViewModel]
-}
+    struct ProfileCardViewModel {
+        let username: String
+        let email: String
+        let avatarImageName: String?
+    }
 
-enum AccountRowViewModel {
-    case value(title: String, value: String)
-    case navigation(title: String, action: AccountRowAction)
-    case danger(title: String, action: AccountRowAction)
+    struct SectionViewModel {
+        let title: String
+        let rows: [RowViewModel]
+    }
+
+    enum RowViewModel {
+        case value(title: String, value: String)
+        case navigation(title: String, action: RowAction)
+        case danger(title: String, action: RowAction)
+    }
 }

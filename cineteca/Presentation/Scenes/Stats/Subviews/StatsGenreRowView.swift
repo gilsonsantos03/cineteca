@@ -127,7 +127,7 @@ final class StatsGenreRowView: UIView {
 
     // MARK: - Configure
 
-    func configure(viewModel: StatsGenreRowViewModel) {
+    func configure(viewModel: StatsModels.GenreRowViewModel) {
         nameLabel.text = viewModel.name
         percentageLabel.text = viewModel.percentageText
         fillView.backgroundColor = color(for: viewModel.tone)
@@ -142,7 +142,7 @@ final class StatsGenreRowView: UIView {
         progressConstraint?.constant = progress > 0 ? max(width, 8) : 0
     }
 
-    private func color(for tone: GenreStatTone) -> UIColor {
+    private func color(for tone: StatsModels.GenreTone) -> UIColor {
         switch tone {
         case .accent:
             return .accentYellow

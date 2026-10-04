@@ -75,7 +75,7 @@ final class GenreFilterView: UIView {
 
     // MARK: - Configure
 
-    func configure(viewModel: GenreFilterViewModel) {
+    func configure(viewModel: HomeModels.GenreFilterViewModel) {
         options = viewModel.options
         selectedIndex = viewModel.selectedIndex
         collectionView.reloadData()

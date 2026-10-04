@@ -106,7 +106,7 @@ final class SearchMovieGridCell: UICollectionViewCell {
 
     // MARK: - Configure
 
-    func configure(viewModel: SearchMovieGridViewModel) {
+    func configure(viewModel: SearchModels.MovieGridViewModel) {
         posterImageView.loadImage(from: viewModel.posterURL)
         titleLabel.text = viewModel.title
         yearLabel.text = viewModel.year

@@ -12,7 +12,7 @@ final class SearchViewController: UIViewController {
     private let router: SearchRoutingLogic
 
     private var debounceTask: Task<Void, Never>?
-    private var currentMovies: [SearchMovieGridViewModel] = []
+    private var currentMovies: [SearchModels.MovieGridViewModel] = []
     private var filtersViewController: SearchFiltersViewController?
 
     init(customView: SearchView, interactor: SearchBusinessLogic, router: SearchRoutingLogic) {

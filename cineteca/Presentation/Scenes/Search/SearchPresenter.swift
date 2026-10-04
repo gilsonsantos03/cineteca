@@ -2,7 +2,7 @@ import Foundation
 
 protocol SearchPresentationLogic {
     func presentMovies(response: SearchModels.Movies.Response)
-    func presentLoading(mode: SearchDisplayMode)
+    func presentLoading(mode: SearchModels.DisplayMode)
     func presentFilters(response: SearchModels.ShowFilters.Response)
 }
 
@@ -20,7 +20,7 @@ extension SearchPresenter: SearchPresentationLogic {
         }
     }
 
-    func presentLoading(mode: SearchDisplayMode) {
+    func presentLoading(mode: SearchModels.DisplayMode) {
         view?.displayLoading(viewModel: .init(mode: mode))
     }
 
@@ -29,9 +29,9 @@ extension SearchPresenter: SearchPresentationLogic {
         let languages = makeLanguageOptions(selectedCode: response.filters.languageCode)
 
         let viewModel = SearchModels.ShowFilters.ViewModel(
-            filters: SearchFiltersViewModel(
+            filters: SearchModels.FiltersViewModel(
                 genres: response.genres.map { genre in
-                    SearchGenreOptionViewModel(
+                    SearchModels.GenreOptionViewModel(
                         id: genre.id,
                         name: genre.name,
                         isSelected: response.filters.selectedGenreIds.contains(genre.id)
@@ -49,8 +49,8 @@ extension SearchPresenter: SearchPresentationLogic {
         view?.displayFilters(viewModel: viewModel)
     }
 
-    private func makeGridViewModel(from movie: Movie) -> SearchMovieGridViewModel {
-        SearchMovieGridViewModel(
+    private func makeGridViewModel(from movie: Movie) -> SearchModels.MovieGridViewModel {
+        SearchModels.MovieGridViewModel(
             id: movie.id,
             title: movie.title,
             year: movie.releaseYear,
@@ -63,7 +63,7 @@ extension SearchPresenter: SearchPresentationLogic {
         String(format: "%.1f", rating)
     }
 
-    private func makeLanguageOptions(selectedCode: String?) -> [SearchLanguageOptionViewModel] {
+    private func makeLanguageOptions(selectedCode: String?) -> [SearchModels.LanguageOptionViewModel] {
         let options: [(String?, String)] = [
             (nil, Strings.SearchScene.Filters.Language.all),
             ("en", Strings.SearchScene.Filters.Language.english),
@@ -73,7 +73,7 @@ extension SearchPresenter: SearchPresentationLogic {
         ]
 
         return options.map { code, name in
-            SearchLanguageOptionViewModel(
+            SearchModels.LanguageOptionViewModel(
                 code: code,
                 name: name,
                 isSelected: code == selectedCode

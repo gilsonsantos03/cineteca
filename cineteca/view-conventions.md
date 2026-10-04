@@ -183,7 +183,7 @@ The extracted subview follows the same class structure and setup pipeline as the
 Views are **display-only**. They accept a view model and bind it — no business logic, no data fetching.
 
 ```swift
-func configure(viewModel: FeaturedViewModel) {
+func configure(viewModel: HomeModels.FeaturedViewModel) {
     backdropImageView.loadImage(from: viewModel.backdropURL)
     titleLabel.text = viewModel.title
     imdbRatingLabel.text = viewModel.rating
@@ -191,6 +191,8 @@ func configure(viewModel: FeaturedViewModel) {
 ```
 
 - One public `configure(viewModel:)` per view. If the view has to expose more than one setter, that is a signal the parent should own the state instead.
+- Scene-only subviews take types nested in `<Scene>Models` (see [architecture.md](architecture.md) — Scene models: namespace).
+- Shared views in `Presentation/UI/` take **their own** nested `ViewModel` (e.g. `StatCardsView.ViewModel`). The scene content view maps from the scene model to that type. Do not configure a UI component with `ProfileModels.…` from another scene.
 - View models come from the scene's `Presenter` (see [architecture.md](architecture.md) — VIP section). Views never reach into repositories, services, or `HomeModels.Response`.
 
 ## Delegates

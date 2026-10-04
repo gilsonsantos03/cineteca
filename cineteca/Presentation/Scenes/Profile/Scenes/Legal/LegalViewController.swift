@@ -48,7 +48,7 @@ extension LegalViewController: LegalViewDelegate {
         router.routeBack()
     }
 
-    func didSelectLink(_ action: LegalLinkAction) {
+    func didSelectLink(_ action: LegalModels.LinkAction) {
         switch action {
         case .privacyPolicy:
             router.routeToPrivacyPolicy()

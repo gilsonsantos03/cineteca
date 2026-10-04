@@ -10,6 +10,9 @@
 "HomeScene.Error.RetryButton.Text" = "Tentar novamente";
 
 "UI.WatchTrailerButton.Title" = "Ver trailer";
+"UI.StatCards.Films" = "FILMES";
+"UI.StatCards.Hours" = "HORAS";
+"UI.StatCards.Reviews" = "REVIEWS";
 "HomeScene.Featured.WatchlistButton.Text" = "  Minha lista";
 
 "HomeScene.TrailerUnavailable.Title" = "Trailer indisponível";
@@ -86,9 +89,6 @@
 "ProfileScene.MemberSince.Format" = "Membro desde %@";
 "ProfileScene.SignOut.Text" = "Sair";
 "ProfileScene.FavoriteFilm.Badge" = "MEU FILME FAVORITO";
-"ProfileScene.Stats.Films" = "FILMES";
-"ProfileScene.Stats.Hours" = "HORAS";
-"ProfileScene.Stats.Reviews" = "REVIEWS";
 "ProfileScene.RecentReviews.Title" = "Reviews recentes";
 "ProfileScene.RecentReviews.SeeAll" = "Ver tudo";
 "ProfileScene.Settings.Account" = "Conta";

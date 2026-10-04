@@ -1,6 +1,6 @@
 import Foundation
 
-struct LegalModels {
+enum LegalModels {
     enum FetchLegal {
         struct Request {}
 
@@ -12,23 +12,23 @@ struct LegalModels {
             case content(Content)
 
             struct Content {
-                let linksSection: LegalLinksSectionViewModel
+                let linksSection: LinksSectionViewModel
             }
         }
     }
-}
 
-enum LegalLinkAction {
-    case privacyPolicy
-    case termsOfService
-}
+    enum LinkAction {
+        case privacyPolicy
+        case termsOfService
+    }
 
-struct LegalLinksSectionViewModel {
-    let title: String
-    let rows: [LegalLinkRowViewModel]
-}
+    struct LinksSectionViewModel {
+        let title: String
+        let rows: [LinkRowViewModel]
+    }
 
-struct LegalLinkRowViewModel {
-    let title: String
-    let action: LegalLinkAction
+    struct LinkRowViewModel {
+        let title: String
+        let action: LinkAction
+    }
 }

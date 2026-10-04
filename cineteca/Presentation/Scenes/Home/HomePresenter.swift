@@ -18,7 +18,7 @@ extension HomePresenter: HomePresentationLogic {
                 viewModel: .content(
                     HomeModels.FetchContent.ViewModel.Content(
                         featured: makeFeaturedViewModel(from: featured),
-                        genreFilter: GenreFilterViewModel(
+                        genreFilter: HomeModels.GenreFilterViewModel(
                             options: [Strings.HomeScene.GenreFilter.all] + genreFilter.genres.map(\.name),
                             selectedIndex: genreFilter.selectedIndex
                         ),
@@ -51,8 +51,8 @@ extension HomePresenter: HomePresentationLogic {
         }
     }
 
-    private func makeFeaturedViewModel(from movie: Movie) -> FeaturedViewModel {
-        FeaturedViewModel(
+    private func makeFeaturedViewModel(from movie: Movie) -> HomeModels.FeaturedViewModel {
+        HomeModels.FeaturedViewModel(
             movieId: movie.id,
             title: movie.title,
             year: movie.releaseYear,
@@ -62,8 +62,8 @@ extension HomePresenter: HomePresentationLogic {
         )
     }
 
-    private func makeCardViewModel(from movie: Movie, isTrending: Bool = false) -> MovieCardViewModel {
-        MovieCardViewModel(
+    private func makeCardViewModel(from movie: Movie, isTrending: Bool = false) -> HomeModels.MovieCardViewModel {
+        HomeModels.MovieCardViewModel(
             id: movie.id,
             title: movie.title,
             rating: formatRating(movie.rating),

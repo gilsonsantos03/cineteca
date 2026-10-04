@@ -86,7 +86,7 @@ final class StatsMonthlyBarColumnView: UIView {
 
     // MARK: - Configure
 
-    func configure(viewModel: StatsMonthlyBarViewModel) {
+    func configure(viewModel: StatsModels.MonthlyBarViewModel) {
         valueLabel.text = viewModel.valueText
         relativeHeight = viewModel.relativeHeight
         setNeedsLayout()

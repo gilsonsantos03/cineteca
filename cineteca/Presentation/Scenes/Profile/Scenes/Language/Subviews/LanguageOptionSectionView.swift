@@ -88,7 +88,7 @@ final class LanguageOptionSectionView: UIView {
 
     // MARK: - Configure
 
-    func configure(viewModel: LanguageOptionSectionViewModel) {
+    func configure(viewModel: LanguageModels.OptionSectionViewModel) {
         titleLabel.text = viewModel.title
         rowsStack.arrangedSubviews.forEach {
             rowsStack.removeArrangedSubview($0)

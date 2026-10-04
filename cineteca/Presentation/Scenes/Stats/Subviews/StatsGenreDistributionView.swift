@@ -62,7 +62,7 @@ final class StatsGenreDistributionView: UIView {
 
     // MARK: - Configure
 
-    func configure(viewModel: StatsGenreDistributionViewModel) {
+    func configure(viewModel: StatsModels.GenreDistributionViewModel) {
         titleLabel.text = viewModel.title
         rowsStack.arrangedSubviews.forEach { view in
             rowsStack.removeArrangedSubview(view)

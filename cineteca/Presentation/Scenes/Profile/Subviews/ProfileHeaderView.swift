@@ -134,7 +134,7 @@ final class ProfileHeaderView: UIView {
 
     // MARK: - Configure
 
-    func configure(viewModel: ProfileHeaderViewModel) {
+    func configure(viewModel: ProfileModels.HeaderViewModel) {
         usernameLabel.text = viewModel.username
         memberSinceLabel.text = viewModel.memberSinceText
         if let imageName = viewModel.avatarImageName, let image = UIImage(named: imageName) {

@@ -87,7 +87,7 @@ final class StatsHeaderView: UIView {
 
     // MARK: - Configure
 
-    func configure(viewModel: StatsHeaderViewModel) {
+    func configure(viewModel: StatsModels.HeaderViewModel) {
         yearLabel.text = viewModel.yearText
         titleLabel.text = viewModel.title
     }

@@ -1,6 +1,6 @@
 import Foundation
 
-struct AppearanceModels {
+enum AppearanceModels {
     enum FetchAppearance {
         struct Request {}
 
@@ -14,7 +14,7 @@ struct AppearanceModels {
             struct Content {
                 let savedTheme: AppTheme
                 let pendingTheme: AppTheme
-                let themeSection: AppearanceThemeSectionViewModel
+                let themeSection: ThemeSectionViewModel
                 let isApplyEnabled: Bool
             }
         }
@@ -45,15 +45,15 @@ struct AppearanceModels {
             case success(AppTheme)
         }
     }
-}
 
-struct AppearanceThemeSectionViewModel {
-    let title: String
-    let options: [AppearanceThemeOptionViewModel]
-}
+    struct ThemeSectionViewModel {
+        let title: String
+        let options: [ThemeOptionViewModel]
+    }
 
-struct AppearanceThemeOptionViewModel {
-    let theme: AppTheme
-    let title: String
-    let isSelected: Bool
+    struct ThemeOptionViewModel {
+        let theme: AppTheme
+        let title: String
+        let isSelected: Bool
+    }
 }

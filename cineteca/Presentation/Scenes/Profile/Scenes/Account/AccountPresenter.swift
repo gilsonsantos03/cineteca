@@ -25,12 +25,12 @@ extension AccountPresenter: AccountPresentationLogic {
 
     private func makeContent(from user: User) -> AccountModels.FetchAccount.ViewModel.Content {
         AccountModels.FetchAccount.ViewModel.Content(
-            profileCard: AccountProfileCardViewModel(
+            profileCard: AccountModels.ProfileCardViewModel(
                 username: user.username,
                 email: user.email,
                 avatarImageName: user.avatarImageName
             ),
-            profileSection: AccountSectionViewModel(
+            profileSection: AccountModels.SectionViewModel(
                 title: Strings.AccountScene.Section.profile,
                 rows: [
                     .value(title: Strings.AccountScene.Row.username, value: user.username),
@@ -38,14 +38,14 @@ extension AccountPresenter: AccountPresentationLogic {
                     .value(title: Strings.AccountScene.Row.bio, value: user.bio)
                 ]
             ),
-            securitySection: AccountSectionViewModel(
+            securitySection: AccountModels.SectionViewModel(
                 title: Strings.AccountScene.Section.security,
                 rows: [
                     .value(title: Strings.AccountScene.Row.email, value: user.email),
                     .navigation(title: Strings.AccountScene.Row.changePassword, action: .changePassword)
                 ]
             ),
-            dangerSection: AccountSectionViewModel(
+            dangerSection: AccountModels.SectionViewModel(
                 title: Strings.AccountScene.Section.dangerZone,
                 rows: [
                     .danger(title: Strings.AccountScene.Row.deleteAccount, action: .deleteAccount)

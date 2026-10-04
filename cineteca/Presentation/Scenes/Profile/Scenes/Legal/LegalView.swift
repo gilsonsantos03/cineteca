@@ -3,7 +3,7 @@ import Cartography
 
 protocol LegalViewDelegate: AnyObject {
     func didTapBack()
-    func didSelectLink(_ action: LegalLinkAction)
+    func didSelectLink(_ action: LegalModels.LinkAction)
 }
 
 final class LegalView: UIView {
@@ -60,7 +60,7 @@ extension LegalView: LegalContentViewDelegate {
         delegate?.didTapBack()
     }
 
-    func didSelectLink(_ action: LegalLinkAction) {
+    func didSelectLink(_ action: LegalModels.LinkAction) {
         delegate?.didSelectLink(action)
     }
 }

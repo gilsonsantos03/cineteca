@@ -3,6 +3,12 @@ import Foundation
 enum Strings {
     enum UI {
         static var watchTrailer: String { Localization.string("UI.WatchTrailerButton.Title") }
+
+        enum StatCards {
+            static var films: String { Localization.string("UI.StatCards.Films") }
+            static var hours: String { Localization.string("UI.StatCards.Hours") }
+            static var reviews: String { Localization.string("UI.StatCards.Reviews") }
+        }
     }
 
     enum HomeScene {
@@ -116,12 +122,6 @@ enum Strings {
 
         enum FavoriteFilm {
             static var badge: String { Localization.string("ProfileScene.FavoriteFilm.Badge") }
-        }
-
-        enum Stats {
-            static var films: String { Localization.string("ProfileScene.Stats.Films") }
-            static var hours: String { Localization.string("ProfileScene.Stats.Hours") }
-            static var reviews: String { Localization.string("ProfileScene.Stats.Reviews") }
         }
 
         enum RecentReviews {

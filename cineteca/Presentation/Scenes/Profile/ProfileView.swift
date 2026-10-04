@@ -3,7 +3,7 @@ import Cartography
 
 protocol ProfileViewDelegate: AnyObject {
     func didTapEdit()
-    func didSelectSetting(_ setting: ProfileSetting)
+    func didSelectSetting(_ setting: ProfileModels.Setting)
 }
 
 final class ProfileView: UIView {
@@ -90,7 +90,7 @@ extension ProfileView: ProfileContentViewDelegate {
         delegate?.didTapEdit()
     }
 
-    func didSelectSetting(_ setting: ProfileSetting) {
+    func didSelectSetting(_ setting: ProfileModels.Setting) {
         delegate?.didSelectSetting(setting)
     }
 }

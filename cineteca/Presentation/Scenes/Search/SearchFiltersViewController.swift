@@ -18,7 +18,7 @@ final class SearchFiltersViewController: UIViewController {
         filtersView.delegate = self
     }
 
-    func configure(viewModel: SearchFiltersViewModel) {
+    func configure(viewModel: SearchModels.FiltersViewModel) {
         filtersView.configure(viewModel: viewModel)
     }
 }

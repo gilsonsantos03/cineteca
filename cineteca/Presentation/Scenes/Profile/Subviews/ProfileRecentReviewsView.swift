@@ -83,7 +83,7 @@ final class ProfileRecentReviewsView: UIView {
 
     // MARK: - Configure
 
-    func configure(viewModel: ProfileRecentReviewsViewModel) {
+    func configure(viewModel: ProfileModels.RecentReviewsViewModel) {
         cardsStack.arrangedSubviews.forEach {
             cardsStack.removeArrangedSubview($0)
             $0.removeFromSuperview()

@@ -2,7 +2,7 @@ import UIKit
 import Cartography
 
 protocol AccountSectionViewDelegate: AnyObject {
-    func didSelectRow(action: AccountRowAction)
+    func didSelectRow(action: AccountModels.RowAction)
 }
 
 final class AccountSectionView: UIView {
@@ -88,7 +88,7 @@ final class AccountSectionView: UIView {
 
     // MARK: - Configure
 
-    func configure(viewModel: AccountSectionViewModel) {
+    func configure(viewModel: AccountModels.SectionViewModel) {
         titleLabel.text = viewModel.title
         rowsStack.arrangedSubviews.forEach {
             rowsStack.removeArrangedSubview($0)
@@ -104,7 +104,7 @@ final class AccountSectionView: UIView {
 
     // MARK: - Helpers
 
-    private func makeRowView(for row: AccountRowViewModel, showsSeparator: Bool) -> UIView {
+    private func makeRowView(for row: AccountModels.RowViewModel, showsSeparator: Bool) -> UIView {
         switch row {
         case let .value(title, value):
             return AccountValueRowView(title: title, value: value, showsSeparator: showsSeparator)

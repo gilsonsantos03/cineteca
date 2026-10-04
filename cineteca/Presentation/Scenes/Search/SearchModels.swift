@@ -1,18 +1,18 @@
 import Foundation
 
-struct SearchModels {
+enum SearchModels {
     enum LoadContent {
         struct Request {}
     }
 
     enum Movies {
         enum Response {
-            case content(movies: [Movie], mode: SearchDisplayMode)
+            case content(movies: [Movie], mode: DisplayMode)
             case error
         }
 
         enum ViewModel {
-            case content(movies: [SearchMovieGridViewModel], mode: SearchDisplayMode)
+            case content(movies: [MovieGridViewModel], mode: DisplayMode)
             case error
         }
     }
@@ -25,7 +25,7 @@ struct SearchModels {
 
     enum Loading {
         struct ViewModel {
-            let mode: SearchDisplayMode
+            let mode: DisplayMode
         }
     }
 
@@ -42,43 +42,43 @@ struct SearchModels {
         }
 
         struct ViewModel {
-            let filters: SearchFiltersViewModel
+            let filters: FiltersViewModel
         }
     }
-}
 
-enum SearchDisplayMode {
-    case suggested
-    case results
-}
+    enum DisplayMode {
+        case suggested
+        case results
+    }
 
-struct SearchMovieGridViewModel {
-    let id: Int
-    let title: String
-    let year: String
-    let rating: String
-    let posterURL: URL?
-}
+    struct MovieGridViewModel {
+        let id: Int
+        let title: String
+        let year: String
+        let rating: String
+        let posterURL: URL?
+    }
 
-struct SearchFiltersViewModel {
-    let genres: [SearchGenreOptionViewModel]
-    let yearFrom: Int
-    let yearTo: Int
-    let minYear: Int
-    let maxYear: Int
-    let minRating: Int
-    let languages: [SearchLanguageOptionViewModel]
-    let selectedLanguageCode: String?
-}
+    struct FiltersViewModel {
+        let genres: [GenreOptionViewModel]
+        let yearFrom: Int
+        let yearTo: Int
+        let minYear: Int
+        let maxYear: Int
+        let minRating: Int
+        let languages: [LanguageOptionViewModel]
+        let selectedLanguageCode: String?
+    }
 
-struct SearchGenreOptionViewModel {
-    let id: Int
-    let name: String
-    let isSelected: Bool
-}
+    struct GenreOptionViewModel {
+        let id: Int
+        let name: String
+        let isSelected: Bool
+    }
 
-struct SearchLanguageOptionViewModel {
-    let code: String?
-    let name: String
-    let isSelected: Bool
+    struct LanguageOptionViewModel {
+        let code: String?
+        let name: String
+        let isSelected: Bool
+    }
 }

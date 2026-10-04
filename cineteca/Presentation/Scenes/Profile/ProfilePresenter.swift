@@ -35,24 +35,24 @@ extension ProfilePresenter: ProfilePresentationLogic {
         let memberSinceText = String(format: Strings.ProfileScene.memberSinceFormat, memberSince)
 
         let favoriteFilm = user.favoriteFilm.map {
-            ProfileFavoriteFilmViewModel(title: $0.title, backdropURL: $0.backdropURL)
-        } ?? ProfileFavoriteFilmViewModel(title: "", backdropURL: nil)
+            ProfileModels.FavoriteFilmViewModel(title: $0.title, backdropURL: $0.backdropURL)
+        } ?? ProfileModels.FavoriteFilmViewModel(title: "", backdropURL: nil)
 
         return ProfileModels.FetchProfile.ViewModel.Content(
-            header: ProfileHeaderViewModel(
+            header: ProfileModels.HeaderViewModel(
                 username: user.displayName.isEmpty ? user.username : user.displayName,
                 memberSinceText: memberSinceText,
                 avatarImageName: user.avatarImageName
             ),
             favoriteFilm: favoriteFilm,
-            stats: ProfileStatsViewModel(
+            stats: ProfileModels.StatsViewModel(
                 filmsCount: "\(user.stats.filmsCount)",
                 hoursWatched: "\(user.stats.hoursWatched)",
                 reviewsCount: "\(user.stats.reviewsCount)"
             ),
-            recentReviews: ProfileRecentReviewsViewModel(
+            recentReviews: ProfileModels.RecentReviewsViewModel(
                 reviews: user.recentReviews.map {
-                    ProfileReviewCardViewModel(
+                    ProfileModels.ReviewCardViewModel(
                         title: $0.title,
                         posterURL: $0.posterURL,
                         rating: $0.rating,
@@ -60,13 +60,13 @@ extension ProfilePresenter: ProfilePresentationLogic {
                     )
                 }
             ),
-            settings: ProfileSettingsViewModel(
+            settings: ProfileModels.SettingsViewModel(
                 rows: [
-                    ProfileSettingRowViewModel(title: Strings.ProfileScene.Settings.account, setting: .account),
-                    ProfileSettingRowViewModel(title: Strings.ProfileScene.Settings.notifications, setting: .notifications),
-                    ProfileSettingRowViewModel(title: Strings.ProfileScene.Settings.appearance, setting: .appearance),
-                    ProfileSettingRowViewModel(title: Strings.ProfileScene.Settings.language, setting: .language),
-                    ProfileSettingRowViewModel(title: Strings.ProfileScene.Settings.legal, setting: .legal)
+                    ProfileModels.SettingRowViewModel(title: Strings.ProfileScene.Settings.account, setting: .account),
+                    ProfileModels.SettingRowViewModel(title: Strings.ProfileScene.Settings.notifications, setting: .notifications),
+                    ProfileModels.SettingRowViewModel(title: Strings.ProfileScene.Settings.appearance, setting: .appearance),
+                    ProfileModels.SettingRowViewModel(title: Strings.ProfileScene.Settings.language, setting: .language),
+                    ProfileModels.SettingRowViewModel(title: Strings.ProfileScene.Settings.legal, setting: .legal)
                 ]
             )
         )

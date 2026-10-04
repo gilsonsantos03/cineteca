@@ -2,7 +2,7 @@ import UIKit
 import Cartography
 
 protocol LegalLinksSectionViewDelegate: AnyObject {
-    func didSelectLink(_ action: LegalLinkAction)
+    func didSelectLink(_ action: LegalModels.LinkAction)
 }
 
 final class LegalLinksSectionView: UIView {
@@ -88,7 +88,7 @@ final class LegalLinksSectionView: UIView {
 
     // MARK: - Configure
 
-    func configure(viewModel: LegalLinksSectionViewModel) {
+    func configure(viewModel: LegalModels.LinksSectionViewModel) {
         titleLabel.text = viewModel.title
         rowsStack.arrangedSubviews.forEach {
             rowsStack.removeArrangedSubview($0)

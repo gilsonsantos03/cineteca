@@ -34,19 +34,19 @@ extension StatsPresenter: StatsPresentationLogic {
         let maxMonthly = stats.monthlyActivity.map(\.filmsCount).max() ?? 1
 
         return StatsModels.FetchStats.ViewModel.Content(
-            header: StatsHeaderViewModel(
+            header: StatsModels.HeaderViewModel(
                 yearText: "\(stats.year)",
                 title: Strings.StatsScene.title
             ),
-            summary: ProfileStatsViewModel(
+            summary: StatsModels.SummaryViewModel(
                 filmsCount: "\(stats.filmsCount)",
                 hoursWatched: "\(stats.hoursWatched)",
                 reviewsCount: "\(stats.reviewsCount)"
             ),
-            genres: StatsGenreDistributionViewModel(
+            genres: StatsModels.GenreDistributionViewModel(
                 title: Strings.StatsScene.GenreDistribution.title,
                 rows: stats.genres.map { genre in
-                    StatsGenreRowViewModel(
+                    StatsModels.GenreRowViewModel(
                         name: genreName(for: genre.id),
                         percentageText: "\(Int((genre.percentage * 100).rounded()))%",
                         progress: genre.percentage,
@@ -54,7 +54,7 @@ extension StatsPresenter: StatsPresentationLogic {
                     )
                 }
             ),
-            topDirector: StatsTopPersonViewModel(
+            topDirector: StatsModels.TopPersonViewModel(
                 sectionTitle: Strings.StatsScene.TopDirector.title,
                 name: stats.topDirector.name,
                 subtitle: String(
@@ -63,7 +63,7 @@ extension StatsPresenter: StatsPresentationLogic {
                 ),
                 profileURL: stats.topDirector.profileURL
             ),
-            topActor: StatsTopPersonViewModel(
+            topActor: StatsModels.TopPersonViewModel(
                 sectionTitle: Strings.StatsScene.TopActor.title,
                 name: stats.topActor.name,
                 subtitle: String(
@@ -72,14 +72,14 @@ extension StatsPresenter: StatsPresentationLogic {
                 ),
                 profileURL: stats.topActor.profileURL
             ),
-            monthlyActivity: StatsMonthlyActivityViewModel(
+            monthlyActivity: StatsModels.MonthlyActivityViewModel(
                 title: Strings.StatsScene.MonthlyActivity.title,
                 subtitle: Strings.StatsScene.MonthlyActivity.subtitle,
                 bars: stats.monthlyActivity.map { month in
                     let relative = maxMonthly > 0
                         ? Double(month.filmsCount) / Double(maxMonthly)
                         : 0
-                    return StatsMonthlyBarViewModel(
+                    return StatsModels.MonthlyBarViewModel(
                         monthLabel: monthLabel(for: month.monthIndex),
                         valueText: "\(month.filmsCount)",
                         relativeHeight: max(relative, 0.08)
@@ -99,7 +99,7 @@ extension StatsPresenter: StatsPresentationLogic {
         }
     }
 
-    private func genreTone(for id: GenreStatID) -> GenreStatTone {
+    private func genreTone(for id: GenreStatID) -> StatsModels.GenreTone {
         switch id {
         case .drama, .sciFi:
             .accent

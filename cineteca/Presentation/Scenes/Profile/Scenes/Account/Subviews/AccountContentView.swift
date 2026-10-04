@@ -3,7 +3,7 @@ import Cartography
 
 protocol AccountContentViewDelegate: AnyObject {
     func didTapBack()
-    func didSelectRow(action: AccountRowAction)
+    func didSelectRow(action: AccountModels.RowAction)
 }
 
 final class AccountContentView: UIView {
@@ -119,7 +119,7 @@ extension AccountContentView: BackNavigationHeaderViewDelegate {
 }
 
 extension AccountContentView: AccountSectionViewDelegate {
-    func didSelectRow(action: AccountRowAction) {
+    func didSelectRow(action: AccountModels.RowAction) {
         delegate?.didSelectRow(action: action)
     }
 }

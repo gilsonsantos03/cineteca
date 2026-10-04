@@ -1,6 +1,6 @@
 import Foundation
 
-struct ProfileModels {
+enum ProfileModels {
     enum FetchProfile {
         struct Request {}
 
@@ -14,57 +14,57 @@ struct ProfileModels {
             case error
 
             struct Content {
-                let header: ProfileHeaderViewModel
-                let favoriteFilm: ProfileFavoriteFilmViewModel
-                let stats: ProfileStatsViewModel
-                let recentReviews: ProfileRecentReviewsViewModel
-                let settings: ProfileSettingsViewModel
+                let header: HeaderViewModel
+                let favoriteFilm: FavoriteFilmViewModel
+                let stats: StatsViewModel
+                let recentReviews: RecentReviewsViewModel
+                let settings: SettingsViewModel
             }
         }
     }
-}
 
-struct ProfileHeaderViewModel {
-    let username: String
-    let memberSinceText: String
-    let avatarImageName: String?
-}
+    struct HeaderViewModel {
+        let username: String
+        let memberSinceText: String
+        let avatarImageName: String?
+    }
 
-struct ProfileFavoriteFilmViewModel {
-    let title: String
-    let backdropURL: URL?
-}
+    struct FavoriteFilmViewModel {
+        let title: String
+        let backdropURL: URL?
+    }
 
-struct ProfileStatsViewModel {
-    let filmsCount: String
-    let hoursWatched: String
-    let reviewsCount: String
-}
+    struct StatsViewModel {
+        let filmsCount: String
+        let hoursWatched: String
+        let reviewsCount: String
+    }
 
-struct ProfileReviewCardViewModel {
-    let title: String
-    let posterURL: URL?
-    let rating: Double
-    let reviewText: String
-}
+    struct ReviewCardViewModel {
+        let title: String
+        let posterURL: URL?
+        let rating: Double
+        let reviewText: String
+    }
 
-struct ProfileRecentReviewsViewModel {
-    let reviews: [ProfileReviewCardViewModel]
-}
+    struct RecentReviewsViewModel {
+        let reviews: [ReviewCardViewModel]
+    }
 
-struct ProfileSettingsViewModel {
-    let rows: [ProfileSettingRowViewModel]
-}
+    struct SettingsViewModel {
+        let rows: [SettingRowViewModel]
+    }
 
-struct ProfileSettingRowViewModel {
-    let title: String
-    let setting: ProfileSetting
-}
+    struct SettingRowViewModel {
+        let title: String
+        let setting: Setting
+    }
 
-enum ProfileSetting {
-    case account
-    case notifications
-    case appearance
-    case language
-    case legal
+    enum Setting {
+        case account
+        case notifications
+        case appearance
+        case language
+        case legal
+    }
 }

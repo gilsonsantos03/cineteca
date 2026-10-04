@@ -1,6 +1,6 @@
 import Foundation
 
-struct ChangePasswordModels {
+enum ChangePasswordModels {
     enum UpdatePassword {
         struct Request {
             let currentPassword: String

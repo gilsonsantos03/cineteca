@@ -1,7 +1,13 @@
 import UIKit
 import Cartography
 
-final class ProfileStatsView: UIView {
+final class StatCardsView: UIView {
+
+    struct ViewModel {
+        let filmsCount: String
+        let hoursWatched: String
+        let reviewsCount: String
+    }
 
     // MARK: - UI Components
 
@@ -13,9 +19,9 @@ final class ProfileStatsView: UIView {
         return stack
     }()
 
-    private lazy var filmsCard = ProfileStatCardView()
-    private lazy var hoursCard = ProfileStatCardView()
-    private lazy var reviewsCard = ProfileStatCardView()
+    private lazy var filmsCard = StatCardView()
+    private lazy var hoursCard = StatCardView()
+    private lazy var reviewsCard = StatCardView()
 
     // MARK: - Initialization
 
@@ -57,14 +63,14 @@ final class ProfileStatsView: UIView {
 
     // MARK: - Configure
 
-    func configure(viewModel: ProfileStatsViewModel) {
-        filmsCard.configure(value: viewModel.filmsCount, label: Strings.ProfileScene.Stats.films)
-        hoursCard.configure(value: viewModel.hoursWatched, label: Strings.ProfileScene.Stats.hours)
-        reviewsCard.configure(value: viewModel.reviewsCount, label: Strings.ProfileScene.Stats.reviews)
+    func configure(viewModel: ViewModel) {
+        filmsCard.configure(value: viewModel.filmsCount, label: Strings.UI.StatCards.films)
+        hoursCard.configure(value: viewModel.hoursWatched, label: Strings.UI.StatCards.hours)
+        reviewsCard.configure(value: viewModel.reviewsCount, label: Strings.UI.StatCards.reviews)
     }
 }
 
-private final class ProfileStatCardView: UIView {
+private final class StatCardView: UIView {
 
     private lazy var valueLabel: UILabel = {
         let label = UILabel()

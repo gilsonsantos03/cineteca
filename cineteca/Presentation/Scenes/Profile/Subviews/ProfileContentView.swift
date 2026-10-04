@@ -3,7 +3,7 @@ import Cartography
 
 protocol ProfileContentViewDelegate: AnyObject {
     func didTapEdit()
-    func didSelectSetting(_ setting: ProfileSetting)
+    func didSelectSetting(_ setting: ProfileModels.Setting)
 }
 
 final class ProfileContentView: UIView {
@@ -31,7 +31,7 @@ final class ProfileContentView: UIView {
 
     private lazy var headerView = ProfileHeaderView()
     private lazy var favoriteFilmView = ProfileFavoriteFilmView()
-    private lazy var statsView = ProfileStatsView()
+    private lazy var statsView = StatCardsView()
     private lazy var recentReviewsView = ProfileRecentReviewsView()
     private lazy var settingsView = ProfileSettingsView()
 
@@ -109,7 +109,13 @@ final class ProfileContentView: UIView {
     func configure(content: ProfileModels.FetchProfile.ViewModel.Content) {
         headerView.configure(viewModel: content.header)
         favoriteFilmView.configure(viewModel: content.favoriteFilm)
-        statsView.configure(viewModel: content.stats)
+        statsView.configure(
+            viewModel: .init(
+                filmsCount: content.stats.filmsCount,
+                hoursWatched: content.stats.hoursWatched,
+                reviewsCount: content.stats.reviewsCount
+            )
+        )
         recentReviewsView.configure(viewModel: content.recentReviews)
         settingsView.configure(viewModel: content.settings)
     }
@@ -134,7 +140,7 @@ extension ProfileContentView: ProfileHeaderViewDelegate {
 }
 
 extension ProfileContentView: ProfileSettingsViewDelegate {
-    func didSelectSetting(_ setting: ProfileSetting) {
+    func didSelectSetting(_ setting: ProfileModels.Setting) {
         delegate?.didSelectSetting(setting)
     }
 }

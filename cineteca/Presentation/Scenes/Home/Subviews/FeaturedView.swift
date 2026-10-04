@@ -255,7 +255,7 @@ final class FeaturedView: UIView {
 
     // MARK: - Configure
 
-    func configure(viewModel: FeaturedViewModel) {
+    func configure(viewModel: HomeModels.FeaturedViewModel) {
         movieId = viewModel.movieId
         backdropImageView.loadImage(from: viewModel.backdropURL)
         titleLabel.text = viewModel.title

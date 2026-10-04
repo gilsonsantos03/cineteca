@@ -2,7 +2,7 @@ import UIKit
 import Cartography
 
 protocol ProfileSettingsViewDelegate: AnyObject {
-    func didSelectSetting(_ setting: ProfileSetting)
+    func didSelectSetting(_ setting: ProfileModels.Setting)
 }
 
 final class ProfileSettingsView: UIView {
@@ -74,7 +74,7 @@ final class ProfileSettingsView: UIView {
 
     // MARK: - Configure
 
-    func configure(viewModel: ProfileSettingsViewModel) {
+    func configure(viewModel: ProfileModels.SettingsViewModel) {
         rowsStack.arrangedSubviews.forEach {
             rowsStack.removeArrangedSubview($0)
             $0.removeFromSuperview()

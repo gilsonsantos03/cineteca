@@ -88,7 +88,7 @@ final class AppearanceThemeSectionView: UIView {
 
     // MARK: - Configure
 
-    func configure(viewModel: AppearanceThemeSectionViewModel) {
+    func configure(viewModel: AppearanceModels.ThemeSectionViewModel) {
         titleLabel.text = viewModel.title
         rowsStack.arrangedSubviews.forEach {
             rowsStack.removeArrangedSubview($0)

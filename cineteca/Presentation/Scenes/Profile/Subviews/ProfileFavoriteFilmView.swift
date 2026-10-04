@@ -123,7 +123,7 @@ final class ProfileFavoriteFilmView: UIView {
 
     // MARK: - Configure
 
-    func configure(viewModel: ProfileFavoriteFilmViewModel) {
+    func configure(viewModel: ProfileModels.FavoriteFilmViewModel) {
         titleLabel.text = viewModel.title
         backdropImageView.loadImage(from: viewModel.backdropURL)
     }

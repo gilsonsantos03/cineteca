@@ -100,7 +100,7 @@ final class ProfileReviewCardView: UIView {
 
     // MARK: - Configure
 
-    func configure(viewModel: ProfileReviewCardViewModel) {
+    func configure(viewModel: ProfileModels.ReviewCardViewModel) {
         titleLabel.text = viewModel.title
         reviewTextLabel.text = viewModel.reviewText
         starRatingView.configure(rating: viewModel.rating)

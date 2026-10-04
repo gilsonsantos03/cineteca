@@ -155,7 +155,7 @@ final class MovieCardCell: UICollectionViewCell {
 
     // MARK: - Configure
 
-    func configure(viewModel: MovieCardViewModel) {
+    func configure(viewModel: HomeModels.MovieCardViewModel) {
         posterImageView.loadImage(from: viewModel.posterURL)
         titleLabel.text = viewModel.title
         ratingLabel.text = viewModel.rating

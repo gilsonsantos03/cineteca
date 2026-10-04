@@ -125,7 +125,7 @@ final class StatsMonthlyActivityView: UIView {
 
     // MARK: - Configure
 
-    func configure(viewModel: StatsMonthlyActivityViewModel) {
+    func configure(viewModel: StatsModels.MonthlyActivityViewModel) {
         titleLabel.text = viewModel.title
         subtitleLabel.text = viewModel.subtitle
         clearStacks()

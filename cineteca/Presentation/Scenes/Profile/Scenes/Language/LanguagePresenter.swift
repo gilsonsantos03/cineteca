@@ -43,10 +43,10 @@ extension LanguagePresenter: LanguagePresentationLogic {
         LanguageModels.FetchLanguage.ViewModel.Content(
             savedLanguage: savedLanguage,
             pendingLanguage: pendingLanguage,
-            languageSection: LanguageOptionSectionViewModel(
+            languageSection: LanguageModels.OptionSectionViewModel(
                 title: Strings.LanguageScene.Section.appLanguage,
                 options: AppLanguage.allCases.map { language in
-                    LanguageOptionViewModel(
+                    LanguageModels.OptionViewModel(
                         language: language,
                         title: language.displayName,
                         isSelected: language == pendingLanguage

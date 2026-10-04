@@ -59,7 +59,7 @@ extension ProfileViewController: ProfileViewDelegate {
         router.routeToEditProfile()
     }
 
-    func didSelectSetting(_ setting: ProfileSetting) {
+    func didSelectSetting(_ setting: ProfileModels.Setting) {
         switch setting {
         case .account:
             router.routeToAccount()

@@ -1,6 +1,6 @@
 import Foundation
 
-struct LanguageModels {
+enum LanguageModels {
     enum FetchLanguage {
         struct Request {}
 
@@ -14,7 +14,7 @@ struct LanguageModels {
             struct Content {
                 let savedLanguage: AppLanguage
                 let pendingLanguage: AppLanguage
-                let languageSection: LanguageOptionSectionViewModel
+                let languageSection: OptionSectionViewModel
                 let isSaveEnabled: Bool
             }
         }
@@ -45,15 +45,15 @@ struct LanguageModels {
             case success(AppLanguage)
         }
     }
-}
 
-struct LanguageOptionSectionViewModel {
-    let title: String
-    let options: [LanguageOptionViewModel]
-}
+    struct OptionSectionViewModel {
+        let title: String
+        let options: [OptionViewModel]
+    }
 
-struct LanguageOptionViewModel {
-    let language: AppLanguage
-    let title: String
-    let isSelected: Bool
+    struct OptionViewModel {
+        let language: AppLanguage
+        let title: String
+        let isSelected: Bool
+    }
 }

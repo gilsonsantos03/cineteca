@@ -128,7 +128,7 @@ final class StatsTopPersonView: UIView {
 
     // MARK: - Configure
 
-    func configure(viewModel: StatsTopPersonViewModel) {
+    func configure(viewModel: StatsModels.TopPersonViewModel) {
         sectionTitleLabel.text = viewModel.sectionTitle
         nameLabel.text = viewModel.name
         subtitleLabel.text = viewModel.subtitle

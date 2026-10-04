@@ -68,11 +68,11 @@ final class SearchView: UIView {
 
     // MARK: - Public API
 
-    func showLoading(mode: SearchDisplayMode) {
+    func showLoading(mode: SearchModels.DisplayMode) {
         searchContentView.showLoading(mode: mode)
     }
 
-    func showMovies(movies: [SearchMovieGridViewModel], mode: SearchDisplayMode) {
+    func showMovies(movies: [SearchModels.MovieGridViewModel], mode: SearchModels.DisplayMode) {
         searchContentView.showMovies(movies: movies, mode: mode)
     }
 

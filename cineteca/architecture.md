@@ -125,6 +125,68 @@ component that receives and renders its ViewModels.
 | Router | `<Scene>RoutingLogic` | `<Scene>Router` | `<Scene>Router.swift` |
 | Scene models | n/a | enum `<Scene>Models` (nested Request/Response/ViewModel) | `<Scene>Models.swift` |
 
+#### Scene models: namespace
+
+`<Scene>Models` is always an `enum` used as a namespace — never a `struct` you instantiate. Every type that belongs to the scene lives **inside** that enum. Do not declare scene view models, row models, or scene-only actions at module root (`struct FeaturedViewModel { … }` next to `HomeModels`).
+
+Two layers:
+
+1. **Use-case envelope** — nested in the use case: `<Scene>Models.<UseCase>.Request`, `.Response`, `.ViewModel`. This is the VIP cycle payload.
+2. **Subview / row view models** — nested in the scene enum as siblings of the use cases, e.g. `HomeModels.FeaturedViewModel`, `MovieDetailsModels.CastViewModel`. Inside the namespace, drop the scene prefix (`CastViewModel`, not `MovieDetailsCastViewModel`).
+
+Scene-only enums follow the same rule (`ProfileModels.Setting`, `LegalModels.LinkAction`, `SearchModels.DisplayMode`).
+
+```swift
+enum HomeModels {
+    enum FetchContent {
+        struct Request {}
+
+        enum Response {
+            case content(featured: Movie, nowPlaying: [Movie])
+            case error
+        }
+
+        enum ViewModel {
+            case content(Content)
+            case error
+
+            struct Content {
+                let featured: FeaturedViewModel
+                let nowPlaying: [MovieCardViewModel]
+            }
+        }
+    }
+
+    struct FeaturedViewModel {
+        let movieId: Int
+        let title: String
+        let backdropURL: URL?
+    }
+
+    struct MovieCardViewModel {
+        let id: Int
+        let title: String
+        let posterURL: URL?
+    }
+}
+```
+
+**Do not share a scene view model across scenes.** Identical fields today are not a reason to share the type. Profile and Stats both show films / hours / reviews; each still owns its model (`ProfileModels.StatsViewModel`, `StatsModels.SummaryViewModel`). Sharing would make Stats depend on Profile's namespace.
+
+**Shared UI** (`Presentation/UI/`) is the exception. A reused view owns its own nested `ViewModel` (`StatCardsView.ViewModel`). Presenters still emit **scene** models. The scene content view maps to the UI component at the view boundary — that mapping is the only coupling.
+
+```swift
+statsView.configure(
+    viewModel: .init(
+        filmsCount: content.stats.filmsCount,
+        hoursWatched: content.stats.hoursWatched,
+        reviewsCount: content.stats.reviewsCount
+    )
+)
+```
+
+Put a view in `Presentation/UI/` only when **two or more scenes** compose it. One scene → `<Scene>/Subviews/`.
+
 #### Scene models: content + error
 
 When a use case can succeed with data or fail, **unify `content` and `error` in a single enum** for both `Response` and `ViewModel`. Keep `loading` as a separate use case when the UI needs a distinct loading state.
@@ -154,6 +216,8 @@ enum Loading {
     struct ViewModel {}
 }
 ```
+
+`FeaturedViewModel` and `MovieCardViewModel` in this snippet are nested types of `<Scene>Models`, not file-level structs. See **Scene models: namespace** above.
 
 **Do:**
 - One presenter method per unified flow (e.g. `presentFetchContent(response:)`)

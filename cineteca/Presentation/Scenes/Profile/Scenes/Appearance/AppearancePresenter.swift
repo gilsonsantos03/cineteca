@@ -43,10 +43,10 @@ extension AppearancePresenter: AppearancePresentationLogic {
         AppearanceModels.FetchAppearance.ViewModel.Content(
             savedTheme: savedTheme,
             pendingTheme: pendingTheme,
-            themeSection: AppearanceThemeSectionViewModel(
+            themeSection: AppearanceModels.ThemeSectionViewModel(
                 title: Strings.AppearanceScene.Section.theme,
                 options: AppTheme.allCases.map { theme in
-                    AppearanceThemeOptionViewModel(
+                    AppearanceModels.ThemeOptionViewModel(
                         theme: theme,
                         title: title(for: theme),
                         isSelected: theme == pendingTheme

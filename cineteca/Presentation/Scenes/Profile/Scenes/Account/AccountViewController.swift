@@ -55,7 +55,7 @@ extension AccountViewController: AccountViewDelegate {
         router.routeBack()
     }
 
-    func didSelectRow(action: AccountRowAction) {
+    func didSelectRow(action: AccountModels.RowAction) {
         switch action {
         case .changePassword:
             router.routeToChangePassword()

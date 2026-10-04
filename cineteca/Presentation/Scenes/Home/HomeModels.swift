@@ -1,6 +1,6 @@
 import Foundation
 
-struct HomeModels {
+enum HomeModels {
     enum FetchContent {
         struct Request {}
 
@@ -50,31 +50,31 @@ struct HomeModels {
             case unavailable(title: String, message: String)
         }
     }
-}
 
-struct GenreFilter {
-    let genres: [Genre]
-    let selectedIndex: Int
-}
+    struct GenreFilter {
+        let genres: [Genre]
+        let selectedIndex: Int
+    }
 
-struct GenreFilterViewModel {
-    let options: [String]
-    let selectedIndex: Int
-}
+    struct GenreFilterViewModel {
+        let options: [String]
+        let selectedIndex: Int
+    }
 
-struct FeaturedViewModel {
-    let movieId: Int
-    let title: String
-    let year: String
-    let rating: String
-    let genres: [String]
-    let backdropURL: URL?
-}
+    struct FeaturedViewModel {
+        let movieId: Int
+        let title: String
+        let year: String
+        let rating: String
+        let genres: [String]
+        let backdropURL: URL?
+    }
 
-struct MovieCardViewModel {
-    let id: Int
-    let title: String
-    let rating: String
-    let posterURL: URL?
-    let isTrending: Bool
+    struct MovieCardViewModel {
+        let id: Int
+        let title: String
+        let rating: String
+        let posterURL: URL?
+        let isTrending: Bool
+    }
 }

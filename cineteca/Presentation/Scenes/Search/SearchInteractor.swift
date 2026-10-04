@@ -74,7 +74,7 @@ extension SearchInteractor: SearchBusinessLogic {
             return
         }
 
-        let loadingMode: SearchDisplayMode = .results
+        let loadingMode: SearchModels.DisplayMode = .results
         await MainActor.run { presenter.presentLoading(mode: loadingMode) }
 
         do {
@@ -103,7 +103,7 @@ extension SearchInteractor: SearchBusinessLogic {
     }
 
     private func loadSuggestedContent() async {
-        let loadingMode: SearchDisplayMode = .suggested
+        let loadingMode: SearchModels.DisplayMode = .suggested
         await MainActor.run { presenter.presentLoading(mode: loadingMode) }
 
         do {

@@ -114,7 +114,7 @@ final class AccountProfileCardView: UIView {
 
     // MARK: - Configure
 
-    func configure(viewModel: AccountProfileCardViewModel) {
+    func configure(viewModel: AccountModels.ProfileCardViewModel) {
         usernameLabel.text = viewModel.username
         emailLabel.text = viewModel.email
         if let imageName = viewModel.avatarImageName, let image = UIImage(named: imageName) {

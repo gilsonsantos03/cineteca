@@ -11,7 +11,7 @@ final class MovieSectionView: UIView {
 
     weak var delegate: MovieSectionViewDelegate?
     private let sectionTitle: String
-    private var movies: [MovieCardViewModel] = []
+    private var movies: [HomeModels.MovieCardViewModel] = []
 
     // MARK: - UI Components
 
@@ -102,7 +102,7 @@ final class MovieSectionView: UIView {
 
     // MARK: - Configure
 
-    func configure(movies: [MovieCardViewModel]) {
+    func configure(movies: [HomeModels.MovieCardViewModel]) {
         self.movies = movies
         collectionView.reloadData()
     }

@@ -12,8 +12,8 @@ final class SearchFiltersView: UIView {
     weak var delegate: SearchFiltersViewDelegate?
 
     private var filters = SearchFilters()
-    private var genreOptions: [SearchGenreOptionViewModel] = []
-    private var languageOptions: [SearchLanguageOptionViewModel] = []
+    private var genreOptions: [SearchModels.GenreOptionViewModel] = []
+    private var languageOptions: [SearchModels.LanguageOptionViewModel] = []
 
     // MARK: - UI Components
 
@@ -213,7 +213,7 @@ final class SearchFiltersView: UIView {
 
     // MARK: - Configure
 
-    func configure(viewModel: SearchFiltersViewModel) {
+    func configure(viewModel: SearchModels.FiltersViewModel) {
         genreOptions = viewModel.genres
         languageOptions = viewModel.languages
 
@@ -245,7 +245,7 @@ final class SearchFiltersView: UIView {
                 guard let self else { return }
                 self.filters.languageCode = option.code
                 self.languageOptions = self.languageOptions.map {
-                    SearchLanguageOptionViewModel(code: $0.code, name: $0.name, isSelected: $0.code == option.code)
+                    SearchModels.LanguageOptionViewModel(code: $0.code, name: $0.name, isSelected: $0.code == option.code)
                 }
                 self.updateLanguageButton()
                 self.notifyFiltersChanged()
@@ -304,7 +304,7 @@ extension SearchFiltersView: UICollectionViewDataSource, UICollectionViewDelegat
         } else {
             filters.selectedGenreIds.insert(option.id)
         }
-        genreOptions[indexPath.item] = SearchGenreOptionViewModel(
+        genreOptions[indexPath.item] = SearchModels.GenreOptionViewModel(
             id: option.id,
             name: option.name,
             isSelected: filters.selectedGenreIds.contains(option.id)

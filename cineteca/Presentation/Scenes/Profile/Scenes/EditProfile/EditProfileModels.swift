@@ -1,6 +1,6 @@
 import Foundation
 
-struct EditProfileModels {
+enum EditProfileModels {
     enum FetchProfile {
         struct Request {}
 

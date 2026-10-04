@@ -21,7 +21,7 @@ final class StatsContentView: UIView {
     }()
 
     private lazy var headerView = StatsHeaderView()
-    private lazy var summaryView = ProfileStatsView()
+    private lazy var summaryView = StatCardsView()
     private lazy var genreDistributionView = StatsGenreDistributionView()
     private lazy var topDirectorView = StatsTopPersonView()
     private lazy var topActorView = StatsTopPersonView()
@@ -82,7 +82,13 @@ final class StatsContentView: UIView {
 
     func configure(content: StatsModels.FetchStats.ViewModel.Content) {
         headerView.configure(viewModel: content.header)
-        summaryView.configure(viewModel: content.summary)
+        summaryView.configure(
+            viewModel: .init(
+                filmsCount: content.summary.filmsCount,
+                hoursWatched: content.summary.hoursWatched,
+                reviewsCount: content.summary.reviewsCount
+            )
+        )
         genreDistributionView.configure(viewModel: content.genres)
         topDirectorView.configure(viewModel: content.topDirector)
         topActorView.configure(viewModel: content.topActor)
