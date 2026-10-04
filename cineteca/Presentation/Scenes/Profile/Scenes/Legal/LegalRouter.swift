@@ -8,6 +8,11 @@ protocol LegalRoutingLogic {
 
 final class LegalRouter {
     weak var viewController: UIViewController?
+    private let legalDocumentBuilder: LegalDocumentBuilding
+
+    init(legalDocumentBuilder: LegalDocumentBuilding) {
+        self.legalDocumentBuilder = legalDocumentBuilder
+    }
 }
 
 extension LegalRouter: LegalRoutingLogic {
@@ -16,12 +21,12 @@ extension LegalRouter: LegalRoutingLogic {
     }
 
     func routeToPrivacyPolicy() {
-        let documentViewController = LegalDocumentConfigurator.resolve(documentType: .privacyPolicy)
+        let documentViewController = legalDocumentBuilder.makeLegalDocument(documentType: .privacyPolicy)
         viewController?.navigationController?.pushViewController(documentViewController, animated: true)
     }
 
     func routeToTermsOfService() {
-        let documentViewController = LegalDocumentConfigurator.resolve(documentType: .termsOfService)
+        let documentViewController = legalDocumentBuilder.makeLegalDocument(documentType: .termsOfService)
         viewController?.navigationController?.pushViewController(documentViewController, animated: true)
     }
 }

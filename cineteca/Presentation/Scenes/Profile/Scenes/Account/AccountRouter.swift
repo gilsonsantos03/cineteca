@@ -7,10 +7,10 @@ protocol AccountRoutingLogic {
 
 final class AccountRouter {
     weak var viewController: UIViewController?
-    private let userRepository: UserRepositoryProtocol
+    private let changePasswordBuilder: ChangePasswordBuilding
 
-    init(userRepository: UserRepositoryProtocol) {
-        self.userRepository = userRepository
+    init(changePasswordBuilder: ChangePasswordBuilding) {
+        self.changePasswordBuilder = changePasswordBuilder
     }
 }
 
@@ -20,7 +20,7 @@ extension AccountRouter: AccountRoutingLogic {
     }
 
     func routeToChangePassword() {
-        let changePasswordViewController = ChangePasswordConfigurator.resolve(userRepository: userRepository)
+        let changePasswordViewController = changePasswordBuilder.makeChangePassword()
         viewController?.navigationController?.pushViewController(changePasswordViewController, animated: true)
     }
 }

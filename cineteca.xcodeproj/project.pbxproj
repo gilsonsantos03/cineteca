@@ -66,7 +66,7 @@
 		AA100001000000000000007A /* MovieDetailsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000007B /* MovieDetailsConfigurator.swift */; };
 		AA100001000000000000008A /* MovieDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000008B /* MovieDetailsView.swift */; };
 		AA100001000000000000009A /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000009B /* MovieDetailsViewController.swift */; };
-		AA100001000000000000010A /* MovieDetailsBuilding.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000010B /* MovieDetailsBuilding.swift */; };
+		AA100001000000000000012A /* SceneBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000012B /* SceneBuilders.swift */; };
 		AA100001000000000000011A /* MovieDetailsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000011B /* MovieDetailsHeaderView.swift */; };
 		AA100001000000000000020A /* MovieDetailsActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000020B /* MovieDetailsActionsView.swift */; };
 		AA100001000000000000021A /* MovieDetailsRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000021B /* MovieDetailsRatingView.swift */; };
@@ -273,7 +273,7 @@
 		AA100001000000000000007B /* MovieDetailsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsConfigurator.swift; sourceTree = "<group>"; };
 		AA100001000000000000008B /* MovieDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsView.swift; sourceTree = "<group>"; };
 		AA100001000000000000009B /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewController.swift; sourceTree = "<group>"; };
-		AA100001000000000000010B /* MovieDetailsBuilding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsBuilding.swift; sourceTree = "<group>"; };
+		AA100001000000000000012B /* SceneBuilders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneBuilders.swift; sourceTree = "<group>"; };
 		AA100001000000000000011B /* MovieDetailsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsHeaderView.swift; sourceTree = "<group>"; };
 		AA100001000000000000020B /* MovieDetailsActionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsActionsView.swift; sourceTree = "<group>"; };
 		AA100001000000000000021B /* MovieDetailsRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsRatingView.swift; sourceTree = "<group>"; };
@@ -435,7 +435,7 @@
 			isa = PBXGroup;
 			children = (
 				442CB0512FF6027B004FCC82 /* AppDependencies.swift */,
-				AA100001000000000000010B /* MovieDetailsBuilding.swift */,
+				AA100001000000000000012B /* SceneBuilders.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -1124,7 +1124,7 @@
 				AA100001000000000000007A /* MovieDetailsConfigurator.swift in Sources */,
 				AA100001000000000000008A /* MovieDetailsView.swift in Sources */,
 				AA100001000000000000009A /* MovieDetailsViewController.swift in Sources */,
-				AA100001000000000000010A /* MovieDetailsBuilding.swift in Sources */,
+				AA100001000000000000012A /* SceneBuilders.swift in Sources */,
 				AA100001000000000000011A /* MovieDetailsHeaderView.swift in Sources */,
 				AA100001000000000000020A /* MovieDetailsActionsView.swift in Sources */,
 				AA100001000000000000021A /* MovieDetailsRatingView.swift in Sources */,

@@ -165,7 +165,26 @@ AppDependencies()
     → MainTabBarController
 ```
 
-Cada cena tem seu próprio `Configurator` para wiring VIP local.
+Cada cena tem seu próprio `Configurator` para o wiring VIP local. O
+`Configurator` monta `ViewController`, `Interactor`, `Presenter` e `Router`;
+ele não deve ser chamado diretamente por outro Router.
+
+Quando um Router precisa abrir outra cena, recebe o protocolo
+`<Scene>Building` correspondente. Os builders ficam na camada `Application` e
+são implementados pelo `AppDependencies`, que delega a criação ao
+`Configurator` da cena de destino:
+
+```text
+ProfileRouter
+    → AccountBuilding
+    → AppDependencies
+    → AccountConfigurator
+    → AccountViewController
+```
+
+Builders são necessários para cenas criadas por outros Routers. Cenas criadas
+diretamente pela composição inicial, como as tabs raiz, não precisam de um
+builder apenas para serem instanciadas.
 
 ---
 
@@ -181,6 +200,7 @@ cineteca/
     │
     ├── Application/
     │   ├── AppDependencies.swift         # Composition root
+    │   ├── SceneBuilders.swift           # Contratos de criação das cenas
     │   └── LocaleProvider.swift          # Device locale → TMDB language
     │
     ├── Domain/

@@ -55,19 +55,61 @@ extension AppDependencies {
             genreRepository: genreRepository,
             userRepository: userRepository,
             statsRepository: statsRepository,
-            appearanceRepository: appearanceRepository,
-            languageRepository: languageRepository,
-            movieDetailsBuilder: self
+            movieDetailsBuilder: self,
+            editProfileBuilder: self,
+            accountBuilder: self,
+            appearanceBuilder: self,
+            languageBuilder: self,
+            legalBuilder: self
         )
     }
 }
 
-extension AppDependencies: MovieDetailsBuilding {
+extension AppDependencies:
+    MovieDetailsBuilding,
+    EditProfileBuilding,
+    AccountBuilding,
+    AppearanceBuilding,
+    LanguageBuilding,
+    LegalBuilding,
+    ChangePasswordBuilding,
+    LegalDocumentBuilding {
     func makeMovieDetails(movieId: Int) -> UIViewController {
         MovieDetailsConfigurator.resolve(
             movieId: movieId,
             repository: movieRepository,
             movieDetailsBuilder: self
         )
+    }
+
+    func makeEditProfile() -> UIViewController {
+        EditProfileConfigurator.resolve(userRepository: userRepository)
+    }
+
+    func makeAccount() -> UIViewController {
+        AccountConfigurator.resolve(
+            userRepository: userRepository,
+            changePasswordBuilder: self
+        )
+    }
+
+    func makeAppearance() -> UIViewController {
+        AppearanceConfigurator.resolve(appearanceRepository: appearanceRepository)
+    }
+
+    func makeLanguage() -> UIViewController {
+        LanguageConfigurator.resolve(languageRepository: languageRepository)
+    }
+
+    func makeLegal() -> UIViewController {
+        LegalConfigurator.resolve(legalDocumentBuilder: self)
+    }
+
+    func makeChangePassword() -> UIViewController {
+        ChangePasswordConfigurator.resolve(userRepository: userRepository)
+    }
+
+    func makeLegalDocument(documentType: LegalDocumentType) -> UIViewController {
+        LegalDocumentConfigurator.resolve(documentType: documentType)
     }
 }

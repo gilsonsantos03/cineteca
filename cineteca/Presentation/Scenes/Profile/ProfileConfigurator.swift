@@ -3,8 +3,11 @@ import UIKit
 final class ProfileConfigurator {
     static func resolve(
         userRepository: UserRepositoryProtocol,
-        appearanceRepository: AppearanceRepositoryProtocol,
-        languageRepository: LanguageRepositoryProtocol
+        editProfileBuilder: EditProfileBuilding,
+        accountBuilder: AccountBuilding,
+        appearanceBuilder: AppearanceBuilding,
+        languageBuilder: LanguageBuilding,
+        legalBuilder: LegalBuilding
     ) -> UIViewController {
         let presenter = ProfilePresenter()
         let interactor = ProfileInteractor(
@@ -12,9 +15,11 @@ final class ProfileConfigurator {
             userRepository: userRepository
         )
         let router = ProfileRouter(
-            userRepository: userRepository,
-            appearanceRepository: appearanceRepository,
-            languageRepository: languageRepository
+            editProfileBuilder: editProfileBuilder,
+            accountBuilder: accountBuilder,
+            appearanceBuilder: appearanceBuilder,
+            languageBuilder: languageBuilder,
+            legalBuilder: legalBuilder
         )
         let view = ProfileView()
         let viewController = ProfileViewController(

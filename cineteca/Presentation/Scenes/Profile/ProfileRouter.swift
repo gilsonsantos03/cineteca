@@ -10,42 +10,48 @@ protocol ProfileRoutingLogic {
 
 final class ProfileRouter: ProfileRoutingLogic {
     weak var viewController: UIViewController?
-    private let userRepository: UserRepositoryProtocol
-    private let appearanceRepository: AppearanceRepositoryProtocol
-    private let languageRepository: LanguageRepositoryProtocol
+    private let editProfileBuilder: EditProfileBuilding
+    private let accountBuilder: AccountBuilding
+    private let appearanceBuilder: AppearanceBuilding
+    private let languageBuilder: LanguageBuilding
+    private let legalBuilder: LegalBuilding
 
     init(
-        userRepository: UserRepositoryProtocol,
-        appearanceRepository: AppearanceRepositoryProtocol,
-        languageRepository: LanguageRepositoryProtocol
+        editProfileBuilder: EditProfileBuilding,
+        accountBuilder: AccountBuilding,
+        appearanceBuilder: AppearanceBuilding,
+        languageBuilder: LanguageBuilding,
+        legalBuilder: LegalBuilding
     ) {
-        self.userRepository = userRepository
-        self.appearanceRepository = appearanceRepository
-        self.languageRepository = languageRepository
+        self.editProfileBuilder = editProfileBuilder
+        self.accountBuilder = accountBuilder
+        self.appearanceBuilder = appearanceBuilder
+        self.languageBuilder = languageBuilder
+        self.legalBuilder = legalBuilder
     }
 
     func routeToEditProfile() {
-        let editProfileViewController = EditProfileConfigurator.resolve(userRepository: userRepository)
+        let editProfileViewController = editProfileBuilder.makeEditProfile()
         viewController?.navigationController?.pushViewController(editProfileViewController, animated: true)
     }
 
     func routeToAccount() {
-        let accountViewController = AccountConfigurator.resolve(userRepository: userRepository)
+        let accountViewController = accountBuilder.makeAccount()
         viewController?.navigationController?.pushViewController(accountViewController, animated: true)
     }
 
     func routeToAppearance() {
-        let appearanceViewController = AppearanceConfigurator.resolve(appearanceRepository: appearanceRepository)
+        let appearanceViewController = appearanceBuilder.makeAppearance()
         viewController?.navigationController?.pushViewController(appearanceViewController, animated: true)
     }
 
     func routeToLanguage() {
-        let languageViewController = LanguageConfigurator.resolve(languageRepository: languageRepository)
+        let languageViewController = languageBuilder.makeLanguage()
         viewController?.navigationController?.pushViewController(languageViewController, animated: true)
     }
 
     func routeToLegal() {
-        let legalViewController = LegalConfigurator.resolve()
+        let legalViewController = legalBuilder.makeLegal()
         viewController?.navigationController?.pushViewController(legalViewController, animated: true)
     }
 }

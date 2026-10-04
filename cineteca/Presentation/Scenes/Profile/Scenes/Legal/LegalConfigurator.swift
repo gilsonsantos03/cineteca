@@ -1,10 +1,10 @@
 import UIKit
 
 final class LegalConfigurator {
-    static func resolve() -> UIViewController {
+    static func resolve(legalDocumentBuilder: LegalDocumentBuilding) -> UIViewController {
         let presenter = LegalPresenter()
         let interactor = LegalInteractor(presenter: presenter)
-        let router = LegalRouter()
+        let router = LegalRouter(legalDocumentBuilder: legalDocumentBuilder)
         let view = LegalView()
         let viewController = LegalViewController(
             customView: view,

@@ -125,6 +125,40 @@ component that receives and renders its ViewModels.
 | Router | `<Scene>RoutingLogic` | `<Scene>Router` | `<Scene>Router.swift` |
 | Scene models | n/a | enum `<Scene>Models` (nested Request/Response/ViewModel) | `<Scene>Models.swift` |
 
+### Composition Root and scene builders
+
+`AppDependencies` is the composition root. It creates the concrete repositories,
+services, and scene-building dependencies, then injects abstractions into the
+presentation layer.
+
+Each scene has a `Configurator` for wiring its local VIP cycle:
+
+```text
+Configurator → ViewController + Interactor + Presenter + Router
+```
+
+When a Router needs to create another scene, it must depend on that scene's
+`<Scene>Building` protocol instead of calling the destination Configurator
+directly. The builder is implemented by `AppDependencies` and delegates the
+concrete construction to the destination Configurator.
+
+```swift
+protocol MovieDetailsBuilding {
+    func makeMovieDetails(movieId: Int) -> UIViewController
+}
+
+final class MovieDetailsRouter {
+    private let movieDetailsBuilder: MovieDetailsBuilding
+}
+```
+
+This keeps navigation code independent from concrete dependency wiring and
+makes Routers straightforward to test with a spy builder.
+
+Use a builder when a scene is created by another scene's Router. Scenes created
+directly by the initial composition (for example, root tabs) do not need a
+builder solely to be instantiated.
+
 #### Scene models: namespace
 
 `<Scene>Models` is always an `enum` used as a namespace — never a `struct` you instantiate. Every type that belongs to the scene lives **inside** that enum. Do not declare scene view models, row models, or scene-only actions at module root (`struct FeaturedViewModel { … }` next to `HomeModels`).

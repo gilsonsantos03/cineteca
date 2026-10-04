@@ -5,26 +5,35 @@ final class MainTabBarController: UITabBarController {
     private let genreRepository: GenreRepositoryProtocol
     private let userRepository: UserRepositoryProtocol
     private let statsRepository: StatsRepositoryProtocol
-    private let appearanceRepository: AppearanceRepositoryProtocol
-    private let languageRepository: LanguageRepositoryProtocol
     private let movieDetailsBuilder: MovieDetailsBuilding
+    private let editProfileBuilder: EditProfileBuilding
+    private let accountBuilder: AccountBuilding
+    private let appearanceBuilder: AppearanceBuilding
+    private let languageBuilder: LanguageBuilding
+    private let legalBuilder: LegalBuilding
 
     init(
         repository: MovieRepositoryProtocol,
         genreRepository: GenreRepositoryProtocol,
         userRepository: UserRepositoryProtocol,
         statsRepository: StatsRepositoryProtocol,
-        appearanceRepository: AppearanceRepositoryProtocol,
-        languageRepository: LanguageRepositoryProtocol,
-        movieDetailsBuilder: MovieDetailsBuilding
+        movieDetailsBuilder: MovieDetailsBuilding,
+        editProfileBuilder: EditProfileBuilding,
+        accountBuilder: AccountBuilding,
+        appearanceBuilder: AppearanceBuilding,
+        languageBuilder: LanguageBuilding,
+        legalBuilder: LegalBuilding
     ) {
         self.repository = repository
         self.genreRepository = genreRepository
         self.userRepository = userRepository
         self.statsRepository = statsRepository
-        self.appearanceRepository = appearanceRepository
-        self.languageRepository = languageRepository
         self.movieDetailsBuilder = movieDetailsBuilder
+        self.editProfileBuilder = editProfileBuilder
+        self.accountBuilder = accountBuilder
+        self.appearanceBuilder = appearanceBuilder
+        self.languageBuilder = languageBuilder
+        self.legalBuilder = legalBuilder
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -105,8 +114,11 @@ final class MainTabBarController: UITabBarController {
         )
         let profileVC = ProfileConfigurator.resolve(
             userRepository: userRepository,
-            appearanceRepository: appearanceRepository,
-            languageRepository: languageRepository
+            editProfileBuilder: editProfileBuilder,
+            accountBuilder: accountBuilder,
+            appearanceBuilder: appearanceBuilder,
+            languageBuilder: languageBuilder,
+            legalBuilder: legalBuilder
         )
         profileVC.tabBarItem = UITabBarItem(
             title: Strings.TabBar.profile,
