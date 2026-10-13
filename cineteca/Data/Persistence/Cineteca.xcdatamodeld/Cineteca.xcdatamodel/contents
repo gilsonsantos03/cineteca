@@ -6,6 +6,9 @@
         <attribute name="rating" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="reviewText" attributeType="String"/>
         <attribute name="sortOrder" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="releaseYear" optional="YES" attributeType="String"/>
+        <attribute name="directorName" optional="YES" attributeType="String"/>
+        <attribute name="reviewDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="title" attributeType="String"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserEntity" inverseName="reviews" inverseEntity="UserEntity"/>
     </entity>
@@ -24,5 +27,23 @@
         <attribute name="reviewsCount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="username" attributeType="String"/>
         <relationship name="reviews" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="ReviewEntity" inverseName="user" inverseEntity="ReviewEntity"/>
+        <relationship name="movieActivities" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MovieActivityEntity" inverseName="user" inverseEntity="MovieActivityEntity"/>
+    </entity>
+    <entity name="MovieActivityEntity" representedClassName="MovieActivityEntity" syncable="YES">
+        <attribute name="actorNamesData" optional="YES" attributeType="String"/>
+        <attribute name="backdropPath" optional="YES" attributeType="String"/>
+        <attribute name="directorNamesData" optional="YES" attributeType="String"/>
+        <attribute name="genresData" optional="YES" attributeType="String"/>
+        <attribute name="isFavorite" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="isInWatchlist" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="movieId" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="posterPath" optional="YES" attributeType="String"/>
+        <attribute name="ratedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="releaseYear" optional="YES" attributeType="String"/>
+        <attribute name="rating" attributeType="Double" defaultValueString="-1.0" usesScalarValueType="YES"/>
+        <attribute name="runtimeMinutes" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="title" attributeType="String"/>
+        <attribute name="updatedAt" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserEntity" inverseName="movieActivities" inverseEntity="UserEntity"/>
     </entity>
 </model>

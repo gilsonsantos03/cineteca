@@ -6,6 +6,9 @@ protocol MovieDetailsViewDelegate: AnyObject {
     func didRequestBack()
     func didRequestTrailer(for movieId: Int)
     func didSelectSimilarMovie(id movieId: Int)
+    func didRequestRate()
+    func didRequestFavorite(isFavorite: Bool)
+    func didRequestWatchlist(isInWatchlist: Bool)
 }
 
 final class MovieDetailsView: UIView {
@@ -19,6 +22,15 @@ final class MovieDetailsView: UIView {
 
     private lazy var headerView = MovieDetailsHeaderView()
     private lazy var actionsView = MovieDetailsActionsView()
+    private lazy var activityHintLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 12, weight: .medium)
+        label.textColor = .textSecondary
+        label.numberOfLines = 0
+        label.text = Strings.MovieDetailsScene.Favorite.disabledHint
+        label.isHidden = true
+        return label
+    }()
     private lazy var ratingView = MovieDetailsRatingView()
     private lazy var providersView = MovieDetailsProvidersView()
     private lazy var overviewView = MovieDetailsOverviewView()
@@ -54,6 +66,7 @@ final class MovieDetailsView: UIView {
     private lazy var detailsStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
             actionsView,
+            activityHintLabel,
             ratingView,
             providersView,
             overviewView,
@@ -165,6 +178,8 @@ final class MovieDetailsView: UIView {
             backdropURL: viewModel.backdropURL
         )
         ratingView.configure(rating: viewModel.rating)
+        actionsView.configure(activity: viewModel.activity)
+        activityHintLabel.isHidden = viewModel.activity.canFavorite
         providersView.configure(viewModel.watchProviders)
         overviewView.configure(text: viewModel.overview)
         castView.configure(viewModel.cast)
@@ -173,6 +188,11 @@ final class MovieDetailsView: UIView {
         loader.stopAnimating()
         errorView.isHidden = true
         scrollView.isHidden = false
+    }
+
+    func showActivity(viewModel: MovieDetailsModels.ActivityViewModel) {
+        actionsView.configure(activity: viewModel)
+        activityHintLabel.isHidden = viewModel.canFavorite
     }
 
     func showError(viewModel: MovieDetailsModels.ErrorState.ViewModel) {
@@ -205,11 +225,17 @@ extension MovieDetailsView: MovieDetailsHeaderViewDelegate {
 // MARK: - MovieDetailsActionsViewDelegate
 
 extension MovieDetailsView: MovieDetailsActionsViewDelegate {
-    func didTapRate() {}
+    func didTapRate() {
+        delegate?.didRequestRate()
+    }
 
-    func didTapFavorite() {}
+    func didTapFavorite() {
+        delegate?.didRequestFavorite(isFavorite: !actionsView.isFavoriteSelected)
+    }
 
-    func didTapWatchlist() {}
+    func didTapWatchlist() {
+        delegate?.didRequestWatchlist(isInWatchlist: !actionsView.isWatchlistSelected)
+    }
 }
 
 // MARK: - WatchTrailerButtonDelegate

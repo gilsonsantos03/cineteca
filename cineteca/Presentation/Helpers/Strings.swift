@@ -138,6 +138,15 @@ enum Strings {
         }
     }
 
+    enum MyReviewsScene {
+        static var title: String { Localization.string("MyReviewsScene.Title") }
+        static var reviewCountFormat: String { Localization.string("MyReviewsScene.ReviewCount.Format") }
+        static var updateErrorTitle: String { Localization.string("MyReviewsScene.UpdateError.Title") }
+        static var updateErrorMessage: String { Localization.string("MyReviewsScene.UpdateError.Message") }
+        static var okButton: String { Localization.string("MyReviewsScene.UpdateError.OkButton") }
+        static var ratingScale: String { Localization.string("MyReviewsScene.RatingScale") }
+    }
+
     enum LegalScene {
         static var title: String { Localization.string("LegalScene.Title") }
 
@@ -340,6 +349,98 @@ enum Strings {
 
         enum Rating {
             static var tmdb: String { Localization.string("MovieDetailsScene.Rating.TMDB.Text") }
+        }
+
+        enum Favorite {
+            static var disabledHint: String {
+                Localization.string("MovieDetailsScene.Favorite.DisabledHint")
+            }
+        }
+
+        enum RatingPicker {
+            static var title: String {
+                Localization.string("MovieDetailsScene.RatingPicker.Title")
+            }
+
+            static var cancel: String {
+                Localization.string("MovieDetailsScene.RatingPicker.Cancel")
+            }
+        }
+
+        enum Review {
+            static var title: String {
+                Localization.string("MovieDetailsScene.Review.Title")
+            }
+
+            static var yourRating: String {
+                Localization.string("MovieDetailsScene.Review.YourRating")
+            }
+
+            static var outOfTen: String {
+                Localization.string("MovieDetailsScene.Review.OutOfTen")
+            }
+
+            static var placeholder: String {
+                Localization.string("MovieDetailsScene.Review.Placeholder")
+            }
+
+            static var submit: String {
+                Localization.string("MovieDetailsScene.Review.Submit")
+            }
+
+            static var skip: String {
+                Localization.string("MovieDetailsScene.Review.Skip")
+            }
+
+            static var ratingFormat: String {
+                Localization.string("MovieDetailsScene.Review.RatingFormat")
+            }
+
+            static var ratingRequired: String {
+                Localization.string("MovieDetailsScene.Review.RatingRequired")
+            }
+
+            static var notForMe: String {
+                Localization.string("MovieDetailsScene.Review.NotForMe")
+            }
+
+            static var terrible: String {
+                Localization.string("MovieDetailsScene.Review.Terrible")
+            }
+
+            static var bad: String {
+                Localization.string("MovieDetailsScene.Review.Bad")
+            }
+
+            static var okay: String {
+                Localization.string("MovieDetailsScene.Review.Okay")
+            }
+
+            static var good: String {
+                Localization.string("MovieDetailsScene.Review.Good")
+            }
+
+            static var great: String {
+                Localization.string("MovieDetailsScene.Review.Great")
+            }
+
+            static var masterpiece: String {
+                Localization.string("MovieDetailsScene.Review.Masterpiece")
+            }
+        }
+
+        enum ActivityError {
+            static var title: String {
+                Localization.string("MovieDetailsScene.ActivityError.Title")
+            }
+
+            static var message: String {
+                Localization.string("MovieDetailsScene.ActivityError.Message")
+            }
+
+            static var okButton: String {
+                Localization.string("MovieDetailsScene.ActivityError.OkButton")
+            }
         }
 
         enum Certification {

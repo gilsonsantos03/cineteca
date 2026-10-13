@@ -8,6 +8,7 @@ enum MovieDetailsModels {
 
         struct Response {
             let movie: MovieDetails
+            let activity: MovieActivity
         }
 
         struct ViewModel {
@@ -24,6 +25,7 @@ enum MovieDetailsModels {
             let crew: [CrewViewModel]
             let watchProviders: [WatchProviderViewModel]
             let similarMovies: [SimilarMovieViewModel]
+            let activity: ActivityViewModel
         }
     }
 
@@ -40,6 +42,43 @@ enum MovieDetailsModels {
         enum ViewModel {
             case success(youtubeKey: String)
             case unavailable(title: String, message: String)
+        }
+    }
+
+    enum FetchReview {
+        struct Request {
+            let movieId: Int
+        }
+
+        struct Response {
+            let reviewText: String?
+        }
+
+        struct ViewModel {
+            let reviewText: String?
+        }
+    }
+
+    enum UpdateActivity {
+        struct Request {
+            let movieId: Int
+            let action: Action
+        }
+
+        enum Action {
+            case rate(rating: Double, reviewText: String?)
+            case favorite(Bool)
+            case watchlist(Bool)
+        }
+
+        enum Response {
+            case content(MovieActivity)
+            case error
+        }
+
+        enum ViewModel {
+            case content(ActivityViewModel)
+            case error
         }
     }
 
@@ -70,5 +109,12 @@ enum MovieDetailsModels {
         let id: Int
         let title: String
         let posterURL: URL?
+    }
+
+    struct ActivityViewModel {
+        let rating: Double?
+        let isFavorite: Bool
+        let isInWatchlist: Bool
+        let canFavorite: Bool
     }
 }

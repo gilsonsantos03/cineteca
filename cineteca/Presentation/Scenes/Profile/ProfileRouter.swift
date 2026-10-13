@@ -2,6 +2,7 @@ import UIKit
 
 protocol ProfileRoutingLogic {
     func routeToEditProfile()
+    func routeToMyReviews()
     func routeToAccount()
     func routeToAppearance()
     func routeToLanguage()
@@ -11,6 +12,7 @@ protocol ProfileRoutingLogic {
 final class ProfileRouter: ProfileRoutingLogic {
     weak var viewController: UIViewController?
     private let editProfileBuilder: EditProfileBuilding
+    private let myReviewsBuilder: MyReviewsBuilding
     private let accountBuilder: AccountBuilding
     private let appearanceBuilder: AppearanceBuilding
     private let languageBuilder: LanguageBuilding
@@ -18,12 +20,14 @@ final class ProfileRouter: ProfileRoutingLogic {
 
     init(
         editProfileBuilder: EditProfileBuilding,
+        myReviewsBuilder: MyReviewsBuilding,
         accountBuilder: AccountBuilding,
         appearanceBuilder: AppearanceBuilding,
         languageBuilder: LanguageBuilding,
         legalBuilder: LegalBuilding
     ) {
         self.editProfileBuilder = editProfileBuilder
+        self.myReviewsBuilder = myReviewsBuilder
         self.accountBuilder = accountBuilder
         self.appearanceBuilder = appearanceBuilder
         self.languageBuilder = languageBuilder
@@ -38,6 +42,11 @@ final class ProfileRouter: ProfileRoutingLogic {
     func routeToAccount() {
         let accountViewController = accountBuilder.makeAccount()
         viewController?.navigationController?.pushViewController(accountViewController, animated: true)
+    }
+
+    func routeToMyReviews() {
+        let myReviewsViewController = myReviewsBuilder.makeMyReviews()
+        viewController?.navigationController?.pushViewController(myReviewsViewController, animated: true)
     }
 
     func routeToAppearance() {

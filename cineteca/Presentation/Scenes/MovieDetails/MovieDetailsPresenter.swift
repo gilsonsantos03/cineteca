@@ -5,6 +5,8 @@ protocol MovieDetailsPresentationLogic {
     func presentDetails(response: MovieDetailsModels.FetchDetails.Response)
     func presentError(_ error: Error)
     func presentWatchTrailer(response: MovieDetailsModels.WatchTrailer.Response)
+    func presentReview(response: MovieDetailsModels.FetchReview.Response)
+    func presentUpdateActivity(response: MovieDetailsModels.UpdateActivity.Response)
 }
 
 final class MovieDetailsPresenter {
@@ -36,7 +38,8 @@ extension MovieDetailsPresenter: MovieDetailsPresentationLogic {
             cast: movie.cast.map { makeCastViewModel(from: $0) },
             crew: movie.crew.map { makeCrewViewModel(from: $0) },
             watchProviders: movie.watchProviders.map { makeWatchProviderViewModel(from: $0) },
-            similarMovies: movie.similarMovies.prefix(10).map { makeSimilarMovieViewModel(from: $0) }
+            similarMovies: movie.similarMovies.prefix(10).map { makeSimilarMovieViewModel(from: $0) },
+            activity: makeActivityViewModel(from: response.activity)
         )
         view?.displayDetails(viewModel: viewModel)
     }
@@ -61,6 +64,30 @@ extension MovieDetailsPresenter: MovieDetailsPresentationLogic {
                 )
             )
         }
+    }
+
+    func presentReview(response: MovieDetailsModels.FetchReview.Response) {
+        view?.displayReview(
+            viewModel: .init(reviewText: response.reviewText)
+        )
+    }
+
+    func presentUpdateActivity(response: MovieDetailsModels.UpdateActivity.Response) {
+        switch response {
+        case let .content(activity):
+            view?.displayActivity(viewModel: makeActivityViewModel(from: activity))
+        case .error:
+            view?.displayActivityError()
+        }
+    }
+
+    private func makeActivityViewModel(from activity: MovieActivity) -> MovieDetailsModels.ActivityViewModel {
+        MovieDetailsModels.ActivityViewModel(
+            rating: activity.rating,
+            isFavorite: activity.isFavorite,
+            isInWatchlist: activity.isInWatchlist,
+            canFavorite: activity.isRated
+        )
     }
 
     private func makeCastViewModel(from member: MovieCastMember) -> MovieDetailsModels.CastViewModel {

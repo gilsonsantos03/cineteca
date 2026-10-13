@@ -59,6 +59,10 @@ extension ProfileViewController: ProfileViewDelegate {
         router.routeToEditProfile()
     }
 
+    func didTapSeeAllReviews() {
+        router.routeToMyReviews()
+    }
+
     func didSelectSetting(_ setting: ProfileModels.Setting) {
         switch setting {
         case .account:

@@ -3,28 +3,35 @@ import Foundation
 
 final class UserRepository: UserRepositoryProtocol {
     private let coreDataStack: CoreDataStack
+    private let activityRepository: MovieActivityRepositoryProtocol
 
-    init(coreDataStack: CoreDataStack) {
+    init(
+        coreDataStack: CoreDataStack,
+        activityRepository: MovieActivityRepositoryProtocol
+    ) {
         self.coreDataStack = coreDataStack
+        self.activityRepository = activityRepository
     }
 
     func fetchCurrentUser() async throws -> User {
         let context = coreDataStack.viewContext
-        return try await context.perform {
+        let user = try await context.perform {
             try ProfileSeedData.seedIfNeeded(in: context)
             return try Self.fetchUserEntity(in: context).toDomain()
         }
+        return try await applyActivities(to: user)
     }
 
     func updateProfile(_ update: UserProfileUpdate) async throws -> User {
         let context = coreDataStack.viewContext
-        return try await context.perform {
+        let user = try await context.perform {
             let entity = try Self.fetchUserEntity(in: context)
             entity.displayName = update.displayName
             entity.bio = update.bio
             try context.save()
             return entity.toDomain()
         }
+        return try await applyActivities(to: user)
     }
 
     func updatePassword(_ update: UserPasswordUpdate) async throws {
@@ -46,6 +53,32 @@ final class UserRepository: UserRepositoryProtocol {
             throw UserRepositoryError.userNotFound
         }
         return entity
+    }
+
+    private func applyActivities(to user: User) async throws -> User {
+        let activities = try await activityRepository.fetchActivities()
+        let ratedActivities = activities.filter(\.isRated)
+        let totalRuntime = ratedActivities.reduce(0) { total, activity in
+            total + (activity.metadata.runtimeMinutes ?? 0)
+        }
+        let favoriteActivity = activities
+            .filter(\.isFavorite)
+            .max { $0.updatedAt < $1.updatedAt }
+
+        let favoriteFilm = favoriteActivity.map {
+            UserFavoriteFilm(
+                movieId: $0.metadata.movieId,
+                title: $0.metadata.title,
+                backdropURL: $0.metadata.backdropURL
+            )
+        }
+        let stats = UserStats(
+            filmsCount: ratedActivities.count,
+            hoursWatched: Int((Double(totalRuntime) / 60.0).rounded()),
+            reviewsCount: user.stats.reviewsCount
+        )
+
+        return user.applying(favoriteFilm: favoriteFilm, stats: stats)
     }
 }
 

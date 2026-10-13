@@ -8,6 +8,10 @@ protocol EditProfileBuilding {
     func makeEditProfile() -> UIViewController
 }
 
+protocol MyReviewsBuilding {
+    func makeMyReviews() -> UIViewController
+}
+
 protocol AccountBuilding {
     func makeAccount() -> UIViewController
 }

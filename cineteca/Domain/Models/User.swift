@@ -9,6 +9,7 @@ struct User: Sendable {
     let avatarImageName: String?
     let favoriteFilm: UserFavoriteFilm?
     let stats: UserStats
+    let reviews: [UserReview]
     let recentReviews: [UserReview]
 }
 
@@ -30,4 +31,27 @@ struct UserReview: Sendable {
     let posterURL: URL?
     let rating: Double
     let reviewText: String
+    let releaseYear: String?
+    let directorName: String?
+    let reviewDate: Date?
+}
+
+extension User {
+    func applying(
+        favoriteFilm: UserFavoriteFilm?,
+        stats: UserStats
+    ) -> User {
+        User(
+            username: username,
+            displayName: displayName,
+            bio: bio,
+            email: email,
+            memberSince: memberSince,
+            avatarImageName: avatarImageName,
+            favoriteFilm: favoriteFilm,
+            stats: stats,
+            reviews: reviews,
+            recentReviews: recentReviews
+        )
+    }
 }

@@ -8,6 +8,9 @@ enum ProfileSeedData {
         let posterPath: String
         let rating: Double
         let reviewText: String
+        let releaseYear: String
+        let directorName: String
+        let reviewDate: Date
     }
 
     static func seedIfNeeded(in context: NSManagedObjectContext) throws {
@@ -21,39 +24,47 @@ enum ProfileSeedData {
         let user = UserEntity(context: context)
         user.username = "@mariadot"
         user.displayName = "Maria Dot"
-        user.bio = "Film lover. 127 films logged."
+        user.bio = "Film lover."
         user.email = "maria.dot@gmail.com"
         user.password = "password123"
         user.memberSince = makeMemberSinceDate()
         user.avatarImageName = "profile-avatar"
-        user.filmsCount = 127
-        user.hoursWatched = 318
-        user.reviewsCount = 42
-        user.favoriteMovieId = 157336
-        user.favoriteFilmTitle = "Interstellar"
-        user.favoriteBackdropPath = "/rAiYBfKGq16ESwh/5u1cMDouWRUeQ7ZKv2UX7n4.2.jpg"
+        user.filmsCount = 0
+        user.hoursWatched = 0
+        user.reviewsCount = 0
+        user.favoriteMovieId = 0
+        user.favoriteFilmTitle = ""
 
         let reviews: [ReviewSeed] = [
             ReviewSeed(
                 movieId: 872585,
                 title: "Oppenheimer",
                 posterPath: "/8Gxv8gSfcaaajMBZRduyo6aafLf.jpg",
-                rating: 3.5,
-                reviewText: "Nolan at his most ambitious. The sound design alone makes this worth the IMAX experience."
+                rating: 7.0,
+                reviewText: "Nolan at his most ambitious. The sound design alone makes this worth the IMAX experience.",
+                releaseYear: "2023",
+                directorName: "Christopher Nolan",
+                reviewDate: makeReviewDate(year: 2026, month: 2, day: 2)
             ),
             ReviewSeed(
                 movieId: 335984,
                 title: "Blade Runner 2049",
                 posterPath: "/gajva2L0rPYkEWjzgFlNX5AzULU.jpg",
-                rating: 2.5,
-                reviewText: "Visually stunning but the pacing drags in the second act. Still a worthy sequel."
+                rating: 5.0,
+                reviewText: "Visually stunning but the pacing drags in the second act. Still a worthy sequel.",
+                releaseYear: "2017",
+                directorName: "Denis Villeneuve",
+                reviewDate: makeReviewDate(year: 2026, month: 1, day: 14)
             ),
             ReviewSeed(
                 movieId: 414906,
                 title: "The Batman",
                 posterPath: "/b0PlZXz4m5avXvXR4t2h6nfsQdk.jpg",
-                rating: 4.0,
-                reviewText: "A noir detective story disguised as a superhero film. Pattinson nails the brooding intensity."
+                rating: 8.0,
+                reviewText: "A noir detective story disguised as a superhero film. Pattinson nails the brooding intensity.",
+                releaseYear: "2022",
+                directorName: "Matt Reeves",
+                reviewDate: makeReviewDate(year: 2025, month: 12, day: 20)
             )
         ]
 
@@ -65,6 +76,9 @@ enum ProfileSeedData {
             entity.rating = review.rating
             entity.reviewText = review.reviewText
             entity.sortOrder = Int16(index)
+            entity.releaseYear = review.releaseYear
+            entity.directorName = review.directorName
+            entity.reviewDate = review.reviewDate
             entity.user = user
         }
 
@@ -105,6 +119,15 @@ enum ProfileSeedData {
         components.year = 2023
         components.month = 3
         components.day = 1
+        return components.date ?? Date()
+    }
+
+    private static func makeReviewDate(year: Int, month: Int, day: Int) -> Date {
+        var components = DateComponents()
+        components.calendar = Calendar(identifier: .gregorian)
+        components.year = year
+        components.month = month
+        components.day = day
         return components.date ?? Date()
     }
 }

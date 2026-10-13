@@ -13,6 +13,9 @@ final class MovieDetailsActionsView: UIStackView {
 
     weak var delegate: MovieDetailsActionsViewDelegate?
 
+    private(set) var isFavoriteSelected = false
+    private(set) var isWatchlistSelected = false
+
     private enum ActionKind: String {
         case rate
         case favorite
@@ -81,9 +84,9 @@ final class MovieDetailsActionsView: UIStackView {
         spacing = 12
         distribution = .fillEqually
 
-        addArrangedSubview(makeButton(kind: .rate, selector: #selector(didTapRate)))
-        addArrangedSubview(makeButton(kind: .favorite, selector: #selector(didTapFavorite)))
-        addArrangedSubview(makeButton(kind: .watchlist, selector: #selector(didTapWatchlist)))
+        addArrangedSubview(rateButton)
+        addArrangedSubview(favoriteButton)
+        addArrangedSubview(watchlistButton)
 
         constrain(self) { view in
             view.height == 76
@@ -93,21 +96,47 @@ final class MovieDetailsActionsView: UIStackView {
     // MARK: - Actions
 
     @objc private func didTapRate(_ sender: UIButton) {
-        toggle(sender, kind: .rate)
         delegate?.didTapRate()
     }
 
     @objc private func didTapFavorite(_ sender: UIButton) {
-        toggle(sender, kind: .favorite)
         delegate?.didTapFavorite()
     }
 
     @objc private func didTapWatchlist(_ sender: UIButton) {
-        toggle(sender, kind: .watchlist)
         delegate?.didTapWatchlist()
     }
 
+    // MARK: - Configuration
+
+    func configure(activity: MovieDetailsModels.ActivityViewModel) {
+        isFavoriteSelected = activity.isFavorite
+        isWatchlistSelected = activity.isInWatchlist
+
+        rateButton.isSelected = activity.rating != nil
+        favoriteButton.isSelected = activity.isFavorite
+        watchlistButton.isSelected = activity.isInWatchlist
+        favoriteButton.isEnabled = activity.canFavorite
+        favoriteButton.alpha = activity.canFavorite ? 1 : 0.45
+        favoriteButton.accessibilityHint = activity.canFavorite
+            ? nil
+            : Strings.MovieDetailsScene.Favorite.disabledHint
+
+        applyStyle(
+            to: rateButton,
+            kind: .rate,
+            isSelected: activity.rating != nil,
+            title: activity.rating.map { String(format: "%.1f", $0) }
+        )
+        applyStyle(to: favoriteButton, kind: .favorite, isSelected: activity.isFavorite)
+        applyStyle(to: watchlistButton, kind: .watchlist, isSelected: activity.isInWatchlist)
+    }
+
     // MARK: - Helpers
+
+    private lazy var rateButton = makeButton(kind: .rate, selector: #selector(didTapRate))
+    private lazy var favoriteButton = makeButton(kind: .favorite, selector: #selector(didTapFavorite))
+    private lazy var watchlistButton = makeButton(kind: .watchlist, selector: #selector(didTapWatchlist))
 
     private func makeButton(kind: ActionKind, selector: Selector) -> UIButton {
         let button = UIButton(type: .system)
@@ -117,7 +146,12 @@ final class MovieDetailsActionsView: UIStackView {
         return button
     }
 
-    private func applyStyle(to button: UIButton, kind: ActionKind, isSelected: Bool) {
+    private func applyStyle(
+        to button: UIButton,
+        kind: ActionKind,
+        isSelected: Bool,
+        title: String? = nil
+    ) {
         let symbol = isSelected ? kind.selectedSymbol : kind.symbol
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 17, weight: .medium)
         let icon = UIImage(systemName: symbol, withConfiguration: symbolConfiguration)?
@@ -125,7 +159,7 @@ final class MovieDetailsActionsView: UIStackView {
 
         var configuration = UIButton.Configuration.plain()
         configuration.image = icon
-        configuration.title = kind.title
+        configuration.title = title ?? kind.title
         configuration.imagePlacement = .top
         configuration.imagePadding = 6
         configuration.baseForegroundColor = .white
@@ -138,10 +172,5 @@ final class MovieDetailsActionsView: UIStackView {
             return attributes
         }
         button.configuration = configuration
-    }
-
-    private func toggle(_ button: UIButton, kind: ActionKind) {
-        button.isSelected.toggle()
-        applyStyle(to: button, kind: kind, isSelected: button.isSelected)
     }
 }

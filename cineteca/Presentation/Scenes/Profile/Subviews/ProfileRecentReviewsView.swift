@@ -1,7 +1,13 @@
 import UIKit
 import Cartography
 
+protocol ProfileRecentReviewsViewDelegate: AnyObject {
+    func didTapSeeAllReviews()
+}
+
 final class ProfileRecentReviewsView: UIView {
+
+    weak var delegate: ProfileRecentReviewsViewDelegate?
 
     // MARK: - UI Components
 
@@ -18,13 +24,14 @@ final class ProfileRecentReviewsView: UIView {
         button.setTitle(Strings.ProfileScene.RecentReviews.seeAll, for: .normal)
         button.setTitleColor(.textSecondary, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 13)
-        button.isUserInteractionEnabled = false
+        button.addTarget(self, action: #selector(didTapSeeAll), for: .touchUpInside)
         return button
     }()
 
     private lazy var cardsStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
+        stack.alignment = .fill
         stack.spacing = 12
         return stack
     }()
@@ -94,5 +101,9 @@ final class ProfileRecentReviewsView: UIView {
             card.configure(viewModel: review)
             cardsStack.addArrangedSubview(card)
         }
+    }
+
+    @objc private func didTapSeeAll() {
+        delegate?.didTapSeeAllReviews()
     }
 }

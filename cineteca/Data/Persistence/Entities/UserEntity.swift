@@ -16,6 +16,7 @@ final class UserEntity: NSManagedObject {
     @NSManaged var favoriteFilmTitle: String
     @NSManaged var favoriteBackdropPath: String?
     @NSManaged var reviews: NSOrderedSet?
+    @NSManaged var movieActivities: NSSet?
 }
 
 extension UserEntity {
@@ -25,7 +26,7 @@ extension UserEntity {
 
     func toDomain() -> User {
         let reviewEntities = (reviews?.array as? [ReviewEntity]) ?? []
-        let sortedReviews = reviewEntities.sorted { $0.sortOrder < $1.sortOrder }
+        let sortedReviews = reviewEntities.sorted { $0.sortOrder > $1.sortOrder }
 
         let favoriteFilm: UserFavoriteFilm?
         if favoriteMovieId > 0 {
@@ -49,9 +50,10 @@ extension UserEntity {
             stats: UserStats(
                 filmsCount: Int(filmsCount),
                 hoursWatched: Int(hoursWatched),
-                reviewsCount: Int(reviewsCount)
+                reviewsCount: reviewEntities.count
             ),
-            recentReviews: sortedReviews.map { $0.toDomain() }
+            reviews: sortedReviews.map { $0.toDomain() },
+            recentReviews: sortedReviews.prefix(3).map { $0.toDomain() }
         )
     }
 }

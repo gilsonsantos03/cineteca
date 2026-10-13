@@ -10,22 +10,51 @@ final class ProfileReviewCardView: UIView {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.backgroundColor = .cardBackground
-        imageView.layer.cornerRadius = 8
+        imageView.layer.cornerRadius = 10
         return imageView
     }()
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 15, weight: .semibold)
+        label.font = .systemFont(ofSize: 17, weight: .semibold)
         label.textColor = .textPrimary
+        label.numberOfLines = 1
+        label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         return label
     }()
 
-    private lazy var starRatingView = StarRatingView()
+    private lazy var ratingValueLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 24, weight: .bold)
+        label.textColor = .accentYellow
+        label.setContentHuggingPriority(.required, for: .horizontal)
+        label.setContentCompressionResistancePriority(.required, for: .horizontal)
+        return label
+    }()
+
+    private lazy var ratingScaleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 13, weight: .medium)
+        label.textColor = .textSecondary
+        label.text = Strings.MyReviewsScene.ratingScale
+        label.setContentHuggingPriority(.required, for: .horizontal)
+        label.setContentCompressionResistancePriority(.required, for: .horizontal)
+        return label
+    }()
+
+    private lazy var ratingStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [ratingValueLabel, ratingScaleLabel])
+        stack.axis = .horizontal
+        stack.alignment = .lastBaseline
+        stack.spacing = 2
+        stack.setContentHuggingPriority(.required, for: .horizontal)
+        stack.setContentCompressionResistancePriority(.required, for: .horizontal)
+        return stack
+    }()
 
     private lazy var reviewTextLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 13)
+        label.font = .systemFont(ofSize: 15)
         label.textColor = .textSecondary
         label.numberOfLines = 2
         return label
@@ -53,48 +82,48 @@ final class ProfileReviewCardView: UIView {
     private func setupSubviews() {
         addSubview(posterImageView)
         addSubview(titleLabel)
-        addSubview(starRatingView)
+        addSubview(ratingStack)
         addSubview(reviewTextLabel)
     }
 
     private func setupConstraints() {
         constrainPosterImageView()
         constrainTitleLabel()
-        constrainStarRatingView()
+        constrainRatingStack()
         constrainReviewTextLabel()
     }
 
     private func constrainPosterImageView() {
         constrain(posterImageView, self) { poster, superview in
-            poster.top == superview.top + 12
-            poster.left == superview.left + 12
-            poster.bottom == superview.bottom - 12
-            poster.width == 48
-            poster.height == 72
+            poster.top == superview.top + 16
+            poster.left == superview.left + 16
+            poster.bottom <= superview.bottom - 16
+            poster.width == 80
+            poster.height == 80
         }
     }
 
     private func constrainTitleLabel() {
-        constrain(titleLabel, posterImageView, self) { title, poster, superview in
-            title.top == poster.top
-            title.left == poster.right + 12
-            title.right == superview.right - 12
+        constrain(titleLabel, posterImageView, ratingStack) { title, poster, rating in
+            title.top == poster.top + 2
+            title.left == poster.right + 14
+            title.right == rating.left - 8
         }
     }
 
-    private func constrainStarRatingView() {
-        constrain(starRatingView, titleLabel) { stars, title in
-            stars.top == title.bottom + 4
-            stars.left == title.left
-            stars.height == 14
+    private func constrainRatingStack() {
+        constrain(ratingStack, titleLabel, self) { rating, title, superview in
+            rating.top == title.top - 2
+            rating.right == superview.right - 16
         }
     }
 
     private func constrainReviewTextLabel() {
-        constrain(reviewTextLabel, starRatingView, self) { text, stars, superview in
-            text.top == stars.bottom + 6
-            text.left == stars.left
-            text.right == superview.right - 12
+        constrain(reviewTextLabel, posterImageView, self) { text, poster, superview in
+            text.centerY == poster.centerY
+            text.left == poster.right + 14
+            text.right == superview.right - 16
+            text.bottom == superview.bottom - 16
         }
     }
 
@@ -102,8 +131,10 @@ final class ProfileReviewCardView: UIView {
 
     func configure(viewModel: ProfileModels.ReviewCardViewModel) {
         titleLabel.text = viewModel.title
+        ratingValueLabel.text = viewModel.rating == viewModel.rating.rounded()
+            ? String(format: "%.0f", viewModel.rating)
+            : String(format: "%.1f", viewModel.rating)
         reviewTextLabel.text = viewModel.reviewText
-        starRatingView.configure(rating: viewModel.rating)
         posterImageView.loadImage(from: viewModel.posterURL)
     }
 }

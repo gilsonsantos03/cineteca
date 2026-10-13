@@ -34,7 +34,7 @@ final class StarRatingView: UIView {
 
     private func setupStarImageViews() {
         let config = UIImage.SymbolConfiguration(pointSize: 11, weight: .medium)
-        for _ in 0..<5 {
+        for _ in 0..<10 {
             let imageView = UIImageView()
             imageView.contentMode = .scaleAspectFit
             imageView.preferredSymbolConfiguration = config
@@ -69,7 +69,7 @@ final class StarRatingView: UIView {
     // MARK: - Configure
 
     func configure(rating: Double) {
-        for index in 0..<5 {
+        for index in 0..<10 {
             let starValue = Double(index) + 1
             let imageName: String
             if rating >= starValue {

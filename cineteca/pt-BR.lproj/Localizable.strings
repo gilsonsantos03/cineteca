@@ -62,6 +62,27 @@
 "MovieDetailsScene.Action.Favorite.Text" = "Favoritar";
 "MovieDetailsScene.Action.Watchlist.Text" = "Minha lista";
 "MovieDetailsScene.Action.ReadMore.Text" = "Ler mais";
+"MovieDetailsScene.Favorite.DisabledHint" = "Avalie o filme para adicioná-lo aos favoritos.";
+"MovieDetailsScene.RatingPicker.Title" = "Que nota você dá para este filme?";
+"MovieDetailsScene.RatingPicker.Cancel" = "Cancelar";
+"MovieDetailsScene.Review.Title" = "Escreva uma review";
+"MovieDetailsScene.Review.YourRating" = "SUA NOTA";
+"MovieDetailsScene.Review.OutOfTen" = "DE 10";
+"MovieDetailsScene.Review.Placeholder" = "Escreva sua review... (opcional)";
+"MovieDetailsScene.Review.Submit" = "Enviar review";
+"MovieDetailsScene.Review.Skip" = "Pular";
+"MovieDetailsScene.Review.RatingFormat" = "%.1f de 10";
+"MovieDetailsScene.Review.RatingRequired" = "Escolha uma nota para continuar";
+"MovieDetailsScene.Review.NotForMe" = "Não é para mim";
+"MovieDetailsScene.Review.Terrible" = "Terrível";
+"MovieDetailsScene.Review.Bad" = "Ruim";
+"MovieDetailsScene.Review.Okay" = "Regular";
+"MovieDetailsScene.Review.Good" = "Bom";
+"MovieDetailsScene.Review.Great" = "Ótimo";
+"MovieDetailsScene.Review.Masterpiece" = "Obra-prima";
+"MovieDetailsScene.ActivityError.Title" = "Não foi possível salvar";
+"MovieDetailsScene.ActivityError.Message" = "A alteração não pôde ser salva. Tente novamente.";
+"MovieDetailsScene.ActivityError.OkButton" = "OK";
 
 "MovieDetailsScene.Section.WhereToWatch.Title" = "Onde assistir";
 "MovieDetailsScene.Section.Synopsis.Title" = "Sinopse";
@@ -96,6 +117,13 @@
 "ProfileScene.Settings.Appearance" = "Aparência";
 "ProfileScene.Settings.Language" = "Idioma";
 "ProfileScene.Settings.Legal" = "Legal";
+
+"MyReviewsScene.Title" = "Minhas reviews";
+"MyReviewsScene.ReviewCount.Format" = "%d reviews";
+"MyReviewsScene.UpdateError.Title" = "Não foi possível atualizar a review";
+"MyReviewsScene.UpdateError.Message" = "Não foi possível salvar suas alterações. Tente novamente.";
+"MyReviewsScene.UpdateError.OkButton" = "OK";
+"MyReviewsScene.RatingScale" = "/10";
 
 "EditProfileScene.Title" = "Editar perfil";
 "EditProfileScene.ChangePhotoHint" = "Toque na câmera para alterar a foto";

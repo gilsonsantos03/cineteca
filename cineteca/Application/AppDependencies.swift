@@ -4,10 +4,12 @@ import UIKit
 final class AppDependencies {
     let movieRepository: MovieRepositoryProtocol
     let genreRepository: GenreRepositoryProtocol
+    let movieActivityRepository: MovieActivityRepositoryProtocol
     let userRepository: UserRepositoryProtocol
     let statsRepository: StatsRepositoryProtocol
     let appearanceRepository: AppearanceRepositoryProtocol
     let languageRepository: LanguageRepositoryProtocol
+    let movieReviewSheetFactory: MovieReviewSheetBuilding
 
     private let coreDataStack: CoreDataStack
 
@@ -17,9 +19,17 @@ final class AppDependencies {
         self.coreDataStack = CoreDataStack()
         self.genreRepository = GenreRepository(networkService: networkService)
         self.movieRepository = MovieRepository(networkService: networkService)
-        self.userRepository = UserRepository(coreDataStack: coreDataStack)
-        self.statsRepository = StatsRepository()
+        self.movieActivityRepository = MovieActivityRepository(coreDataStack: coreDataStack)
+        self.userRepository = UserRepository(
+            coreDataStack: coreDataStack,
+            activityRepository: movieActivityRepository
+        )
+        self.statsRepository = StatsRepository(
+            activityRepository: movieActivityRepository,
+            coreDataStack: coreDataStack
+        )
         self.appearanceRepository = AppearanceRepository()
+        self.movieReviewSheetFactory = MovieReviewSheetFactory()
     }
 
     private static func makeTMDBNetworkService(
@@ -57,6 +67,7 @@ extension AppDependencies {
             statsRepository: statsRepository,
             movieDetailsBuilder: self,
             editProfileBuilder: self,
+            myReviewsBuilder: self,
             accountBuilder: self,
             appearanceBuilder: self,
             languageBuilder: self,
@@ -68,6 +79,7 @@ extension AppDependencies {
 extension AppDependencies:
     MovieDetailsBuilding,
     EditProfileBuilding,
+    MyReviewsBuilding,
     AccountBuilding,
     AppearanceBuilding,
     LanguageBuilding,
@@ -78,12 +90,22 @@ extension AppDependencies:
         MovieDetailsConfigurator.resolve(
             movieId: movieId,
             repository: movieRepository,
-            movieDetailsBuilder: self
+            activityRepository: movieActivityRepository,
+            movieDetailsBuilder: self,
+            movieReviewSheetFactory: movieReviewSheetFactory
         )
     }
 
     func makeEditProfile() -> UIViewController {
         EditProfileConfigurator.resolve(userRepository: userRepository)
+    }
+
+    func makeMyReviews() -> UIViewController {
+        MyReviewsConfigurator.resolve(
+            userRepository: userRepository,
+            activityRepository: movieActivityRepository,
+            movieReviewSheetFactory: movieReviewSheetFactory
+        )
     }
 
     func makeAccount() -> UIViewController {

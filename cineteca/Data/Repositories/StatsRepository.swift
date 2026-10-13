@@ -1,55 +1,138 @@
+import CoreData
 import Foundation
 
-final class StatsRepository: StatsRepositoryProtocol {
-    func fetchYearInFilmStats() async throws -> YearInFilmStats {
-        StatsSeedData.makeYearInFilmStats()
-    }
-}
+final class StatsRepository: StatsRepositoryProtocol, @unchecked Sendable {
+    private let activityRepository: MovieActivityRepositoryProtocol
+    private let coreDataStack: CoreDataStack
 
-enum StatsSeedData {
-    static func makeYearInFilmStats() -> YearInFilmStats {
+    init(
+        activityRepository: MovieActivityRepositoryProtocol,
+        coreDataStack: CoreDataStack
+    ) {
+        self.activityRepository = activityRepository
+        self.coreDataStack = coreDataStack
+    }
+
+    func fetchYearInFilmStats() async throws -> YearInFilmStats {
         let year = Calendar.current.component(.year, from: Date())
+        let activities = try await activityRepository.fetchActivities()
+        let ratedActivities = activities.filter {
+            guard let ratedAt = $0.ratedAt else { return false }
+            return Calendar.current.component(.year, from: ratedAt) == year
+        }
+        let reviewsCount = try await fetchReviewCount()
 
         return YearInFilmStats(
             year: year,
-            filmsCount: 127,
-            hoursWatched: 318,
-            reviewsCount: 42,
-            genres: [
-                GenreStat(id: .drama, percentage: 0.38),
-                GenreStat(id: .sciFi, percentage: 0.24),
-                GenreStat(id: .thriller, percentage: 0.16),
-                GenreStat(id: .comedy, percentage: 0.12),
-                GenreStat(id: .other, percentage: 0.10)
-            ],
-            topDirector: PersonStat(
-                name: "Denis Villeneuve",
-                filmsWatched: 8,
-                profileURL: profileURL(path: "/1Rr5SrvHxMXHu5RjKiuFpPHjklZ.jpg")
-            ),
-            topActor: PersonStat(
-                name: "Timothée Chalamet",
-                filmsWatched: 6,
-                profileURL: profileURL(path: "/BE2Nud3VmcqG3PK1nNW7XGYpTl.jpg")
-            ),
-            monthlyActivity: [
-                MonthlyActivityStat(monthIndex: 1, filmsCount: 8),
-                MonthlyActivityStat(monthIndex: 2, filmsCount: 11),
-                MonthlyActivityStat(monthIndex: 3, filmsCount: 9),
-                MonthlyActivityStat(monthIndex: 4, filmsCount: 14),
-                MonthlyActivityStat(monthIndex: 5, filmsCount: 10),
-                MonthlyActivityStat(monthIndex: 6, filmsCount: 7),
-                MonthlyActivityStat(monthIndex: 7, filmsCount: 12),
-                MonthlyActivityStat(monthIndex: 8, filmsCount: 15),
-                MonthlyActivityStat(monthIndex: 9, filmsCount: 13),
-                MonthlyActivityStat(monthIndex: 10, filmsCount: 11),
-                MonthlyActivityStat(monthIndex: 11, filmsCount: 9),
-                MonthlyActivityStat(monthIndex: 12, filmsCount: 8)
-            ]
+            filmsCount: ratedActivities.count,
+            hoursWatched: hoursWatched(for: ratedActivities),
+            reviewsCount: reviewsCount,
+            genres: genreStats(for: ratedActivities),
+            topDirector: topPerson(names: ratedActivities.flatMap(\.metadata.directorNames)),
+            topActor: topPerson(names: ratedActivities.flatMap(\.metadata.actorNames)),
+            monthlyActivity: monthlyActivity(for: ratedActivities, year: year)
         )
     }
 
-    private static func profileURL(path: String) -> URL? {
-        URL(string: TMDBImage.profileBaseURL + path)
+    private func fetchReviewCount() async throws -> Int {
+        let context = coreDataStack.viewContext
+        return try await context.perform {
+            let request = ReviewEntity.fetchRequest()
+            return try context.count(for: request)
+        }
+    }
+
+    private func hoursWatched(for activities: [MovieActivity]) -> Int {
+        let minutes = activities.reduce(0) {
+            $0 + ($1.metadata.runtimeMinutes ?? 0)
+        }
+        return Int((Double(minutes) / 60.0).rounded())
+    }
+
+    private func genreStats(for activities: [MovieActivity]) -> [GenreStat] {
+        guard !activities.isEmpty else { return [] }
+
+        var counts = Dictionary(uniqueKeysWithValues: GenreStatID.allCases.map { ($0, 0) })
+        activities.forEach { activity in
+            counts[primaryGenre(for: activity.metadata.genres), default: 0] += 1
+        }
+
+        return counts
+            .filter { $0.value > 0 }
+            .sorted { $0.key.sortOrder < $1.key.sortOrder }
+            .map {
+                GenreStat(
+                    id: $0.key,
+                    percentage: Double($0.value) / Double(activities.count)
+                )
+            }
+    }
+
+    private func primaryGenre(for genres: [Genre]) -> GenreStatID {
+        for genre in genres {
+            switch genre.id {
+            case 18:
+                return .drama
+            case 878:
+                return .sciFi
+            case 53:
+                return .thriller
+            case 35:
+                return .comedy
+            default:
+                continue
+            }
+        }
+        return .other
+    }
+
+    private func topPerson(names: [String]) -> PersonStat {
+        let counts = names.reduce(into: [String: Int]()) { counts, name in
+            guard !name.isEmpty else { return }
+            counts[name, default: 0] += 1
+        }
+        let top = counts.max { first, second in
+            if first.value == second.value {
+                return first.key > second.key
+            }
+            return first.value < second.value
+        }
+        return PersonStat(
+            name: top?.key ?? "",
+            filmsWatched: top?.value ?? 0,
+            profileURL: nil
+        )
+    }
+
+    private func monthlyActivity(
+        for activities: [MovieActivity],
+        year: Int
+    ) -> [MonthlyActivityStat] {
+        let calendar = Calendar.current
+        let counts = activities.reduce(into: [Int: Int]()) { counts, activity in
+            guard let ratedAt = activity.ratedAt else { return }
+            guard calendar.component(.year, from: ratedAt) == year else { return }
+            let month = calendar.component(.month, from: ratedAt)
+            counts[month, default: 0] += 1
+        }
+        return (1...12).map {
+            MonthlyActivityStat(monthIndex: $0, filmsCount: counts[$0, default: 0])
+        }
+    }
+}
+
+private extension GenreStatID {
+    static var allCases: [GenreStatID] {
+        [.drama, .sciFi, .thriller, .comedy, .other]
+    }
+
+    var sortOrder: Int {
+        switch self {
+        case .drama: 0
+        case .sciFi: 1
+        case .thriller: 2
+        case .comedy: 3
+        case .other: 4
+        }
     }
 }

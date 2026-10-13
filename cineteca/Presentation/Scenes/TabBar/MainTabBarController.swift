@@ -7,6 +7,7 @@ final class MainTabBarController: UITabBarController {
     private let statsRepository: StatsRepositoryProtocol
     private let movieDetailsBuilder: MovieDetailsBuilding
     private let editProfileBuilder: EditProfileBuilding
+    private let myReviewsBuilder: MyReviewsBuilding
     private let accountBuilder: AccountBuilding
     private let appearanceBuilder: AppearanceBuilding
     private let languageBuilder: LanguageBuilding
@@ -19,6 +20,7 @@ final class MainTabBarController: UITabBarController {
         statsRepository: StatsRepositoryProtocol,
         movieDetailsBuilder: MovieDetailsBuilding,
         editProfileBuilder: EditProfileBuilding,
+        myReviewsBuilder: MyReviewsBuilding,
         accountBuilder: AccountBuilding,
         appearanceBuilder: AppearanceBuilding,
         languageBuilder: LanguageBuilding,
@@ -30,6 +32,7 @@ final class MainTabBarController: UITabBarController {
         self.statsRepository = statsRepository
         self.movieDetailsBuilder = movieDetailsBuilder
         self.editProfileBuilder = editProfileBuilder
+        self.myReviewsBuilder = myReviewsBuilder
         self.accountBuilder = accountBuilder
         self.appearanceBuilder = appearanceBuilder
         self.languageBuilder = languageBuilder
@@ -115,6 +118,7 @@ final class MainTabBarController: UITabBarController {
         let profileVC = ProfileConfigurator.resolve(
             userRepository: userRepository,
             editProfileBuilder: editProfileBuilder,
+            myReviewsBuilder: myReviewsBuilder,
             accountBuilder: accountBuilder,
             appearanceBuilder: appearanceBuilder,
             languageBuilder: languageBuilder,

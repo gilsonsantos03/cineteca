@@ -8,6 +8,9 @@ final class ReviewEntity: NSManagedObject {
     @NSManaged var rating: Double
     @NSManaged var reviewText: String
     @NSManaged var sortOrder: Int16
+    @NSManaged var releaseYear: String?
+    @NSManaged var directorName: String?
+    @NSManaged var reviewDate: Date?
     @NSManaged var user: UserEntity?
 }
 
@@ -17,12 +20,22 @@ extension ReviewEntity {
     }
 
     func toDomain() -> UserReview {
-        UserReview(
+        let posterURL = posterPath.flatMap { path -> URL? in
+            if path.hasPrefix("http://") || path.hasPrefix("https://") {
+                return URL(string: path)
+            }
+            return URL(string: TMDBImage.posterBaseURL + path)
+        }
+
+        return UserReview(
             movieId: Int(movieId),
             title: title,
-            posterURL: posterPath.flatMap { URL(string: TMDBImage.posterBaseURL + $0) },
+            posterURL: posterURL,
             rating: rating,
-            reviewText: reviewText
+            reviewText: reviewText,
+            releaseYear: releaseYear,
+            directorName: directorName,
+            reviewDate: reviewDate
         )
     }
 }

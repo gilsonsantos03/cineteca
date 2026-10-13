@@ -62,6 +62,27 @@
 "MovieDetailsScene.Action.Favorite.Text" = "Favorite";
 "MovieDetailsScene.Action.Watchlist.Text" = "Watchlist";
 "MovieDetailsScene.Action.ReadMore.Text" = "Read more";
+"MovieDetailsScene.Favorite.DisabledHint" = "Rate this film to add it to your favorites.";
+"MovieDetailsScene.RatingPicker.Title" = "How would you rate this film?";
+"MovieDetailsScene.RatingPicker.Cancel" = "Cancel";
+"MovieDetailsScene.Review.Title" = "Write a review";
+"MovieDetailsScene.Review.YourRating" = "YOUR RATING";
+"MovieDetailsScene.Review.OutOfTen" = "OF 10";
+"MovieDetailsScene.Review.Placeholder" = "Write your review... (optional)";
+"MovieDetailsScene.Review.Submit" = "Submit Review";
+"MovieDetailsScene.Review.Skip" = "Skip";
+"MovieDetailsScene.Review.RatingFormat" = "%.1f out of 10";
+"MovieDetailsScene.Review.RatingRequired" = "Select a rating to continue";
+"MovieDetailsScene.Review.NotForMe" = "Not for me";
+"MovieDetailsScene.Review.Terrible" = "Terrible";
+"MovieDetailsScene.Review.Bad" = "Bad";
+"MovieDetailsScene.Review.Okay" = "Okay";
+"MovieDetailsScene.Review.Good" = "Good";
+"MovieDetailsScene.Review.Great" = "Great";
+"MovieDetailsScene.Review.Masterpiece" = "Masterpiece";
+"MovieDetailsScene.ActivityError.Title" = "Could not save activity";
+"MovieDetailsScene.ActivityError.Message" = "Your change could not be saved. Please try again.";
+"MovieDetailsScene.ActivityError.OkButton" = "OK";
 
 "MovieDetailsScene.Section.WhereToWatch.Title" = "Where to watch";
 "MovieDetailsScene.Section.Synopsis.Title" = "Synopsis";
@@ -96,6 +117,13 @@
 "ProfileScene.Settings.Appearance" = "Appearance";
 "ProfileScene.Settings.Language" = "Language";
 "ProfileScene.Settings.Legal" = "Legal";
+
+"MyReviewsScene.Title" = "My Reviews";
+"MyReviewsScene.ReviewCount.Format" = "%d reviews";
+"MyReviewsScene.UpdateError.Title" = "Couldn't update review";
+"MyReviewsScene.UpdateError.Message" = "Your changes couldn't be saved. Please try again.";
+"MyReviewsScene.UpdateError.OkButton" = "OK";
+"MyReviewsScene.RatingScale" = "/10";
 
 "EditProfileScene.Title" = "Edit Profile";
 "EditProfileScene.ChangePhotoHint" = "Tap the camera to change photo";

@@ -4,6 +4,7 @@ final class ProfileConfigurator {
     static func resolve(
         userRepository: UserRepositoryProtocol,
         editProfileBuilder: EditProfileBuilding,
+        myReviewsBuilder: MyReviewsBuilding,
         accountBuilder: AccountBuilding,
         appearanceBuilder: AppearanceBuilding,
         languageBuilder: LanguageBuilding,
@@ -16,6 +17,7 @@ final class ProfileConfigurator {
         )
         let router = ProfileRouter(
             editProfileBuilder: editProfileBuilder,
+            myReviewsBuilder: myReviewsBuilder,
             accountBuilder: accountBuilder,
             appearanceBuilder: appearanceBuilder,
             languageBuilder: languageBuilder,
