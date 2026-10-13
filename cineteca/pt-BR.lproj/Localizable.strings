@@ -112,6 +112,8 @@
 "ProfileScene.FavoriteFilm.Badge" = "MEU FILME FAVORITO";
 "ProfileScene.RecentReviews.Title" = "Reviews recentes";
 "ProfileScene.RecentReviews.SeeAll" = "Ver tudo";
+"ProfileScene.RecentReviews.Empty" = "Você ainda não tem reviews. Avalie um filme para vê-las aqui.";
+"ProfileScene.RecentReviews.NoComment" = "Sem comentário escrito";
 "ProfileScene.Settings.Account" = "Conta";
 "ProfileScene.Settings.Notifications" = "Notificações";
 "ProfileScene.Settings.Appearance" = "Aparência";
@@ -124,6 +126,8 @@
 "MyReviewsScene.UpdateError.Message" = "Não foi possível salvar suas alterações. Tente novamente.";
 "MyReviewsScene.UpdateError.OkButton" = "OK";
 "MyReviewsScene.RatingScale" = "/10";
+"MyReviewsScene.Empty" = "Você ainda não escreveu nenhuma review.";
+"MyReviewsScene.NoComment" = "Sem comentário escrito";
 
 "EditProfileScene.Title" = "Editar perfil";
 "EditProfileScene.ChangePhotoHint" = "Toque na câmera para alterar a foto";

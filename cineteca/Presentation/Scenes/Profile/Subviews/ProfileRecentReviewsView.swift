@@ -36,6 +36,20 @@ final class ProfileRecentReviewsView: UIView {
         return stack
     }()
 
+    private lazy var emptyStateLabel: UILabel = {
+        let label = UILabel()
+        label.text = Strings.ProfileScene.RecentReviews.empty
+        label.font = .systemFont(ofSize: 15)
+        label.textColor = .textSecondary
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.backgroundColor = .cardBackground
+        label.layer.cornerRadius = 12
+        label.clipsToBounds = true
+        label.heightAnchor.constraint(equalToConstant: 64).isActive = true
+        return label
+    }()
+
     // MARK: - Initialization
 
     override init(frame: CGRect) {
@@ -94,6 +108,12 @@ final class ProfileRecentReviewsView: UIView {
         cardsStack.arrangedSubviews.forEach {
             cardsStack.removeArrangedSubview($0)
             $0.removeFromSuperview()
+        }
+
+        seeAllButton.isHidden = viewModel.reviews.isEmpty
+        guard !viewModel.reviews.isEmpty else {
+            cardsStack.addArrangedSubview(emptyStateLabel)
+            return
         }
 
         for review in viewModel.reviews {

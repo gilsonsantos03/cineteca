@@ -83,6 +83,24 @@ final class MovieActivityRepositoryTests: XCTestCase {
         XCTAssertEqual(user.favoriteFilm?.movieId, 101)
     }
 
+    func testProfileIncludesRatingWithoutReviewText() async throws {
+        try await repository.upsertMetadata(makeMetadata())
+        _ = try await repository.rateMovie(for: 101, rating: 8.0)
+
+        let userRepository = UserRepository(
+            coreDataStack: coreDataStack,
+            activityRepository: repository
+        )
+        let user = try await userRepository.fetchCurrentUser()
+
+        let ratingOnlyReview = try XCTUnwrap(
+            user.reviews.first { $0.movieId == 101 }
+        )
+        XCTAssertEqual(ratingOnlyReview.rating, 8.0)
+        XCTAssertTrue(ratingOnlyReview.reviewText.isEmpty)
+        XCTAssertEqual(user.recentReviews.first?.movieId, 101)
+    }
+
     func testReviewIsPersistedWithOptionalText() async throws {
         try await repository.upsertMetadata(makeMetadata())
         _ = try await repository.rateMovie(for: 101, rating: 4.0)
@@ -97,7 +115,7 @@ final class MovieActivityRepositoryTests: XCTestCase {
 
         let user = try await userRepository.fetchCurrentUser()
 
-        XCTAssertEqual(user.stats.reviewsCount, initialUser.stats.reviewsCount + 1)
+        XCTAssertEqual(user.stats.reviewsCount, initialUser.stats.reviewsCount)
         XCTAssertTrue(user.recentReviews.contains { $0.reviewText == "A great film" })
         XCTAssertTrue(user.recentReviews.contains { $0.rating == 4.0 })
     }
@@ -172,6 +190,29 @@ final class MovieActivityRepositoryTests: XCTestCase {
 
         XCTAssertEqual(activity.rating, 0.0)
         XCTAssertTrue(activity.isRated)
+    }
+
+    func testResetSessionDataClearsActivitiesAndReviews() async throws {
+        try await repository.upsertMetadata(makeMetadata())
+        _ = try await repository.rateMovie(for: 101, rating: 8.0)
+        try await repository.saveReview(for: 101, rating: 8.0, text: "Great film")
+        _ = try await repository.setFavorite(true, for: 101)
+        _ = try await repository.setWatchlist(true, for: 101)
+
+        try repository.resetSessionData()
+
+        let activities = try await repository.fetchActivities()
+        XCTAssertTrue(activities.isEmpty)
+
+        let userRepository = UserRepository(
+            coreDataStack: coreDataStack,
+            activityRepository: repository
+        )
+        let user = try await userRepository.fetchCurrentUser()
+        XCTAssertNil(user.favoriteFilm)
+        XCTAssertEqual(user.stats.filmsCount, 0)
+        XCTAssertEqual(user.stats.reviewsCount, 0)
+        XCTAssertTrue(user.reviews.isEmpty)
     }
 
     func testRatingRejectsValuesAboveTen() async throws {

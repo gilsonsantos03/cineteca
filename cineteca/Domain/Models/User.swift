@@ -39,7 +39,8 @@ struct UserReview: Sendable {
 extension User {
     func applying(
         favoriteFilm: UserFavoriteFilm?,
-        stats: UserStats
+        stats: UserStats,
+        reviews: [UserReview]
     ) -> User {
         User(
             username: username,
@@ -51,7 +52,7 @@ extension User {
             favoriteFilm: favoriteFilm,
             stats: stats,
             reviews: reviews,
-            recentReviews: recentReviews
+            recentReviews: Array(reviews.prefix(3))
         )
     }
 }

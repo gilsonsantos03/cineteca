@@ -1,7 +1,7 @@
 # Cineteca — Documentação do Projeto
 
 > Documento de referência para discussão técnica com engenheiro iOS especialista.  
-> Última atualização: agosto/2026.
+> Última atualização: outubro/2026.
 
 ---
 
@@ -34,7 +34,7 @@
 |---|---|
 | **Propósito** | Exibir filmes populares, em cartaz, em alta e mais bem avaliados, com filtro por gênero |
 | **Público** | App pessoal/portfólio com UI dark polida |
-| **Estado atual** | Home e **Movie Details** implementadas; Search, Lists, Stats e Profile são placeholders |
+| **Estado atual** | Home, Search, Movie Details, Stats e Profile implementadas; Lists continua como placeholder |
 | **Bundle ID** | `com.gilson.cineteca` |
 | **Versão** | 1.0 (1) |
 | **iOS mínimo** | 17.0 |
@@ -46,12 +46,15 @@
 - Filtra por gênero **no cliente** (sem nova chamada à API)
 - Suporta pull-to-refresh, skeleton loading e tela de erro com retry
 - Localiza UI em `en` e `pt-BR`; nomes de gênero vêm da API no idioma configurado
+- Permite avaliar filmes, adicionar reviews, favoritar e adicionar filmes à watchlist
+- Exibe perfil, estatísticas e reviews recentes do usuário
+- Persiste dados locais do perfil e da atividade de filmes via Core Data
 
 ### O que ainda não faz
 
-- Navega para detalhe do filme e assiste trailer (YouTube)
-- Watchlist, "Ver tudo", notificações
-- Persistência local, testes automatizados, CI/CD
+- Aba Lists, "Ver tudo" e notificações
+- Persistência definitiva para produção e sincronização com backend
+- CI/CD
 
 ---
 
@@ -68,11 +71,11 @@
 | Injeção de dependências | Manual via `AppDependencies` + `Configurator` por cena |
 | Localização | `Localizable.strings` + enum type-safe `Strings` |
 | Dependências externas | 1 pacote SPM (Cartography) |
-| Persistência | Nenhuma |
+| Persistência | Core Data (perfil, atividades de filmes e reviews) |
 
 ### Frameworks Apple utilizados
 
-`UIKit`, `Foundation` — sem SwiftUI, Combine, Core Data, Keychain ou UserDefaults.
+`UIKit`, `Foundation`, `Core Data` — sem SwiftUI, Combine, Keychain ou UserDefaults.
 
 ### Baseline arquitetural
 
@@ -279,6 +282,10 @@ cineteca/
 | **Estado de erro** | Tela cheia com botão retry | `HomeErrorStateView` |
 | **Imagens assíncronas** | Posters/backdrops do CDN TMDB | `UIImageView+AsyncLoad` |
 | **Localização** | UI em en/pt-BR; gêneros da API no idioma do device | `Strings`, `LocaleProvider` |
+| **Avaliação de filmes** | Nota inteira de 0 a 10, com data da avaliação | `MovieActivityRepository`, `MovieReviewView` |
+| **Reviews do usuário** | Texto opcional associado à avaliação; edição sem duplicidade | `ReviewEntity`, `MyReviews/` |
+| **Atividade do usuário** | Favoritos (exigem avaliação) e watchlist por filme | `MovieActivityRepository` |
+| **Perfil e estatísticas** | Dados do usuário, filmes avaliados, horas, reviews e filme favorito | `Profile/`, `Stats/` |
 
 ### 5.2 Seções da Home
 
@@ -295,14 +302,23 @@ cineteca/
 
 | Item | Status |
 |---|---|
-| Aba Search | `UIViewController` vazio |
 | Aba Lists | `UIViewController` vazio |
-| Aba Stats | `UIViewController` vazio |
-| Aba Profile | `UIViewController` vazio |
-| Botão Watch Trailer | Funcional (Home e Movie Details) |
-| Tap em card de filme | Navega para Movie Details |
-| `HomeRouter` | Navega para Movie Details e trailer |
-| Weekly Digest | Strings hardcoded |
+| Notificações | Não implementadas |
+| "Ver tudo" para listas | Não implementado |
+
+### 5.4 Reviews e atividade do usuário
+
+As avaliações e reviews são dados da sessão do usuário no dispositivo:
+
+- A nota aceita valores inteiros de `0` a `10`; uma avaliação registra `ratedAt`.
+- Um filme só pode ser favoritado depois de receber uma avaliação.
+- O texto da review é opcional. Texto vazio remove a review; texto preenchido cria ou atualiza a review do filme sem duplicá-la.
+- Uma avaliação sem texto também aparece no Perfil e em “Minhas reviews” como um card com a nota e os metadados do filme.
+- Cards sem comentário exibem o placeholder localizado “Sem comentário escrito”/“No written comment” em estilo discreto.
+- O perfil calcula filmes avaliados, horas assistidas, quantidade de reviews (com ou sem texto) e filme favorito a partir das atividades salvas.
+- Quando não há reviews, o Perfil exibe um estado vazio na seção de reviews e “Minhas reviews” exibe um estado vazio próprio; no Perfil, “Ver tudo” fica oculto.
+- As alterações são salvas no Core Data durante o uso do app.
+- **Comportamento temporário de desenvolvimento:** `AppDelegate` chama `resetSessionData()` ao iniciar o app, removendo atividades e reviews. Isso deve ser removido antes da produção para preservar os dados entre lançamentos.
 
 ---
 
@@ -336,6 +352,13 @@ struct Movie: Sendable {
 
 **`MovieDetails`** — agrega `Movie` + overview, cast, crew, watch providers e filmes similares. Tipos auxiliares: `MovieCastMember`, `MovieCrewMember`, `WatchProvider`.
 
+**`User` e atividade de filmes**
+
+- `User`: perfil, estatísticas, filme favorito, reviews e reviews recentes.
+- `UserReview`: filme, nota, texto, data, ano de lançamento e diretor.
+- `MovieActivity`: metadados do filme, nota, data da avaliação, favorito e watchlist.
+- `MovieActivityMetadata`: dados necessários para criar ou atualizar a atividade local do filme.
+
 **Regra de organização:** entidades de domínio ficam em `Domain/Models/`; Responses da API ficam em `Data/Models/`.
 
 ### 6.2 Responses da API
@@ -363,7 +386,19 @@ struct Movie: Sendable {
 | `HomeModels.FetchContent.*` | Request/Response/ViewModel do fluxo VIP |
 | `HomeModels.SelectGenre.Request` | Índice do chip selecionado |
 
-### 6.4 Cache interno do Interactor
+### 6.4 Persistência local
+
+O Core Data usa o modelo `Data/Persistence/Cineteca.xcdatamodeld` e mantém:
+
+| Entidade | Conteúdo |
+|---|---|
+| `UserEntity` | Perfil do usuário e relacionamento com reviews e atividades |
+| `MovieActivityEntity` | Metadados, nota, favorito e watchlist por filme |
+| `ReviewEntity` | Texto e dados da review vinculada ao usuário |
+
+`UserRepository` lê e atualiza o perfil. `MovieActivityRepository` grava avaliações, reviews, favoritos e watchlist. A implementação atual é local e temporária: `resetSessionData()` é executado no lançamento para limpar atividades e reviews antes de criar a interface inicial.
+
+### 6.5 Cache interno do Interactor
 
 ```swift
 private struct CachedHomeContent {
@@ -433,6 +468,23 @@ protocol GenreRepositoryProtocol {
     func genres() async throws -> [Genre]
     func invalidateCache() async
 }
+
+protocol MovieActivityRepositoryProtocol {
+    func upsertMetadata(_ metadata: MovieActivityMetadata) async throws
+    func fetchActivity(for movieId: Int) async throws -> MovieActivity?
+    func fetchReview(for movieId: Int) async throws -> String?
+    func rateMovie(for movieId: Int, rating: Double) async throws -> MovieActivity
+    func saveReview(for movieId: Int, rating: Double, text: String) async throws
+    func setFavorite(_ isFavorite: Bool, for movieId: Int) async throws -> MovieActivity
+    func setWatchlist(_ isInWatchlist: Bool, for movieId: Int) async throws -> MovieActivity
+    func fetchActivities() async throws -> [MovieActivity]
+}
+
+protocol UserRepositoryProtocol {
+    func fetchCurrentUser() async throws -> User
+    func updateProfile(_ update: UserProfileUpdate) async throws -> User
+    func updatePassword(_ update: UserPasswordUpdate) async throws
+}
 ```
 
 O `HomeInteractor` chama `genres()` uma vez e repassa `[Genre]` para cada `fetch*` do `MovieRepository`. O filtro por gênero usa `genre.id`, não o nome. O `MovieRepository` não depende de `GenreRepository`.
@@ -497,6 +549,18 @@ loadContent() catch → presenter.presentError(error)
     → Retry chama fetchContent() novamente
 ```
 
+### 8.5 Avaliação e review de um filme
+
+```
+1. Usuário abre Movie Details e escolhe uma nota
+2. MovieDetailsInteractor chama MovieActivityRepository.rateMovie()
+3. Repository atualiza rating, ratedAt e updatedAt no Core Data
+4. Se houver texto, saveReview() cria ou atualiza ReviewEntity
+5. Profile e Stats consultam as atividades e reviews para atualizar os agregados
+```
+
+Ao abrir o app, o fluxo temporário em `AppDelegate` chama `resetSessionData()` antes de montar a interface. O reset remove `MovieActivityEntity` e `ReviewEntity` do usuário local; alterações feitas depois disso são salvas normalmente durante a sessão.
+
 ---
 
 ## 9. Estado e concorrência
@@ -507,6 +571,7 @@ loadContent() catch → presenter.presentError(error)
 |---|---|---|
 | Cache de conteúdo da Home | `HomeInteractor` | `cachedHomeContent`, `sortedGenres`, `selectedGenreIndex` |
 | Cache de gêneros da API | `GenreRepository` (actor) | `cache: [Genre]?` in-memory |
+| Perfil e atividade de filmes | Core Data via `UserRepository` e `MovieActivityRepository` | `UserEntity`, `MovieActivityEntity`, `ReviewEntity` |
 | Estado visual (loading/content/error) | `HomeView` | `enum State { loading, content, error }` |
 | Seleção de chip | `GenreFilterView` | `options` + `selectedIndex` via `configure` |
 
@@ -543,10 +608,10 @@ AppDelegate
   └── UIWindow
         └── MainTabBarController
               ├── UINavigationController → Home (implementada)
-              ├── UINavigationController → Search (placeholder)
+              ├── UINavigationController → Search (implementada)
               ├── UINavigationController → Lists (placeholder)
-              ├── UINavigationController → Stats (placeholder)
-              └── UINavigationController → Profile (placeholder)
+              ├── UINavigationController → Stats (implementada)
+              └── UINavigationController → Profile (implementada)
 ```
 
 ### 10.2 Home
@@ -664,12 +729,12 @@ Sugestões de tópicos para a conversa com o engenheiro iOS:
 
 | # | Tópico | Contexto |
 |---|---|---|
-| 1 | **Próximas features** | Detalhe do filme, busca, watchlist — `HomeRouter` pronto para crescer |
+| 1 | **Próximas features** | Aba Lists, "Ver tudo" e notificações |
 | 2 | **UseCase vs Interactor** | Regra de filtro no Interactor é suficiente? Quando extrair? |
 | 3 | **Modularização** | Monolito hoje; `architecture.md` descreve split Interface/Implementation |
-| 4 | **Testes** | Zero cobertura; `HomeInteractor` (filtro) é o primeiro candidato |
+| 4 | **Testes** | Ampliar cobertura além dos testes atuais de `MovieActivityRepository` |
 | 5 | **Image loading** | Trocar loader custom por Nuke/Kingfisher? Cancelamento de task? |
-| 6 | **Persistência** | Cache in-memory apenas; watchlist precisaria Core Data/SwiftData/UserDefaults |
+| 6 | **Persistência** | Core Data local existe, mas o reset de atividades no lançamento é temporário e precisa ser removido antes da produção |
 | 7 | **iOS 17 baseline** | Permite concurrency moderna sem preocupação com retrocompat |
 | 8 | **Delegates vs closures** | Cadeia de 4 delegates na Home — alternativas? |
 | 9 | **VIP boilerplate** | Vale a pena para cenas simples? Quando usar MVVM-C? |
@@ -776,39 +841,16 @@ graph TB
     end
 
     subgraph "Cineteca — Roadmap"
-        UC_SEARCH[Buscar filmes]
-        UC_DETAIL[Ver detalhe do filme]
-        UC_TRAILER[Assistir trailer]
-        UC_WATCHLIST[Adicionar à watchlist]
         UC_LISTS[Gerenciar listas]
-        UC_STATS[Ver estatísticas]
-        UC_PROFILE[Gerenciar perfil]
         UC_NOTIFY[Receber notificações]
         UC_SEEALL[Ver lista completa]
     end
 
-    U -.->|futuro| UC_SEARCH
-    U -.->|futuro| UC_DETAIL
-    U -.->|futuro| UC_TRAILER
-    U -.->|futuro| UC_WATCHLIST
     U -.->|futuro| UC_LISTS
-    U -.->|futuro| UC_STATS
-    U -.->|futuro| UC_PROFILE
     U -.->|futuro| UC_NOTIFY
     U -.->|futuro| UC_SEEALL
 
-    UC_DETAIL -.->|include| UC_TRAILER
-    UC_DETAIL -.->|include| UC_WATCHLIST
-    UC_SEARCH -.-> API
-    UC_DETAIL -.-> API
-
-    style UC_SEARCH fill:#333,stroke:#666,stroke-dasharray: 5 5
-    style UC_DETAIL fill:#333,stroke:#666,stroke-dasharray: 5 5
-    style UC_TRAILER fill:#333,stroke:#666,stroke-dasharray: 5 5
-    style UC_WATCHLIST fill:#333,stroke:#666,stroke-dasharray: 5 5
     style UC_LISTS fill:#333,stroke:#666,stroke-dasharray: 5 5
-    style UC_STATS fill:#333,stroke:#666,stroke-dasharray: 5 5
-    style UC_PROFILE fill:#333,stroke:#666,stroke-dasharray: 5 5
     style UC_NOTIFY fill:#333,stroke:#666,stroke-dasharray: 5 5
     style UC_SEEALL fill:#333,stroke:#666,stroke-dasharray: 5 5
 ```

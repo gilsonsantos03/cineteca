@@ -127,6 +127,8 @@ enum Strings {
         enum RecentReviews {
             static var title: String { Localization.string("ProfileScene.RecentReviews.Title") }
             static var seeAll: String { Localization.string("ProfileScene.RecentReviews.SeeAll") }
+            static var empty: String { Localization.string("ProfileScene.RecentReviews.Empty") }
+            static var noComment: String { Localization.string("ProfileScene.RecentReviews.NoComment") }
         }
 
         enum Settings {
@@ -145,6 +147,8 @@ enum Strings {
         static var updateErrorMessage: String { Localization.string("MyReviewsScene.UpdateError.Message") }
         static var okButton: String { Localization.string("MyReviewsScene.UpdateError.OkButton") }
         static var ratingScale: String { Localization.string("MyReviewsScene.RatingScale") }
+        static var empty: String { Localization.string("MyReviewsScene.Empty") }
+        static var noComment: String { Localization.string("MyReviewsScene.NoComment") }
     }
 
     enum LegalScene {

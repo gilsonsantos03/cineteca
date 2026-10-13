@@ -198,7 +198,13 @@ final class MyReviewCardView: UIView {
         ratingValueLabel.text = viewModel.rating == viewModel.rating.rounded()
             ? String(format: "%.0f", viewModel.rating)
             : String(format: "%.1f", viewModel.rating)
-        reviewTextLabel.text = viewModel.reviewText
+        let hasComment = !viewModel.reviewText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        reviewTextLabel.text = hasComment
+            ? viewModel.reviewText
+            : Strings.MyReviewsScene.noComment
+        reviewTextLabel.font = hasComment
+            ? .systemFont(ofSize: 15)
+            : .italicSystemFont(ofSize: 15)
         dateLabel.text = viewModel.dateText
         dateLabel.isHidden = viewModel.dateText.isEmpty
     }

@@ -60,11 +60,22 @@ Core Data entity. It represents the result needed by the Stats scene after film
 history has been aggregated by year. It has no independent identity, lifecycle,
 or persistence requirements.
 
-The repository may initially return mocked data and later build the same
-read model from watch history, movies, reviews, and credits. If that
-aggregation becomes complex or combines multiple repositories, move the
-orchestration into a `YearInFilmStatsUseCase`; keep the read model contract
-unchanged so the Presentation layer does not depend on the data source.
+`StatsRepository` currently builds the same read model from the local movie
+activity repository and Core Data-backed activity history. Reviews and profile
+data are persisted as `ReviewEntity` and `UserEntity`; `MovieActivityEntity`
+stores ratings, favorites, watchlist state, and movie metadata. These
+persistence details remain behind repository protocols and are not exposed to
+Presentation.
+
+`UserRepository` composes persisted reviews with rated activities when building
+the `User` read model. This allows a rating without comment to appear in the
+profile review cards without creating a `ReviewEntity` or duplicating a review
+that already has text.
+
+The temporary development reset is also owned by the data boundary:
+`MovieActivityRepository.resetSessionData()` clears local activities and
+reviews during app launch. This flow must be removed before production so the
+repository can preserve user activity across launches.
 
 Domain read models must contain domain data only. Localization, UIKit colors,
 layout choices, and other visual concerns belong to the Presenter or View.

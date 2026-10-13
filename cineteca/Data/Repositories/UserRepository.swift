@@ -58,6 +58,10 @@ final class UserRepository: UserRepositoryProtocol {
     private func applyActivities(to user: User) async throws -> User {
         let activities = try await activityRepository.fetchActivities()
         let ratedActivities = activities.filter(\.isRated)
+        let reviews = Self.mergeRatedActivities(
+            into: user.reviews,
+            ratedActivities: ratedActivities
+        )
         let totalRuntime = ratedActivities.reduce(0) { total, activity in
             total + (activity.metadata.runtimeMinutes ?? 0)
         }
@@ -75,10 +79,40 @@ final class UserRepository: UserRepositoryProtocol {
         let stats = UserStats(
             filmsCount: ratedActivities.count,
             hoursWatched: Int((Double(totalRuntime) / 60.0).rounded()),
-            reviewsCount: user.stats.reviewsCount
+            reviewsCount: reviews.count
         )
 
-        return user.applying(favoriteFilm: favoriteFilm, stats: stats)
+        return user.applying(
+            favoriteFilm: favoriteFilm,
+            stats: stats,
+            reviews: reviews
+        )
+    }
+
+    private static func mergeRatedActivities(
+        into reviews: [UserReview],
+        ratedActivities: [MovieActivity]
+    ) -> [UserReview] {
+        let reviewedMovieIDs = Set(reviews.map(\.movieId))
+        let ratingOnlyReviews = ratedActivities
+            .filter { !reviewedMovieIDs.contains($0.metadata.movieId) }
+            .compactMap { activity -> UserReview? in
+                guard let rating = activity.rating else { return nil }
+                return UserReview(
+                    movieId: activity.metadata.movieId,
+                    title: activity.metadata.title,
+                    posterURL: activity.metadata.posterURL,
+                    rating: rating,
+                    reviewText: "",
+                    releaseYear: activity.metadata.releaseYear,
+                    directorName: activity.metadata.directorNames.first,
+                    reviewDate: activity.ratedAt
+                )
+            }
+
+        return (reviews + ratingOnlyReviews).sorted {
+            ($0.reviewDate ?? .distantPast) > ($1.reviewDate ?? .distantPast)
+        }
     }
 }
 

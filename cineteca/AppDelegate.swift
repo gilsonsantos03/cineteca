@@ -7,6 +7,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let dependencies = AppDependencies()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // TEMPORARY: reset mock user activity on every launch.
+        // Remove before production so user ratings and reviews persist.
+        do {
+            try dependencies.movieActivityRepository.resetSessionData()
+        } catch {
+            fatalError("Could not reset session data: \(error)")
+        }
+
         let selectedLanguage = dependencies.languageRepository.fetchSelectedLanguage()
         LanguageManager.bootstrap(selectedLanguage: selectedLanguage)
 

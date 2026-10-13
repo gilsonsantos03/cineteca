@@ -8,6 +8,31 @@ final class MovieActivityRepository: MovieActivityRepositoryProtocol, @unchecked
         self.coreDataStack = coreDataStack
     }
 
+    // TEMPORARY: used only to reset mock data between app launches.
+    // Remove this flow before production.
+    func resetSessionData() throws {
+        let context = coreDataStack.viewContext
+        try context.performAndWait {
+            try ProfileSeedData.seedIfNeeded(in: context)
+
+            let userRequest = UserEntity.fetchRequest()
+            userRequest.fetchLimit = 1
+            guard let user = try context.fetch(userRequest).first else {
+                throw MovieActivityRepositoryError.activityNotFound
+            }
+
+            let activityRequest = MovieActivityEntity.fetchRequest()
+            activityRequest.predicate = NSPredicate(format: "user == %@", user)
+            try context.fetch(activityRequest).forEach(context.delete)
+
+            let reviewRequest = ReviewEntity.fetchRequest()
+            reviewRequest.predicate = NSPredicate(format: "user == %@", user)
+            try context.fetch(reviewRequest).forEach(context.delete)
+
+            try context.save()
+        }
+    }
+
     func upsertMetadata(_ metadata: MovieActivityMetadata) async throws {
         let context = coreDataStack.viewContext
         try await context.perform {

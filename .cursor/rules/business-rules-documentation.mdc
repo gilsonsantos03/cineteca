@@ -1,0 +1,14 @@
+---
+description: Keep project documentation synchronized with business rules and features
+alwaysApply: true
+---
+
+# Business rule documentation
+
+Whenever a business rule changes or a new user-facing feature is added:
+
+- Update `DOCUMENTACAO-PROJETO.md` in the same change.
+- Document the user-visible behavior, relevant constraints, persistence behavior, and temporary/development-only behavior.
+- Update `architecture.md` too when the change affects architectural boundaries, data flow, or repository responsibilities.
+- Remove stale statements elsewhere in the documentation that contradict the current implementation.
+- Do not add documentation for purely mechanical refactors unless they change a documented contract.

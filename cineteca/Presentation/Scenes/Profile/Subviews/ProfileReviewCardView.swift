@@ -105,7 +105,7 @@ final class ProfileReviewCardView: UIView {
 
     private func constrainTitleLabel() {
         constrain(titleLabel, posterImageView, ratingStack) { title, poster, rating in
-            title.centerY == rating.centerY
+            title.top == poster.top
             title.left == poster.right + 14
             title.right == rating.left - 8
         }
@@ -113,7 +113,7 @@ final class ProfileReviewCardView: UIView {
 
     private func constrainRatingStack() {
         constrain(ratingStack, posterImageView, self) { rating, poster, superview in
-            rating.centerY == poster.top + 16
+            rating.top == poster.top - 2
             rating.right == superview.right - 16
         }
     }
@@ -134,7 +134,13 @@ final class ProfileReviewCardView: UIView {
         ratingValueLabel.text = viewModel.rating == viewModel.rating.rounded()
             ? String(format: "%.0f", viewModel.rating)
             : String(format: "%.1f", viewModel.rating)
-        reviewTextLabel.text = viewModel.reviewText
+        let hasComment = !viewModel.reviewText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        reviewTextLabel.text = hasComment
+            ? viewModel.reviewText
+            : Strings.ProfileScene.RecentReviews.noComment
+        reviewTextLabel.font = hasComment
+            ? .systemFont(ofSize: 15)
+            : .italicSystemFont(ofSize: 15)
         posterImageView.loadImage(from: viewModel.posterURL)
     }
 }
