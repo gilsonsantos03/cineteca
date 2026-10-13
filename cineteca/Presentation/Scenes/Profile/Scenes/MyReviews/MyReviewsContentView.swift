@@ -7,7 +7,12 @@ protocol MyReviewsContentViewDelegate: AnyObject {
 }
 
 final class MyReviewsContentView: UIView {
+
+    // MARK: - Properties
+    
     weak var delegate: MyReviewsContentViewDelegate?
+
+    // MARK: - UI Components
 
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -25,12 +30,6 @@ final class MyReviewsContentView: UIView {
     }()
 
     private lazy var headerView = BackNavigationHeaderView(title: Strings.MyReviewsScene.title)
-    private lazy var subtitleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 15)
-        label.textColor = .textSecondary
-        return label
-    }()
 
     private lazy var cardsStack: UIStackView = {
         let stack = UIStackView()
@@ -40,12 +39,16 @@ final class MyReviewsContentView: UIView {
         return stack
     }()
 
+    // MARK: - Initialization
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
     }
 
     required init?(coder: NSCoder) { nil }
+
+    // MARK: - Setup
 
     private func setup() {
         backgroundColor = .appBackground
@@ -58,7 +61,6 @@ final class MyReviewsContentView: UIView {
         addSubview(scrollView)
         scrollView.addSubview(contentStack)
         contentStack.addArrangedSubview(headerView)
-        contentStack.addArrangedSubview(subtitleLabel)
         contentStack.addArrangedSubview(cardsStack)
         contentStack.addArrangedSubview(makeSpacer(height: 24))
     }
@@ -66,7 +68,6 @@ final class MyReviewsContentView: UIView {
     private func setupConstraints() {
         constrainScrollView()
         constrainContentStack()
-        constrainSubtitleLabel()
     }
 
     private func constrainScrollView() {
@@ -88,14 +89,7 @@ final class MyReviewsContentView: UIView {
         }
     }
 
-    private func constrainSubtitleLabel() {
-        constrain(subtitleLabel) { label in
-            label.height == 20
-        }
-    }
-
     func configure(content: MyReviewsModels.FetchReviews.ViewModel.Content) {
-        subtitleLabel.text = content.subtitle
         cardsStack.arrangedSubviews.forEach {
             cardsStack.removeArrangedSubview($0)
             $0.removeFromSuperview()

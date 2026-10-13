@@ -6,9 +6,14 @@ protocol MyReviewCardViewDelegate: AnyObject {
 }
 
 final class MyReviewCardView: UIView {
+    
+    // MARK: - Properties
+    
     weak var delegate: MyReviewCardViewDelegate?
 
     private var review: MyReviewsModels.ReviewCardViewModel?
+
+    // MARK: - UI Components
 
     private lazy var posterImageView: UIImageView = {
         let imageView = UIImageView()
@@ -95,12 +100,16 @@ final class MyReviewCardView: UIView {
         return label
     }()
 
+    // MARK: - Initialization
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
     }
 
     required init?(coder: NSCoder) { nil }
+
+    // MARK: - Setup
 
     private func setup() {
         backgroundColor = .cardBackground
@@ -178,6 +187,8 @@ final class MyReviewCardView: UIView {
         }
     }
 
+    // MARK: - Configure
+
     func configure(viewModel: MyReviewsModels.ReviewCardViewModel) {
         review = viewModel
         posterImageView.loadImage(from: viewModel.posterURL)
@@ -191,6 +202,8 @@ final class MyReviewCardView: UIView {
         dateLabel.text = viewModel.dateText
         dateLabel.isHidden = viewModel.dateText.isEmpty
     }
+
+    // MARK: - Actions
 
     @objc private func didTap() {
         guard let review else { return }

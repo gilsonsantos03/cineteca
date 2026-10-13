@@ -14,7 +14,6 @@ enum MyReviewsModels {
             case error
 
             struct Content {
-                let subtitle: String
                 let reviews: [ReviewCardViewModel]
             }
         }

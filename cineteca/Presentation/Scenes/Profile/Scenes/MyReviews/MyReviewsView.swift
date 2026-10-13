@@ -7,7 +7,12 @@ protocol MyReviewsViewDelegate: AnyObject {
 }
 
 final class MyReviewsView: UIView {
+
+    // MARK: - Properties
+
     weak var delegate: MyReviewsViewDelegate?
+
+    // MARK: - UI Components
 
     private lazy var contentView = MyReviewsContentView()
     private lazy var loadingIndicator: UIActivityIndicatorView = {
@@ -17,12 +22,16 @@ final class MyReviewsView: UIView {
         return indicator
     }()
 
+    // MARK: - Initialization
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
     }
 
     required init?(coder: NSCoder) { nil }
+
+    // MARK: - Setup
 
     private func setup() {
         backgroundColor = .appBackground
@@ -53,6 +62,8 @@ final class MyReviewsView: UIView {
             indicator.centerY == superview.centerY
         }
     }
+
+    // MARK: - Public API
 
     func showLoading() {
         contentView.isHidden = true

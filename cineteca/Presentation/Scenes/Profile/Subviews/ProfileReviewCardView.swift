@@ -105,15 +105,15 @@ final class ProfileReviewCardView: UIView {
 
     private func constrainTitleLabel() {
         constrain(titleLabel, posterImageView, ratingStack) { title, poster, rating in
-            title.top == poster.top + 2
+            title.centerY == rating.centerY
             title.left == poster.right + 14
             title.right == rating.left - 8
         }
     }
 
     private func constrainRatingStack() {
-        constrain(ratingStack, titleLabel, self) { rating, title, superview in
-            rating.top == title.top - 2
+        constrain(ratingStack, posterImageView, self) { rating, poster, superview in
+            rating.centerY == poster.top + 16
             rating.right == superview.right - 16
         }
     }

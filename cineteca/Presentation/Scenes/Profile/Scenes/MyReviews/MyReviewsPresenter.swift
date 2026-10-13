@@ -42,10 +42,6 @@ extension MyReviewsPresenter: MyReviewsPresentationLogic {
 
     private func makeContent(from user: User) -> MyReviewsModels.FetchReviews.ViewModel.Content {
         MyReviewsModels.FetchReviews.ViewModel.Content(
-            subtitle: String(
-                format: Strings.MyReviewsScene.reviewCountFormat,
-                user.reviews.count
-            ),
             reviews: user.reviews.map { review in
                 MyReviewsModels.ReviewCardViewModel(
                     movieId: review.movieId,
