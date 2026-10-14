@@ -26,7 +26,7 @@ final class MovieDetailsActionsView: UIStackView {
             case .rate:
                 Strings.MovieDetailsScene.Action.rate
             case .favorite:
-                Strings.MovieDetailsScene.Action.favorite
+                Strings.MovieDetailsScene.Action.like
             case .watchlist:
                 Strings.MovieDetailsScene.Action.watchlist
             }

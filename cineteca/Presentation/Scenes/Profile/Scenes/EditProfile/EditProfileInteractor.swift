@@ -39,7 +39,14 @@ extension EditProfileInteractor: EditProfileBusinessLogic {
                 _ = try await userRepository.updateProfile(
                     UserProfileUpdate(
                         displayName: request.displayName.trimmingCharacters(in: .whitespacesAndNewlines),
-                        bio: request.bio.trimmingCharacters(in: .whitespacesAndNewlines)
+                        bio: request.bio.trimmingCharacters(in: .whitespacesAndNewlines),
+                        favoriteFilm: request.favoriteFilm.map {
+                            UserFavoriteFilm(
+                                movieId: $0.movieId,
+                                title: $0.title,
+                                backdropURL: $0.backdropURL
+                            )
+                        }
                     )
                 )
                 response = .success
@@ -51,4 +58,5 @@ extension EditProfileInteractor: EditProfileBusinessLogic {
             }
         }
     }
+
 }

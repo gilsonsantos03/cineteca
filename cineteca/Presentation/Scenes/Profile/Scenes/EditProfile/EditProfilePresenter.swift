@@ -19,6 +19,13 @@ extension EditProfilePresenter: EditProfilePresentationLogic {
                     username: user.username,
                     displayName: user.displayName,
                     bio: user.bio,
+                    favoriteFilm: user.favoriteFilm.map {
+                        EditProfileModels.FavoriteFilmViewModel(
+                            movieId: $0.movieId,
+                            title: $0.title,
+                            backdropURL: $0.backdropURL
+                        )
+                    },
                     avatarImageName: user.avatarImageName
                 )
             ))

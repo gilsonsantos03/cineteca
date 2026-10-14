@@ -3,6 +3,7 @@ import UIKit
 final class ProfileConfigurator {
     static func resolve(
         userRepository: UserRepositoryProtocol,
+        movieDetailsBuilder: MovieDetailsBuilding,
         editProfileBuilder: EditProfileBuilding,
         myReviewsBuilder: MyReviewsBuilding,
         accountBuilder: AccountBuilding,
@@ -16,6 +17,7 @@ final class ProfileConfigurator {
             userRepository: userRepository
         )
         let router = ProfileRouter(
+            movieDetailsBuilder: movieDetailsBuilder,
             editProfileBuilder: editProfileBuilder,
             myReviewsBuilder: myReviewsBuilder,
             accountBuilder: accountBuilder,

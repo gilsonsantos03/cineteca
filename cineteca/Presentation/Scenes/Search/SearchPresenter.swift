@@ -55,7 +55,8 @@ extension SearchPresenter: SearchPresentationLogic {
             title: movie.title,
             year: movie.releaseYear,
             rating: formatRating(movie.rating),
-            posterURL: movie.posterURL
+            posterURL: movie.posterURL,
+            backdropURL: movie.backdropURL
         )
     }
 

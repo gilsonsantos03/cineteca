@@ -2,6 +2,7 @@ import UIKit
 
 protocol ProfileRoutingLogic {
     func routeToEditProfile()
+    func routeToMovieDetails(movieId: Int)
     func routeToMyReviews()
     func routeToAccount()
     func routeToAppearance()
@@ -11,6 +12,7 @@ protocol ProfileRoutingLogic {
 
 final class ProfileRouter: ProfileRoutingLogic {
     weak var viewController: UIViewController?
+    private let movieDetailsBuilder: MovieDetailsBuilding
     private let editProfileBuilder: EditProfileBuilding
     private let myReviewsBuilder: MyReviewsBuilding
     private let accountBuilder: AccountBuilding
@@ -19,6 +21,7 @@ final class ProfileRouter: ProfileRoutingLogic {
     private let legalBuilder: LegalBuilding
 
     init(
+        movieDetailsBuilder: MovieDetailsBuilding,
         editProfileBuilder: EditProfileBuilding,
         myReviewsBuilder: MyReviewsBuilding,
         accountBuilder: AccountBuilding,
@@ -26,6 +29,7 @@ final class ProfileRouter: ProfileRoutingLogic {
         languageBuilder: LanguageBuilding,
         legalBuilder: LegalBuilding
     ) {
+        self.movieDetailsBuilder = movieDetailsBuilder
         self.editProfileBuilder = editProfileBuilder
         self.myReviewsBuilder = myReviewsBuilder
         self.accountBuilder = accountBuilder
@@ -37,6 +41,11 @@ final class ProfileRouter: ProfileRoutingLogic {
     func routeToEditProfile() {
         let editProfileViewController = editProfileBuilder.makeEditProfile()
         viewController?.navigationController?.pushViewController(editProfileViewController, animated: true)
+    }
+
+    func routeToMovieDetails(movieId: Int) {
+        let movieDetailsViewController = movieDetailsBuilder.makeMovieDetails(movieId: movieId)
+        viewController?.navigationController?.pushViewController(movieDetailsViewController, animated: true)
     }
 
     func routeToAccount() {

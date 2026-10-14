@@ -59,6 +59,10 @@ extension ProfileViewController: ProfileViewDelegate {
         router.routeToEditProfile()
     }
 
+    func didTapFavoriteFilm(movieId: Int) {
+        router.routeToMovieDetails(movieId: movieId)
+    }
+
     func didTapSeeAllReviews() {
         router.routeToMyReviews()
     }

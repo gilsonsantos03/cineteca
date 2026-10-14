@@ -28,6 +28,7 @@ final class UserRepository: UserRepositoryProtocol {
             let entity = try Self.fetchUserEntity(in: context)
             entity.displayName = update.displayName
             entity.bio = update.bio
+            Self.applyFavoriteFilm(update.favoriteFilm, to: entity)
             try context.save()
             return entity.toDomain()
         }
@@ -65,17 +66,6 @@ final class UserRepository: UserRepositoryProtocol {
         let totalRuntime = ratedActivities.reduce(0) { total, activity in
             total + (activity.metadata.runtimeMinutes ?? 0)
         }
-        let favoriteActivity = activities
-            .filter(\.isFavorite)
-            .max { $0.updatedAt < $1.updatedAt }
-
-        let favoriteFilm = favoriteActivity.map {
-            UserFavoriteFilm(
-                movieId: $0.metadata.movieId,
-                title: $0.metadata.title,
-                backdropURL: $0.metadata.backdropURL
-            )
-        }
         let stats = UserStats(
             filmsCount: ratedActivities.count,
             hoursWatched: Int((Double(totalRuntime) / 60.0).rounded()),
@@ -83,10 +73,28 @@ final class UserRepository: UserRepositoryProtocol {
         )
 
         return user.applying(
-            favoriteFilm: favoriteFilm,
+            favoriteFilm: user.favoriteFilm,
             stats: stats,
             reviews: reviews
         )
+    }
+
+    private static func backdropPath(from url: URL?) -> String? {
+        guard let url, !url.path.isEmpty else { return nil }
+        let basePath = URL(string: TMDBImage.backdropBaseURL)?.path ?? ""
+        guard !basePath.isEmpty, url.path.hasPrefix(basePath) else {
+            return url.path
+        }
+        return String(url.path.dropFirst(basePath.count))
+    }
+
+    private static func applyFavoriteFilm(
+        _ favoriteFilm: UserFavoriteFilm?,
+        to entity: UserEntity
+    ) {
+        entity.favoriteMovieId = Int32(favoriteFilm?.movieId ?? 0)
+        entity.favoriteFilmTitle = favoriteFilm?.title ?? ""
+        entity.favoriteBackdropPath = backdropPath(from: favoriteFilm?.backdropURL)
     }
 
     private static func mergeRatedActivities(

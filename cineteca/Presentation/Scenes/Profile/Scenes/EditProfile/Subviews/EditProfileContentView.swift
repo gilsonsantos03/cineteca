@@ -4,8 +4,13 @@ import Cartography
 protocol EditProfileContentViewDelegate: AnyObject {
     func didTapBack()
     func didTapCancel()
-    func didTapSave(displayName: String, bio: String)
+    func didTapSave(
+        displayName: String,
+        bio: String,
+        favoriteFilm: EditProfileModels.FavoriteFilmViewModel?
+    )
     func didTapChangePhoto()
+    func didTapChangeFavoriteFilm()
 }
 
 final class EditProfileContentView: UIView {
@@ -34,6 +39,7 @@ final class EditProfileContentView: UIView {
 
     private lazy var headerView = EditProfileHeaderView()
     private lazy var avatarView = EditProfileAvatarView()
+    private lazy var favoriteFilmView = EditProfileFavoriteFilmView()
 
     private lazy var usernameField = EditProfileFormFieldView(
         title: Strings.EditProfileScene.Field.username,
@@ -75,6 +81,8 @@ final class EditProfileContentView: UIView {
 
     private var savedDisplayName = ""
     private var savedBio = ""
+    private var savedFavoriteFilm: EditProfileModels.FavoriteFilmViewModel?
+    private var selectedFavoriteFilm: EditProfileModels.FavoriteFilmViewModel?
     private var isSaveEnabled = false
 
     // MARK: - Initialization
@@ -92,6 +100,7 @@ final class EditProfileContentView: UIView {
         backgroundColor = .appBackground
         headerView.delegate = self
         avatarView.delegate = self
+        favoriteFilmView.delegate = self
         displayNameField.onTextChange = { [weak self] in
             self?.evaluateChanges()
         }
@@ -108,6 +117,7 @@ final class EditProfileContentView: UIView {
 
         contentStack.addArrangedSubview(headerView)
         contentStack.addArrangedSubview(avatarView)
+        contentStack.addArrangedSubview(favoriteFilmView)
         contentStack.addArrangedSubview(makeFieldsContainer())
         contentStack.addArrangedSubview(makeButtonsContainer())
         contentStack.addArrangedSubview(makeSpacer(height: 24))
@@ -142,7 +152,10 @@ final class EditProfileContentView: UIView {
     func configure(content: EditProfileModels.FetchProfile.ViewModel.Content) {
         savedDisplayName = content.displayName
         savedBio = content.bio
+        savedFavoriteFilm = content.favoriteFilm
+        selectedFavoriteFilm = content.favoriteFilm
         avatarView.configure(avatarImageName: content.avatarImageName)
+        favoriteFilmView.configure(viewModel: content.favoriteFilm)
         usernameField.configure(text: content.username)
         displayNameField.configure(text: content.displayName)
         bioField.configure(text: content.bio)
@@ -161,7 +174,8 @@ final class EditProfileContentView: UIView {
         endEditing(true)
         delegate?.didTapSave(
             displayName: displayNameField.currentText(),
-            bio: bioField.currentText()
+            bio: bioField.currentText(),
+            favoriteFilm: selectedFavoriteFilm
         )
     }
 
@@ -206,8 +220,16 @@ final class EditProfileContentView: UIView {
         let bio = bioField.currentText().trimmingCharacters(in: .whitespacesAndNewlines)
         let savedDisplayName = savedDisplayName.trimmingCharacters(in: .whitespacesAndNewlines)
         let savedBio = savedBio.trimmingCharacters(in: .whitespacesAndNewlines)
-        let hasChanges = displayName != savedDisplayName || bio != savedBio
+        let hasChanges = displayName != savedDisplayName
+            || bio != savedBio
+            || selectedFavoriteFilm != savedFavoriteFilm
         updateSaveButton(isEnabled: hasChanges)
+    }
+
+    func setFavoriteFilm(_ favoriteFilm: EditProfileModels.FavoriteFilmViewModel) {
+        selectedFavoriteFilm = favoriteFilm
+        favoriteFilmView.configure(viewModel: favoriteFilm)
+        evaluateChanges()
     }
 
     private func updateSaveButton(isEnabled: Bool) {
@@ -230,5 +252,11 @@ extension EditProfileContentView: EditProfileHeaderViewDelegate {
 extension EditProfileContentView: EditProfileAvatarViewDelegate {
     func didTapChangePhoto() {
         delegate?.didTapChangePhoto()
+    }
+}
+
+extension EditProfileContentView: EditProfileFavoriteFilmViewDelegate {
+    func didTapChangeFavoriteFilm() {
+        delegate?.didTapChangeFavoriteFilm()
     }
 }

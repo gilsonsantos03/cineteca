@@ -59,7 +59,7 @@
 "SearchScene.Filters.Language.French" = "Francês";
 
 "MovieDetailsScene.Action.Rate.Text" = "Avaliar";
-"MovieDetailsScene.Action.Favorite.Text" = "Favoritar";
+"MovieDetailsScene.Action.Like.Text" = "Curtir";
 "MovieDetailsScene.Action.Watchlist.Text" = "Minha lista";
 "MovieDetailsScene.Action.ReadMore.Text" = "Ler mais";
 "MovieDetailsScene.Favorite.DisabledHint" = "Avalie o filme para adicioná-lo aos favoritos.";
@@ -110,6 +110,7 @@
 "ProfileScene.MemberSince.Format" = "Membro desde %@";
 "ProfileScene.SignOut.Text" = "Sair";
 "ProfileScene.FavoriteFilm.Badge" = "MEU FILME FAVORITO";
+"ProfileScene.FavoriteFilm.Empty" = "Você ainda não escolheu um filme favorito.";
 "ProfileScene.RecentReviews.Title" = "Reviews recentes";
 "ProfileScene.RecentReviews.SeeAll" = "Ver tudo";
 "ProfileScene.RecentReviews.Empty" = "Você ainda não tem reviews. Avalie um filme para vê-las aqui.";
@@ -133,6 +134,10 @@
 "EditProfileScene.ChangePhotoHint" = "Toque na câmera para alterar a foto";
 "EditProfileScene.SaveChanges" = "Salvar alterações";
 "EditProfileScene.Cancel" = "Cancelar";
+"EditProfileScene.FavoriteFilm.Badge" = "MEU FILME FAVORITO";
+"EditProfileScene.FavoriteFilm.Change" = "Trocar";
+"EditProfileScene.FavoriteFilm.Empty" = "Escolha um filme favorito";
+"SearchScene.SelectionTitle" = "Escolha o filme favorito";
 "EditProfileScene.Field.Username" = "NOME DE USUÁRIO";
 "EditProfileScene.Field.DisplayName" = "NOME DE EXIBIÇÃO";
 "EditProfileScene.Field.Bio" = "BIO";

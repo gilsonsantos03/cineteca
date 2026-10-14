@@ -133,6 +133,7 @@
 		EP000001000000000000011C000000000000001A /* EditProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EP000001000000000000011C /* EditProfileHeaderView.swift */; };
 		EP000001000000000000012C000000000000001A /* EditProfileAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EP000001000000000000012C /* EditProfileAvatarView.swift */; };
 		EP000001000000000000013C000000000000001A /* EditProfileFormFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EP000001000000000000013C /* EditProfileFormFieldView.swift */; };
+		EP000001000000000000015C000000000000001A /* EditProfileFavoriteFilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EP000001000000000000015C /* EditProfileFavoriteFilmView.swift */; };
 		LC000001000000000000005E000000000000001A /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = LC000001000000000000005E /* Localization.swift */; };
 		LE000001000000000000009B000000000000001A /* LegalModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = LE000001000000000000009B /* LegalModels.swift */; };
 		LE00000100000000000000AB000000000000001A /* LegalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = LE00000100000000000000AB /* LegalViewController.swift */; };
@@ -372,6 +373,7 @@
 		EP000001000000000000011C /* EditProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileHeaderView.swift; sourceTree = "<group>"; };
 		EP000001000000000000012C /* EditProfileAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileAvatarView.swift; sourceTree = "<group>"; };
 		EP000001000000000000013C /* EditProfileFormFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileFormFieldView.swift; sourceTree = "<group>"; };
+		EP000001000000000000015C /* EditProfileFavoriteFilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileFavoriteFilmView.swift; sourceTree = "<group>"; };
 		F09EE0361B7672E51466DEC2 /* MovieActivityRepositoryTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MovieActivityRepositoryTests.swift; sourceTree = "<group>"; };
 		LC000001000000000000005E /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		LE000001000000000000009B /* LegalModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalModels.swift; sourceTree = "<group>"; };
@@ -916,6 +918,7 @@
 				EP000001000000000000011C /* EditProfileHeaderView.swift */,
 				EP000001000000000000012C /* EditProfileAvatarView.swift */,
 				EP000001000000000000013C /* EditProfileFormFieldView.swift */,
+				EP000001000000000000015C /* EditProfileFavoriteFilmView.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -1355,6 +1358,7 @@
 				EP000001000000000000011C000000000000001A /* EditProfileHeaderView.swift in Sources */,
 				EP000001000000000000012C000000000000001A /* EditProfileAvatarView.swift in Sources */,
 				EP000001000000000000013C000000000000001A /* EditProfileFormFieldView.swift in Sources */,
+				EP000001000000000000015C000000000000001A /* EditProfileFavoriteFilmView.swift in Sources */,
 				UI000001000000000000001B000000000000001A /* BackNavigationHeaderView.swift in Sources */,
 				UI000001000000000000002B000000000000001A /* PasswordFormFieldView.swift in Sources */,
 				AC000001000000000000009B000000000000001A /* AccountModels.swift in Sources */,

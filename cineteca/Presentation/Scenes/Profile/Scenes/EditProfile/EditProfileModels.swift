@@ -17,6 +17,7 @@ enum EditProfileModels {
                 let username: String
                 let displayName: String
                 let bio: String
+                let favoriteFilm: FavoriteFilmViewModel?
                 let avatarImageName: String?
             }
         }
@@ -26,6 +27,7 @@ enum EditProfileModels {
         struct Request {
             let displayName: String
             let bio: String
+            let favoriteFilm: FavoriteFilmViewModel?
         }
 
         enum Response {
@@ -37,5 +39,11 @@ enum EditProfileModels {
             case success
             case error
         }
+    }
+
+    struct FavoriteFilmViewModel: Equatable {
+        let movieId: Int
+        let title: String
+        let backdropURL: URL?
     }
 }

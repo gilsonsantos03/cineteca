@@ -242,8 +242,12 @@ cineteca/
     │   │   └── UIImageView+AsyncLoad.swift
     │   └── Scenes/
     │       ├── TabBar/MainTabBarController.swift
-    │       └── Home/                     # Cena Home (VIP)
-    │           ├── ...
+    │       ├── Home/                     # Cena Home (VIP)
+    │       │   └── ...
+    │       ├── Search/                   # Cena Search (VIP; busca ou seleção)
+    │       │   ├── SearchConfigurator.swift
+    │       │   ├── SearchViewController.swift
+    │       │   └── ...
     │       └── MovieDetails/             # Cena Movie Details (VIP)
     │           ├── MovieDetailsConfigurator.swift
     │           ├── MovieDetailsInteractor.swift
@@ -277,6 +281,7 @@ cineteca/
 | **Pull-to-refresh** | Invalida cache de gêneros e recarrega tudo | `HomeInteractor.refresh()` |
 | **Filtro por gênero** | Chips horizontais; filtro instantâneo no cliente por `Genre.id` | `HomeInteractor`, `GenreFilterView` |
 | **Detalhe do filme** | Tela VIP com overview, cast, crew, providers e similares | `MovieDetails/` |
+| **Seleção de filme** | A cena Search é apresentada em diálogo com comportamento de seleção para escolher o filme favorito no Edit Profile | `Search/`, `EditProfileRouter` |
 | **Trailer** | Abre YouTube (app ou web) a partir da Home ou Movie Details | `HomeRouter`, `MovieDetailsRouter` |
 | **Skeleton loading** | Shimmer placeholders no layout final | `HomeSkeletonView` |
 | **Estado de erro** | Tela cheia com botão retry | `HomeErrorStateView` |
@@ -315,7 +320,10 @@ As avaliações e reviews são dados da sessão do usuário no dispositivo:
 - O texto da review é opcional. Texto vazio remove a review; texto preenchido cria ou atualiza a review do filme sem duplicá-la.
 - Uma avaliação sem texto também aparece no Perfil e em “Minhas reviews” como um card com a nota e os metadados do filme.
 - Cards sem comentário exibem o placeholder localizado “Sem comentário escrito”/“No written comment” em estilo discreto.
-- O perfil calcula filmes avaliados, horas assistidas, quantidade de reviews (com ou sem texto) e filme favorito a partir das atividades salvas.
+- O perfil calcula filmes avaliados, horas assistidas e quantidade de reviews (com ou sem texto) a partir das atividades salvas.
+- O filme favorito do perfil é definido no Edit Profile, usando a busca em um diálogo, e só é persistido quando o usuário toca em “Salvar alterações”, independentemente do favorito de uma atividade de filme.
+- O card de filme favorito no Perfil é clicável e navega para Movie Details.
+- Movie Details usa “Curtir”/“Like” para a atividade que será consumida futuramente pela cena Lists; isso é separado do filme favorito do perfil.
 - Quando não há reviews, o Perfil exibe um estado vazio na seção de reviews e “Minhas reviews” exibe um estado vazio próprio; no Perfil, “Ver tudo” fica oculto.
 - As alterações são salvas no Core Data durante o uso do app.
 - **Comportamento temporário de desenvolvimento:** `AppDelegate` chama `resetSessionData()` ao iniciar o app, removendo atividades e reviews. Isso deve ser removido antes da produção para preservar os dados entre lançamentos.
@@ -396,7 +404,7 @@ O Core Data usa o modelo `Data/Persistence/Cineteca.xcdatamodeld` e mantém:
 | `MovieActivityEntity` | Metadados, nota, favorito e watchlist por filme |
 | `ReviewEntity` | Texto e dados da review vinculada ao usuário |
 
-`UserRepository` lê e atualiza o perfil. `MovieActivityRepository` grava avaliações, reviews, favoritos e watchlist. A implementação atual é local e temporária: `resetSessionData()` é executado no lançamento para limpar atividades e reviews antes de criar a interface inicial.
+`UserRepository` lê e atualiza o perfil. `MovieActivityRepository` grava avaliações, reviews, curtidas e watchlist. A implementação atual é local e temporária: `resetSessionData()` é executado no lançamento para limpar atividades, reviews e o filme favorito do perfil antes de criar a interface inicial.
 
 ### 6.5 Cache interno do Interactor
 
@@ -559,7 +567,7 @@ loadContent() catch → presenter.presentError(error)
 5. Profile e Stats consultam as atividades e reviews para atualizar os agregados
 ```
 
-Ao abrir o app, o fluxo temporário em `AppDelegate` chama `resetSessionData()` antes de montar a interface. O reset remove `MovieActivityEntity` e `ReviewEntity` do usuário local; alterações feitas depois disso são salvas normalmente durante a sessão.
+Ao abrir o app, o fluxo temporário em `AppDelegate` chama `resetSessionData()` antes de montar a interface. O reset remove `MovieActivityEntity` e `ReviewEntity` e limpa o filme favorito do perfil; alterações feitas depois disso são salvas normalmente durante a sessão. Essa é a mesma regra temporária aplicada às reviews.
 
 ---
 

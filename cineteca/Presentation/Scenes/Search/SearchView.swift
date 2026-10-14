@@ -51,7 +51,7 @@ final class SearchView: UIView {
 
     private func constrainSearchBarView() {
         constrain(searchBarView, self) { bar, superview in
-            bar.top == superview.safeAreaLayoutGuide.top
+            bar.top == superview.safeAreaLayoutGuide.top + 16
             bar.left == superview.left
             bar.right == superview.right
         }

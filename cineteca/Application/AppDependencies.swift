@@ -79,6 +79,7 @@ extension AppDependencies {
 extension AppDependencies:
     MovieDetailsBuilding,
     EditProfileBuilding,
+    SearchBuilding,
     MyReviewsBuilding,
     AccountBuilding,
     AppearanceBuilding,
@@ -97,7 +98,23 @@ extension AppDependencies:
     }
 
     func makeEditProfile() -> UIViewController {
-        EditProfileConfigurator.resolve(userRepository: userRepository)
+        EditProfileConfigurator.resolve(
+            userRepository: userRepository,
+            searchBuilder: self
+        )
+    }
+
+    func makeSearch(
+        selectionBehavior: SearchModels.SelectionBehavior,
+        selectionDelegate: SearchSelectionDelegate?
+    ) -> UIViewController {
+        SearchConfigurator.resolve(
+            repository: movieRepository,
+            genreRepository: genreRepository,
+            movieDetailsBuilder: self,
+            selectionBehavior: selectionBehavior,
+            selectionDelegate: selectionDelegate
+        )
     }
 
     func makeMyReviews() -> UIViewController {

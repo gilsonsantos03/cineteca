@@ -117,6 +117,7 @@ final class MainTabBarController: UITabBarController {
         )
         let profileVC = ProfileConfigurator.resolve(
             userRepository: userRepository,
+            movieDetailsBuilder: movieDetailsBuilder,
             editProfileBuilder: editProfileBuilder,
             myReviewsBuilder: myReviewsBuilder,
             accountBuilder: accountBuilder,

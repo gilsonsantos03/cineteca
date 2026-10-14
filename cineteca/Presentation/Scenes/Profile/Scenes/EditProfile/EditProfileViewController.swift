@@ -60,6 +60,7 @@ extension EditProfileViewController: EditProfileDisplayLogic {
             customView.showSaveError()
         }
     }
+
 }
 
 // MARK: - EditProfileViewDelegate
@@ -73,10 +74,38 @@ extension EditProfileViewController: EditProfileViewDelegate {
         router.routeBack()
     }
 
-    func didTapSave(displayName: String, bio: String) {
+    func didTapSave(
+        displayName: String,
+        bio: String,
+        favoriteFilm: EditProfileModels.FavoriteFilmViewModel?
+    ) {
         customView.setSaving(true)
-        interactor.saveProfile(request: .init(displayName: displayName, bio: bio))
+        interactor.saveProfile(
+            request: .init(
+                displayName: displayName,
+                bio: bio,
+                favoriteFilm: favoriteFilm
+            )
+        )
     }
 
     func didTapChangePhoto() {}
+
+    func didTapChangeFavoriteFilm() {
+        router.routeToMovieSearch(delegate: self)
+    }
+}
+
+// MARK: - SearchSelectionDelegate
+
+extension EditProfileViewController: SearchSelectionDelegate {
+    func didSelectMovie(movieId: Int, title: String, backdropURL: URL?) {
+        customView.setFavoriteFilm(
+            EditProfileModels.FavoriteFilmViewModel(
+                movieId: movieId,
+                title: title,
+                backdropURL: backdropURL
+            )
+        )
+    }
 }

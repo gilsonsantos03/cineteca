@@ -3,6 +3,7 @@ import Foundation
 struct UserProfileUpdate: Sendable {
     let displayName: String
     let bio: String
+    let favoriteFilm: UserFavoriteFilm?
 }
 
 struct UserPasswordUpdate: Sendable {

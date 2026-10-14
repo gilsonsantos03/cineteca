@@ -30,6 +30,7 @@ enum ProfileModels {
     }
 
     struct FavoriteFilmViewModel {
+        let movieId: Int?
         let title: String
         let backdropURL: URL?
     }

@@ -72,10 +72,15 @@ the `User` read model. This allows a rating without comment to appear in the
 profile review cards without creating a `ReviewEntity` or duplicating a review
 that already has text.
 
+The profile's favorite film is a separate `UserEntity` field managed by
+`UserRepository.updateProfile`. It is selected through the Edit Profile search
+dialog and persisted with the scene's Save action; it must not be inferred from
+`MovieActivityEntity.isFavorite`.
+
 The temporary development reset is also owned by the data boundary:
-`MovieActivityRepository.resetSessionData()` clears local activities and
-reviews during app launch. This flow must be removed before production so the
-repository can preserve user activity across launches.
+`MovieActivityRepository.resetSessionData()` clears local activities, reviews,
+and the profile favorite during app launch. This flow must be removed before
+production so the repository can preserve user data across launches.
 
 Domain read models must contain domain data only. Localization, UIKit colors,
 layout choices, and other visual concerns belong to the Presenter or View.
@@ -165,6 +170,13 @@ final class MovieDetailsRouter {
 
 This keeps navigation code independent from concrete dependency wiring and
 makes Routers straightforward to test with a spy builder.
+
+The Search scene supports two selection behaviors without duplicating its UI:
+`openDetails` routes the selected film to Movie Details, while `selectMovie`
+returns the selected film through `SearchSelectionDelegate`. Edit Profile uses
+the latter behavior when presenting Search as a dialog. The selection behavior
+is explicit in the scene configuration, so the regular Search flow does not
+depend on an optional callback.
 
 Use a builder when a scene is created by another scene's Router. Scenes created
 directly by the initial composition (for example, root tabs) do not need a

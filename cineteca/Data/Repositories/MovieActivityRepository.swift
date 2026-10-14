@@ -8,7 +8,7 @@ final class MovieActivityRepository: MovieActivityRepositoryProtocol, @unchecked
         self.coreDataStack = coreDataStack
     }
 
-    // TEMPORARY: used only to reset mock data between app launches.
+    // TEMPORARY: used only to reset mock activities, reviews, and profile favorite between app launches.
     // Remove this flow before production.
     func resetSessionData() throws {
         let context = coreDataStack.viewContext
@@ -28,6 +28,10 @@ final class MovieActivityRepository: MovieActivityRepositoryProtocol, @unchecked
             let reviewRequest = ReviewEntity.fetchRequest()
             reviewRequest.predicate = NSPredicate(format: "user == %@", user)
             try context.fetch(reviewRequest).forEach(context.delete)
+
+            user.favoriteMovieId = 0
+            user.favoriteFilmTitle = ""
+            user.favoriteBackdropPath = nil
 
             try context.save()
         }

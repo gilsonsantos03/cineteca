@@ -6,19 +6,34 @@ protocol SearchDisplayLogic: AnyObject {
     func displayFilters(viewModel: SearchModels.ShowFilters.ViewModel)
 }
 
+protocol SearchSelectionDelegate: AnyObject {
+    func didSelectMovie(movieId: Int, title: String, backdropURL: URL?)
+}
+
 final class SearchViewController: UIViewController {
+    // MARK: - Properties
+
+    weak var selectionDelegate: SearchSelectionDelegate?
+
     private let customView: SearchView
     private let interactor: SearchBusinessLogic
     private let router: SearchRoutingLogic
+    private let selectionBehavior: SearchModels.SelectionBehavior
 
     private var debounceTask: Task<Void, Never>?
     private var currentMovies: [SearchModels.MovieGridViewModel] = []
     private var filtersViewController: SearchFiltersViewController?
 
-    init(customView: SearchView, interactor: SearchBusinessLogic, router: SearchRoutingLogic) {
+    init(
+        customView: SearchView,
+        interactor: SearchBusinessLogic,
+        router: SearchRoutingLogic,
+        selectionBehavior: SearchModels.SelectionBehavior
+    ) {
         self.customView = customView
         self.interactor = interactor
         self.router = router
+        self.selectionBehavior = selectionBehavior
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -30,7 +45,7 @@ final class SearchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.setNavigationBarHidden(true, animated: false)
+        configureNavigationBar()
         customView.delegate = self
         interactor.loadContent(request: .init())
     }
@@ -92,7 +107,20 @@ extension SearchViewController: SearchViewDelegate {
 
     func didSelectMovie(at index: Int) {
         guard currentMovies.indices.contains(index) else { return }
-        router.routeToMovieDetails(movieId: currentMovies[index].id)
+        let movie = currentMovies[index]
+
+        switch selectionBehavior {
+        case .openDetails:
+            router.routeToMovieDetails(movieId: movie.id)
+        case .selectMovie:
+            guard let selectionDelegate else { return }
+            selectionDelegate.didSelectMovie(
+                movieId: movie.id,
+                title: movie.title,
+                backdropURL: movie.backdropURL
+            )
+            dismiss(animated: true)
+        }
     }
 
     func didRequestRetry() {
@@ -105,5 +133,28 @@ extension SearchViewController: SearchViewDelegate {
 extension SearchViewController: SearchFiltersViewControllerDelegate {
     func didUpdateFilters(_ filters: SearchFilters) {
         interactor.updateFilters(request: .init(filters: filters))
+    }
+}
+
+// MARK: - Navigation
+
+private extension SearchViewController {
+    func configureNavigationBar() {
+        switch selectionBehavior {
+        case .openDetails:
+            navigationController?.setNavigationBarHidden(true, animated: false)
+        case .selectMovie:
+            navigationController?.setNavigationBarHidden(false, animated: false)
+            navigationItem.title = Strings.SearchScene.selectionTitle
+            navigationItem.leftBarButtonItem = UIBarButtonItem(
+                barButtonSystemItem: .cancel,
+                target: self,
+                action: #selector(didTapClose)
+            )
+        }
+    }
+
+    @objc func didTapClose() {
+        dismiss(animated: true)
     }
 }

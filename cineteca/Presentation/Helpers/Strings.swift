@@ -89,6 +89,8 @@ enum Strings {
     }
 
     enum SearchScene {
+        static var selectionTitle: String { Localization.string("SearchScene.SelectionTitle") }
+
         enum SearchBar {
             static var placeholder: String { Localization.string("SearchScene.SearchBar.Placeholder") }
         }
@@ -122,6 +124,7 @@ enum Strings {
 
         enum FavoriteFilm {
             static var badge: String { Localization.string("ProfileScene.FavoriteFilm.Badge") }
+            static var empty: String { Localization.string("ProfileScene.FavoriteFilm.Empty") }
         }
 
         enum RecentReviews {
@@ -327,6 +330,12 @@ enum Strings {
         static var saveChanges: String { Localization.string("EditProfileScene.SaveChanges") }
         static var cancel: String { Localization.string("EditProfileScene.Cancel") }
 
+        enum FavoriteFilm {
+            static var badge: String { Localization.string("EditProfileScene.FavoriteFilm.Badge") }
+            static var change: String { Localization.string("EditProfileScene.FavoriteFilm.Change") }
+            static var empty: String { Localization.string("EditProfileScene.FavoriteFilm.Empty") }
+        }
+
         enum Field {
             static var username: String { Localization.string("EditProfileScene.Field.Username") }
             static var displayName: String { Localization.string("EditProfileScene.Field.DisplayName") }
@@ -337,7 +346,7 @@ enum Strings {
     enum MovieDetailsScene {
         enum Action {
             static var rate: String { Localization.string("MovieDetailsScene.Action.Rate.Text") }
-            static var favorite: String { Localization.string("MovieDetailsScene.Action.Favorite.Text") }
+            static var like: String { Localization.string("MovieDetailsScene.Action.Like.Text") }
             static var watchlist: String { Localization.string("MovieDetailsScene.Action.Watchlist.Text") }
             static var readMore: String { Localization.string("MovieDetailsScene.Action.ReadMore.Text") }
             static var watchTrailer: String { Strings.UI.watchTrailer }
@@ -484,4 +493,5 @@ enum Strings {
             static var okButton: String { Localization.string("MovieDetailsScene.TrailerUnavailable.OkButton.Text") }
         }
     }
+
 }

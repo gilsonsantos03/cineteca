@@ -35,8 +35,16 @@ extension ProfilePresenter: ProfilePresentationLogic {
         let memberSinceText = String(format: Strings.ProfileScene.memberSinceFormat, memberSince)
 
         let favoriteFilm = user.favoriteFilm.map {
-            ProfileModels.FavoriteFilmViewModel(title: $0.title, backdropURL: $0.backdropURL)
-        } ?? ProfileModels.FavoriteFilmViewModel(title: "", backdropURL: nil)
+            ProfileModels.FavoriteFilmViewModel(
+                movieId: $0.movieId,
+                title: $0.title,
+                backdropURL: $0.backdropURL
+            )
+        } ?? ProfileModels.FavoriteFilmViewModel(
+            movieId: nil,
+            title: "",
+            backdropURL: nil
+        )
 
         return ProfileModels.FetchProfile.ViewModel.Content(
             header: ProfileModels.HeaderViewModel(

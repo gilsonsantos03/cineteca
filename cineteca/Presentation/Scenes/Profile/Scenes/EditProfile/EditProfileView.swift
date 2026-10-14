@@ -4,8 +4,13 @@ import Cartography
 protocol EditProfileViewDelegate: AnyObject {
     func didTapBack()
     func didTapCancel()
-    func didTapSave(displayName: String, bio: String)
+    func didTapSave(
+        displayName: String,
+        bio: String,
+        favoriteFilm: EditProfileModels.FavoriteFilmViewModel?
+    )
     func didTapChangePhoto()
+    func didTapChangeFavoriteFilm()
 }
 
 final class EditProfileView: UIView {
@@ -104,11 +109,28 @@ extension EditProfileView: EditProfileContentViewDelegate {
         delegate?.didTapCancel()
     }
 
-    func didTapSave(displayName: String, bio: String) {
-        delegate?.didTapSave(displayName: displayName, bio: bio)
+    func didTapSave(
+        displayName: String,
+        bio: String,
+        favoriteFilm: EditProfileModels.FavoriteFilmViewModel?
+    ) {
+        delegate?.didTapSave(
+            displayName: displayName,
+            bio: bio,
+            favoriteFilm: favoriteFilm
+        )
     }
 
     func didTapChangePhoto() {
         delegate?.didTapChangePhoto()
     }
+
+    func didTapChangeFavoriteFilm() {
+        delegate?.didTapChangeFavoriteFilm()
+    }
+
+    func setFavoriteFilm(_ favoriteFilm: EditProfileModels.FavoriteFilmViewModel) {
+        contentView.setFavoriteFilm(favoriteFilm)
+    }
+
 }

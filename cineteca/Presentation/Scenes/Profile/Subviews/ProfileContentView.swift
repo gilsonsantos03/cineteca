@@ -3,6 +3,7 @@ import Cartography
 
 protocol ProfileContentViewDelegate: AnyObject {
     func didTapEdit()
+    func didTapFavoriteFilm(movieId: Int)
     func didTapSeeAllReviews()
     func didSelectSetting(_ setting: ProfileModels.Setting)
 }
@@ -58,6 +59,7 @@ final class ProfileContentView: UIView {
 
     private func setup() {
         backgroundColor = .appBackground
+        favoriteFilmView.delegate = self
         headerView.delegate = self
         recentReviewsView.delegate = self
         settingsView.delegate = self
@@ -138,6 +140,12 @@ final class ProfileContentView: UIView {
 extension ProfileContentView: ProfileHeaderViewDelegate {
     func didTapEdit() {
         delegate?.didTapEdit()
+    }
+}
+
+extension ProfileContentView: ProfileFavoriteFilmViewDelegate {
+    func didTapFavoriteFilm(movieId: Int) {
+        delegate?.didTapFavoriteFilm(movieId: movieId)
     }
 }
 

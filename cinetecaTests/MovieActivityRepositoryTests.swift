@@ -80,7 +80,36 @@ final class MovieActivityRepositoryTests: XCTestCase {
 
         XCTAssertEqual(user.stats.filmsCount, 1)
         XCTAssertEqual(user.stats.hoursWatched, 2)
-        XCTAssertEqual(user.favoriteFilm?.movieId, 101)
+        XCTAssertNil(user.favoriteFilm)
+    }
+
+    func testProfileFavoriteFilmIsUpdatedIndependentlyFromMovieActivity() async throws {
+        let userRepository = UserRepository(
+            coreDataStack: coreDataStack,
+            activityRepository: repository
+        )
+        _ = try await userRepository.fetchCurrentUser()
+        let favoriteFilm = UserFavoriteFilm(
+            movieId: 202,
+            title: "Favorite film",
+            backdropURL: URL(string: "https://image.tmdb.org/t/p/w780/backdrop.jpg")
+        )
+
+        _ = try await userRepository.updateProfile(
+            UserProfileUpdate(
+                displayName: "Maria Dot",
+                bio: "Film lover.",
+                favoriteFilm: favoriteFilm
+            )
+        )
+
+        let user = try await userRepository.fetchCurrentUser()
+        XCTAssertEqual(user.favoriteFilm?.movieId, 202)
+        XCTAssertEqual(user.favoriteFilm?.title, "Favorite film")
+        XCTAssertEqual(
+            user.favoriteFilm?.backdropURL?.path,
+            "/t/p/w780/backdrop.jpg"
+        )
     }
 
     func testProfileIncludesRatingWithoutReviewText() async throws {
@@ -199,15 +228,28 @@ final class MovieActivityRepositoryTests: XCTestCase {
         _ = try await repository.setFavorite(true, for: 101)
         _ = try await repository.setWatchlist(true, for: 101)
 
+        let userRepository = UserRepository(
+            coreDataStack: coreDataStack,
+            activityRepository: repository
+        )
+        _ = try await userRepository.fetchCurrentUser()
+        _ = try await userRepository.updateProfile(
+            UserProfileUpdate(
+                displayName: "Maria Dot",
+                bio: "Film lover.",
+                favoriteFilm: UserFavoriteFilm(
+                    movieId: 202,
+                    title: "Favorite film",
+                    backdropURL: nil
+                )
+            )
+        )
+
         try repository.resetSessionData()
 
         let activities = try await repository.fetchActivities()
         XCTAssertTrue(activities.isEmpty)
 
-        let userRepository = UserRepository(
-            coreDataStack: coreDataStack,
-            activityRepository: repository
-        )
         let user = try await userRepository.fetchCurrentUser()
         XCTAssertNil(user.favoriteFilm)
         XCTAssertEqual(user.stats.filmsCount, 0)

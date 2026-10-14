@@ -8,6 +8,13 @@ protocol EditProfileBuilding {
     func makeEditProfile() -> UIViewController
 }
 
+protocol SearchBuilding {
+    func makeSearch(
+        selectionBehavior: SearchModels.SelectionBehavior,
+        selectionDelegate: SearchSelectionDelegate?
+    ) -> UIViewController
+}
+
 protocol MyReviewsBuilding {
     func makeMyReviews() -> UIViewController
 }

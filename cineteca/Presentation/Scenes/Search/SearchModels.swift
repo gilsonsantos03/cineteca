@@ -51,12 +51,18 @@ enum SearchModels {
         case results
     }
 
+    enum SelectionBehavior {
+        case openDetails
+        case selectMovie
+    }
+
     struct MovieGridViewModel {
         let id: Int
         let title: String
         let year: String
         let rating: String
         let posterURL: URL?
+        let backdropURL: URL?
     }
 
     struct FiltersViewModel {

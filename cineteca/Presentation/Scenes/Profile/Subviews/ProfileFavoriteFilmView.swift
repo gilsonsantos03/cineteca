@@ -1,7 +1,14 @@
 import UIKit
 import Cartography
 
+protocol ProfileFavoriteFilmViewDelegate: AnyObject {
+    func didTapFavoriteFilm(movieId: Int)
+}
+
 final class ProfileFavoriteFilmView: UIView {
+
+    weak var delegate: ProfileFavoriteFilmViewDelegate?
+    private var movieId: Int?
 
     // MARK: - UI Components
 
@@ -58,7 +65,8 @@ final class ProfileFavoriteFilmView: UIView {
 
     private func setup() {
         backgroundColor = .clear
-        isUserInteractionEnabled = false
+        isUserInteractionEnabled = true
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapFavoriteFilm)))
         setupGradient()
         setupSubviews()
         setupConstraints()
@@ -124,7 +132,17 @@ final class ProfileFavoriteFilmView: UIView {
     // MARK: - Configure
 
     func configure(viewModel: ProfileModels.FavoriteFilmViewModel) {
-        titleLabel.text = viewModel.title
+        movieId = viewModel.movieId
+        titleLabel.text = viewModel.title.isEmpty
+            ? Strings.ProfileScene.FavoriteFilm.empty
+            : viewModel.title
+        titleLabel.textColor = viewModel.movieId == nil ? .textSecondary : .textPrimary
+        isUserInteractionEnabled = viewModel.movieId != nil
         backdropImageView.loadImage(from: viewModel.backdropURL)
+    }
+
+    @objc private func didTapFavoriteFilm() {
+        guard let movieId else { return }
+        delegate?.didTapFavoriteFilm(movieId: movieId)
     }
 }
