@@ -21,7 +21,6 @@
 		442CB0692FFC821E004FCC82 /* HomeConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CB0682FFC821E004FCC82 /* HomeConfigurator.swift */; };
 		442CB0812FFC8301004FCC82 /* FeaturedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CB0712FFC8301004FCC82 /* FeaturedView.swift */; };
 		442CB0822FFC8302004FCC82 /* GenreFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CB0722FFC8302004FCC82 /* GenreFilterView.swift */; };
-		442CB0832FFC8303004FCC82 /* GenreChipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CB0732FFC8303004FCC82 /* GenreChipCell.swift */; };
 		442CB0842FFC8304004FCC82 /* MovieSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CB0742FFC8304004FCC82 /* MovieSectionView.swift */; };
 		442CB0852FFC8305004FCC82 /* MovieCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CB0752FFC8305004FCC82 /* MovieCardCell.swift */; };
 		442CB0862FFC8306004FCC82 /* WeeklyDigestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CB0762FFC8306004FCC82 /* WeeklyDigestView.swift */; };
@@ -150,6 +149,7 @@
 		LE000001000000000000015C000000000000001A /* LegalDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = LE000001000000000000015C /* LegalDocumentViewController.swift */; };
 		LE000001000000000000016C000000000000001A /* LegalDocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LE000001000000000000016C /* LegalDocumentView.swift */; };
 		LE000001000000000000017C000000000000001A /* LegalDocumentContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LE000001000000000000017C /* LegalDocumentContentView.swift */; };
+		LE000001000000000000018C000000000000001A /* LegalDocumentSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LE000001000000000000018C /* LegalDocumentSectionView.swift */; };
 		LG000001000000000000009B000000000000001A /* LanguageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = LG000001000000000000009B /* LanguageModels.swift */; };
 		LG00000100000000000000AB000000000000001A /* LanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = LG00000100000000000000AB /* LanguageViewController.swift */; };
 		LG00000100000000000000BB000000000000001A /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LG00000100000000000000BB /* LanguageView.swift */; };
@@ -232,6 +232,8 @@
 		TM000001000000000000005E000000000000001A /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = TM000001000000000000005E /* ThemeManager.swift */; };
 		UI000001000000000000001B000000000000001A /* BackNavigationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = UI000001000000000000001B /* BackNavigationHeaderView.swift */; };
 		UI000001000000000000002B000000000000001A /* PasswordFormFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = UI000001000000000000002B /* PasswordFormFieldView.swift */; };
+		UI000001000000000000003B000000000000001A /* ErrorStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = UI000001000000000000003B /* ErrorStateView.swift */; };
+		UI000001000000000000004B000000000000001A /* GenreChipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = UI000001000000000000004B /* GenreChipCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -391,6 +393,7 @@
 		LE000001000000000000015C /* LegalDocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalDocumentViewController.swift; sourceTree = "<group>"; };
 		LE000001000000000000016C /* LegalDocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalDocumentView.swift; sourceTree = "<group>"; };
 		LE000001000000000000017C /* LegalDocumentContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalDocumentContentView.swift; sourceTree = "<group>"; };
+		LE000001000000000000018C /* LegalDocumentSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalDocumentSectionView.swift; sourceTree = "<group>"; };
 		LG000001000000000000009B /* LanguageModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageModels.swift; sourceTree = "<group>"; };
 		LG00000100000000000000AB /* LanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageViewController.swift; sourceTree = "<group>"; };
 		LG00000100000000000000BB /* LanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageView.swift; sourceTree = "<group>"; };
@@ -472,6 +475,8 @@
 		TM000001000000000000005E /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		UI000001000000000000001B /* BackNavigationHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackNavigationHeaderView.swift; sourceTree = "<group>"; };
 		UI000001000000000000002B /* PasswordFormFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFormFieldView.swift; sourceTree = "<group>"; };
+		UI000001000000000000003B /* ErrorStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorStateView.swift; sourceTree = "<group>"; };
+		UI000001000000000000004B /* GenreChipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreChipCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -721,6 +726,8 @@
 				AA100001000000000000027B /* WatchTrailerButton.swift */,
 				UI000001000000000000001B /* BackNavigationHeaderView.swift */,
 				UI000001000000000000002B /* PasswordFormFieldView.swift */,
+				UI000001000000000000003B /* ErrorStateView.swift */,
+				UI000001000000000000004B /* GenreChipCell.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -949,6 +956,7 @@
 				LE000001000000000000010C /* LegalContentView.swift */,
 				LE000001000000000000011C /* LegalLinksSectionView.swift */,
 				LE000001000000000000017C /* LegalDocumentContentView.swift */,
+				LE000001000000000000018C /* LegalDocumentSectionView.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -1241,7 +1249,6 @@
 				442CB0632FFC8202004FCC82 /* HomeInteractor.swift in Sources */,
 				442CB0812FFC8301004FCC82 /* FeaturedView.swift in Sources */,
 				442CB0822FFC8302004FCC82 /* GenreFilterView.swift in Sources */,
-				442CB0832FFC8303004FCC82 /* GenreChipCell.swift in Sources */,
 				442CB0842FFC8304004FCC82 /* MovieSectionView.swift in Sources */,
 				442CB0852FFC8305004FCC82 /* MovieCardCell.swift in Sources */,
 				442CB0862FFC8306004FCC82 /* WeeklyDigestView.swift in Sources */,
@@ -1361,6 +1368,8 @@
 				EP000001000000000000015C000000000000001A /* EditProfileFavoriteFilmView.swift in Sources */,
 				UI000001000000000000001B000000000000001A /* BackNavigationHeaderView.swift in Sources */,
 				UI000001000000000000002B000000000000001A /* PasswordFormFieldView.swift in Sources */,
+				UI000001000000000000003B000000000000001A /* ErrorStateView.swift in Sources */,
+				UI000001000000000000004B000000000000001A /* GenreChipCell.swift in Sources */,
 				AC000001000000000000009B000000000000001A /* AccountModels.swift in Sources */,
 				AC00000100000000000000AB000000000000001A /* AccountViewController.swift in Sources */,
 				AC00000100000000000000BB000000000000001A /* AccountView.swift in Sources */,
@@ -1421,6 +1430,7 @@
 				LE000001000000000000015C000000000000001A /* LegalDocumentViewController.swift in Sources */,
 				LE000001000000000000016C000000000000001A /* LegalDocumentView.swift in Sources */,
 				LE000001000000000000017C000000000000001A /* LegalDocumentContentView.swift in Sources */,
+				LE000001000000000000018C000000000000001A /* LegalDocumentSectionView.swift in Sources */,
 				PP000001000000000000017A /* Cineteca.xcdatamodeld in Sources */,
 				MA000001000000000000001A /* MovieActivity.swift in Sources */,
 				MA000001000000000000002A /* MovieActivityRepositoryProtocol.swift in Sources */,

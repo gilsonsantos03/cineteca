@@ -27,7 +27,7 @@ final class HomeView: UIView {
 
     private lazy var loadingSkeletonView = HomeSkeletonView()
     private lazy var homeContentView = HomeContentView()
-    private lazy var errorStateView = HomeErrorStateView()
+    private lazy var errorStateView = ErrorStateView()
 
     // MARK: - Initialization
 
@@ -127,9 +127,9 @@ extension HomeView: HomeContentViewDelegate {
     }
 }
 
-// MARK: - HomeErrorStateViewDelegate
+// MARK: - ErrorStateViewDelegate
 
-extension HomeView: HomeErrorStateViewDelegate {
+extension HomeView: ErrorStateViewDelegate {
     func didRequestRetry() {
         delegate?.didRequestRetry()
     }

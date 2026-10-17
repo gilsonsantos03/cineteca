@@ -49,6 +49,8 @@ final class LegalDocumentView: UIView {
     }
 }
 
+// MARK: - LegalDocumentContentViewDelegate
+
 extension LegalDocumentView: LegalDocumentContentViewDelegate {
     func didTapBack() {
         delegate?.didTapBack()

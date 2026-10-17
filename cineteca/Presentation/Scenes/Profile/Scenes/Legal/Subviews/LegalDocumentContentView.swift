@@ -10,6 +10,7 @@ final class LegalDocumentContentView: UIView {
     // MARK: - Properties
 
     weak var delegate: LegalDocumentContentViewDelegate?
+    private let content: LegalDocumentContent
 
     // MARK: - UI Components
 
@@ -28,7 +29,9 @@ final class LegalDocumentContentView: UIView {
         return stack
     }()
 
-    private let headerView: BackNavigationHeaderView
+    private lazy var headerView: BackNavigationHeaderView = {
+        BackNavigationHeaderView(title: content.title)
+    }()
     private lazy var lastUpdatedLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13)
@@ -47,7 +50,7 @@ final class LegalDocumentContentView: UIView {
     // MARK: - Initialization
 
     init(content: LegalDocumentContent) {
-        self.headerView = BackNavigationHeaderView(title: content.title)
+        self.content = content
         super.init(frame: .zero)
         lastUpdatedLabel.text = content.lastUpdated
         content.sections.forEach { section in
@@ -115,68 +118,10 @@ final class LegalDocumentContentView: UIView {
     }
 }
 
+// MARK: - BackNavigationHeaderViewDelegate
+
 extension LegalDocumentContentView: BackNavigationHeaderViewDelegate {
     func didTapBack() {
         delegate?.didTapBack()
-    }
-}
-
-private final class LegalDocumentSectionView: UIView {
-
-    // MARK: - UI Components
-
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 16, weight: .semibold)
-        label.textColor = .textPrimary
-        label.numberOfLines = 0
-        return label
-    }()
-
-    private lazy var bodyLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 15)
-        label.textColor = .textSecondary
-        label.numberOfLines = 0
-        return label
-    }()
-
-    private lazy var contentStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [titleLabel, bodyLabel])
-        stack.axis = .vertical
-        stack.spacing = 8
-        return stack
-    }()
-
-    // MARK: - Initialization
-
-    init(section: LegalDocumentSection) {
-        super.init(frame: .zero)
-        titleLabel.text = section.title
-        bodyLabel.text = section.body
-        setup()
-    }
-
-    required init?(coder: NSCoder) { nil }
-
-    // MARK: - Setup
-
-    private func setup() {
-        setupSubviews()
-        setupConstraints()
-    }
-
-    private func setupSubviews() {
-        addSubview(contentStack)
-    }
-
-    private func setupConstraints() {
-        constrainContentStack()
-    }
-
-    private func constrainContentStack() {
-        constrain(contentStack, self) { stack, superview in
-            stack.edges == superview.edges
-        }
     }
 }

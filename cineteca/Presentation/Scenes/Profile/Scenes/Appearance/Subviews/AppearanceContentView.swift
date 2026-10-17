@@ -176,11 +176,15 @@ final class AppearanceContentView: UIView {
     }
 }
 
+// MARK: - BackNavigationHeaderViewDelegate
+
 extension AppearanceContentView: BackNavigationHeaderViewDelegate {
     func didTapBack() {
         delegate?.didTapBack()
     }
 }
+
+// MARK: - AppearanceThemeSectionViewDelegate
 
 extension AppearanceContentView: AppearanceThemeSectionViewDelegate {
     func didSelectTheme(_ theme: AppTheme) {

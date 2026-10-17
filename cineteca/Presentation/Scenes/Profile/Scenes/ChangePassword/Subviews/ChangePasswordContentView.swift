@@ -148,6 +148,8 @@ final class ChangePasswordContentView: UIView {
     }
 }
 
+// MARK: - BackNavigationHeaderViewDelegate
+
 extension ChangePasswordContentView: BackNavigationHeaderViewDelegate {
     func didTapBack() {
         delegate?.didTapBack()

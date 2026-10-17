@@ -39,11 +39,11 @@ extension MovieDetailsInteractor: MovieDetailsBusinessLogic {
                     activity = Self.makeEmptyActivity(metadata: metadata)
                 }
                 await MainActor.run {
-                    presenter.presentDetails(response: .init(movie: movie, activity: activity))
+                    presenter.presentFetchDetails(response: .content(movie: movie, activity: activity))
                 }
             } catch {
                 await MainActor.run {
-                    presenter.presentError(error)
+                    presenter.presentFetchDetails(response: .error)
                 }
             }
         }

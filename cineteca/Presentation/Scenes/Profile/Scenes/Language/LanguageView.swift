@@ -61,6 +61,8 @@ final class LanguageView: UIView {
     }
 }
 
+// MARK: - LanguageContentViewDelegate
+
 extension LanguageView: LanguageContentViewDelegate {
     func didTapBack() {
         delegate?.didTapBack()

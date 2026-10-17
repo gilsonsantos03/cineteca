@@ -131,11 +131,15 @@ final class MyReviewsContentView: UIView {
     }
 }
 
+// MARK: - BackNavigationHeaderViewDelegate
+
 extension MyReviewsContentView: BackNavigationHeaderViewDelegate {
     func didTapBack() {
         delegate?.didTapBack()
     }
 }
+
+// MARK: - MyReviewCardViewDelegate
 
 extension MyReviewsContentView: MyReviewCardViewDelegate {
     func didSelectReview(_ review: MyReviewsModels.ReviewCardViewModel) {

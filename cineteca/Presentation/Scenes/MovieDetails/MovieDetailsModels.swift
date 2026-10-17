@@ -6,26 +6,36 @@ enum MovieDetailsModels {
             let movieId: Int
         }
 
-        struct Response {
-            let movie: MovieDetails
-            let activity: MovieActivity
+        enum Response {
+            case content(movie: MovieDetails, activity: MovieActivity)
+            case error
         }
 
-        struct ViewModel {
-            let movieId: Int
-            let title: String
-            let overview: String
-            let posterURL: URL?
-            let backdropURL: URL?
-            let metadata: String
-            let certification: String?
-            let genres: [String]
-            let rating: String
-            let cast: [CastViewModel]
-            let crew: [CrewViewModel]
-            let watchProviders: [WatchProviderViewModel]
-            let similarMovies: [SimilarMovieViewModel]
-            let activity: ActivityViewModel
+        enum ViewModel {
+            case content(Content)
+            case error(ErrorViewModel)
+
+            struct Content {
+                let movieId: Int
+                let title: String
+                let overview: String
+                let posterURL: URL?
+                let backdropURL: URL?
+                let metadata: String
+                let certification: String?
+                let genres: [String]
+                let rating: String
+                let cast: [CastViewModel]
+                let crew: [CrewViewModel]
+                let watchProviders: [WatchProviderViewModel]
+                let similarMovies: [SimilarMovieViewModel]
+                let activity: ActivityViewModel
+            }
+
+            struct ErrorViewModel {
+                let title: String
+                let message: String
+            }
         }
     }
 
@@ -79,13 +89,6 @@ enum MovieDetailsModels {
         enum ViewModel {
             case content(ActivityViewModel)
             case error
-        }
-    }
-
-    enum ErrorState {
-        struct ViewModel {
-            let title: String
-            let message: String
         }
     }
 

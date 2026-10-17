@@ -40,7 +40,7 @@ final class ProfileContentView: UIView {
     private lazy var signOutButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle(Strings.ProfileScene.signOut, for: .normal)
-        button.setTitleColor(UIColor(red: 0.95, green: 0.28, blue: 0.28, alpha: 1), for: .normal)
+        button.setTitleColor(.destructiveRed, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
         button.isUserInteractionEnabled = false
         return button
@@ -143,17 +143,23 @@ extension ProfileContentView: ProfileHeaderViewDelegate {
     }
 }
 
+// MARK: - ProfileFavoriteFilmViewDelegate
+
 extension ProfileContentView: ProfileFavoriteFilmViewDelegate {
     func didTapFavoriteFilm(movieId: Int) {
         delegate?.didTapFavoriteFilm(movieId: movieId)
     }
 }
 
+// MARK: - ProfileRecentReviewsViewDelegate
+
 extension ProfileContentView: ProfileRecentReviewsViewDelegate {
     func didTapSeeAllReviews() {
         delegate?.didTapSeeAllReviews()
     }
 }
+
+// MARK: - ProfileSettingsViewDelegate
 
 extension ProfileContentView: ProfileSettingsViewDelegate {
     func didSelectSetting(_ setting: ProfileModels.Setting) {

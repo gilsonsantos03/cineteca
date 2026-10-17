@@ -168,6 +168,15 @@ final class MovieDetailsView: UIView {
     }
 
     func showDetails(viewModel: MovieDetailsModels.FetchDetails.ViewModel) {
+        switch viewModel {
+        case let .content(content):
+            showContent(content)
+        case let .error(error):
+            showError(error)
+        }
+    }
+
+    private func showContent(_ viewModel: MovieDetailsModels.FetchDetails.ViewModel.Content) {
         movieId = viewModel.movieId
         headerView.configure(
             title: viewModel.title,
@@ -195,8 +204,8 @@ final class MovieDetailsView: UIView {
         activityHintLabel.isHidden = viewModel.canFavorite
     }
 
-    func showError(viewModel: MovieDetailsModels.ErrorState.ViewModel) {
-        errorView.configure(title: viewModel.title, message: viewModel.message)
+    private func showError(_ viewModel: MovieDetailsModels.FetchDetails.ViewModel.ErrorViewModel) {
+        errorView.configure(viewModel: viewModel)
         loader.stopAnimating()
         scrollView.isHidden = true
         errorView.isHidden = false

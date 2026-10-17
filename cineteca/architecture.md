@@ -244,6 +244,10 @@ statsView.configure(
 
 Put a view in `Presentation/UI/` only when **two or more scenes** compose it. One scene → `<Scene>/Subviews/`.
 
+The current shared presentation components include `ErrorStateView` and
+`GenreChipCell`, both composed by Home and Search. Scene-specific implementations
+remain under their owning scene's `Subviews/` folder.
+
 #### Scene models: content + error
 
 When a use case can succeed with data or fail, **unify `content` and `error` in a single enum** for both `Response` and `ViewModel`. Keep `loading` as a separate use case when the UI needs a distinct loading state.

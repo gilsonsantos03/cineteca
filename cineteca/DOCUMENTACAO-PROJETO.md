@@ -666,7 +666,7 @@ Arquivos: `en.lproj/Localizable.strings`, `pt-BR.lproj/Localizable.strings`
 
 Documentadas em `view-conventions.md`:
 
-- UI 100% programática — `required init?(coder:)` retorna `nil` em todos os lugares
+- UI 100% programática — `required init?(coder:)` retorna `nil`; subclasses de `UIStackView` usam o inicializador não-falível herdado e chamam `setup()` sem `fatalError()`
 - `// MARK: -` em ordem fixa por arquivo
 - `private lazy var` para componentes de UI
 - Cartography: um `constrain<Component>()` por subview
@@ -681,6 +681,8 @@ Documentadas em `view-conventions.md`:
 | `CardBackground` | Cards e seções |
 | `AccentYellow` | Destaques, tab selecionada |
 | `TextSecondary` | Texto secundário, ícones inativos |
+| `DestructiveRed` | Ações e estados destrutivos |
+| `GenrePink` / `GenreCyan` | Tons semânticos das barras de gêneros nas estatísticas |
 
 ### Limitações do image loader
 

@@ -147,9 +147,9 @@ final class StatsGenreRowView: UIView {
         case .accent:
             return .accentYellow
         case .pink:
-            return UIColor(red: 0.93, green: 0.35, blue: 0.55, alpha: 1)
+            return .genrePink
         case .cyan:
-            return UIColor(red: 0.25, green: 0.78, blue: 0.86, alpha: 1)
+            return .genreCyan
         case .muted:
             return .textSecondary
         }

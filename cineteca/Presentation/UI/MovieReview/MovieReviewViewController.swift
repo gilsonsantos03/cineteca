@@ -47,19 +47,15 @@ final class MovieReviewViewController: UIViewController {
 // MARK: - Delegate
 
 protocol MovieReviewViewControllerDelegate: AnyObject {
-    func movieReviewViewControllerDidRequestClose(_ viewController: MovieReviewViewController)
-    func movieReviewViewController(
-        _ viewController: MovieReviewViewController,
-        didSubmitRating rating: Double,
-        reviewText: String?
-    )
+    func didRequestClose()
+    func didSubmitRating(_ rating: Double, reviewText: String?)
 }
 
 // MARK: - MovieReviewViewDelegate
 
 extension MovieReviewViewController: MovieReviewViewDelegate {
     func movieReviewViewDidRequestClose(_ view: MovieReviewView) {
-        delegate?.movieReviewViewControllerDidRequestClose(self)
+        delegate?.didRequestClose()
     }
 
     func movieReviewView(
@@ -67,10 +63,6 @@ extension MovieReviewViewController: MovieReviewViewDelegate {
         didSubmit rating: Double,
         reviewText: String?
     ) {
-        delegate?.movieReviewViewController(
-            self,
-            didSubmitRating: rating,
-            reviewText: reviewText
-        )
+        delegate?.didSubmitRating(rating, reviewText: reviewText)
     }
 }

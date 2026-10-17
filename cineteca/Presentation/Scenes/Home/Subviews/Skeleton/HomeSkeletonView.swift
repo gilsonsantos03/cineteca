@@ -151,7 +151,9 @@ final class HomeSkeletonView: UIView {
     private func makeSpacer(height: CGFloat) -> UIView {
         let spacer = UIView()
         spacer.backgroundColor = .clear
-        constrain(spacer) { $0.height == height }
+        constrain(spacer) { spacer in
+            spacer.height == height
+        }
         return spacer
     }
 }

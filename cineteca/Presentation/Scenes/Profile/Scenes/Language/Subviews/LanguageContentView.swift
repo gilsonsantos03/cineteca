@@ -176,11 +176,15 @@ final class LanguageContentView: UIView {
     }
 }
 
+// MARK: - BackNavigationHeaderViewDelegate
+
 extension LanguageContentView: BackNavigationHeaderViewDelegate {
     func didTapBack() {
         delegate?.didTapBack()
     }
 }
+
+// MARK: - LanguageOptionSectionViewDelegate
 
 extension LanguageContentView: LanguageOptionSectionViewDelegate {
     func didSelectLanguage(_ language: AppLanguage) {

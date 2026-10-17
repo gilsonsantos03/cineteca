@@ -74,7 +74,8 @@ final class MovieDetailsActionsView: UIStackView {
     }
 
     required init(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
+        setup()
     }
 
     // MARK: - Setup
@@ -83,11 +84,21 @@ final class MovieDetailsActionsView: UIStackView {
         axis = .horizontal
         spacing = 12
         distribution = .fillEqually
+        setupSubviews()
+        setupConstraints()
+    }
 
+    private func setupSubviews() {
         addArrangedSubview(rateButton)
         addArrangedSubview(favoriteButton)
         addArrangedSubview(watchlistButton)
+    }
 
+    private func setupConstraints() {
+        constrainSelf()
+    }
+
+    private func constrainSelf() {
         constrain(self) { view in
             view.height == 76
         }
@@ -107,7 +118,7 @@ final class MovieDetailsActionsView: UIStackView {
         delegate?.didTapWatchlist()
     }
 
-    // MARK: - Configuration
+    // MARK: - Configure
 
     func configure(activity: MovieDetailsModels.ActivityViewModel) {
         isFavoriteSelected = activity.isFavorite

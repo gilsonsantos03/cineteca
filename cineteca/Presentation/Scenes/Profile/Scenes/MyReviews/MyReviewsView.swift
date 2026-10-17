@@ -82,6 +82,8 @@ final class MyReviewsView: UIView {
     }
 }
 
+// MARK: - MyReviewsContentViewDelegate
+
 extension MyReviewsView: MyReviewsContentViewDelegate {
     func didTapBack() {
         delegate?.didTapBack()

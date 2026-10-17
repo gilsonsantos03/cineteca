@@ -2,8 +2,7 @@ import UIKit
 
 protocol MovieDetailsDisplayLogic: AnyObject {
     func displayLoading()
-    func displayDetails(viewModel: MovieDetailsModels.FetchDetails.ViewModel)
-    func displayError(viewModel: MovieDetailsModels.ErrorState.ViewModel)
+    func displayFetchDetails(viewModel: MovieDetailsModels.FetchDetails.ViewModel)
     func displayWatchTrailer(viewModel: MovieDetailsModels.WatchTrailer.ViewModel)
     func displayReview(viewModel: MovieDetailsModels.FetchReview.ViewModel)
     func displayActivity(viewModel: MovieDetailsModels.ActivityViewModel)
@@ -62,19 +61,17 @@ extension MovieDetailsViewController: MovieDetailsDisplayLogic {
         customView.showLoading()
     }
 
-    func displayDetails(viewModel: MovieDetailsModels.FetchDetails.ViewModel) {
-        reviewContext = ReviewContext(
-            title: viewModel.title,
-            metadata: viewModel.metadata,
-            posterURL: viewModel.posterURL,
-            rating: viewModel.activity.rating,
-            reviewText: nil
-        )
+    func displayFetchDetails(viewModel: MovieDetailsModels.FetchDetails.ViewModel) {
+        if case let .content(content) = viewModel {
+            reviewContext = ReviewContext(
+                title: content.title,
+                metadata: content.metadata,
+                posterURL: content.posterURL,
+                rating: content.activity.rating,
+                reviewText: nil
+            )
+        }
         customView.showDetails(viewModel: viewModel)
-    }
-
-    func displayError(viewModel: MovieDetailsModels.ErrorState.ViewModel) {
-        customView.showError(viewModel: viewModel)
     }
 
     func displayWatchTrailer(viewModel: MovieDetailsModels.WatchTrailer.ViewModel) {
@@ -167,15 +164,11 @@ extension MovieDetailsViewController: MovieDetailsViewDelegate {
 }
 
 extension MovieDetailsViewController: MovieReviewViewControllerDelegate {
-    func movieReviewViewControllerDidRequestClose(_ viewController: MovieReviewViewController) {
-        viewController.dismiss(animated: true)
+    func didRequestClose() {
+        dismiss(animated: true)
     }
 
-    func movieReviewViewController(
-        _ viewController: MovieReviewViewController,
-        didSubmitRating rating: Double,
-        reviewText: String?
-    ) {
+    func didSubmitRating(_ rating: Double, reviewText: String?) {
         reviewContext?.rating = rating
         reviewContext?.reviewText = reviewText
         interactor.updateActivity(
@@ -184,6 +177,6 @@ extension MovieDetailsViewController: MovieReviewViewControllerDelegate {
                 action: .rate(rating: rating, reviewText: reviewText)
             )
         )
-        viewController.dismiss(animated: true)
+        dismiss(animated: true)
     }
 }

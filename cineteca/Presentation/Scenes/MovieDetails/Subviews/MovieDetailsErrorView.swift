@@ -47,7 +47,8 @@ final class MovieDetailsErrorView: UIStackView {
     }
 
     required init(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
+        setup()
     }
 
     // MARK: - Setup
@@ -56,11 +57,21 @@ final class MovieDetailsErrorView: UIStackView {
         axis = .vertical
         spacing = 12
         alignment = .fill
+        setupSubviews()
+        setupConstraints()
+    }
 
+    private func setupSubviews() {
         addArrangedSubview(titleLabel)
         addArrangedSubview(messageLabel)
         addArrangedSubview(retryButton)
+    }
 
+    private func setupConstraints() {
+        constrainRetryButton()
+    }
+
+    private func constrainRetryButton() {
         constrain(retryButton) { button in
             button.height == 44
         }
@@ -68,9 +79,9 @@ final class MovieDetailsErrorView: UIStackView {
 
     // MARK: - Configure
 
-    func configure(title: String, message: String) {
-        titleLabel.text = title
-        messageLabel.text = message
+    func configure(viewModel: MovieDetailsModels.FetchDetails.ViewModel.ErrorViewModel) {
+        titleLabel.text = viewModel.title
+        messageLabel.text = viewModel.message
     }
 
     // MARK: - Actions

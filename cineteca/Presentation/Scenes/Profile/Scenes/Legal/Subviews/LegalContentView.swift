@@ -104,11 +104,15 @@ final class LegalContentView: UIView {
     }
 }
 
+// MARK: - BackNavigationHeaderViewDelegate
+
 extension LegalContentView: BackNavigationHeaderViewDelegate {
     func didTapBack() {
         delegate?.didTapBack()
     }
 }
+
+// MARK: - LegalLinksSectionViewDelegate
 
 extension LegalContentView: LegalLinksSectionViewDelegate {
     func didSelectLink(_ action: LegalModels.LinkAction) {

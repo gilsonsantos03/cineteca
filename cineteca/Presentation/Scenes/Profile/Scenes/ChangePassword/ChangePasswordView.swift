@@ -30,7 +30,19 @@ final class ChangePasswordView: UIView {
     private func setup() {
         backgroundColor = .appBackground
         contentView.delegate = self
+        setupSubviews()
+        setupConstraints()
+    }
+
+    private func setupSubviews() {
         addSubview(contentView)
+    }
+
+    private func setupConstraints() {
+        constrainContentView()
+    }
+
+    private func constrainContentView() {
         constrain(contentView, self) { view, superview in
             view.edges == superview.edges
         }
@@ -42,6 +54,8 @@ final class ChangePasswordView: UIView {
         contentView.setUpdating(isUpdating)
     }
 }
+
+// MARK: - ChangePasswordContentViewDelegate
 
 extension ChangePasswordView: ChangePasswordContentViewDelegate {
     func didTapBack() {

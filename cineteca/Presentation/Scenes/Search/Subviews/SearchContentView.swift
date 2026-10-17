@@ -49,7 +49,7 @@ final class SearchContentView: UIView {
         return indicator
     }()
 
-    private lazy var errorStateView = HomeErrorStateView()
+    private lazy var errorStateView = ErrorStateView()
 
     // MARK: - Initialization
 
@@ -199,9 +199,9 @@ extension SearchContentView: UICollectionViewDataSource, UICollectionViewDelegat
     }
 }
 
-// MARK: - HomeErrorStateViewDelegate
+// MARK: - ErrorStateViewDelegate
 
-extension SearchContentView: HomeErrorStateViewDelegate {
+extension SearchContentView: ErrorStateViewDelegate {
     func didRequestRetry() {
         delegate?.didRequestRetry()
     }

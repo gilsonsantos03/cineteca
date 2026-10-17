@@ -112,11 +112,15 @@ final class AccountContentView: UIView {
     }
 }
 
+// MARK: - BackNavigationHeaderViewDelegate
+
 extension AccountContentView: BackNavigationHeaderViewDelegate {
     func didTapBack() {
         delegate?.didTapBack()
     }
 }
+
+// MARK: - AccountSectionViewDelegate
 
 extension AccountContentView: AccountSectionViewDelegate {
     func didSelectRow(action: AccountModels.RowAction) {

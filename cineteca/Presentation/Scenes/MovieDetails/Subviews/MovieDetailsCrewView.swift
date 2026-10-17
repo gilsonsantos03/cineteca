@@ -29,7 +29,8 @@ final class MovieDetailsCrewView: UIStackView {
     }
 
     required init(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
+        setup()
     }
 
     // MARK: - Setup
@@ -37,9 +38,16 @@ final class MovieDetailsCrewView: UIStackView {
     private func setup() {
         axis = .vertical
         spacing = 10
+        setupSubviews()
+        setupConstraints()
+    }
+
+    private func setupSubviews() {
         addArrangedSubview(titleLabel)
         addArrangedSubview(contentStack)
     }
+
+    private func setupConstraints() {}
 
     // MARK: - Configure
 

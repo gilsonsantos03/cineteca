@@ -47,9 +47,17 @@ final class AccountView: UIView {
     }
 
     private func setupConstraints() {
+        constrainContentView()
+        constrainLoadingIndicator()
+    }
+
+    private func constrainContentView() {
         constrain(contentView, self) { view, superview in
             view.edges == superview.edges
         }
+    }
+
+    private func constrainLoadingIndicator() {
         constrain(loadingIndicator, self) { indicator, superview in
             indicator.centerX == superview.centerX
             indicator.centerY == superview.centerY
@@ -74,6 +82,8 @@ final class AccountView: UIView {
         contentView.isHidden = true
     }
 }
+
+// MARK: - AccountContentViewDelegate
 
 extension AccountView: AccountContentViewDelegate {
     func didTapBack() {

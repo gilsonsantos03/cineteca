@@ -127,6 +127,7 @@ private func constrainImageView() {
 ### Init
 
 - Always pair `override init(frame: CGRect) { super.init(frame: frame); setup() }` with `required init?(coder: NSCoder) { nil }` — never `fatalError()`.
+- `UIStackView` subclasses are the UIKit exception: their inherited `init(coder:)` is non-failable, so override it as `required init(coder: NSCoder) { super.init(coder: coder); setup() }`, still without `fatalError()`.
 
 ### Constraint closures
 

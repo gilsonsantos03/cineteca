@@ -2,8 +2,7 @@ import Foundation
 
 protocol MovieDetailsPresentationLogic {
     func presentLoading()
-    func presentDetails(response: MovieDetailsModels.FetchDetails.Response)
-    func presentError(_ error: Error)
+    func presentFetchDetails(response: MovieDetailsModels.FetchDetails.Response)
     func presentWatchTrailer(response: MovieDetailsModels.WatchTrailer.Response)
     func presentReview(response: MovieDetailsModels.FetchReview.Response)
     func presentUpdateActivity(response: MovieDetailsModels.UpdateActivity.Response)
@@ -18,14 +17,25 @@ extension MovieDetailsPresenter: MovieDetailsPresentationLogic {
         view?.displayLoading()
     }
 
-    func presentDetails(response: MovieDetailsModels.FetchDetails.Response) {
-        let movie = response.movie
+    func presentFetchDetails(response: MovieDetailsModels.FetchDetails.Response) {
+        guard case let .content(movie, activity) = response else {
+            view?.displayFetchDetails(
+                viewModel: .error(
+                    .init(
+                        title: Strings.MovieDetailsScene.Error.title,
+                        message: Strings.MovieDetailsScene.Error.message
+                    )
+                )
+            )
+            return
+        }
+
         let metadata = [movie.releaseYear, formatRuntime(movie.runtime)]
             .compactMap { $0 }
             .filter { !$0.isEmpty }
             .joined(separator: " • ")
 
-        let viewModel = MovieDetailsModels.FetchDetails.ViewModel(
+        let content = MovieDetailsModels.FetchDetails.ViewModel.Content(
             movieId: movie.id,
             title: movie.title,
             overview: movie.overview,
@@ -39,17 +49,9 @@ extension MovieDetailsPresenter: MovieDetailsPresentationLogic {
             crew: movie.crew.map { makeCrewViewModel(from: $0) },
             watchProviders: movie.watchProviders.map { makeWatchProviderViewModel(from: $0) },
             similarMovies: movie.similarMovies.prefix(10).map { makeSimilarMovieViewModel(from: $0) },
-            activity: makeActivityViewModel(from: response.activity)
+            activity: makeActivityViewModel(from: activity)
         )
-        view?.displayDetails(viewModel: viewModel)
-    }
-
-    func presentError(_ error: Error) {
-        let viewModel = MovieDetailsModels.ErrorState.ViewModel(
-            title: Strings.MovieDetailsScene.Error.title,
-            message: Strings.MovieDetailsScene.Error.message
-        )
-        view?.displayError(viewModel: viewModel)
+        view?.displayFetchDetails(viewModel: .content(content))
     }
 
     func presentWatchTrailer(response: MovieDetailsModels.WatchTrailer.Response) {

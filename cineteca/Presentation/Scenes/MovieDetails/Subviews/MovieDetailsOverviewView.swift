@@ -1,4 +1,5 @@
 import UIKit
+import Cartography
 
 final class MovieDetailsOverviewView: UIStackView {
 
@@ -37,7 +38,8 @@ final class MovieDetailsOverviewView: UIStackView {
     }
 
     required init(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
+        setup()
     }
 
     // MARK: - Setup
@@ -45,9 +47,24 @@ final class MovieDetailsOverviewView: UIStackView {
     private func setup() {
         axis = .vertical
         spacing = 10
+        setupSubviews()
+        setupConstraints()
+    }
+
+    private func setupSubviews() {
         addArrangedSubview(titleLabel)
         addArrangedSubview(textLabel)
         addArrangedSubview(readMoreButton)
+    }
+
+    private func setupConstraints() {
+        constrainReadMoreButton()
+    }
+
+    private func constrainReadMoreButton() {
+        constrain(readMoreButton) { button in
+            button.height == 24
+        }
     }
 
     // MARK: - Configure

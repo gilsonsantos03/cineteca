@@ -249,7 +249,7 @@ private final class AccountDangerRowView: UIView {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .semibold)
-        label.textColor = UIColor(red: 0.95, green: 0.28, blue: 0.28, alpha: 1)
+        label.textColor = .destructiveRed
         label.textAlignment = .center
         return label
     }()

@@ -61,6 +61,8 @@ final class AppearanceView: UIView {
     }
 }
 
+// MARK: - AppearanceContentViewDelegate
+
 extension AppearanceView: AppearanceContentViewDelegate {
     func didTapBack() {
         delegate?.didTapBack()

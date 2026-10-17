@@ -97,17 +97,13 @@ extension MyReviewsViewController: MyReviewsViewDelegate {
 }
 
 extension MyReviewsViewController: MovieReviewViewControllerDelegate {
-    func movieReviewViewControllerDidRequestClose(_ viewController: MovieReviewViewController) {
-        viewController.dismiss(animated: true)
+    func didRequestClose() {
+        dismiss(animated: true)
         reviewController = nil
         selectedReview = nil
     }
 
-    func movieReviewViewController(
-        _ viewController: MovieReviewViewController,
-        didSubmitRating rating: Double,
-        reviewText: String?
-    ) {
+    func didSubmitRating(_ rating: Double, reviewText: String?) {
         guard let selectedReview else { return }
         let metadata = MovieActivityMetadata(
             movieId: selectedReview.movieId,
