@@ -80,10 +80,11 @@ final class SearchYearRangeSliderView: UIView {
     }
 
     private func constrainTrackView() {
+        let horizontalInset = thumbSize / 2
         constrain(trackView, self) { track, superview in
             track.centerY == superview.centerY
-            track.left == superview.left
-            track.right == superview.right
+            track.left == superview.left + horizontalInset
+            track.right == superview.right - horizontalInset
             track.height == trackHeight
         }
     }

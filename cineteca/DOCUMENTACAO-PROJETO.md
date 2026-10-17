@@ -285,6 +285,7 @@ cineteca/
 | **Filtro por gênero** | Chips horizontais; filtro instantâneo no cliente por `Genre.id` | `HomeInteractor`, `GenreFilterView` |
 | **Detalhe do filme** | Tela VIP com overview, cast, crew, providers e similares | `MovieDetails/` |
 | **Seleção de filme** | A cena Search é apresentada em diálogo com comportamento de seleção para escolher o filme favorito no Edit Profile | `Search/`, `EditProfileRouter` |
+| **Filtros da Search** | Sheet com gênero, ano (range), nota mínima (slider inteiro 0–10, mesma escala TMDB/`vote_average`) e idioma; `minRating > 0` vira `vote_average.gte` sem conversão | `SearchFilters`, `SearchFiltersView`, `MovieEndpoint.discover` |
 | **Trailer** | Abre YouTube (app ou web) a partir da Home ou Movie Details | `HomeRouter`, `MovieDetailsRouter` |
 | **Lists** | Watchlist, Curtidos e Rated com cards, empty states, remoção e navegação para detalhes | `Lists/` |
 | **Skeleton loading** | Shimmer placeholders no layout final | `HomeSkeletonView` |
@@ -448,6 +449,7 @@ Armazena listas **antes** do filtro. `selectGenre()` reutiliza este cache sem re
 | `MovieEndpoint.nowPlaying` | GET | `/movie/now_playing` | Seção "Em cartaz" |
 | `MovieEndpoint.trending` | GET | `/trending/movie/week` | Seção "Em alta" |
 | `MovieEndpoint.topRated` | GET | `/movie/top_rated` | Seção "Mais bem avaliados" |
+| `MovieEndpoint.discover` | GET | `/discover/movie` | Busca filtrada (gênero, ano, nota mínima 0–10, idioma, texto) |
 | `GenreEndpoint.movieList` | GET | `/genre/movie/list` | Chips de filtro + resolução de nomes |
 
 ### 7.3 CDN de imagens (fora do NetworkService)

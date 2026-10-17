@@ -69,25 +69,41 @@ final class SearchFiltersView: UIView {
 
     private lazy var ratingSectionLabel: UILabel = makeSectionLabel(text: Strings.SearchScene.Filters.minRating)
 
+    private lazy var ratingValueLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 13, weight: .semibold)
+        label.textColor = .accentYellow
+        label.textAlignment = .right
+        return label
+    }()
+
+    private lazy var ratingHeaderRow: UIStackView = {
+        let row = UIStackView(arrangedSubviews: [ratingSectionLabel, ratingValueLabel])
+        row.axis = .horizontal
+        row.distribution = .equalSpacing
+        return row
+    }()
+
     private lazy var ratingPickerView = SearchRatingPickerView()
 
     private lazy var languageSectionLabel: UILabel = makeSectionLabel(text: Strings.SearchScene.Filters.language)
 
     private lazy var languageButton: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = .cardBackground
+        button.backgroundColor = .surfaceOverlay
         button.layer.cornerRadius = 12
+        button.layer.borderWidth = 1
         button.contentHorizontalAlignment = .left
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 40)
         button.setTitleColor(.textPrimary, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 16)
+        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         button.addTarget(self, action: #selector(languageTapped), for: .touchUpInside)
         return button
     }()
 
     private lazy var languageChevronImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(systemName: "chevron.down"))
-        imageView.tintColor = .textSecondary
+        imageView.tintColor = .accentYellow
         imageView.contentMode = .scaleAspectFit
         imageView.isUserInteractionEnabled = false
         return imageView
@@ -100,7 +116,7 @@ final class SearchFiltersView: UIView {
             genreCollectionView,
             yearHeaderRow,
             yearRangeSliderView,
-            ratingSectionLabel,
+            ratingHeaderRow,
             ratingPickerView,
             languageSectionLabel,
             languageButton
@@ -109,11 +125,11 @@ final class SearchFiltersView: UIView {
         stack.spacing = 12
         stack.setCustomSpacing(24, after: titleLabel)
         stack.setCustomSpacing(8, after: genreSectionLabel)
-        stack.setCustomSpacing(20, after: genreCollectionView)
+        stack.setCustomSpacing(24, after: genreCollectionView)
         stack.setCustomSpacing(8, after: yearHeaderRow)
-        stack.setCustomSpacing(20, after: yearRangeSliderView)
-        stack.setCustomSpacing(8, after: ratingSectionLabel)
-        stack.setCustomSpacing(20, after: ratingPickerView)
+        stack.setCustomSpacing(24, after: yearRangeSliderView)
+        stack.setCustomSpacing(8, after: ratingHeaderRow)
+        stack.setCustomSpacing(24, after: ratingPickerView)
         stack.setCustomSpacing(8, after: languageSectionLabel)
         return stack
     }()
@@ -144,6 +160,13 @@ final class SearchFiltersView: UIView {
         yearRangeSliderView.delegate = self
         setupSubviews()
         setupConstraints()
+        updateLanguageButtonAppearance()
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        guard traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) else { return }
+        updateLanguageButtonAppearance()
     }
 
     private func setupSubviews() {
@@ -201,7 +224,7 @@ final class SearchFiltersView: UIView {
 
     private func constrainLanguageButton() {
         constrain(languageButton) { button in
-            button.height == 48
+            button.height == 52
         }
     }
 
@@ -232,6 +255,7 @@ final class SearchFiltersView: UIView {
 
         ratingPickerView.configure(rating: viewModel.minRating)
         updateYearLabel()
+        updateRatingLabel()
         updateLanguageButton()
         genreCollectionView.reloadData()
     }
@@ -269,10 +293,18 @@ final class SearchFiltersView: UIView {
         yearValueLabel.text = "\(filters.yearFrom) – \(filters.yearTo)"
     }
 
+    private func updateRatingLabel() {
+        ratingValueLabel.text = "\(filters.minRating)/10"
+    }
+
     private func updateLanguageButton() {
         let selectedName = languageOptions.first(where: \.isSelected)?.name
             ?? Strings.SearchScene.Filters.Language.all
         languageButton.setTitle(selectedName, for: .normal)
+    }
+
+    private func updateLanguageButtonAppearance() {
+        languageButton.layer.borderColor = UIColor.borderSubtle.resolvedColor(with: traitCollection).cgColor
     }
 
     private func notifyFiltersChanged() {
@@ -330,6 +362,7 @@ extension SearchFiltersView: SearchYearRangeSliderViewDelegate {
 extension SearchFiltersView: SearchRatingPickerViewDelegate {
     func didSelectRating(_ rating: Int) {
         filters.minRating = rating
+        updateRatingLabel()
         notifyFiltersChanged()
     }
 }

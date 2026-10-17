@@ -61,8 +61,7 @@ enum MovieEndpoint: URLRequestBuilder, Sendable {
         items.append(URLQueryItem(name: "primary_release_date.lte", value: "\(filters.yearTo)-12-31"))
 
         if filters.minRating > 0 {
-            let minVoteAverage = Double(filters.minRating) * 2.0
-            items.append(URLQueryItem(name: "vote_average.gte", value: String(format: "%.1f", minVoteAverage)))
+            items.append(URLQueryItem(name: "vote_average.gte", value: String(format: "%.1f", Double(filters.minRating))))
         }
 
         if let languageCode = filters.languageCode, !languageCode.isEmpty {
