@@ -10,7 +10,8 @@ enum HomeModels {
                 nowPlaying: [Movie],
                 trending: [Movie],
                 topRated: [Movie],
-                genreFilter: GenreFilter
+                genreFilter: GenreFilter,
+                featuredIsInWatchlist: Bool
             )
             case error
         }
@@ -32,6 +33,23 @@ enum HomeModels {
     enum SelectGenre {
         struct Request {
             let index: Int
+        }
+    }
+
+    enum DidTapWatchlist {
+        struct Request {
+            let movieId: Int
+            let isInWatchlist: Bool
+        }
+
+        enum Response {
+            case success(MovieActivity)
+            case error
+        }
+
+        enum ViewModel {
+            case success(isInWatchlist: Bool)
+            case error
         }
     }
 
@@ -68,6 +86,7 @@ enum HomeModels {
         let rating: String
         let genres: [String]
         let backdropURL: URL?
+        let isInWatchlist: Bool
     }
 
     struct MovieCardViewModel {

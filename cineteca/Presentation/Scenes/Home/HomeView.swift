@@ -6,6 +6,7 @@ protocol HomeViewDelegate: AnyObject {
     func didRequestRetry()
     func didSelectGenre(at index: Int)
     func didRequestWatchTrailer(movieId: Int)
+    func didTapWatchlist(movieId: Int, isInWatchlist: Bool)
     func didSelectMovie(id movieId: Int)
 }
 
@@ -98,6 +99,10 @@ final class HomeView: UIView {
         homeContentView.endRefreshing()
     }
 
+    func updateWatchlist(isInWatchlist: Bool) {
+        homeContentView.updateWatchlist(isInWatchlist: isInWatchlist)
+    }
+
     // MARK: - Helpers
 
     private func setState(_ state: State) {
@@ -120,6 +125,10 @@ extension HomeView: HomeContentViewDelegate {
 
     func didRequestWatchTrailer(movieId: Int) {
         delegate?.didRequestWatchTrailer(movieId: movieId)
+    }
+
+    func didTapWatchlist(movieId: Int, isInWatchlist: Bool) {
+        delegate?.didTapWatchlist(movieId: movieId, isInWatchlist: isInWatchlist)
     }
 
     func didSelectMovie(id movieId: Int) {

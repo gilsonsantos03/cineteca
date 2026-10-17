@@ -5,12 +5,14 @@ protocol HomeBusinessLogic {
     func refresh()
     func selectGenre(request: HomeModels.SelectGenre.Request)
     func watchTrailer(request: HomeModels.WatchTrailer.Request)
+    func didTapWatchlist(request: HomeModels.DidTapWatchlist.Request)
 }
 
 final class HomeInteractor {
     private let presenter: HomePresentationLogic
     private let repository: MovieRepositoryProtocol
     private let genreRepository: GenreRepositoryProtocol
+    private let activityRepository: MovieActivityRepositoryProtocol
 
     private var cachedHomeContent: CachedHomeContent?
     private var sortedGenres: [Genre] = []
@@ -19,11 +21,13 @@ final class HomeInteractor {
     init(
         presenter: HomePresentationLogic,
         repository: MovieRepositoryProtocol,
-        genreRepository: GenreRepositoryProtocol
+        genreRepository: GenreRepositoryProtocol,
+        activityRepository: MovieActivityRepositoryProtocol
     ) {
         self.presenter = presenter
         self.repository = repository
         self.genreRepository = genreRepository
+        self.activityRepository = activityRepository
     }
 }
 
@@ -64,6 +68,40 @@ extension HomeInteractor: HomeBusinessLogic {
         }
     }
 
+    func didTapWatchlist(request: HomeModels.DidTapWatchlist.Request) {
+        Task {
+            let response: HomeModels.DidTapWatchlist.Response
+            do {
+                guard
+                    let cachedHomeContent,
+                    let movie = cachedHomeContent.movie(withID: request.movieId)
+                else {
+                    response = .error
+                    await MainActor.run {
+                        presenter.presentDidTapWatchlist(response: response)
+                    }
+                    return
+                }
+
+                try await activityRepository.upsertMetadata(
+                    Self.makeActivityMetadata(from: movie)
+                )
+                let activity = try await activityRepository.setWatchlist(
+                    request.isInWatchlist,
+                    for: request.movieId
+                )
+                self.cachedHomeContent?.featuredIsInWatchlist = activity.isInWatchlist
+                response = .success(activity)
+            } catch {
+                response = .error
+            }
+
+            await MainActor.run {
+                presenter.presentDidTapWatchlist(response: response)
+            }
+        }
+    }
+
     private func loadContent() async {
         do {
             let genres = try await genreRepository.genres()
@@ -83,11 +121,15 @@ extension HomeInteractor: HomeBusinessLogic {
             }
 
             sortedGenres = genres.sorted { $0.name < $1.name }
+            let featuredActivity = try? await activityRepository.fetchActivity(
+                for: featuredMovie.id
+            )
             let content = CachedHomeContent(
                 featured: featuredMovie,
                 nowPlaying: nowPlayingMovies,
                 trending: trendingMovies,
-                topRated: topRatedMovies
+                topRated: topRatedMovies,
+                featuredIsInWatchlist: featuredActivity?.isInWatchlist ?? false
             )
             cachedHomeContent = content
             await MainActor.run { presentFilteredContent(from: content) }
@@ -104,7 +146,8 @@ extension HomeInteractor: HomeBusinessLogic {
                 nowPlaying: filter(content.nowPlaying, by: selectedGenre),
                 trending: filter(content.trending, by: selectedGenre),
                 topRated: filter(content.topRated, by: selectedGenre),
-                genreFilter: HomeModels.GenreFilter(genres: sortedGenres, selectedIndex: selectedGenreIndex)
+                genreFilter: HomeModels.GenreFilter(genres: sortedGenres, selectedIndex: selectedGenreIndex),
+                featuredIsInWatchlist: content.featuredIsInWatchlist
             )
         )
     }
@@ -138,4 +181,26 @@ private struct CachedHomeContent {
     let nowPlaying: [Movie]
     let trending: [Movie]
     let topRated: [Movie]
+    var featuredIsInWatchlist: Bool
+
+    func movie(withID movieID: Int) -> Movie? {
+        ([featured] + nowPlaying + trending + topRated)
+            .first { $0.id == movieID }
+    }
+}
+
+private extension HomeInteractor {
+    static func makeActivityMetadata(from movie: Movie) -> MovieActivityMetadata {
+        MovieActivityMetadata(
+            movieId: movie.id,
+            title: movie.title,
+            posterURL: movie.posterURL,
+            backdropURL: movie.backdropURL,
+            runtimeMinutes: movie.runtime,
+            releaseYear: movie.releaseYear,
+            genres: movie.genres,
+            directorNames: [],
+            actorNames: []
+        )
+    }
 }

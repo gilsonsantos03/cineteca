@@ -4,6 +4,7 @@ protocol HomePresentationLogic {
     func presentFetchContent(response: HomeModels.FetchContent.Response)
     func presentLoading()
     func presentWatchTrailer(response: HomeModels.WatchTrailer.Response)
+    func presentDidTapWatchlist(response: HomeModels.DidTapWatchlist.Response)
 }
 
 final class HomePresenter {
@@ -13,11 +14,14 @@ final class HomePresenter {
 extension HomePresenter: HomePresentationLogic {
     func presentFetchContent(response: HomeModels.FetchContent.Response) {
         switch response {
-        case let .content(featured, nowPlaying, trending, topRated, genreFilter):
+        case let .content(featured, nowPlaying, trending, topRated, genreFilter, featuredIsInWatchlist):
             view?.displayFetchContent(
                 viewModel: .content(
                     HomeModels.FetchContent.ViewModel.Content(
-                        featured: makeFeaturedViewModel(from: featured),
+                        featured: makeFeaturedViewModel(
+                            from: featured,
+                            isInWatchlist: featuredIsInWatchlist
+                        ),
                         genreFilter: HomeModels.GenreFilterViewModel(
                             options: [Strings.HomeScene.GenreFilter.all] + genreFilter.genres.map(\.name),
                             selectedIndex: genreFilter.selectedIndex
@@ -51,14 +55,29 @@ extension HomePresenter: HomePresentationLogic {
         }
     }
 
-    private func makeFeaturedViewModel(from movie: Movie) -> HomeModels.FeaturedViewModel {
+    func presentDidTapWatchlist(response: HomeModels.DidTapWatchlist.Response) {
+        switch response {
+        case let .success(activity):
+            view?.displayDidTapWatchlist(
+                viewModel: .success(isInWatchlist: activity.isInWatchlist)
+            )
+        case .error:
+            view?.displayDidTapWatchlist(viewModel: .error)
+        }
+    }
+
+    private func makeFeaturedViewModel(
+        from movie: Movie,
+        isInWatchlist: Bool
+    ) -> HomeModels.FeaturedViewModel {
         HomeModels.FeaturedViewModel(
             movieId: movie.id,
             title: movie.title,
             year: movie.releaseYear,
             rating: formatRating(movie.rating),
             genres: Array(movie.genres.prefix(3)).map(\.name),
-            backdropURL: movie.backdropURL
+            backdropURL: movie.backdropURL,
+            isInWatchlist: isInWatchlist
         )
     }
 

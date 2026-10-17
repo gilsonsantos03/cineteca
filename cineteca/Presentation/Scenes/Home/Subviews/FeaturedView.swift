@@ -3,6 +3,7 @@ import Cartography
 
 protocol FeaturedViewDelegate: AnyObject {
     func didRequestWatchTrailer(movieId: Int)
+    func didTapWatchlist(movieId: Int, isInWatchlist: Bool)
     func didSelectMovie(id movieId: Int)
 }
 
@@ -12,6 +13,7 @@ final class FeaturedView: UIView {
 
     weak var delegate: FeaturedViewDelegate?
     private var movieId: Int?
+    private var isInWatchlist = false
 
     // MARK: - UI Components
 
@@ -105,6 +107,7 @@ final class FeaturedView: UIView {
         button.layer.cornerRadius = 22
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.white.withAlphaComponent(0.3).cgColor
+        button.addTarget(self, action: #selector(didTapWatchlist), for: .touchUpInside)
         return button
     }()
 
@@ -261,6 +264,7 @@ final class FeaturedView: UIView {
         titleLabel.text = viewModel.title
         imdbRatingLabel.text = viewModel.rating
         yearLabel.text = viewModel.year
+        updateWatchlist(isInWatchlist: viewModel.isInWatchlist)
 
         genreChipStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
         viewModel.genres.forEach { genre in
@@ -274,6 +278,14 @@ final class FeaturedView: UIView {
     private func didTapWatchTrailer() {
         guard let movieId else { return }
         delegate?.didRequestWatchTrailer(movieId: movieId)
+    }
+
+    @objc private func didTapWatchlist() {
+        guard let movieId else { return }
+        delegate?.didTapWatchlist(
+            movieId: movieId,
+            isInWatchlist: !isInWatchlist
+        )
     }
 
     @objc private func didTapMovie() {
@@ -303,6 +315,17 @@ final class FeaturedView: UIView {
             label.right == container.right - 10
         }
         return container
+    }
+
+    func updateWatchlist(isInWatchlist: Bool) {
+        self.isInWatchlist = isInWatchlist
+        let config = UIImage.SymbolConfiguration(pointSize: 14, weight: .semibold)
+        let imageName = isInWatchlist ? "checkmark" : "plus"
+        watchlistButton.setImage(
+            UIImage(systemName: imageName, withConfiguration: config),
+            for: .normal
+        )
+        watchlistButton.accessibilityValue = isInWatchlist ? "Added" : "Not added"
     }
 }
 

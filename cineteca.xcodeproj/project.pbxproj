@@ -234,6 +234,16 @@
 		UI000001000000000000002B000000000000001A /* PasswordFormFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = UI000001000000000000002B /* PasswordFormFieldView.swift */; };
 		UI000001000000000000003B000000000000001A /* ErrorStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = UI000001000000000000003B /* ErrorStateView.swift */; };
 		UI000001000000000000004B000000000000001A /* GenreChipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = UI000001000000000000004B /* GenreChipCell.swift */; };
+		LS000001000000000000009A /* ListsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS000001000000000000009B /* ListsModels.swift */; };
+		LS00000100000000000000AA /* ListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS00000100000000000000AB /* ListsViewController.swift */; };
+		LS00000100000000000000BA /* ListsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS00000100000000000000BB /* ListsView.swift */; };
+		LS00000100000000000000CA /* ListsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS00000100000000000000CB /* ListsInteractor.swift */; };
+		LS00000100000000000000DA /* ListsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS00000100000000000000DB /* ListsPresenter.swift */; };
+		LS00000100000000000000EA /* ListsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS00000100000000000000EB /* ListsRouter.swift */; };
+		LS00000100000000000000FA /* ListsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS00000100000000000000FB /* ListsConfigurator.swift */; };
+		LS000001000000000000010C /* ListsMovieCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS000001000000000000010D /* ListsMovieCardView.swift */; };
+		LS000001000000000000011C /* ListsErrorStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS000001000000000000011D /* ListsErrorStateView.swift */; };
+		LS000001000000000000012A /* ListsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS000001000000000000012B /* ListsPresenterTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -477,6 +487,16 @@
 		UI000001000000000000002B /* PasswordFormFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFormFieldView.swift; sourceTree = "<group>"; };
 		UI000001000000000000003B /* ErrorStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorStateView.swift; sourceTree = "<group>"; };
 		UI000001000000000000004B /* GenreChipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreChipCell.swift; sourceTree = "<group>"; };
+		LS000001000000000000009B /* ListsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsModels.swift; sourceTree = "<group>"; };
+		LS00000100000000000000AB /* ListsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsViewController.swift; sourceTree = "<group>"; };
+		LS00000100000000000000BB /* ListsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsView.swift; sourceTree = "<group>"; };
+		LS00000100000000000000CB /* ListsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsInteractor.swift; sourceTree = "<group>"; };
+		LS00000100000000000000DB /* ListsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsPresenter.swift; sourceTree = "<group>"; };
+		LS00000100000000000000EB /* ListsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsRouter.swift; sourceTree = "<group>"; };
+		LS00000100000000000000FB /* ListsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsConfigurator.swift; sourceTree = "<group>"; };
+		LS000001000000000000010D /* ListsMovieCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsMovieCardView.swift; sourceTree = "<group>"; };
+		LS000001000000000000011D /* ListsErrorStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsErrorStateView.swift; sourceTree = "<group>"; };
+		LS000001000000000000012B /* ListsPresenterTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ListsPresenterTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -514,6 +534,7 @@
 			isa = PBXGroup;
 			children = (
 				442CB05D2FFC81ED004FCC82 /* Home */,
+				LS000001000000000000001G /* Lists */,
 				PP000001000000000000012G /* Profile */,
 				AA10000100000000000000CA /* MovieDetails */,
 				SS00000100000000000000CA /* Search */,
@@ -616,6 +637,7 @@
 			isa = PBXGroup;
 			children = (
 				F09EE0361B7672E51466DEC2 /* MovieActivityRepositoryTests.swift */,
+				LS000001000000000000012B /* ListsPresenterTests.swift */,
 			);
 			name = cinetecaTests;
 			path = cinetecaTests;
@@ -1064,6 +1086,30 @@
 			path = MyReviews;
 			sourceTree = "<group>";
 		};
+		LS000001000000000000001G /* Lists */ = {
+			isa = PBXGroup;
+			children = (
+				LS000001000000000000002G /* Subviews */,
+				LS000001000000000000009B /* ListsModels.swift */,
+				LS00000100000000000000AB /* ListsViewController.swift */,
+				LS00000100000000000000BB /* ListsView.swift */,
+				LS00000100000000000000CB /* ListsInteractor.swift */,
+				LS00000100000000000000DB /* ListsPresenter.swift */,
+				LS00000100000000000000EB /* ListsRouter.swift */,
+				LS00000100000000000000FB /* ListsConfigurator.swift */,
+			);
+			path = Lists;
+			sourceTree = "<group>";
+		};
+		LS000001000000000000002G /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				LS000001000000000000010D /* ListsMovieCardView.swift */,
+				LS000001000000000000011D /* ListsErrorStateView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
 		SS00000100000000000000CA /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -1444,6 +1490,15 @@
 				MY00000100000000000000EA /* MyReviewsConfigurator.swift in Sources */,
 				MY00000100000000000010CA /* MyReviewsContentView.swift in Sources */,
 				MY00000100000000000011CA /* MyReviewCardView.swift in Sources */,
+				LS000001000000000000009A /* ListsModels.swift in Sources */,
+				LS00000100000000000000AA /* ListsViewController.swift in Sources */,
+				LS00000100000000000000BA /* ListsView.swift in Sources */,
+				LS00000100000000000000CA /* ListsInteractor.swift in Sources */,
+				LS00000100000000000000DA /* ListsPresenter.swift in Sources */,
+				LS00000100000000000000EA /* ListsRouter.swift in Sources */,
+				LS00000100000000000000FA /* ListsConfigurator.swift in Sources */,
+				LS000001000000000000010C /* ListsMovieCardView.swift in Sources */,
+				LS000001000000000000011C /* ListsErrorStateView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1452,6 +1507,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				661DF6C81A41E7E64243F97C /* MovieActivityRepositoryTests.swift in Sources */,
+				LS000001000000000000012A /* ListsPresenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

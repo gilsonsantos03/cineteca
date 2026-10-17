@@ -30,6 +30,23 @@
 "TabBar.Stats.Title" = "Stats";
 "TabBar.Profile.Title" = "Profile";
 
+"ListsScene.Title" = "Your Library";
+"ListsScene.Tab.Watchlist" = "Watchlist";
+"ListsScene.Tab.Favorites" = "Favorites";
+"ListsScene.Tab.Rated" = "Rated";
+"ListsScene.Empty.Watchlist" = "Movies you add to your watchlist will appear here.";
+"ListsScene.Empty.Favorites" = "Movies you like will appear here.";
+"ListsScene.Empty.Rated" = "Movies you rate will appear here.";
+"ListsScene.Card.Duration.Format" = "%dh %02dm";
+"ListsScene.Card.RatingScale" = "/10";
+"ListsScene.Card.RemoveAccessibilityLabel" = "Remove movie from this list";
+"ListsScene.Error.Title" = "Something went wrong";
+"ListsScene.Error.Subtitle" = "We couldn't load your lists. Check your connection and try again.";
+"ListsScene.Error.RetryButton.Text" = "Try again";
+"ListsScene.Error.OkButton" = "OK";
+"ListsScene.RemoveError.Title" = "Could not update list";
+"ListsScene.RemoveError.Message" = "Your change could not be saved. Please try again.";
+
 "StatsScene.Title" = "Your Year in Film";
 "StatsScene.FilmsWatched.Format" = "%d films watched";
 "StatsScene.GenreDistribution.Title" = "Genre Distribution";

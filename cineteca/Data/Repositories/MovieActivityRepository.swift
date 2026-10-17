@@ -95,6 +95,39 @@ final class MovieActivityRepository: MovieActivityRepositoryProtocol, @unchecked
         }
     }
 
+    func unrateMovie(for movieId: Int) async throws -> MovieActivity {
+        let context = coreDataStack.viewContext
+        return try await context.perform {
+            let user = try Self.fetchUser(in: context)
+            guard let activity = try Self.fetchActivityEntity(
+                for: movieId,
+                user: user,
+                in: context
+            ) else {
+                throw MovieActivityRepositoryError.activityNotFound
+            }
+
+            activity.rating = -1
+            activity.ratedAt = nil
+            activity.isFavorite = false
+            activity.updatedAt = Date()
+
+            let reviewRequest = ReviewEntity.fetchRequest()
+            reviewRequest.fetchLimit = 1
+            reviewRequest.predicate = NSPredicate(
+                format: "user == %@ AND movieId == %d",
+                user,
+                Int32(movieId)
+            )
+            if let review = try context.fetch(reviewRequest).first {
+                context.delete(review)
+            }
+
+            try context.save()
+            return activity.toDomain()
+        }
+    }
+
     func saveReview(for movieId: Int, rating: Double, text: String) async throws {
         guard Self.isValidRating(rating) else {
             throw MovieActivityRepositoryError.invalidRating

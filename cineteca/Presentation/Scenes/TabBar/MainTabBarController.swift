@@ -3,9 +3,11 @@ import UIKit
 final class MainTabBarController: UITabBarController {
     private let repository: MovieRepositoryProtocol
     private let genreRepository: GenreRepositoryProtocol
+    private let movieActivityRepository: MovieActivityRepositoryProtocol
     private let userRepository: UserRepositoryProtocol
     private let statsRepository: StatsRepositoryProtocol
     private let movieDetailsBuilder: MovieDetailsBuilding
+    private let listsBuilder: ListsBuilding
     private let editProfileBuilder: EditProfileBuilding
     private let myReviewsBuilder: MyReviewsBuilding
     private let accountBuilder: AccountBuilding
@@ -16,9 +18,11 @@ final class MainTabBarController: UITabBarController {
     init(
         repository: MovieRepositoryProtocol,
         genreRepository: GenreRepositoryProtocol,
+        movieActivityRepository: MovieActivityRepositoryProtocol,
         userRepository: UserRepositoryProtocol,
         statsRepository: StatsRepositoryProtocol,
         movieDetailsBuilder: MovieDetailsBuilding,
+        listsBuilder: ListsBuilding,
         editProfileBuilder: EditProfileBuilding,
         myReviewsBuilder: MyReviewsBuilding,
         accountBuilder: AccountBuilding,
@@ -28,9 +32,11 @@ final class MainTabBarController: UITabBarController {
     ) {
         self.repository = repository
         self.genreRepository = genreRepository
+        self.movieActivityRepository = movieActivityRepository
         self.userRepository = userRepository
         self.statsRepository = statsRepository
         self.movieDetailsBuilder = movieDetailsBuilder
+        self.listsBuilder = listsBuilder
         self.editProfileBuilder = editProfileBuilder
         self.myReviewsBuilder = myReviewsBuilder
         self.accountBuilder = accountBuilder
@@ -93,6 +99,7 @@ final class MainTabBarController: UITabBarController {
         let homeVC = HomeConfigurator.resolve(
             repository: repository,
             genreRepository: genreRepository,
+            activityRepository: movieActivityRepository,
             movieDetailsBuilder: movieDetailsBuilder
         )
         homeVC.tabBarItem = UITabBarItem(title: Strings.TabBar.home, image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill"))
@@ -108,7 +115,12 @@ final class MainTabBarController: UITabBarController {
             selectedImage: UIImage(systemName: "magnifyingglass")
         )
 
-        let listsVC  = makePlaceholder(title: Strings.TabBar.lists,  icon: "bookmark")
+        let listsVC = listsBuilder.makeLists()
+        listsVC.tabBarItem = UITabBarItem(
+            title: Strings.TabBar.lists,
+            image: UIImage(systemName: "bookmark"),
+            selectedImage: UIImage(systemName: "bookmark.fill")
+        )
         let statsVC = StatsConfigurator.resolve(statsRepository: statsRepository)
         statsVC.tabBarItem = UITabBarItem(
             title: Strings.TabBar.stats,
@@ -136,10 +148,4 @@ final class MainTabBarController: UITabBarController {
         }
     }
 
-    private func makePlaceholder(title: String, icon: String) -> UIViewController {
-        let vc = UIViewController()
-        vc.view.backgroundColor = .appBackground
-        vc.tabBarItem = UITabBarItem(title: title, image: UIImage(systemName: icon), selectedImage: nil)
-        return vc
-    }
 }

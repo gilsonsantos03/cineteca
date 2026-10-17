@@ -30,6 +30,23 @@
 "TabBar.Stats.Title" = "Stats";
 "TabBar.Profile.Title" = "Perfil";
 
+"ListsScene.Title" = "Sua biblioteca";
+"ListsScene.Tab.Watchlist" = "Minha lista";
+"ListsScene.Tab.Favorites" = "Curtidos";
+"ListsScene.Tab.Rated" = "Avaliados";
+"ListsScene.Empty.Watchlist" = "Os filmes adicionados à sua lista aparecerão aqui.";
+"ListsScene.Empty.Favorites" = "Os filmes que você curtir aparecerão aqui.";
+"ListsScene.Empty.Rated" = "Os filmes que você avaliar aparecerão aqui.";
+"ListsScene.Card.Duration.Format" = "%dh %02dm";
+"ListsScene.Card.RatingScale" = "/10";
+"ListsScene.Card.RemoveAccessibilityLabel" = "Remover filme desta lista";
+"ListsScene.Error.Title" = "Algo deu errado";
+"ListsScene.Error.Subtitle" = "Não foi possível carregar suas listas. Verifique sua conexão e tente novamente.";
+"ListsScene.Error.RetryButton.Text" = "Tentar novamente";
+"ListsScene.Error.OkButton" = "OK";
+"ListsScene.RemoveError.Title" = "Não foi possível atualizar a lista";
+"ListsScene.RemoveError.Message" = "Não foi possível salvar a alteração. Tente novamente.";
+
 "StatsScene.Title" = "Seu ano em filmes";
 "StatsScene.FilmsWatched.Format" = "%d filmes assistidos";
 "StatsScene.GenreDistribution.Title" = "Distribuição por gênero";

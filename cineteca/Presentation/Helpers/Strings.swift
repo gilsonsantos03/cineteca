@@ -58,6 +58,49 @@ enum Strings {
         static var profile: String { Localization.string("TabBar.Profile.Title") }
     }
 
+    enum ListsScene {
+        static var title: String { Localization.string("ListsScene.Title") }
+        static var removeErrorTitle: String {
+            Localization.string("ListsScene.RemoveError.Title")
+        }
+        static var removeErrorMessage: String {
+            Localization.string("ListsScene.RemoveError.Message")
+        }
+        static var okButton: String { Localization.string("ListsScene.Error.OkButton") }
+
+        enum Tab {
+            static var watchlist: String { Localization.string("ListsScene.Tab.Watchlist") }
+            static var favorites: String { Localization.string("ListsScene.Tab.Favorites") }
+            static var rated: String { Localization.string("ListsScene.Tab.Rated") }
+        }
+
+        enum Empty {
+            static var watchlist: String { Localization.string("ListsScene.Empty.Watchlist") }
+            static var favorites: String { Localization.string("ListsScene.Empty.Favorites") }
+            static var rated: String { Localization.string("ListsScene.Empty.Rated") }
+        }
+
+        enum Card {
+            static var durationFormat: String {
+                Localization.string("ListsScene.Card.Duration.Format")
+            }
+            static var ratingScale: String {
+                Localization.string("ListsScene.Card.RatingScale")
+            }
+            static var removeAccessibilityLabel: String {
+                Localization.string("ListsScene.Card.RemoveAccessibilityLabel")
+            }
+        }
+
+        enum Error {
+            static var title: String { Localization.string("ListsScene.Error.Title") }
+            static var subtitle: String { Localization.string("ListsScene.Error.Subtitle") }
+            static var retryButton: String {
+                Localization.string("ListsScene.Error.RetryButton.Text")
+            }
+        }
+    }
+
     enum StatsScene {
         static var title: String { Localization.string("StatsScene.Title") }
         static var filmsWatchedFormat: String { Localization.string("StatsScene.FilmsWatched.Format") }

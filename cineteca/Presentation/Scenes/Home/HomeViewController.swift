@@ -4,6 +4,7 @@ protocol HomeDisplayLogic: AnyObject {
     func displayFetchContent(viewModel: HomeModels.FetchContent.ViewModel)
     func displayLoading()
     func displayWatchTrailer(viewModel: HomeModels.WatchTrailer.ViewModel)
+    func displayDidTapWatchlist(viewModel: HomeModels.DidTapWatchlist.ViewModel)
 }
 
 final class HomeViewController: UIViewController {
@@ -57,6 +58,26 @@ extension HomeViewController: HomeDisplayLogic {
             present(alert, animated: true)
         }
     }
+
+    func displayDidTapWatchlist(viewModel: HomeModels.DidTapWatchlist.ViewModel) {
+        switch viewModel {
+        case let .success(isInWatchlist):
+            customView.updateWatchlist(isInWatchlist: isInWatchlist)
+        case .error:
+            let alert = UIAlertController(
+                title: Strings.MovieDetailsScene.ActivityError.title,
+                message: Strings.MovieDetailsScene.ActivityError.message,
+                preferredStyle: .alert
+            )
+            alert.addAction(
+                UIAlertAction(
+                    title: Strings.MovieDetailsScene.ActivityError.okButton,
+                    style: .default
+                )
+            )
+            present(alert, animated: true)
+        }
+    }
 }
 
 // MARK: - HomeViewDelegate
@@ -76,6 +97,12 @@ extension HomeViewController: HomeViewDelegate {
 
     func didRequestWatchTrailer(movieId: Int) {
         interactor.watchTrailer(request: .init(movieId: movieId))
+    }
+
+    func didTapWatchlist(movieId: Int, isInWatchlist: Bool) {
+        interactor.didTapWatchlist(
+            request: .init(movieId: movieId, isInWatchlist: isInWatchlist)
+        )
     }
 
     func didSelectMovie(id movieId: Int) {

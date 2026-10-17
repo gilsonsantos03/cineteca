@@ -41,6 +41,20 @@ final class MovieActivityRepositoryTests: XCTestCase {
         XCTAssertTrue(favorite.isFavorite)
     }
 
+    func testUnrateMovieClearsRatingFavoriteAndReview() async throws {
+        try await repository.upsertMetadata(makeMetadata())
+        _ = try await repository.rateMovie(for: 101, rating: 8.0)
+        try await repository.saveReview(for: 101, rating: 8.0, text: "Great film")
+        _ = try await repository.setFavorite(true, for: 101)
+
+        let activity = try await repository.unrateMovie(for: 101)
+        let review = try await repository.fetchReview(for: 101)
+
+        XCTAssertFalse(activity.isRated)
+        XCTAssertFalse(activity.isFavorite)
+        XCTAssertNil(review)
+    }
+
     func testWatchlistToggleIsIdempotent() async throws {
         try await repository.upsertMetadata(makeMetadata())
 

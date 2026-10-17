@@ -19,6 +19,10 @@ protocol MyReviewsBuilding {
     func makeMyReviews() -> UIViewController
 }
 
+protocol ListsBuilding {
+    func makeLists() -> UIViewController
+}
+
 protocol AccountBuilding {
     func makeAccount() -> UIViewController
 }

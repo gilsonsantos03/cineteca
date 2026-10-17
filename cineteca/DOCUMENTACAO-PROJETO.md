@@ -34,7 +34,7 @@
 |---|---|
 | **Propósito** | Exibir filmes populares, em cartaz, em alta e mais bem avaliados, com filtro por gênero |
 | **Público** | App pessoal/portfólio com UI dark polida |
-| **Estado atual** | Home, Search, Movie Details, Stats e Profile implementadas; Lists continua como placeholder |
+| **Estado atual** | Home, Search, Movie Details, Lists, Stats e Profile implementadas |
 | **Bundle ID** | `com.gilson.cineteca` |
 | **Versão** | 1.0 (1) |
 | **iOS mínimo** | 17.0 |
@@ -47,12 +47,13 @@
 - Suporta pull-to-refresh, skeleton loading e tela de erro com retry
 - Localiza UI em `en` e `pt-BR`; nomes de gênero vêm da API no idioma configurado
 - Permite avaliar filmes, adicionar reviews, favoritar e adicionar filmes à watchlist
+- O botão Watchlist do filme em destaque persiste a alteração localmente e atualiza o estado visual do hero
 - Exibe perfil, estatísticas e reviews recentes do usuário
 - Persiste dados locais do perfil e da atividade de filmes via Core Data
 
 ### O que ainda não faz
 
-- Aba Lists, "Ver tudo" e notificações
+- "Ver tudo" e notificações
 - Persistência definitiva para produção e sincronização com backend
 - CI/CD
 
@@ -136,9 +137,9 @@ HomeView + Subviews                ← renderização pura
 | Componente | Arquivo | Papel |
 |---|---|---|
 | `HomeViewController` | `HomeViewController.swift` | Implementa `HomeDisplayLogic`; encaminha eventos ao Interactor |
-| `HomeInteractor` | `HomeInteractor.swift` | Lógica de negócio: fetch paralelo, cache, filtro por gênero |
+| `HomeInteractor` | `HomeInteractor.swift` | Lógica de negócio: fetch paralelo, cache, filtro por gênero e atualização da Watchlist do destaque |
 | `HomePresenter` | `HomePresenter.swift` | Mapeia `Movie` → `FeaturedViewModel`, `MovieCardViewModel` |
-| `HomeRouter` | `HomeRouter.swift` | **Stub vazio** — navegação ainda não implementada |
+| `HomeRouter` | `HomeRouter.swift` | Navega para Movie Details e abre trailer no YouTube |
 | `HomeConfigurator` | `HomeConfigurator.swift` | Monta e injeta dependências da cena |
 | `HomeView` + subviews | `HomeView.swift`, `Subviews/` | Views desacopladas; delegates para eventos |
 
@@ -153,7 +154,7 @@ HomeInteractor
         → MovieResponse.toDomain(genreLookup:)
 ```
 
-**Por que não há UseCase?** A regra de negócio (filtro por gênero, resolução do featured) vive no `HomeInteractor`, que já orquestra dois repositórios. Um UseCase que apenas repassasse chamadas ao repositório não agregaria valor — conforme `architecture.md`.
+**Por que não há UseCase?** As regras de negócio (filtro por gênero, resolução do featured e atualização da Watchlist) vivem no `HomeInteractor`, que já orquestra os repositórios necessários. Um UseCase que apenas repassasse chamadas ao repositório não agregaria valor — conforme `architecture.md`.
 
 ### 3.4 Composition Root
 
@@ -244,6 +245,8 @@ cineteca/
     │       ├── TabBar/MainTabBarController.swift
     │       ├── Home/                     # Cena Home (VIP)
     │       │   └── ...
+    │       ├── Lists/                    # Cena Lists (VIP)
+    │       │   └── ...
     │       ├── Search/                   # Cena Search (VIP; busca ou seleção)
     │       │   ├── SearchConfigurator.swift
     │       │   ├── SearchViewController.swift
@@ -283,6 +286,7 @@ cineteca/
 | **Detalhe do filme** | Tela VIP com overview, cast, crew, providers e similares | `MovieDetails/` |
 | **Seleção de filme** | A cena Search é apresentada em diálogo com comportamento de seleção para escolher o filme favorito no Edit Profile | `Search/`, `EditProfileRouter` |
 | **Trailer** | Abre YouTube (app ou web) a partir da Home ou Movie Details | `HomeRouter`, `MovieDetailsRouter` |
+| **Lists** | Watchlist, Curtidos e Rated com cards, empty states, remoção e navegação para detalhes | `Lists/` |
 | **Skeleton loading** | Shimmer placeholders no layout final | `HomeSkeletonView` |
 | **Estado de erro** | Tela cheia com botão retry | `HomeErrorStateView` |
 | **Imagens assíncronas** | Posters/backdrops do CDN TMDB | `UIImageView+AsyncLoad` |
@@ -296,7 +300,7 @@ cineteca/
 
 | Seção | Fonte de dados | Comportamento |
 |---|---|---|
-| **Featured (hero)** | 1º filme de `/movie/popular` | Backdrop, rating, ano, chips de gênero, botões Watch Trailer / Watchlist |
+| **Featured (hero)** | 1º filme de `/movie/popular` | Backdrop, rating, ano, chips de gênero, botões Watch Trailer / Watchlist; Watchlist é persistida via `MovieActivityRepository` |
 | **Filtro de gênero** | `/genre/movie/list` + chip "All/Todos" | Ordenação alfabética; índice 0 = sem filtro |
 | **Now Playing** | `/movie/now_playing` | `UICollectionView` horizontal |
 | **Trending** | `/trending/movie/week` | Cards com badge "Trending" |
@@ -307,7 +311,6 @@ cineteca/
 
 | Item | Status |
 |---|---|
-| Aba Lists | `UIViewController` vazio |
 | Notificações | Não implementadas |
 | "Ver tudo" para listas | Não implementado |
 
@@ -323,7 +326,10 @@ As avaliações e reviews são dados da sessão do usuário no dispositivo:
 - O perfil calcula filmes avaliados, horas assistidas e quantidade de reviews (com ou sem texto) a partir das atividades salvas.
 - O filme favorito do perfil é definido no Edit Profile, usando a busca em um diálogo, e só é persistido quando o usuário toca em “Salvar alterações”, independentemente do favorito de uma atividade de filme.
 - O card de filme favorito no Perfil é clicável e navega para Movie Details.
-- Movie Details usa “Curtir”/“Like” para a atividade que será consumida futuramente pela cena Lists; isso é separado do filme favorito do perfil.
+- Movie Details usa “Curtir”/“Like” para a atividade consumida pela cena Lists; isso é separado do filme favorito do perfil.
+- A cena Lists exibe as atividades em três abas: Watchlist (`isInWatchlist`), Curtidos/Favorites (`isFavorite`) e Rated (`isRated`).
+- Tocar em um card abre Movie Details. A lixeira remove o filme da lista atual; em Rated, desfaz a avaliação, remove o favorito dependente e exclui a review associada.
+- Cada aba possui um empty state próprio quando não há filmes.
 - Quando não há reviews, o Perfil exibe um estado vazio na seção de reviews e “Minhas reviews” exibe um estado vazio próprio; no Perfil, “Ver tudo” fica oculto.
 - As alterações são salvas no Core Data durante o uso do app.
 - **Comportamento temporário de desenvolvimento:** `AppDelegate` chama `resetSessionData()` ao iniciar o app, removendo atividades e reviews. Isso deve ser removido antes da produção para preservar os dados entre lançamentos.
@@ -393,6 +399,8 @@ struct Movie: Sendable {
 | `GenreFilter` / `GenreFilterViewModel` | `[Genre]` no domínio/interactor; opções de chip (`[String]`) + índice selecionado na UI |
 | `HomeModels.FetchContent.*` | Request/Response/ViewModel do fluxo VIP |
 | `HomeModels.SelectGenre.Request` | Índice do chip selecionado |
+| `ListsModels.FetchContent.*` | Snapshot filtrado por Watchlist, Curtidos ou Rated |
+| `ListsModels.MovieCardViewModel` | Card de filme da cena Lists |
 
 ### 6.4 Persistência local
 
@@ -482,6 +490,7 @@ protocol MovieActivityRepositoryProtocol {
     func fetchActivity(for movieId: Int) async throws -> MovieActivity?
     func fetchReview(for movieId: Int) async throws -> String?
     func rateMovie(for movieId: Int, rating: Double) async throws -> MovieActivity
+    func unrateMovie(for movieId: Int) async throws -> MovieActivity
     func saveReview(for movieId: Int, rating: Double, text: String) async throws
     func setFavorite(_ isFavorite: Bool, for movieId: Int) async throws -> MovieActivity
     func setWatchlist(_ isInWatchlist: Bool, for movieId: Int) async throws -> MovieActivity
@@ -516,7 +525,18 @@ O `HomeInteractor` chama `genres()` uma vez e repassa `[Genre]` para cada `fetch
 8. presenter.presentContent() → HomeView exibe conteúdo
 ```
 
-### 8.2 Filtro por gênero (sem rede)
+### 8.2 Atualização da Watchlist no destaque
+
+```
+1. Usuário toca Watchlist no FeaturedView
+2. Delegate chain: FeaturedView → HomeContentView → HomeView → HomeViewController
+3. HomeViewController → HomeInteractor.didTapWatchlist(movieId:isInWatchlist:)
+4. HomeInteractor garante os metadados locais e chama MovieActivityRepository.setWatchlist()
+5. HomePresenter mapeia o resultado
+6. HomeView atualiza o ícone do botão; em erro, exibe alerta
+```
+
+### 8.3 Filtro por gênero (sem rede)
 
 ```
 1. Usuário toca chip em GenreFilterView
@@ -539,7 +559,7 @@ O `HomeInteractor` chama `genres()` uma vez e repassa `[Genre]` para cada `fetch
 3. Senão → primeiro match em nowPlaying → trending → topRated
 4. Nenhum match → mantém featured original
 
-### 8.3 Pull-to-refresh
+### 8.4 Pull-to-refresh
 
 ```
 1. UIRefreshControl dispara refresh
@@ -548,7 +568,7 @@ O `HomeInteractor` chama `genres()` uma vez e repassa `[Genre]` para cada `fetch
 4. selectedGenreIndex preservado; filtro reaplicado nos dados novos
 ```
 
-### 8.4 Tratamento de erro
+### 8.5 Tratamento de erro
 
 ```
 loadContent() catch → presenter.presentError(error)
@@ -557,7 +577,29 @@ loadContent() catch → presenter.presentError(error)
     → Retry chama fetchContent() novamente
 ```
 
-### 8.5 Avaliação e review de um filme
+### 8.6 Carregamento e navegação da Lists
+
+```
+1. ListsViewController.viewWillAppear()
+2. ListsInteractor.fetchContent()
+3. MovieActivityRepository.fetchActivities()
+4. ListsPresenter filtra o snapshot pela aba selecionada
+5. ListsView exibe cards ou o empty state da aba
+6. Toque no card → ListsRouter → MovieDetailsBuilding → Movie Details
+7. Retorno à tab → novo fetch para refletir alterações feitas nos detalhes
+```
+
+As abas usam as seguintes regras:
+
+- Watchlist: `activity.isInWatchlist`
+- Curtidos/Favorites: `activity.isFavorite`
+- Rated: `activity.isRated`, ou seja, existe avaliação e data de avaliação
+
+A remoção usa `setWatchlist(false)` ou `setFavorite(false)`. Para Rated,
+`unrateMovie()` limpa a nota/data, remove o favorito dependente e exclui a
+review associada; uma atividade que também está na watchlist permanece nela.
+
+### 8.6 Avaliação e review de um filme
 
 ```
 1. Usuário abre Movie Details e escolhe uma nota
@@ -617,7 +659,7 @@ AppDelegate
         └── MainTabBarController
               ├── UINavigationController → Home (implementada)
               ├── UINavigationController → Search (implementada)
-              ├── UINavigationController → Lists (placeholder)
+              ├── UINavigationController → Lists
               ├── UINavigationController → Stats (implementada)
               └── UINavigationController → Profile (implementada)
 ```
@@ -739,7 +781,7 @@ Sugestões de tópicos para a conversa com o engenheiro iOS:
 
 | # | Tópico | Contexto |
 |---|---|---|
-| 1 | **Próximas features** | Aba Lists, "Ver tudo" e notificações |
+| 1 | **Próximas features** | "Ver tudo" e notificações |
 | 2 | **UseCase vs Interactor** | Regra de filtro no Interactor é suficiente? Quando extrair? |
 | 3 | **Modularização** | Monolito hoje; `architecture.md` descreve split Interface/Implementation |
 | 4 | **Testes** | Ampliar cobertura além dos testes atuais de `MovieActivityRepository` |
@@ -851,16 +893,13 @@ graph TB
     end
 
     subgraph "Cineteca — Roadmap"
-        UC_LISTS[Gerenciar listas]
         UC_NOTIFY[Receber notificações]
         UC_SEEALL[Ver lista completa]
     end
 
-    U -.->|futuro| UC_LISTS
     U -.->|futuro| UC_NOTIFY
     U -.->|futuro| UC_SEEALL
 
-    style UC_LISTS fill:#333,stroke:#666,stroke-dasharray: 5 5
     style UC_NOTIFY fill:#333,stroke:#666,stroke-dasharray: 5 5
     style UC_SEEALL fill:#333,stroke:#666,stroke-dasharray: 5 5
 ```

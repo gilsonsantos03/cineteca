@@ -5,6 +5,7 @@ protocol HomeContentViewDelegate: AnyObject {
     func didRequestRefresh()
     func didSelectGenre(at index: Int)
     func didRequestWatchTrailer(movieId: Int)
+    func didTapWatchlist(movieId: Int, isInWatchlist: Bool)
     func didSelectMovie(id movieId: Int)
 }
 
@@ -119,6 +120,10 @@ final class HomeContentView: UIView {
         refreshControl.endRefreshing()
     }
 
+    func updateWatchlist(isInWatchlist: Bool) {
+        featuredView.updateWatchlist(isInWatchlist: isInWatchlist)
+    }
+
     // MARK: - Actions
 
     @objc private func didPullToRefresh() {
@@ -150,6 +155,10 @@ extension HomeContentView: GenreFilterViewDelegate {
 extension HomeContentView: FeaturedViewDelegate, MovieSectionViewDelegate {
     func didRequestWatchTrailer(movieId: Int) {
         delegate?.didRequestWatchTrailer(movieId: movieId)
+    }
+
+    func didTapWatchlist(movieId: Int, isInWatchlist: Bool) {
+        delegate?.didTapWatchlist(movieId: movieId, isInWatchlist: isInWatchlist)
     }
 
     func didSelectMovie(id movieId: Int) {

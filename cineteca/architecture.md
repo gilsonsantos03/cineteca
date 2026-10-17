@@ -77,6 +77,24 @@ The profile's favorite film is a separate `UserEntity` field managed by
 dialog and persisted with the scene's Save action; it must not be inferred from
 `MovieActivityEntity.isFavorite`.
 
+The Home scene reads the featured movie's activity from
+`MovieActivityRepositoryProtocol` and updates its watchlist through
+`upsertMetadata` plus `setWatchlist`. The visual state is returned through the
+VIP Presenter and is not persisted by the View.
+
+The Lists scene reads the `MovieActivityRepositoryProtocol.fetchActivities()`
+snapshot and projects it into three presentation tabs: `isInWatchlist`,
+`isFavorite`, and `isRated` (the latter means a rating and `ratedAt` exist).
+Its Router opens Movie Details through `MovieDetailsBuilding`, and the scene
+reloads the activity snapshot when it appears again so changes made in Movie
+Details are reflected.
+
+Removing a Rated item uses `unrateMovie(for:)` at the repository boundary.
+That operation clears the rating and date, removes the dependent activity
+favorite, and deletes the associated `ReviewEntity`; an existing watchlist
+flag is preserved. Watchlist and Favorites removal use the existing toggle
+operations.
+
 The temporary development reset is also owned by the data boundary:
 `MovieActivityRepository.resetSessionData()` clears local activities, reviews,
 and the profile favorite during app launch. This flow must be removed before
@@ -101,6 +119,10 @@ Flow: `ViewController -> Interactor -> Presenter -> ViewController`.
 - `Presenter` is optional for trivial mappings; use when formatting logic is non-trivial.
 - `Router` is optional; simple scenes can navigate directly with RouterService contracts.
 - Keep detached `View` objects — avoid bloated `UIViewController` classes.
+
+Lists follows the same VIP cycle. Its Interactor owns the selected tab and the
+activity snapshot, its Presenter filters and formats `MovieActivity` values into
+scene view models, and its View forwards tab, card, retry, and remove actions.
 
 VIP scene protocols follow the responsibility of the receiving component:
 

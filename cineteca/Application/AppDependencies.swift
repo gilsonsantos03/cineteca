@@ -63,9 +63,11 @@ extension AppDependencies {
         MainTabBarController(
             repository: movieRepository,
             genreRepository: genreRepository,
+            movieActivityRepository: movieActivityRepository,
             userRepository: userRepository,
             statsRepository: statsRepository,
             movieDetailsBuilder: self,
+            listsBuilder: self,
             editProfileBuilder: self,
             myReviewsBuilder: self,
             accountBuilder: self,
@@ -81,6 +83,7 @@ extension AppDependencies:
     EditProfileBuilding,
     SearchBuilding,
     MyReviewsBuilding,
+    ListsBuilding,
     AccountBuilding,
     AppearanceBuilding,
     LanguageBuilding,
@@ -122,6 +125,13 @@ extension AppDependencies:
             userRepository: userRepository,
             activityRepository: movieActivityRepository,
             movieReviewSheetFactory: movieReviewSheetFactory
+        )
+    }
+
+    func makeLists() -> UIViewController {
+        ListsConfigurator.resolve(
+            activityRepository: movieActivityRepository,
+            movieDetailsBuilder: self
         )
     }
 
