@@ -7,6 +7,7 @@ final class MainTabBarController: UITabBarController {
     private let userRepository: UserRepositoryProtocol
     private let statsRepository: StatsRepositoryProtocol
     private let movieDetailsBuilder: MovieDetailsBuilding
+    private let movieCatalogBuilder: MovieCatalogBuilding
     private let listsBuilder: ListsBuilding
     private let editProfileBuilder: EditProfileBuilding
     private let myReviewsBuilder: MyReviewsBuilding
@@ -22,6 +23,7 @@ final class MainTabBarController: UITabBarController {
         userRepository: UserRepositoryProtocol,
         statsRepository: StatsRepositoryProtocol,
         movieDetailsBuilder: MovieDetailsBuilding,
+        movieCatalogBuilder: MovieCatalogBuilding,
         listsBuilder: ListsBuilding,
         editProfileBuilder: EditProfileBuilding,
         myReviewsBuilder: MyReviewsBuilding,
@@ -36,6 +38,7 @@ final class MainTabBarController: UITabBarController {
         self.userRepository = userRepository
         self.statsRepository = statsRepository
         self.movieDetailsBuilder = movieDetailsBuilder
+        self.movieCatalogBuilder = movieCatalogBuilder
         self.listsBuilder = listsBuilder
         self.editProfileBuilder = editProfileBuilder
         self.myReviewsBuilder = myReviewsBuilder
@@ -100,7 +103,8 @@ final class MainTabBarController: UITabBarController {
             repository: repository,
             genreRepository: genreRepository,
             activityRepository: movieActivityRepository,
-            movieDetailsBuilder: movieDetailsBuilder
+            movieDetailsBuilder: movieDetailsBuilder,
+            movieCatalogBuilder: movieCatalogBuilder
         )
         homeVC.tabBarItem = UITabBarItem(title: Strings.TabBar.home, image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill"))
 

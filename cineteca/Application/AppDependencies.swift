@@ -67,6 +67,7 @@ extension AppDependencies {
             userRepository: userRepository,
             statsRepository: statsRepository,
             movieDetailsBuilder: self,
+            movieCatalogBuilder: self,
             listsBuilder: self,
             editProfileBuilder: self,
             myReviewsBuilder: self,
@@ -80,6 +81,7 @@ extension AppDependencies {
 
 extension AppDependencies:
     MovieDetailsBuilding,
+    MovieCatalogBuilding,
     EditProfileBuilding,
     SearchBuilding,
     MyReviewsBuilding,
@@ -97,6 +99,16 @@ extension AppDependencies:
             activityRepository: movieActivityRepository,
             movieDetailsBuilder: self,
             movieReviewSheetFactory: movieReviewSheetFactory
+        )
+    }
+
+    func makeMovieCatalog(category: MovieCollectionCategory, title: String) -> UIViewController {
+        MovieCatalogConfigurator.resolve(
+            category: category,
+            title: title,
+            repository: movieRepository,
+            genreRepository: genreRepository,
+            movieDetailsBuilder: self
         )
     }
 

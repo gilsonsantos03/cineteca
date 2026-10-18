@@ -8,19 +8,38 @@ final class MovieRepository: MovieRepositoryProtocol {
     }
 
     func fetchNowPlaying(genres: [Genre]) async throws -> [Movie] {
-        try await fetchMovies(from: .nowPlaying, genres: genres)
+        try await fetchMovies(from: .nowPlaying(page: 1), genres: genres)
     }
 
     func fetchTrending(genres: [Genre]) async throws -> [Movie] {
-        try await fetchMovies(from: .trending, genres: genres)
+        try await fetchMovies(from: .trending(page: 1), genres: genres)
     }
 
     func fetchTopRated(genres: [Genre]) async throws -> [Movie] {
-        try await fetchMovies(from: .topRated, genres: genres)
+        try await fetchMovies(from: .topRated(page: 1), genres: genres)
     }
 
     func fetchFeatured(genres: [Genre]) async throws -> [Movie] {
-        try await fetchMovies(from: .featured, genres: genres)
+        try await fetchMovies(from: .featured(page: 1), genres: genres)
+    }
+
+    func fetchMovieCollection(
+        category: MovieCollectionCategory,
+        page: Int,
+        genres: [Genre]
+    ) async throws -> MovieCollectionPage {
+        let endpoint: MovieEndpoint
+
+        switch category {
+        case .nowPlaying:
+            endpoint = .nowPlaying(page: page)
+        case .trending:
+            endpoint = .trending(page: page)
+        case .topRated:
+            endpoint = .topRated(page: page)
+        }
+
+        return try await fetchMoviePage(from: endpoint, page: page, genres: genres)
     }
 
     func searchMovies(query: String, genres: [Genre]) async throws -> [Movie] {
@@ -74,9 +93,21 @@ final class MovieRepository: MovieRepositoryProtocol {
     }
 
     private func fetchMovies(from endpoint: MovieEndpoint, genres: [Genre]) async throws -> [Movie] {
+        try await fetchMoviePage(from: endpoint, page: 1, genres: genres).movies
+    }
+
+    private func fetchMoviePage(
+        from endpoint: MovieEndpoint,
+        page: Int,
+        genres: [Genre]
+    ) async throws -> MovieCollectionPage {
         let genreLookup = genres.lookupById
         let response: MovieListResponse = try await networkService.request(endpoint)
-        return response.results.map { $0.toDomain(genreLookup: genreLookup) }
+        return MovieCollectionPage(
+            movies: response.results.map { $0.toDomain(genreLookup: genreLookup) },
+            page: response.page ?? page,
+            totalPages: response.totalPages ?? page
+        )
     }
 
     private var regionCode: String {

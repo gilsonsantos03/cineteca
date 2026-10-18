@@ -89,6 +89,15 @@ Its Router opens Movie Details through `MovieDetailsBuilding`, and the scene
 reloads the activity snapshot when it appears again so changes made in Movie
 Details are reflected.
 
+The MovieCatalog scene is opened from a Home carousel through
+`MovieCatalogBuilding`. Home passes both the localized section title and the
+typed `MovieCollectionCategory`; the title is display-only, while the
+category selects the paginated repository request. MovieCatalog loads the
+category independently, presents its own grid view models, requests additional
+pages only after the user taps the button at the end of the grid, and opens
+Movie Details through `MovieDetailsBuilding`. The Interactor keeps the IDs
+already presented so repeated movies returned by TMDB are not shown again.
+
 Removing a Rated item uses `unrateMovie(for:)` at the repository boundary.
 That operation clears the rating and date, removes the dependent activity
 favorite, and deletes the associated `ReviewEntity`; an existing watchlist
@@ -134,6 +143,13 @@ VIP scene protocols follow the responsibility of the receiving component:
 The Presenter holds a weak reference to `*DisplayLogic`, but does not own the
 display protocol. This keeps the ViewController's input contract beside the
 component that receives and renders its ViewModels.
+
+MovieCatalog follows the same VIP cycle as Lists. Its View emits back, retry,
+load-more and movie-selection actions; its Interactor loads one movie category
+and guards paginated requests; its Presenter maps `Movie` into catalog-card
+view models; and its Router owns only the transition to Movie Details. The
+shared `GenreFilterView` lives in `Presentation/UI`; MovieCatalog keeps it
+outside the scrolling grid and filters the loaded cards locally.
 
 ### SwiftUI: MVVM
 
@@ -183,6 +199,10 @@ concrete construction to the destination Configurator.
 ```swift
 protocol MovieDetailsBuilding {
     func makeMovieDetails(movieId: Int) -> UIViewController
+}
+
+protocol MovieCatalogBuilding {
+    func makeMovieCatalog(category: MovieCollectionCategory, title: String) -> UIViewController
 }
 
 final class MovieDetailsRouter {

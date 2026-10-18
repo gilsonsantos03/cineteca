@@ -4,6 +4,7 @@
 "HomeScene.Section.Trending.Title" = "Em alta";
 "HomeScene.Section.TopRated.Title" = "Mais bem avaliados";
 "HomeScene.Section.SeeAll.Text" = "Ver tudo";
+"HomeScene.Section.Empty.Text" = "Nenhum filme disponível no momento";
 
 "HomeScene.Error.Title" = "Algo deu errado";
 "HomeScene.Error.Subtitle" = "Não foi possível carregar sua home. Verifique sua conexão e tente novamente.";
@@ -23,6 +24,12 @@
 
 "HomeScene.WeeklyDigest.Title" = "Seu resumo semanal";
 "HomeScene.WeeklyDigest.Subtitle" = "4 novos filmes combinam com você";
+
+"MovieCatalogScene.LoadMore" = "Carregar mais";
+"MovieCatalogScene.NextPageError.Title" = "Não foi possível carregar mais filmes";
+"MovieCatalogScene.NextPageError.Message" = "Verifique sua conexão e tente novamente.";
+"MovieCatalogScene.NextPageError.OkButton" = "OK";
+"MovieCatalogScene.Empty.Text" = "Nenhum filme encontrado para este gênero";
 
 "TabBar.Home.Title" = "Home";
 "TabBar.Search.Title" = "Buscar";

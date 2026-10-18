@@ -8,6 +8,7 @@ protocol HomeViewDelegate: AnyObject {
     func didRequestWatchTrailer(movieId: Int)
     func didTapWatchlist(movieId: Int, isInWatchlist: Bool)
     func didSelectMovie(id movieId: Int)
+    func didTapSeeAll(category: MovieCollectionCategory, title: String)
 }
 
 final class HomeView: UIView {
@@ -133,6 +134,10 @@ extension HomeView: HomeContentViewDelegate {
 
     func didSelectMovie(id movieId: Int) {
         delegate?.didSelectMovie(id: movieId)
+    }
+
+    func didTapSeeAll(category: MovieCollectionCategory, title: String) {
+        delegate?.didTapSeeAll(category: category, title: title)
     }
 }
 

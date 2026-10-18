@@ -1,10 +1,10 @@
 import Foundation
 
 enum MovieEndpoint: URLRequestBuilder, Sendable {
-    case nowPlaying
-    case trending
-    case topRated
-    case featured
+    case nowPlaying(page: Int)
+    case trending(page: Int)
+    case topRated(page: Int)
+    case featured(page: Int)
     case search(query: String)
     case discover(filters: SearchFilters, query: String?)
     case details(movieId: Int)
@@ -35,8 +35,13 @@ enum MovieEndpoint: URLRequestBuilder, Sendable {
 
     var queryItems: [URLQueryItem] {
         switch self {
-        case .similar, .nowPlaying, .trending, .topRated, .featured:
+        case .similar:
             return [URLQueryItem(name: "page", value: "1")]
+        case let .nowPlaying(page),
+             let .trending(page),
+             let .topRated(page),
+             let .featured(page):
+            return [URLQueryItem(name: "page", value: String(page))]
         case let .search(query):
             return [
                 URLQueryItem(name: "query", value: query),

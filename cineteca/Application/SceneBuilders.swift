@@ -4,6 +4,10 @@ protocol MovieDetailsBuilding {
     func makeMovieDetails(movieId: Int) -> UIViewController
 }
 
+protocol MovieCatalogBuilding {
+    func makeMovieCatalog(category: MovieCollectionCategory, title: String) -> UIViewController
+}
+
 protocol EditProfileBuilding {
     func makeEditProfile() -> UIViewController
 }

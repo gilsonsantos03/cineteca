@@ -7,6 +7,7 @@ protocol HomeContentViewDelegate: AnyObject {
     func didRequestWatchTrailer(movieId: Int)
     func didTapWatchlist(movieId: Int, isInWatchlist: Bool)
     func didSelectMovie(id movieId: Int)
+    func didTapSeeAll(category: MovieCollectionCategory, title: String)
 }
 
 final class HomeContentView: UIView {
@@ -42,10 +43,18 @@ final class HomeContentView: UIView {
 
     private lazy var featuredView = FeaturedView()
     private lazy var genreFilterView = GenreFilterView()
-    private lazy var nowPlayingSectionView = MovieSectionView(title: Strings.HomeScene.Section.nowPlaying)
-    private lazy var trendingSectionView = MovieSectionView(title: Strings.HomeScene.Section.trending)
-    private lazy var topRatedSectionView = MovieSectionView(title: Strings.HomeScene.Section.topRated)
-    private lazy var weeklyDigestView = WeeklyDigestView()
+    private lazy var nowPlayingSectionView = MovieSectionView(
+        title: Strings.HomeScene.Section.nowPlaying,
+        category: .nowPlaying
+    )
+    private lazy var trendingSectionView = MovieSectionView(
+        title: Strings.HomeScene.Section.trending,
+        category: .trending
+    )
+    private lazy var topRatedSectionView = MovieSectionView(
+        title: Strings.HomeScene.Section.topRated,
+        category: .topRated
+    )
 
     // MARK: - Initialization
 
@@ -81,7 +90,6 @@ final class HomeContentView: UIView {
         contentStack.addArrangedSubview(makeSpacer(height: 24))
         contentStack.addArrangedSubview(topRatedSectionView)
         contentStack.addArrangedSubview(makeSpacer(height: 24))
-        contentStack.addArrangedSubview(weeklyDigestView)
         contentStack.addArrangedSubview(makeSpacer(height: 32))
     }
 
@@ -110,7 +118,10 @@ final class HomeContentView: UIView {
 
     func configure(content: HomeModels.FetchContent.ViewModel.Content) {
         featuredView.configure(viewModel: content.featured)
-        genreFilterView.configure(viewModel: content.genreFilter)
+        genreFilterView.configure(
+            options: content.genreFilter.options,
+            selectedIndex: content.genreFilter.selectedIndex
+        )
         nowPlayingSectionView.configure(movies: content.nowPlaying)
         trendingSectionView.configure(movies: content.trending)
         topRatedSectionView.configure(movies: content.topRated)
@@ -163,5 +174,9 @@ extension HomeContentView: FeaturedViewDelegate, MovieSectionViewDelegate {
 
     func didSelectMovie(id movieId: Int) {
         delegate?.didSelectMovie(id: movieId)
+    }
+
+    func didTapSeeAll(category: MovieCollectionCategory, title: String) {
+        delegate?.didTapSeeAll(category: category, title: title)
     }
 }

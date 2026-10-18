@@ -244,6 +244,18 @@
 		LS000001000000000000010C /* ListsMovieCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS000001000000000000010D /* ListsMovieCardView.swift */; };
 		LS000001000000000000011C /* ListsErrorStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS000001000000000000011D /* ListsErrorStateView.swift */; };
 		LS000001000000000000012A /* ListsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS000001000000000000012B /* ListsPresenterTests.swift */; };
+		MC000001000000000000001A /* MovieCollectionCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC000001000000000000001B /* MovieCollectionCategory.swift */; };
+		MC000001000000000000002A /* MovieCollectionPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC000001000000000000002B /* MovieCollectionPage.swift */; };
+		MC000001000000000000009A /* MovieCatalogModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC000001000000000000009B /* MovieCatalogModels.swift */; };
+		MC00000100000000000000AA /* MovieCatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC00000100000000000000AB /* MovieCatalogViewController.swift */; };
+		MC00000100000000000000BA /* MovieCatalogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC00000100000000000000BB /* MovieCatalogView.swift */; };
+		MC00000100000000000000CA /* MovieCatalogInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC00000100000000000000CB /* MovieCatalogInteractor.swift */; };
+		MC00000100000000000000DA /* MovieCatalogPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC00000100000000000000DB /* MovieCatalogPresenter.swift */; };
+		MC00000100000000000000EA /* MovieCatalogRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC00000100000000000000EB /* MovieCatalogRouter.swift */; };
+		MC00000100000000000000FA /* MovieCatalogConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC00000100000000000000FB /* MovieCatalogConfigurator.swift */; };
+		MC000001000000000000010C /* MovieCatalogGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC000001000000000000010D /* MovieCatalogGridCell.swift */; };
+		MC000001000000000000012A /* MovieCatalogLoadingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC000001000000000000012B /* MovieCatalogLoadingFooterView.swift */; };
+		MC000001000000000000011A /* MovieCatalogPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC000001000000000000011B /* MovieCatalogPresenterTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -497,6 +509,18 @@
 		LS000001000000000000010D /* ListsMovieCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsMovieCardView.swift; sourceTree = "<group>"; };
 		LS000001000000000000011D /* ListsErrorStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsErrorStateView.swift; sourceTree = "<group>"; };
 		LS000001000000000000012B /* ListsPresenterTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ListsPresenterTests.swift; sourceTree = "<group>"; };
+		MC000001000000000000001B /* MovieCollectionCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionCategory.swift; sourceTree = "<group>"; };
+		MC000001000000000000002B /* MovieCollectionPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionPage.swift; sourceTree = "<group>"; };
+		MC000001000000000000009B /* MovieCatalogModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogModels.swift; sourceTree = "<group>"; };
+		MC00000100000000000000AB /* MovieCatalogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogViewController.swift; sourceTree = "<group>"; };
+		MC00000100000000000000BB /* MovieCatalogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogView.swift; sourceTree = "<group>"; };
+		MC00000100000000000000CB /* MovieCatalogInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogInteractor.swift; sourceTree = "<group>"; };
+		MC00000100000000000000DB /* MovieCatalogPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogPresenter.swift; sourceTree = "<group>"; };
+		MC00000100000000000000EB /* MovieCatalogRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogRouter.swift; sourceTree = "<group>"; };
+		MC00000100000000000000FB /* MovieCatalogConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogConfigurator.swift; sourceTree = "<group>"; };
+		MC000001000000000000010D /* MovieCatalogGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogGridCell.swift; sourceTree = "<group>"; };
+		MC000001000000000000012B /* MovieCatalogLoadingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogLoadingFooterView.swift; sourceTree = "<group>"; };
+		MC000001000000000000011B /* MovieCatalogPresenterTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MovieCatalogPresenterTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -534,6 +558,7 @@
 			isa = PBXGroup;
 			children = (
 				442CB05D2FFC81ED004FCC82 /* Home */,
+				MC000001000000000000001G /* MovieCatalog */,
 				LS000001000000000000001G /* Lists */,
 				PP000001000000000000012G /* Profile */,
 				AA10000100000000000000CA /* MovieDetails */,
@@ -559,12 +584,35 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		MC000001000000000000001G /* MovieCatalog */ = {
+			isa = PBXGroup;
+			children = (
+				MC000001000000000000002G /* Subviews */,
+				MC000001000000000000009B /* MovieCatalogModels.swift */,
+				MC00000100000000000000AB /* MovieCatalogViewController.swift */,
+				MC00000100000000000000BB /* MovieCatalogView.swift */,
+				MC00000100000000000000CB /* MovieCatalogInteractor.swift */,
+				MC00000100000000000000DB /* MovieCatalogPresenter.swift */,
+				MC00000100000000000000EB /* MovieCatalogRouter.swift */,
+				MC00000100000000000000FB /* MovieCatalogConfigurator.swift */,
+			);
+			path = MovieCatalog;
+			sourceTree = "<group>";
+		};
+		MC000001000000000000002G /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				MC000001000000000000010D /* MovieCatalogGridCell.swift */,
+				MC000001000000000000012B /* MovieCatalogLoadingFooterView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
 		442CB0702FFC8300004FCC82 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
 				442CB2B230008A98004FCC82 /* Skeleton */,
 				442CB0712FFC8301004FCC82 /* FeaturedView.swift */,
-				442CB0722FFC8302004FCC82 /* GenreFilterView.swift */,
 				442CB0732FFC8303004FCC82 /* GenreChipCell.swift */,
 				442CB0742FFC8304004FCC82 /* MovieSectionView.swift */,
 				442CB0752FFC8305004FCC82 /* MovieCardCell.swift */,
@@ -638,6 +686,7 @@
 			children = (
 				F09EE0361B7672E51466DEC2 /* MovieActivityRepositoryTests.swift */,
 				LS000001000000000000012B /* ListsPresenterTests.swift */,
+				MC000001000000000000011B /* MovieCatalogPresenterTests.swift */,
 			);
 			name = cinetecaTests;
 			path = cinetecaTests;
@@ -750,6 +799,7 @@
 				UI000001000000000000002B /* PasswordFormFieldView.swift */,
 				UI000001000000000000003B /* ErrorStateView.swift */,
 				UI000001000000000000004B /* GenreChipCell.swift */,
+				442CB0722FFC8302004FCC82 /* GenreFilterView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -810,6 +860,8 @@
 				ST000001000000000000001B /* YearInFilmStats.swift */,
 				BB000001000000000000001B /* Genre.swift */,
 				CC000001000000000000001B /* Movie.swift */,
+				MC000001000000000000001B /* MovieCollectionCategory.swift */,
+				MC000001000000000000002B /* MovieCollectionPage.swift */,
 				AA100001000000000000001B /* MovieDetails.swift */,
 				MA000001000000000000001B /* MovieActivity.swift */,
 				SS000001000000000000001B /* SearchFilters.swift */,
@@ -1308,6 +1360,8 @@
 				442CB0B72FFC8507004FCC82 /* HomeErrorStateView.swift in Sources */,
 				442CB0B82FFC8508004FCC82 /* HomeContentView.swift in Sources */,
 				CC000001000000000000001A /* Movie.swift in Sources */,
+				MC000001000000000000001A /* MovieCollectionCategory.swift in Sources */,
+				MC000001000000000000002A /* MovieCollectionPage.swift in Sources */,
 				CC000001000000000000002A /* MovieEndpoint.swift in Sources */,
 				CC000001000000000000003A /* HomeModels.swift in Sources */,
 				CC000001000000000000005A /* UIImageView+AsyncLoad.swift in Sources */,
@@ -1499,6 +1553,15 @@
 				LS00000100000000000000FA /* ListsConfigurator.swift in Sources */,
 				LS000001000000000000010C /* ListsMovieCardView.swift in Sources */,
 				LS000001000000000000011C /* ListsErrorStateView.swift in Sources */,
+				MC000001000000000000009A /* MovieCatalogModels.swift in Sources */,
+				MC00000100000000000000AA /* MovieCatalogViewController.swift in Sources */,
+				MC00000100000000000000BA /* MovieCatalogView.swift in Sources */,
+				MC00000100000000000000CA /* MovieCatalogInteractor.swift in Sources */,
+				MC00000100000000000000DA /* MovieCatalogPresenter.swift in Sources */,
+				MC00000100000000000000EA /* MovieCatalogRouter.swift in Sources */,
+				MC00000100000000000000FA /* MovieCatalogConfigurator.swift in Sources */,
+				MC000001000000000000010C /* MovieCatalogGridCell.swift in Sources */,
+				MC000001000000000000012A /* MovieCatalogLoadingFooterView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1508,6 +1571,7 @@
 			files = (
 				661DF6C81A41E7E64243F97C /* MovieActivityRepositoryTests.swift in Sources */,
 				LS000001000000000000012A /* ListsPresenterTests.swift in Sources */,
+				MC000001000000000000011A /* MovieCatalogPresenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

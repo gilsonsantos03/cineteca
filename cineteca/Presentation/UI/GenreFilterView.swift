@@ -75,9 +75,9 @@ final class GenreFilterView: UIView {
 
     // MARK: - Configure
 
-    func configure(viewModel: HomeModels.GenreFilterViewModel) {
-        options = viewModel.options
-        selectedIndex = viewModel.selectedIndex
+    func configure(options: [String], selectedIndex: Int) {
+        self.options = options
+        self.selectedIndex = selectedIndex
         collectionView.reloadData()
     }
 }
@@ -89,8 +89,14 @@ extension GenreFilterView: UICollectionViewDataSource, UICollectionViewDelegate 
         options.count
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GenreChipCell.reuseId, for: indexPath) as! GenreChipCell
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: GenreChipCell.reuseId,
+            for: indexPath
+        ) as! GenreChipCell
         cell.configure(title: options[indexPath.item], isSelected: indexPath.item == selectedIndex)
         return cell
     }

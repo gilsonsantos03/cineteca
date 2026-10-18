@@ -30,9 +30,6 @@ final class HomeSkeletonView: UIView {
     private lazy var trendingSectionSkeletonView = MovieSectionSkeletonView()
     private lazy var topRatedSectionSkeletonView = MovieSectionSkeletonView()
 
-    private lazy var weeklyDigestContainerView = UIView()
-    private lazy var weeklyDigestShimmer = ShimmerView(cornerRadius: 14)
-
     // MARK: - Initialization
 
     override init(frame: CGRect) {
@@ -59,8 +56,6 @@ final class HomeSkeletonView: UIView {
         featuredContainerView.addSubview(featuredTitleShimmer)
         featuredContainerView.addSubview(featuredButtonShimmer)
 
-        weeklyDigestContainerView.addSubview(weeklyDigestShimmer)
-
         contentStack.addArrangedSubview(featuredContainerView)
         contentStack.addArrangedSubview(makeSpacer(height: 24))
         contentStack.addArrangedSubview(nowPlayingSectionSkeletonView)
@@ -68,8 +63,6 @@ final class HomeSkeletonView: UIView {
         contentStack.addArrangedSubview(trendingSectionSkeletonView)
         contentStack.addArrangedSubview(makeSpacer(height: 24))
         contentStack.addArrangedSubview(topRatedSectionSkeletonView)
-        contentStack.addArrangedSubview(makeSpacer(height: 24))
-        contentStack.addArrangedSubview(weeklyDigestContainerView)
         contentStack.addArrangedSubview(makeSpacer(height: 32))
     }
 
@@ -80,7 +73,6 @@ final class HomeSkeletonView: UIView {
         constrainFeaturedButtonShimmer()
         constrainFeaturedTitleShimmer()
         constrainFeaturedRatingYearShimmer()
-        constrainWeeklyDigestShimmer()
     }
 
     private func constrainScrollView() {
@@ -133,16 +125,6 @@ final class HomeSkeletonView: UIView {
             shimmer.width == 160
             shimmer.bottom == title.top - 8
             shimmer.height == 14
-        }
-    }
-
-    private func constrainWeeklyDigestShimmer() {
-        constrain(weeklyDigestShimmer, weeklyDigestContainerView) { shimmer, container in
-            shimmer.top == container.top
-            shimmer.bottom == container.bottom
-            shimmer.left == container.left + 20
-            shimmer.right == container.right - 20
-            shimmer.height == 72
         }
     }
 

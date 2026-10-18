@@ -3,6 +3,7 @@ import Cartography
 
 protocol MovieSectionViewDelegate: AnyObject {
     func didSelectMovie(id movieId: Int)
+    func didTapSeeAll(category: MovieCollectionCategory, title: String)
 }
 
 final class MovieSectionView: UIView {
@@ -11,7 +12,10 @@ final class MovieSectionView: UIView {
 
     weak var delegate: MovieSectionViewDelegate?
     private let sectionTitle: String
+    private let category: MovieCollectionCategory
     private var movies: [HomeModels.MovieCardViewModel] = []
+    private let populatedSectionHeight: CGFloat = 210
+    private let emptySectionHeight: CGFloat = 120
 
     // MARK: - UI Components
 
@@ -28,8 +32,23 @@ final class MovieSectionView: UIView {
         button.setTitle(Strings.HomeScene.Section.seeAll, for: .normal)
         button.setTitleColor(.textSecondary, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 13)
+        button.addTarget(self, action: #selector(didTapSeeAll), for: .touchUpInside)
         return button
     }()
+
+    private lazy var emptyStateLabel: UILabel = {
+        let label = UILabel()
+        label.text = Strings.HomeScene.Section.empty
+        label.font = .systemFont(ofSize: 15, weight: .medium)
+        label.textColor = .textSecondary
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }()
+
+    private lazy var collectionHeightConstraint = collectionView.heightAnchor.constraint(
+        equalToConstant: populatedSectionHeight
+    )
 
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -48,8 +67,9 @@ final class MovieSectionView: UIView {
 
     // MARK: - Initialization
 
-    init(title: String) {
+    init(title: String, category: MovieCollectionCategory) {
         self.sectionTitle = title
+        self.category = category
         super.init(frame: .zero)
         setup()
     }
@@ -68,12 +88,16 @@ final class MovieSectionView: UIView {
         addSubview(titleLabel)
         addSubview(seeAllButton)
         addSubview(collectionView)
+        addSubview(emptyStateLabel)
+        emptyStateLabel.isHidden = true
     }
 
     private func setupConstraints() {
         constrainTitleLabel()
         constrainSeeAllButton()
         constrainCollectionView()
+        constrainEmptyStateLabel()
+        collectionHeightConstraint.isActive = true
     }
 
     private func constrainTitleLabel() {
@@ -95,8 +119,15 @@ final class MovieSectionView: UIView {
             collectionView.top == label.bottom + 12
             collectionView.left == superview.left
             collectionView.right == superview.right
-            collectionView.height == 210
             collectionView.bottom == superview.bottom
+        }
+    }
+
+    private func constrainEmptyStateLabel() {
+        constrain(emptyStateLabel, collectionView, self) { label, collectionView, superview in
+            label.centerY == collectionView.centerY
+            label.left == superview.left + 20
+            label.right == superview.right - 20
         }
     }
 
@@ -104,7 +135,17 @@ final class MovieSectionView: UIView {
 
     func configure(movies: [HomeModels.MovieCardViewModel]) {
         self.movies = movies
+        let isEmpty = movies.isEmpty
+        collectionHeightConstraint.constant = isEmpty ? emptySectionHeight : populatedSectionHeight
+        collectionView.isHidden = isEmpty
+        emptyStateLabel.isHidden = !isEmpty
         collectionView.reloadData()
+    }
+
+    // MARK: - Actions
+
+    @objc private func didTapSeeAll() {
+        delegate?.didTapSeeAll(category: category, title: sectionTitle)
     }
 }
 

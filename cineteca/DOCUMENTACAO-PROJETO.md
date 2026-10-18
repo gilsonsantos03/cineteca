@@ -53,7 +53,7 @@
 
 ### O que ainda não faz
 
-- "Ver tudo" e notificações
+- Notificações
 - Persistência definitiva para produção e sincronização com backend
 - CI/CD
 
@@ -245,6 +245,8 @@ cineteca/
     │       ├── TabBar/MainTabBarController.swift
     │       ├── Home/                     # Cena Home (VIP)
     │       │   └── ...
+    │       ├── MovieCatalog/             # Catálogo completo de uma seção da Home (VIP)
+    │       │   └── ...
     │       ├── Lists/                    # Cena Lists (VIP)
     │       │   └── ...
     │       ├── Search/                   # Cena Search (VIP; busca ou seleção)
@@ -279,7 +281,8 @@ cineteca/
 
 | Feature | Descrição | Camada principal |
 |---|---|---|
-| **Feed da Home** | Hero + 3 seções horizontais + weekly digest | `HomeView`, subviews |
+| **Feed da Home** | Hero + 3 seções horizontais | `HomeView`, subviews |
+| **Estado vazio das seções** | Quando uma categoria não retorna filmes, o carrossel é substituído por uma mensagem localizada | `MovieSectionView` |
 | **Carregamento da Home** | 1 request de gêneros + 4 requests de filmes em paralelo | `HomeInteractor.loadContent()` |
 | **Pull-to-refresh** | Invalida cache de gêneros e recarrega tudo | `HomeInteractor.refresh()` |
 | **Filtro por gênero** | Chips horizontais; filtro instantâneo no cliente por `Genre.id` | `HomeInteractor`, `GenreFilterView` |
@@ -288,6 +291,7 @@ cineteca/
 | **Filtros da Search** | Sheet com gênero, ano (range), nota mínima (slider inteiro 0–10, mesma escala TMDB/`vote_average`) e idioma; `minRating > 0` vira `vote_average.gte` sem conversão | `SearchFilters`, `SearchFiltersView`, `MovieEndpoint.discover` |
 | **Trailer** | Abre YouTube (app ou web) a partir da Home ou Movie Details | `HomeRouter`, `MovieDetailsRouter` |
 | **Lists** | Watchlist, Curtidos e Rated com cards, empty states, remoção e navegação para detalhes | `Lists/` |
+| **Catálogo por seção** | “Ver tudo” abre uma grade paginada de Now Playing, Trending ou Top Rated; o título da tela acompanha a seção de origem, o filtro de gêneros permanece fixo no topo, categorias sem filmes exibem estado vazio e novas páginas são carregadas pelo botão no fim da grade | `MovieCatalog/`, `Presentation/UI/GenreFilterView.swift` |
 | **Skeleton loading** | Shimmer placeholders no layout final | `HomeSkeletonView` |
 | **Estado de erro** | Tela cheia com botão retry | `HomeErrorStateView` |
 | **Imagens assíncronas** | Posters/backdrops do CDN TMDB | `UIImageView+AsyncLoad` |
@@ -306,14 +310,12 @@ cineteca/
 | **Now Playing** | `/movie/now_playing` | `UICollectionView` horizontal |
 | **Trending** | `/trending/movie/week` | Cards com badge "Trending" |
 | **Top Rated** | `/movie/top_rated` | `UICollectionView` horizontal |
-| **Weekly Digest** | Hardcoded | Card promocional estático, sem binding de dados |
 
 ### 5.3 Placeholders / não funcionais
 
 | Item | Status |
 |---|---|
 | Notificações | Não implementadas |
-| "Ver tudo" para listas | Não implementado |
 
 ### 5.4 Reviews e atividade do usuário
 
@@ -601,7 +603,30 @@ A remoção usa `setWatchlist(false)` ou `setFavorite(false)`. Para Rated,
 `unrateMovie()` limpa a nota/data, remove o favorito dependente e exclui a
 review associada; uma atividade que também está na watchlist permanece nela.
 
-### 8.6 Avaliação e review de um filme
+### 8.7 Carregamento e navegação do catálogo da Home
+
+```
+1. Usuário toca em “Ver tudo” em uma seção da Home
+2. MovieSectionView envia a categoria tipada e o título localizado da seção
+3. HomeRouter → MovieCatalogBuilding → MovieCatalogConfigurator
+4. MovieCatalogInteractor carrega gêneros e a lista completa da categoria
+5. MovieCatalogPresenter mapeia os filmes para cards da grade
+6. MovieCatalogView exibe título, cards e loading inicial
+7. Ao tocar em “Carregar mais filmes”, MovieCatalogView exibe o loading no
+   próprio botão e o MovieCatalogInteractor busca a próxima página
+8. MovieCatalogView adiciona os cards sem remover os anteriores; em caso de
+   erro, restaura o botão e exibe um alerta para permitir nova tentativa.
+   Filmes repetidos pelo TMDB são descartados pelo identificador do filme
+9. Tocar em um card abre Movie Details pelo MovieDetailsBuilding
+```
+
+As categorias usam `MovieCollectionCategory` (`nowPlaying`, `trending` e
+`topRated`) para selecionar o endpoint. Cada chamada informa o número da
+página e o carregamento termina quando o TMDB informa que não existem mais
+páginas. O texto exibido no cabeçalho é recebido da seção clicada e não é
+usado para decidir qual endpoint chamar.
+
+### 8.8 Avaliação e review de um filme
 
 ```
 1. Usuário abre Movie Details e escolhe uma nota
@@ -669,7 +694,9 @@ AppDelegate
 ### 10.2 Home
 
 - Navigation bar oculta (`setNavigationBarHidden(true)`)
-- `HomeRouter` navega para Movie Details e abre trailer no YouTube
+- `HomeRouter` navega para Movie Details, MovieCatalog e abre trailer no YouTube
+- `MovieCatalog` exibe a lista completa da seção escolhida em grade e permite
+  voltar para a Home ou abrir Movie Details
 - Sem deep linking, sem Coordinator pattern
 - Sem SceneDelegate — lifecycle clássico via `AppDelegate`
 
@@ -783,7 +810,7 @@ Sugestões de tópicos para a conversa com o engenheiro iOS:
 
 | # | Tópico | Contexto |
 |---|---|---|
-| 1 | **Próximas features** | "Ver tudo" e notificações |
+| 1 | **Próximas features** | Notificações |
 | 2 | **UseCase vs Interactor** | Regra de filtro no Interactor é suficiente? Quando extrair? |
 | 3 | **Modularização** | Monolito hoje; `architecture.md` descreve split Interface/Implementation |
 | 4 | **Testes** | Ampliar cobertura além dos testes atuais de `MovieActivityRepository` |

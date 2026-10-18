@@ -4,6 +4,7 @@
 "HomeScene.Section.Trending.Title" = "Trending Now";
 "HomeScene.Section.TopRated.Title" = "Top Rated";
 "HomeScene.Section.SeeAll.Text" = "See all";
+"HomeScene.Section.Empty.Text" = "No movies available right now";
 
 "HomeScene.Error.Title" = "Something went wrong";
 "HomeScene.Error.Subtitle" = "We couldn't load your home. Check your connection and try again.";
@@ -23,6 +24,12 @@
 
 "HomeScene.WeeklyDigest.Title" = "Your weekly digest";
 "HomeScene.WeeklyDigest.Subtitle" = "4 new films match your taste";
+
+"MovieCatalogScene.LoadMore" = "Load more";
+"MovieCatalogScene.NextPageError.Title" = "Couldn't load more films";
+"MovieCatalogScene.NextPageError.Message" = "Check your connection and try again.";
+"MovieCatalogScene.NextPageError.OkButton" = "OK";
+"MovieCatalogScene.Empty.Text" = "No movies found for this genre";
 
 "TabBar.Home.Title" = "Home";
 "TabBar.Search.Title" = "Search";

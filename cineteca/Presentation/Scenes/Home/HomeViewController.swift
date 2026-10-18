@@ -108,4 +108,8 @@ extension HomeViewController: HomeViewDelegate {
     func didSelectMovie(id movieId: Int) {
         router.routeToMovieDetails(movieId: movieId)
     }
+
+    func didTapSeeAll(category: MovieCollectionCategory, title: String) {
+        router.routeToMovieCatalog(category: category, title: title)
+    }
 }

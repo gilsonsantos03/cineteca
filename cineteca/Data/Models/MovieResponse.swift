@@ -13,6 +13,9 @@ struct MovieResponse: Decodable, Sendable {
 
 struct MovieListResponse: Decodable, Sendable {
     let results: [MovieResponse]
+    let page: Int?
+    let totalPages: Int?
+    let totalResults: Int?
 }
 
 struct VideoResponse: Decodable, Sendable {

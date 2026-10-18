@@ -21,6 +21,7 @@ enum Strings {
             static var trending: String { Localization.string("HomeScene.Section.Trending.Title") }
             static var topRated: String { Localization.string("HomeScene.Section.TopRated.Title") }
             static var seeAll: String { Localization.string("HomeScene.Section.SeeAll.Text") }
+            static var empty: String { Localization.string("HomeScene.Section.Empty.Text") }
         }
 
         enum Error {
@@ -48,6 +49,14 @@ enum Strings {
             static var title: String { Localization.string("HomeScene.WeeklyDigest.Title") }
             static var subtitle: String { Localization.string("HomeScene.WeeklyDigest.Subtitle") }
         }
+    }
+
+    enum MovieCatalogScene {
+        static var loadMore: String { Localization.string("MovieCatalogScene.LoadMore") }
+        static var nextPageErrorTitle: String { Localization.string("MovieCatalogScene.NextPageError.Title") }
+        static var nextPageErrorMessage: String { Localization.string("MovieCatalogScene.NextPageError.Message") }
+        static var okButton: String { Localization.string("MovieCatalogScene.NextPageError.OkButton") }
+        static var empty: String { Localization.string("MovieCatalogScene.Empty.Text") }
     }
 
     enum TabBar {

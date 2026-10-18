@@ -5,7 +5,8 @@ final class HomeConfigurator {
         repository: MovieRepositoryProtocol,
         genreRepository: GenreRepositoryProtocol,
         activityRepository: MovieActivityRepositoryProtocol,
-        movieDetailsBuilder: MovieDetailsBuilding
+        movieDetailsBuilder: MovieDetailsBuilding,
+        movieCatalogBuilder: MovieCatalogBuilding
     ) -> UIViewController {
         let presenter = HomePresenter()
         let interactor = HomeInteractor(
@@ -14,7 +15,10 @@ final class HomeConfigurator {
             genreRepository: genreRepository,
             activityRepository: activityRepository
         )
-        let router = HomeRouter(movieDetailsBuilder: movieDetailsBuilder)
+        let router = HomeRouter(
+            movieDetailsBuilder: movieDetailsBuilder,
+            movieCatalogBuilder: movieCatalogBuilder
+        )
         let view = HomeView()
         let viewController = HomeViewController(customView: view, interactor: interactor, router: router)
 
