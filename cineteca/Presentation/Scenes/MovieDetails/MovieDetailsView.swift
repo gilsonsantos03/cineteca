@@ -20,6 +20,7 @@ final class MovieDetailsView: UIView {
 
     // MARK: - UI Components
 
+    private lazy var navigationHeader = BackNavigationHeaderView(title: Strings.MovieDetailsScene.title)
     private lazy var headerView = MovieDetailsHeaderView()
     private lazy var actionsView = MovieDetailsActionsView()
     private lazy var activityHintLabel: UILabel = {
@@ -102,7 +103,7 @@ final class MovieDetailsView: UIView {
     }
 
     private func setupDelegates() {
-        headerView.delegate = self
+        navigationHeader.delegate = self
         actionsView.delegate = self
         watchTrailerButton.delegate = self
         similarMoviesView.delegate = self
@@ -110,6 +111,7 @@ final class MovieDetailsView: UIView {
     }
 
     private func setupSubviews() {
+        addSubview(navigationHeader)
         contentStack.addArrangedSubview(headerView)
         contentStack.addArrangedSubview(detailsStack)
         scrollView.addSubview(contentStack)
@@ -119,6 +121,7 @@ final class MovieDetailsView: UIView {
     }
 
     private func setupConstraints() {
+        constrainNavigationHeader()
         constrainScrollView()
         constrainContentStack()
         constrainHeaderView()
@@ -126,9 +129,20 @@ final class MovieDetailsView: UIView {
         constrainErrorView()
     }
 
+    private func constrainNavigationHeader() {
+        constrain(navigationHeader, self) { header, superview in
+            header.top == superview.safeAreaLayoutGuide.top + 8
+            header.left == superview.left
+            header.right == superview.right
+        }
+    }
+
     private func constrainScrollView() {
-        constrain(scrollView, self) { scrollView, superview in
-            scrollView.edges == superview.edges
+        constrain(scrollView, navigationHeader, self) { scrollView, header, superview in
+            scrollView.top == header.bottom + 16
+            scrollView.left == superview.left
+            scrollView.right == superview.right
+            scrollView.bottom == superview.bottom
         }
     }
 
@@ -186,6 +200,7 @@ final class MovieDetailsView: UIView {
             posterURL: viewModel.posterURL,
             backdropURL: viewModel.backdropURL
         )
+        navigationHeader.setTitle(viewModel.title)
         ratingView.configure(rating: viewModel.rating)
         actionsView.configure(activity: viewModel.activity)
         activityHintLabel.isHidden = viewModel.activity.canFavorite
@@ -223,9 +238,9 @@ final class MovieDetailsView: UIView {
     }
 }
 
-// MARK: - MovieDetailsHeaderViewDelegate
+// MARK: - BackNavigationHeaderViewDelegate
 
-extension MovieDetailsView: MovieDetailsHeaderViewDelegate {
+extension MovieDetailsView: BackNavigationHeaderViewDelegate {
     func didTapBack() {
         delegate?.didRequestBack()
     }

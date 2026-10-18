@@ -42,6 +42,10 @@ final class BackNavigationHeaderView: UIView {
 
     required init?(coder: NSCoder) { nil }
 
+    func setTitle(_ title: String) {
+        titleLabel.text = title
+    }
+
     // MARK: - Setup
 
     private func setup() {

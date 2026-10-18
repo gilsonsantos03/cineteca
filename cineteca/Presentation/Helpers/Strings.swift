@@ -396,6 +396,8 @@ enum Strings {
     }
 
     enum MovieDetailsScene {
+        static var title: String { Localization.string("MovieDetailsScene.Title") }
+
         enum Action {
             static var rate: String { Localization.string("MovieDetailsScene.Action.Rate.Text") }
             static var like: String { Localization.string("MovieDetailsScene.Action.Like.Text") }

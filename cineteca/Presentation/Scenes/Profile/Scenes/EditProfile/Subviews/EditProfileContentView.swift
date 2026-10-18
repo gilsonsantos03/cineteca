@@ -112,10 +112,10 @@ final class EditProfileContentView: UIView {
     }
 
     private func setupSubviews() {
+        addSubview(headerView)
         addSubview(scrollView)
         scrollView.addSubview(contentStack)
 
-        contentStack.addArrangedSubview(headerView)
         contentStack.addArrangedSubview(avatarView)
         contentStack.addArrangedSubview(favoriteFilmView)
         contentStack.addArrangedSubview(makeFieldsContainer())
@@ -124,13 +124,22 @@ final class EditProfileContentView: UIView {
     }
 
     private func setupConstraints() {
+        constrainHeaderView()
         constrainScrollView()
         constrainContentStack()
     }
 
+    private func constrainHeaderView() {
+        constrain(headerView, self) { header, superview in
+            header.top == superview.safeAreaLayoutGuide.top + 8
+            header.left == superview.left
+            header.right == superview.right
+        }
+    }
+
     private func constrainScrollView() {
-        constrain(scrollView, self) { scroll, superview in
-            scroll.top == superview.safeAreaLayoutGuide.top + 8
+        constrain(scrollView, headerView, self) { scroll, header, superview in
+            scroll.top == header.bottom + 16
             scroll.bottom == superview.bottom
             scroll.left == superview.left
             scroll.right == superview.right

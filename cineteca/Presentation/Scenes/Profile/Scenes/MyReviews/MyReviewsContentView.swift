@@ -72,21 +72,30 @@ final class MyReviewsContentView: UIView {
     }
 
     private func setupSubviews() {
+        addSubview(headerView)
         addSubview(scrollView)
         scrollView.addSubview(contentStack)
-        contentStack.addArrangedSubview(headerView)
         contentStack.addArrangedSubview(cardsStack)
         contentStack.addArrangedSubview(makeSpacer(height: 24))
     }
 
     private func setupConstraints() {
+        constrainHeaderView()
         constrainScrollView()
         constrainContentStack()
     }
 
+    private func constrainHeaderView() {
+        constrain(headerView, self) { header, superview in
+            header.top == superview.safeAreaLayoutGuide.top + 8
+            header.left == superview.left
+            header.right == superview.right
+        }
+    }
+
     private func constrainScrollView() {
-        constrain(scrollView, self) { scroll, superview in
-            scroll.top == superview.safeAreaLayoutGuide.top
+        constrain(scrollView, headerView, self) { scroll, header, superview in
+            scroll.top == header.bottom + 16
             scroll.left == superview.left
             scroll.right == superview.right
             scroll.bottom == superview.bottom
@@ -95,7 +104,7 @@ final class MyReviewsContentView: UIView {
 
     private func constrainContentStack() {
         constrain(contentStack, scrollView) { stack, scroll in
-            stack.top == scroll.top + 8
+            stack.top == scroll.top
             stack.left == scroll.left + 20
             stack.right == scroll.right - 20
             stack.bottom == scroll.bottom

@@ -1,15 +1,9 @@
 import UIKit
 import Cartography
 
-protocol MovieDetailsHeaderViewDelegate: AnyObject {
-    func didTapBack()
-}
-
 final class MovieDetailsHeaderView: UIView {
 
     // MARK: - Properties
-
-    weak var delegate: MovieDetailsHeaderViewDelegate?
 
     // MARK: - UI Components
 
@@ -82,17 +76,6 @@ final class MovieDetailsHeaderView: UIView {
         return stack
     }()
 
-    private lazy var backButton: UIButton = {
-        let button = UIButton(type: .system)
-        let config = UIImage.SymbolConfiguration(pointSize: 14, weight: .semibold)
-        button.setImage(UIImage(systemName: "chevron.left", withConfiguration: config), for: .normal)
-        button.tintColor = .white
-        button.backgroundColor = UIColor.white.withAlphaComponent(0.12)
-        button.layer.cornerRadius = 18
-        button.addTarget(self, action: #selector(didTapBack), for: .touchUpInside)
-        return button
-    }()
-
     // MARK: - Initialization
 
     override init(frame: CGRect) {
@@ -131,7 +114,6 @@ final class MovieDetailsHeaderView: UIView {
         addSubview(metadataStack)
         certificationBadge.addSubview(certificationLabel)
         addSubview(genresStack)
-        addSubview(backButton)
         updateGradientColors()
     }
 
@@ -142,7 +124,6 @@ final class MovieDetailsHeaderView: UIView {
 
     private func setupConstraints() {
         constrainBackdropImageView()
-        constrainBackButton()
         constrainPosterImageView()
         constrainTitleLabel()
         constrainMetadataStack()
@@ -153,15 +134,6 @@ final class MovieDetailsHeaderView: UIView {
     private func constrainBackdropImageView() {
         constrain(backdropImageView, self) { imageView, superview in
             imageView.edges == superview.edges
-        }
-    }
-
-    private func constrainBackButton() {
-        constrain(backButton, self) { button, superview in
-            button.top == superview.safeAreaLayoutGuide.top + 8
-            button.left == superview.left + 20
-            button.width == 36
-            button.height == 36
         }
     }
 
@@ -234,12 +206,6 @@ final class MovieDetailsHeaderView: UIView {
         backdropImageView.loadImage(from: backdropURL)
         genresStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
         genres.forEach { genresStack.addArrangedSubview(makeGenreChip($0)) }
-    }
-
-    // MARK: - Actions
-
-    @objc private func didTapBack() {
-        delegate?.didTapBack()
     }
 
     // MARK: - Helpers

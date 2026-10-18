@@ -700,7 +700,20 @@ AppDelegate
 - Sem deep linking, sem Coordinator pattern
 - Sem SceneDelegate — lifecycle clássico via `AppDelegate`
 
-### 10.3 Cadeia de delegates (eventos)
+### 10.3 Cabeçalhos das telas secundárias
+
+As telas secundárias abertas a partir do Profile mantêm o cabeçalho com título e
+botão de voltar fixo, fora do conteúdo rolável. Isso se aplica a Account, Edit
+Profile, Change Password, Appearance, Language, Legal, Legal Document e My
+Reviews. O conteúdo abaixo do cabeçalho rola independentemente.
+
+Movie Details segue a mesma regra: o botão de voltar e o título compacto do
+filme permanecem fixos, enquanto o hero com backdrop, poster e metadados rola
+com as demais informações do filme. As telas raiz das tabs, como Home, Profile
+e Stats, mantêm seus cabeçalhos de conteúdo roláveis e não fazem parte desse
+padrão de navegação secundária.
+
+### 10.4 Cadeia de delegates (eventos)
 
 ```
 GenreFilterViewDelegate

@@ -82,6 +82,7 @@
 "SearchScene.Filters.Language.Spanish" = "Spanish";
 "SearchScene.Filters.Language.French" = "French";
 
+"MovieDetailsScene.Title" = "Movie details";
 "MovieDetailsScene.Action.Rate.Text" = "Rate";
 "MovieDetailsScene.Action.Like.Text" = "Like";
 "MovieDetailsScene.Action.Watchlist.Text" = "Watchlist";
