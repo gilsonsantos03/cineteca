@@ -5,6 +5,7 @@ protocol EditProfileContentViewDelegate: AnyObject {
     func didTapBack()
     func didTapCancel()
     func didTapSave(
+        username: String,
         displayName: String,
         bio: String,
         favoriteFilm: EditProfileModels.FavoriteFilmViewModel?
@@ -43,8 +44,7 @@ final class EditProfileContentView: UIView {
 
     private lazy var usernameField = EditProfileFormFieldView(
         title: Strings.EditProfileScene.Field.username,
-        style: .singleLine,
-        isEditable: false
+        style: .singleLine
     )
 
     private lazy var displayNameField = EditProfileFormFieldView(
@@ -79,6 +79,7 @@ final class EditProfileContentView: UIView {
         return button
     }()
 
+    private var savedUsername = ""
     private var savedDisplayName = ""
     private var savedBio = ""
     private var savedFavoriteFilm: EditProfileModels.FavoriteFilmViewModel?
@@ -101,6 +102,9 @@ final class EditProfileContentView: UIView {
         headerView.delegate = self
         avatarView.delegate = self
         favoriteFilmView.delegate = self
+        usernameField.onTextChange = { [weak self] in
+            self?.evaluateChanges()
+        }
         displayNameField.onTextChange = { [weak self] in
             self?.evaluateChanges()
         }
@@ -159,6 +163,7 @@ final class EditProfileContentView: UIView {
     // MARK: - Configure
 
     func configure(content: EditProfileModels.FetchProfile.ViewModel.Content) {
+        savedUsername = content.username
         savedDisplayName = content.displayName
         savedBio = content.bio
         savedFavoriteFilm = content.favoriteFilm
@@ -182,6 +187,7 @@ final class EditProfileContentView: UIView {
     @objc private func didTapSave() {
         endEditing(true)
         delegate?.didTapSave(
+            username: usernameField.currentText(),
             displayName: displayNameField.currentText(),
             bio: bioField.currentText(),
             favoriteFilm: selectedFavoriteFilm
@@ -225,11 +231,14 @@ final class EditProfileContentView: UIView {
     }
 
     private func evaluateChanges() {
+        let username = usernameField.currentText().trimmingCharacters(in: .whitespacesAndNewlines)
         let displayName = displayNameField.currentText().trimmingCharacters(in: .whitespacesAndNewlines)
         let bio = bioField.currentText().trimmingCharacters(in: .whitespacesAndNewlines)
+        let savedUsername = savedUsername.trimmingCharacters(in: .whitespacesAndNewlines)
         let savedDisplayName = savedDisplayName.trimmingCharacters(in: .whitespacesAndNewlines)
         let savedBio = savedBio.trimmingCharacters(in: .whitespacesAndNewlines)
-        let hasChanges = displayName != savedDisplayName
+        let hasChanges = username != savedUsername
+            || displayName != savedDisplayName
             || bio != savedBio
             || selectedFavoriteFilm != savedFavoriteFilm
         updateSaveButton(isEnabled: hasChanges)

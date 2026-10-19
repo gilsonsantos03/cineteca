@@ -1,5 +1,6 @@
 import UIKit
 
+@MainActor
 protocol ProfileRoutingLogic {
     func routeToEditProfile()
     func routeToMovieDetails(movieId: Int)
@@ -10,6 +11,7 @@ protocol ProfileRoutingLogic {
     func routeToLegal()
 }
 
+@MainActor
 final class ProfileRouter: ProfileRoutingLogic {
     weak var viewController: UIViewController?
     private let movieDetailsBuilder: MovieDetailsBuilding

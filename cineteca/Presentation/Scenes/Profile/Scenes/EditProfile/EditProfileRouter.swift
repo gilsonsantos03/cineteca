@@ -1,10 +1,12 @@
 import UIKit
 
+@MainActor
 protocol EditProfileRoutingLogic {
     func routeBack()
     func routeToMovieSearch(delegate: SearchSelectionDelegate)
 }
 
+@MainActor
 final class EditProfileRouter {
     weak var viewController: UIViewController?
     private let searchBuilder: SearchBuilding

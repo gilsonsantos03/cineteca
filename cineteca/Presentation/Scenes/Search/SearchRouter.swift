@@ -1,9 +1,11 @@
 import UIKit
 
+@MainActor
 protocol SearchRoutingLogic {
     func routeToMovieDetails(movieId: Int)
 }
 
+@MainActor
 final class SearchRouter {
     weak var viewController: SearchViewController?
     private let movieDetailsBuilder: MovieDetailsBuilding

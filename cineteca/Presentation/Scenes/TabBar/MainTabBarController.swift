@@ -15,6 +15,7 @@ final class MainTabBarController: UITabBarController {
     private let appearanceBuilder: AppearanceBuilding
     private let languageBuilder: LanguageBuilding
     private let legalBuilder: LegalBuilding
+    private let authGate: AuthenticationGateProtocol
 
     init(
         repository: MovieRepositoryProtocol,
@@ -30,7 +31,8 @@ final class MainTabBarController: UITabBarController {
         accountBuilder: AccountBuilding,
         appearanceBuilder: AppearanceBuilding,
         languageBuilder: LanguageBuilding,
-        legalBuilder: LegalBuilding
+        legalBuilder: LegalBuilding,
+        authGate: AuthenticationGateProtocol
     ) {
         self.repository = repository
         self.genreRepository = genreRepository
@@ -46,6 +48,7 @@ final class MainTabBarController: UITabBarController {
         self.appearanceBuilder = appearanceBuilder
         self.languageBuilder = languageBuilder
         self.legalBuilder = legalBuilder
+        self.authGate = authGate
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -104,7 +107,8 @@ final class MainTabBarController: UITabBarController {
             genreRepository: genreRepository,
             activityRepository: movieActivityRepository,
             movieDetailsBuilder: movieDetailsBuilder,
-            movieCatalogBuilder: movieCatalogBuilder
+            movieCatalogBuilder: movieCatalogBuilder,
+            authGate: authGate
         )
         homeVC.tabBarItem = UITabBarItem(title: Strings.TabBar.home, image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill"))
 
@@ -125,7 +129,10 @@ final class MainTabBarController: UITabBarController {
             image: UIImage(systemName: "bookmark"),
             selectedImage: UIImage(systemName: "bookmark.fill")
         )
-        let statsVC = StatsConfigurator.resolve(statsRepository: statsRepository)
+        let statsVC = StatsConfigurator.resolve(
+            statsRepository: statsRepository,
+            authGate: authGate
+        )
         statsVC.tabBarItem = UITabBarItem(
             title: Strings.TabBar.stats,
             image: UIImage(systemName: "chart.bar"),
@@ -139,7 +146,8 @@ final class MainTabBarController: UITabBarController {
             accountBuilder: accountBuilder,
             appearanceBuilder: appearanceBuilder,
             languageBuilder: languageBuilder,
-            legalBuilder: legalBuilder
+            legalBuilder: legalBuilder,
+            authGate: authGate
         )
         profileVC.tabBarItem = UITabBarItem(
             title: Strings.TabBar.profile,

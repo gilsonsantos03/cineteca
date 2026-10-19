@@ -47,14 +47,13 @@
 - Suporta pull-to-refresh, skeleton loading e tela de erro com retry
 - Localiza UI em `en` e `pt-BR`; nomes de gênero vêm da API no idioma configurado
 - Permite avaliar filmes, adicionar reviews, favoritar e adicionar filmes à watchlist
-- O botão Watchlist do filme em destaque persiste a alteração localmente e atualiza o estado visual do hero
+- O botão Watchlist do filme em destaque persiste a alteração no Firestore e atualiza o estado visual do hero
 - Exibe perfil, estatísticas e reviews recentes do usuário
-- Persiste dados locais do perfil e da atividade de filmes via Core Data
+- Persiste dados autenticados por UID no Firebase Authentication e Firestore
 
 ### O que ainda não faz
 
 - Notificações
-- Persistência definitiva para produção e sincronização com backend
 - CI/CD
 
 ---
@@ -71,12 +70,13 @@
 | Concorrência | `Task`, `actor` (cache de gêneros), `MainActor` para UI |
 | Injeção de dependências | Manual via `AppDependencies` + `Configurator` por cena |
 | Localização | `Localizable.strings` + enum type-safe `Strings` |
-| Dependências externas | 1 pacote SPM (Cartography) |
-| Persistência | Core Data (perfil, atividades de filmes e reviews) |
+| Dependências externas | SPM (Cartography e Firebase iOS SDK) |
+| Persistência | Firebase Authentication + Firestore por UID |
 
 ### Frameworks Apple utilizados
 
-`UIKit`, `Foundation`, `Core Data` — sem SwiftUI, Combine, Keychain ou UserDefaults.
+`UIKit`, `Foundation`, `FirebaseAuth` e `FirebaseFirestore` — sem SwiftUI,
+Combine, Keychain ou UserDefaults.
 
 ### Baseline arquitetural
 
@@ -319,7 +319,8 @@ cineteca/
 
 ### 5.4 Reviews e atividade do usuário
 
-As avaliações e reviews são dados da sessão do usuário no dispositivo:
+As avaliações e reviews são dados do usuário autenticado e são persistidos no
+Firestore, separados por UID:
 
 - A nota aceita valores inteiros de `0` a `10`; uma avaliação registra `ratedAt`.
 - Um filme só pode ser favoritado depois de receber uma avaliação.
@@ -327,6 +328,14 @@ As avaliações e reviews são dados da sessão do usuário no dispositivo:
 - Uma avaliação sem texto também aparece no Perfil e em “Minhas reviews” como um card com a nota e os metadados do filme.
 - Cards sem comentário exibem o placeholder localizado “Sem comentário escrito”/“No written comment” em estilo discreto.
 - O perfil calcula filmes avaliados, horas assistidas e quantidade de reviews (com ou sem texto) a partir das atividades salvas.
+- O username é editável no perfil, é normalizado em minúsculas e aceita de 3 a
+  20 caracteres alfanuméricos ou `_`. O valor exibido mantém o prefixo `@`.
+- A unicidade é garantida pela reserva transacional em
+  `usernames/{username}`; o documento guarda o UID proprietário.
+- O cadastro por e-mail e senha solicita o username antes da criação do perfil.
+  O username é validado e reservado na mesma etapa; se a reserva falhar, a
+  conta recém-criada e os dados temporários são removidos para que o usuário
+  possa tentar novamente.
 - O filme favorito do perfil é definido no Edit Profile, usando a busca em um diálogo, e só é persistido quando o usuário toca em “Salvar alterações”, independentemente do favorito de uma atividade de filme.
 - O card de filme favorito no Perfil é clicável e navega para Movie Details.
 - Movie Details usa “Curtir”/“Like” para a atividade consumida pela cena Lists; isso é separado do filme favorito do perfil.
@@ -334,8 +343,33 @@ As avaliações e reviews são dados da sessão do usuário no dispositivo:
 - Tocar em um card abre Movie Details. A lixeira remove o filme da lista atual; em Rated, desfaz a avaliação, remove o favorito dependente e exclui a review associada.
 - Cada aba possui um empty state próprio quando não há filmes.
 - Quando não há reviews, o Perfil exibe um estado vazio na seção de reviews e “Minhas reviews” exibe um estado vazio próprio; no Perfil, “Ver tudo” fica oculto.
-- As alterações são salvas no Core Data durante o uso do app.
-- **Comportamento temporário de desenvolvimento:** `AppDelegate` chama `resetSessionData()` ao iniciar o app, removendo atividades e reviews. Isso deve ser removido antes da produção para preservar os dados entre lançamentos.
+- As alterações são salvas no Firestore durante o uso do app. Visitantes podem
+  navegar pelo catálogo, mas precisam entrar ou criar uma conta para avaliar,
+  favoritar, usar a watchlist ou remover itens das listas.
+- Não há reset automático de dados no lançamento. O repositório Firestore usa
+  o UID do Firebase como limite de isolamento dos dados.
+
+### 5.5 Autenticação e conta
+
+- O app abre em modo visitante; autenticação só é solicitada ao executar uma
+  ação pessoal protegida.
+- O fluxo atual usa Firebase Authentication com e-mail e senha, oferecendo
+  cadastro com username, login e recuperação de senha. A cena e o coordinator mantêm
+  contratos de provedores intercambiáveis, permitindo adicionar Google ou outro
+  provedor futuramente sem alterar as cenas protegidas.
+- No cadastro, o documento `users/{uid}` e a reserva
+  `usernames/{username}` são criados imediatamente após a conta do Firebase
+  Authentication. Contas antigas sem perfil continuam sendo inicializadas sob
+  demanda no primeiro acesso autenticado.
+- Perfil, atividades, reviews e estatísticas são lidos do Firestore do usuário.
+- A tela Conta permite sair e excluir a conta Firebase. A recuperação de senha
+  é iniciada por e-mail na tela de autenticação.
+- Erros de autenticação do Firebase são convertidos em mensagens amigáveis e
+  localizadas para login, cadastro e recuperação de senha; erros de credencial
+  não revelam se um e-mail está cadastrado. Essas mensagens são apresentadas em
+  um alerta nativo do iOS.
+- As regras em `firestore.rules` permitem acesso somente ao próprio UID; o
+  `firebase.json` também configura Auth e Firestore Emulator para testes locais.
 
 ---
 
@@ -405,17 +439,19 @@ struct Movie: Sendable {
 | `ListsModels.FetchContent.*` | Snapshot filtrado por Watchlist, Curtidos ou Rated |
 | `ListsModels.MovieCardViewModel` | Card de filme da cena Lists |
 
-### 6.4 Persistência local
+### 6.4 Persistência remota
 
-O Core Data usa o modelo `Data/Persistence/Cineteca.xcdatamodeld` e mantém:
+Firebase Authentication identifica o usuário. O Firestore mantém:
 
-| Entidade | Conteúdo |
+| Caminho | Conteúdo |
 |---|---|
-| `UserEntity` | Perfil do usuário e relacionamento com reviews e atividades |
-| `MovieActivityEntity` | Metadados, nota, favorito e watchlist por filme |
-| `ReviewEntity` | Texto e dados da review vinculada ao usuário |
+| `users/{uid}` | Username, perfil, preferências de perfil e dados básicos da conta |
+| `users/{uid}/activities/{movieId}` | Metadados do filme, nota, review, favorito e watchlist |
+| `usernames/{username}` | Reserva única do username e UID proprietário |
 
-`UserRepository` lê e atualiza o perfil. `MovieActivityRepository` grava avaliações, reviews, curtidas e watchlist. A implementação atual é local e temporária: `resetSessionData()` é executado no lançamento para limpar atividades, reviews e o filme favorito do perfil antes de criar a interface inicial.
+`FirestoreUserRepository`, `FirestoreMovieActivityRepository` e
+`FirestoreStatsRepository` escondem o SDK atrás dos contratos de domínio. Não
+há persistência pessoal local nem limpeza automática no lançamento.
 
 ### 6.5 Cache interno do Interactor
 
@@ -630,13 +666,13 @@ usado para decidir qual endpoint chamar.
 
 ```
 1. Usuário abre Movie Details e escolhe uma nota
-2. MovieDetailsInteractor chama MovieActivityRepository.rateMovie()
-3. Repository atualiza rating, ratedAt e updatedAt no Core Data
-4. Se houver texto, saveReview() cria ou atualiza ReviewEntity
-5. Profile e Stats consultam as atividades e reviews para atualizar os agregados
+2. O gate de autenticação abre a cena de login se necessário e retoma a ação
+3. MovieDetailsInteractor chama MovieActivityRepository.rateMovie()
+4. O repositório atualiza rating, ratedAt e updatedAt em
+   `users/{uid}/activities/{movieId}`
+5. Se houver texto, `saveReview()` cria ou atualiza o mesmo documento
+6. Profile e Stats consultam as atividades e reviews para atualizar os agregados
 ```
-
-Ao abrir o app, o fluxo temporário em `AppDelegate` chama `resetSessionData()` antes de montar a interface. O reset remove `MovieActivityEntity` e `ReviewEntity` e limpa o filme favorito do perfil; alterações feitas depois disso são salvas normalmente durante a sessão. Essa é a mesma regra temporária aplicada às reviews.
 
 ---
 
@@ -648,7 +684,7 @@ Ao abrir o app, o fluxo temporário em `AppDelegate` chama `resetSessionData()` 
 |---|---|---|
 | Cache de conteúdo da Home | `HomeInteractor` | `cachedHomeContent`, `sortedGenres`, `selectedGenreIndex` |
 | Cache de gêneros da API | `GenreRepository` (actor) | `cache: [Genre]?` in-memory |
-| Perfil e atividade de filmes | Core Data via `UserRepository` e `MovieActivityRepository` | `UserEntity`, `MovieActivityEntity`, `ReviewEntity` |
+| Perfil e atividade de filmes | Firestore via repositórios por UID | `users/{uid}` e `users/{uid}/activities/{movieId}` |
 | Estado visual (loading/content/error) | `HomeView` | `enum State { loading, content, error }` |
 | Seleção de chip | `GenreFilterView` | `options` + `selectedIndex` via `configure` |
 
@@ -828,7 +864,7 @@ Sugestões de tópicos para a conversa com o engenheiro iOS:
 | 3 | **Modularização** | Monolito hoje; `architecture.md` descreve split Interface/Implementation |
 | 4 | **Testes** | Ampliar cobertura além dos testes atuais de `MovieActivityRepository` |
 | 5 | **Image loading** | Trocar loader custom por Nuke/Kingfisher? Cancelamento de task? |
-| 6 | **Persistência** | Core Data local existe, mas o reset de atividades no lançamento é temporário e precisa ser removido antes da produção |
+| 6 | **Persistência** | Validar regras, índices e comportamento offline do Firestore Emulator e do projeto Firebase |
 | 7 | **iOS 17 baseline** | Permite concurrency moderna sem preocupação com retrocompat |
 | 8 | **Delegates vs closures** | Cadeia de 4 delegates na Home — alternativas? |
 | 9 | **VIP boilerplate** | Vale a pena para cenas simples? Quando usar MVVM-C? |

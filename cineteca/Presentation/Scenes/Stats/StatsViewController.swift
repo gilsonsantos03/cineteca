@@ -8,10 +8,16 @@ protocol StatsDisplayLogic: AnyObject {
 final class StatsViewController: UIViewController {
     private let customView: StatsView
     private let interactor: StatsBusinessLogic
+    private let authGate: AuthenticationGateProtocol
 
-    init(customView: StatsView, interactor: StatsBusinessLogic) {
+    init(
+        customView: StatsView,
+        interactor: StatsBusinessLogic,
+        authGate: AuthenticationGateProtocol
+    ) {
         self.customView = customView
         self.interactor = interactor
+        self.authGate = authGate
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -24,11 +30,24 @@ final class StatsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: false)
+        customView.delegate = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        interactor.fetchStats(request: .init())
+        if authGate.isAuthenticated {
+            interactor.fetchStats(request: .init())
+        } else {
+            customView.showGuest()
+        }
+    }
+}
+
+extension StatsViewController: StatsViewDelegate {
+    func didRequestAuthentication() {
+        authGate.performAuthenticated { [weak self] in
+            self?.interactor.fetchStats(request: .init())
+        }
     }
 }
 

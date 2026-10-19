@@ -9,15 +9,18 @@ final class ProfileViewController: UIViewController {
     private let customView: ProfileView
     private let interactor: ProfileBusinessLogic
     private let router: ProfileRoutingLogic
+    private let authGate: AuthenticationGateProtocol
 
     init(
         customView: ProfileView,
         interactor: ProfileBusinessLogic,
-        router: ProfileRoutingLogic
+        router: ProfileRoutingLogic,
+        authGate: AuthenticationGateProtocol
     ) {
         self.customView = customView
         self.interactor = interactor
         self.router = router
+        self.authGate = authGate
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -35,7 +38,11 @@ final class ProfileViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        interactor.fetchProfile(request: .init())
+        if authGate.isAuthenticated {
+            interactor.fetchProfile(request: .init())
+        } else {
+            customView.showGuest()
+        }
     }
 }
 
@@ -56,7 +63,9 @@ extension ProfileViewController: ProfileDisplayLogic {
 
 extension ProfileViewController: ProfileViewDelegate {
     func didTapEdit() {
-        router.routeToEditProfile()
+        authGate.performAuthenticated { [weak self] in
+            self?.router.routeToEditProfile()
+        }
     }
 
     func didTapFavoriteFilm(movieId: Int) {
@@ -64,13 +73,17 @@ extension ProfileViewController: ProfileViewDelegate {
     }
 
     func didTapSeeAllReviews() {
-        router.routeToMyReviews()
+        authGate.performAuthenticated { [weak self] in
+            self?.router.routeToMyReviews()
+        }
     }
 
     func didSelectSetting(_ setting: ProfileModels.Setting) {
         switch setting {
         case .account:
-            router.routeToAccount()
+            authGate.performAuthenticated { [weak self] in
+                self?.router.routeToAccount()
+            }
         case .appearance:
             router.routeToAppearance()
         case .language:
@@ -79,6 +92,12 @@ extension ProfileViewController: ProfileViewDelegate {
             router.routeToLegal()
         case .notifications:
             break
+        }
+    }
+
+    func didRequestAuthentication() {
+        authGate.performAuthenticated { [weak self] in
+            self?.interactor.fetchProfile(request: .init())
         }
     }
 }

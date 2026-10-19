@@ -1,9 +1,11 @@
 import UIKit
 
+@MainActor
 final class EditProfileConfigurator {
     static func resolve(
         userRepository: UserRepositoryProtocol,
-        searchBuilder: SearchBuilding
+        searchBuilder: SearchBuilding,
+        authGate: AuthenticationGateProtocol
     ) -> UIViewController {
         let presenter = EditProfilePresenter()
         let interactor = EditProfileInteractor(
@@ -15,7 +17,8 @@ final class EditProfileConfigurator {
         let viewController = EditProfileViewController(
             customView: view,
             interactor: interactor,
-            router: router
+            router: router,
+            authGate: authGate
         )
 
         presenter.view = viewController

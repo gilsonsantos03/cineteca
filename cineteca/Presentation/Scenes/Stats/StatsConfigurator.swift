@@ -1,7 +1,10 @@
 import UIKit
 
 final class StatsConfigurator {
-    static func resolve(statsRepository: StatsRepositoryProtocol) -> UIViewController {
+    static func resolve(
+        statsRepository: StatsRepositoryProtocol,
+        authGate: AuthenticationGateProtocol
+    ) -> UIViewController {
         let presenter = StatsPresenter()
         let interactor = StatsInteractor(
             presenter: presenter,
@@ -10,7 +13,8 @@ final class StatsConfigurator {
         let view = StatsView()
         let viewController = StatsViewController(
             customView: view,
-            interactor: interactor
+            interactor: interactor,
+            authGate: authGate
         )
 
         presenter.view = viewController

@@ -1,7 +1,6 @@
 import Foundation
 
 protocol MovieActivityRepositoryProtocol: Sendable {
-    func resetSessionData() throws
     func upsertMetadata(_ metadata: MovieActivityMetadata) async throws
     func fetchActivity(for movieId: Int) async throws -> MovieActivity?
     func fetchReview(for movieId: Int) async throws -> String?

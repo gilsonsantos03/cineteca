@@ -6,6 +6,7 @@ protocol ListsViewDelegate: AnyObject {
     func didSelectMovie(id movieId: Int)
     func didRequestRemoveMovie(id movieId: Int)
     func didRequestRetry()
+    func didRequestAuthentication()
 }
 
 final class ListsView: UIView {
@@ -121,6 +122,7 @@ final class ListsView: UIView {
     }()
 
     private lazy var errorStateView = ListsErrorStateView()
+    private lazy var authenticationPromptView = AuthenticationPromptView()
 
     // MARK: - Initialization
 
@@ -149,6 +151,7 @@ final class ListsView: UIView {
     private func setup() {
         backgroundColor = .appBackground
         errorStateView.delegate = self
+        authenticationPromptView.delegate = self
         setupSubviews()
         setupConstraints()
         setState(.loading)
@@ -165,6 +168,7 @@ final class ListsView: UIView {
         scrollView.addSubview(contentStack)
         addSubview(loadingIndicator)
         addSubview(errorStateView)
+        addSubview(authenticationPromptView)
     }
 
     private func setupConstraints() {
@@ -176,6 +180,7 @@ final class ListsView: UIView {
         constrainContentStack()
         constrainLoadingIndicator()
         constrainErrorStateView()
+        constrainAuthenticationPromptView()
     }
 
     private func constrainTitleLabel() {
@@ -244,10 +249,29 @@ final class ListsView: UIView {
         }
     }
 
+    private func constrainAuthenticationPromptView() {
+        constrain(authenticationPromptView, scrollView) { prompt, scroll in
+            prompt.centerY == scroll.centerY
+            prompt.left == scroll.left + 20
+            prompt.right == scroll.right - 20
+        }
+    }
+
     // MARK: - Public API
 
     func showLoading() {
         setState(.loading)
+    }
+
+    func showGuest(selectedList: ListsModels.List? = nil) {
+        if let selectedList {
+            self.selectedList = selectedList
+            updateTabs()
+        }
+        loadingIndicator.stopAnimating()
+        scrollView.isHidden = true
+        errorStateView.isHidden = true
+        authenticationPromptView.isHidden = false
     }
 
     func showContent(content: ListsModels.FetchContent.ViewModel.Content) {
@@ -306,6 +330,7 @@ final class ListsView: UIView {
 
         scrollView.isHidden = !isContent
         errorStateView.isHidden = !isError
+        authenticationPromptView.isHidden = true
         if isLoading {
             loadingIndicator.startAnimating()
         } else {
@@ -369,5 +394,11 @@ extension ListsView: ListsMovieCardViewDelegate {
 extension ListsView: ListsErrorStateViewDelegate {
     func didRequestRetry() {
         delegate?.didRequestRetry()
+    }
+}
+
+extension ListsView: AuthenticationPromptViewDelegate {
+    func didTapAuthenticationPrompt() {
+        delegate?.didRequestAuthentication()
     }
 }

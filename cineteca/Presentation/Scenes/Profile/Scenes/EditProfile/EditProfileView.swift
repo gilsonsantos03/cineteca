@@ -5,6 +5,7 @@ protocol EditProfileViewDelegate: AnyObject {
     func didTapBack()
     func didTapCancel()
     func didTapSave(
+        username: String,
         displayName: String,
         bio: String,
         favoriteFilm: EditProfileModels.FavoriteFilmViewModel?
@@ -110,11 +111,13 @@ extension EditProfileView: EditProfileContentViewDelegate {
     }
 
     func didTapSave(
+        username: String,
         displayName: String,
         bio: String,
         favoriteFilm: EditProfileModels.FavoriteFilmViewModel?
     ) {
         delegate?.didTapSave(
+            username: username,
             displayName: displayName,
             bio: bio,
             favoriteFilm: favoriteFilm

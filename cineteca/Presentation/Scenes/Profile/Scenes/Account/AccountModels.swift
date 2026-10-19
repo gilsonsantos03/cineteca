@@ -23,7 +23,7 @@ enum AccountModels {
     }
 
     enum RowAction: Equatable {
-        case changePassword
+        case logout
         case deleteAccount
     }
 

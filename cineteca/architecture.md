@@ -56,26 +56,31 @@ projection should not be persisted as an entity merely because it has a
 dedicated struct.
 
 `YearInFilmStats` is a read model (an immutable aggregate/projection), not a
-Core Data entity. It represents the result needed by the Stats scene after film
+persistent entity. It represents the result needed by the Stats scene after film
 history has been aggregated by year. It has no independent identity, lifecycle,
 or persistence requirements.
 
-`StatsRepository` currently builds the same read model from the local movie
-activity repository and Core Data-backed activity history. Reviews and profile
-data are persisted as `ReviewEntity` and `UserEntity`; `MovieActivityEntity`
-stores ratings, favorites, watchlist state, and movie metadata. These
-persistence details remain behind repository protocols and are not exposed to
-Presentation.
+`StatsRepository` builds the same read model from the Firestore movie activity
+repository. Reviews and profile data are persisted in the authenticated user's
+Firestore document tree; activity documents store ratings, favorites,
+watchlist state, and movie metadata. These persistence details remain behind
+repository protocols and are not exposed to Presentation.
 
 `UserRepository` composes persisted reviews with rated activities when building
 the `User` read model. This allows a rating without comment to appear in the
-profile review cards without creating a `ReviewEntity` or duplicating a review
+profile review cards without creating a separate review document or duplicating a review
 that already has text.
 
-The profile's favorite film is a separate `UserEntity` field managed by
+The profile's favorite film is a separate `users/{uid}` field managed by
 `UserRepository.updateProfile`. It is selected through the Edit Profile search
 dialog and persisted with the scene's Save action; it must not be inferred from
-`MovieActivityEntity.isFavorite`.
+`users/{uid}/activities/{movieId}.isFavorite`.
+
+The editable username is stored normalized in `users/{uid}.username` and
+reserved in `usernames/{username}`. `FirestoreUserRepository` updates both
+documents in one transaction, and Firestore rules require the reservation to
+belong to the authenticated UID before accepting the profile write. Presentation
+shows the normalized value with an `@` prefix.
 
 The Home scene reads the featured movie's activity from
 `MovieActivityRepositoryProtocol` and updates its watchlist through
@@ -100,14 +105,37 @@ already presented so repeated movies returned by TMDB are not shown again.
 
 Removing a Rated item uses `unrateMovie(for:)` at the repository boundary.
 That operation clears the rating and date, removes the dependent activity
-favorite, and deletes the associated `ReviewEntity`; an existing watchlist
+favorite, and deletes the review fields from the activity document; an existing watchlist
 flag is preserved. Watchlist and Favorites removal use the existing toggle
 operations.
 
-The temporary development reset is also owned by the data boundary:
-`MovieActivityRepository.resetSessionData()` clears local activities, reviews,
-and the profile favorite during app launch. This flow must be removed before
-production so the repository can preserve user data across launches.
+`FirestoreMovieActivityRepository` scopes every personal read and write to
+`users/{uid}/activities/{movieId}`. The Firestore security rules repeat this
+boundary server-side, so client-side repository checks are not the only
+protection. There is no launch-time reset.
+
+Authentication is modeled separately from the scenes through
+`AuthRepositoryProtocol`, `AuthenticationProviderProtocol` and
+`AuthenticationGateProtocol`. `AuthenticationCoordinator` composes provider
+implementations (currently e-mail/password, with other providers available as
+future integrations) and replays one pending protected action
+after successful login, allowing Google to be added without changing feature
+repositories or scene contracts.
+
+The e-mail/password sign-up flow also receives `UserRepositoryProtocol` through
+the Authentication scene. After Firebase Authentication creates the account,
+the interactor creates `users/{uid}` and atomically reserves the normalized
+username in `usernames/{username}`. If profile creation fails, the newly
+created account is removed and the repository attempts to clean up partial
+profile data before the error is presented. Existing authenticated accounts remain supported
+through the repository's lazy initialization path.
+
+The Authentication scene follows the full UIKit Clean Swift cycle:
+`AuthenticationViewController` forwards user events to
+`AuthenticationInteractor`, `AuthenticationPresenter` maps responses back to
+display models, and `AuthenticationRouter` handles dismissal. The
+`AuthenticationCoordinator` remains outside the scene as the composition and
+pending-action boundary.
 
 Domain read models must contain domain data only. Localization, UIKit colors,
 layout choices, and other visual concerns belong to the Presenter or View.

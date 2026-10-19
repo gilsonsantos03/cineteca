@@ -25,6 +25,7 @@ enum EditProfileModels {
 
     enum SaveProfile {
         struct Request {
+            let username: String
             let displayName: String
             let bio: String
             let favoriteFilm: FavoriteFilmViewModel?
@@ -32,12 +33,12 @@ enum EditProfileModels {
 
         enum Response {
             case success
-            case error
+            case error(UserProfileError?)
         }
 
         enum ViewModel {
             case success
-            case error
+            case error(UserProfileError?)
         }
     }
 

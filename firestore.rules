@@ -1,0 +1,54 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow read, delete: if isOwner(userId);
+      allow create, update: if isOwner(userId)
+        && validProfile(request.resource.data)
+        && getAfter(
+          /databases/$(database)/documents/usernames/$(request.resource.data.username)
+        ).data.uid == userId;
+
+      match /activities/{movieId} {
+        allow read, delete: if isOwner(userId);
+        allow create, update: if isOwner(userId)
+          && validActivity(request.resource.data);
+      }
+    }
+
+    match /usernames/{username} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null
+        && request.resource.data.uid == request.auth.uid
+        && username == request.resource.data.username
+        && validUsername(username);
+      allow update, delete: if request.auth != null
+        && resource.data.uid == request.auth.uid;
+    }
+  }
+
+  function isOwner(userId) {
+    return request.auth != null && request.auth.uid == userId;
+  }
+
+  function validUsername(username) {
+    return username is string
+      && username.matches('^[a-z0-9_]{3,20}$');
+  }
+
+  function validProfile(data) {
+    return validUsername(data.username);
+  }
+
+  function validActivity(data) {
+    return data.movieId is int
+      && data.movieId >= 0
+      && data.title is string
+      && (!("rating" in data)
+        || (data.rating is number && data.rating >= 0 && data.rating <= 10
+          && data.rating == int(data.rating)))
+      && (!("isFavorite" in data) || data.isFavorite is bool)
+      && (!("isInWatchlist" in data) || data.isInWatchlist is bool);
+  }
+}

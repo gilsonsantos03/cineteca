@@ -1,12 +1,14 @@
 import UIKit
 
+@MainActor
 final class HomeConfigurator {
     static func resolve(
         repository: MovieRepositoryProtocol,
         genreRepository: GenreRepositoryProtocol,
         activityRepository: MovieActivityRepositoryProtocol,
         movieDetailsBuilder: MovieDetailsBuilding,
-        movieCatalogBuilder: MovieCatalogBuilding
+        movieCatalogBuilder: MovieCatalogBuilding,
+        authGate: AuthenticationGateProtocol
     ) -> UIViewController {
         let presenter = HomePresenter()
         let interactor = HomeInteractor(
@@ -20,7 +22,12 @@ final class HomeConfigurator {
             movieCatalogBuilder: movieCatalogBuilder
         )
         let view = HomeView()
-        let viewController = HomeViewController(customView: view, interactor: interactor, router: router)
+        let viewController = HomeViewController(
+            customView: view,
+            interactor: interactor,
+            router: router,
+            authGate: authGate
+        )
 
         presenter.view = viewController
         router.viewController = viewController

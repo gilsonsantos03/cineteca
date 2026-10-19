@@ -11,11 +11,18 @@ final class HomeViewController: UIViewController {
     private let customView: HomeView
     private let interactor: HomeBusinessLogic
     private let router: HomeRoutingLogic
+    private let authGate: AuthenticationGateProtocol
 
-    init(customView: HomeView, interactor: HomeBusinessLogic, router: HomeRoutingLogic) {
+    init(
+        customView: HomeView,
+        interactor: HomeBusinessLogic,
+        router: HomeRoutingLogic,
+        authGate: AuthenticationGateProtocol
+    ) {
         self.customView = customView
         self.interactor = interactor
         self.router = router
+        self.authGate = authGate
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -100,9 +107,11 @@ extension HomeViewController: HomeViewDelegate {
     }
 
     func didTapWatchlist(movieId: Int, isInWatchlist: Bool) {
-        interactor.didTapWatchlist(
-            request: .init(movieId: movieId, isInWatchlist: isInWatchlist)
-        )
+        authGate.performAuthenticated { [weak self] in
+            self?.interactor.didTapWatchlist(
+                request: .init(movieId: movieId, isInWatchlist: isInWatchlist)
+            )
+        }
     }
 
     func didSelectMovie(id movieId: Int) {

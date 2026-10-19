@@ -1,12 +1,14 @@
 import UIKit
 
+@MainActor
 final class MovieDetailsConfigurator {
     static func resolve(
         movieId: Int,
         repository: MovieRepositoryProtocol,
         activityRepository: MovieActivityRepositoryProtocol,
         movieDetailsBuilder: MovieDetailsBuilding,
-        movieReviewSheetFactory: MovieReviewSheetBuilding
+        movieReviewSheetFactory: MovieReviewSheetBuilding,
+        authGate: AuthenticationGateProtocol
     ) -> UIViewController {
         let presenter = MovieDetailsPresenter()
         let interactor = MovieDetailsInteractor(
@@ -21,7 +23,8 @@ final class MovieDetailsConfigurator {
             customView: view,
             interactor: interactor,
             router: router,
-            movieReviewSheetFactory: movieReviewSheetFactory
+            movieReviewSheetFactory: movieReviewSheetFactory,
+            authGate: authGate
         )
 
         presenter.view = viewController

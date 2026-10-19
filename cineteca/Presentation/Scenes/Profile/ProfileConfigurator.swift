@@ -1,5 +1,6 @@
 import UIKit
 
+@MainActor
 final class ProfileConfigurator {
     static func resolve(
         userRepository: UserRepositoryProtocol,
@@ -9,7 +10,8 @@ final class ProfileConfigurator {
         accountBuilder: AccountBuilding,
         appearanceBuilder: AppearanceBuilding,
         languageBuilder: LanguageBuilding,
-        legalBuilder: LegalBuilding
+        legalBuilder: LegalBuilding,
+        authGate: AuthenticationGateProtocol
     ) -> UIViewController {
         let presenter = ProfilePresenter()
         let interactor = ProfileInteractor(
@@ -29,7 +31,8 @@ final class ProfileConfigurator {
         let viewController = ProfileViewController(
             customView: view,
             interactor: interactor,
-            router: router
+            router: router,
+            authGate: authGate
         )
 
         presenter.view = viewController

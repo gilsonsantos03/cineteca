@@ -8,7 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		134D3C47F7AB36E6EA6FF6E9 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92D944746BF5098D7ADF3107 /* XCTest.framework */; };
+		14E387A226636E8F7A09477D /* AuthenticationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F538006D2C51872E5F5480E4 /* AuthenticationModels.swift */; };
+		2025AF8A2C92ED3DA1458013 /* FirebaseConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F50B735E506F88941CE16F2 /* FirebaseConfiguration.swift */; };
 		23B11876BF659763451F04D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 201CF9328A44336D9DA09F84 /* Foundation.framework */; };
+		26D3EAE36B33F630462BC23A /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608FA11039306AF47BB002B8 /* AuthenticationViewController.swift */; };
+		356D389445FDB9BE1D776B0C /* FirebaseAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656F9C46808CEC32307992AA /* FirebaseAuthRepository.swift */; };
+		41A954EB033598B16D7AAF04 /* FirestoreStatsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358B6E132B58ACC5593DC1B3 /* FirestoreStatsRepository.swift */; };
+		4411DD3E3085952C0098CBF6 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = A305C61E94BA26E6FC097391 /* FirebaseCore */; };
+		4411DD3F3085952C0098CBF6 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AA0CB820CD40EB41927092A0 /* FirebaseAuth */; };
+		4411DD403085952C0098CBF6 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 35F66191A53A42F77CA71207 /* FirebaseFirestore */; };
+		4411DD443085992F0098CBF6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4411DD433085992F0098CBF6 /* GoogleService-Info.plist */; };
 		442CB04B2FF5EF91004FCC82 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 442CB04A2FF5EF91004FCC82 /* Keys.plist */; };
 		442CB0532FF6027B004FCC82 /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CB0512FF6027B004FCC82 /* AppDependencies.swift */; };
 		442CB05A2FF603BE004FCC82 /* NetworkConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CB0592FF603BE004FCC82 /* NetworkConfiguration.swift */; };
@@ -45,7 +54,10 @@
 		448D4D622FEA1C310008718A /* URLRequestBuilder+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448D4D5E2FEA1C310008718A /* URLRequestBuilder+Extension.swift */; };
 		448D4D632FEA1C310008718A /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448D4D5B2FEA1C310008718A /* NetworkService.swift */; };
 		448D4D642FEA1C310008718A /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448D4D592FEA1C310008718A /* HTTPMethod.swift */; };
+		4C3A999BE67967BCEEBE8A94 /* AuthModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB684124EACB8F27D70A7993 /* AuthModels.swift */; };
+		65BA6A98C47E5B02DFCB73C7 /* FirestoreUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C360D26763E23DD2EE34540 /* FirestoreUserRepository.swift */; };
 		661DF6C81A41E7E64243F97C /* MovieActivityRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09EE0361B7672E51466DEC2 /* MovieActivityRepositoryTests.swift */; };
+		963CE7614099E957DBC80C02 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C205413C935CBA338D4FA7FA /* AuthenticationView.swift */; };
 		AA000001000000000000001A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000001B /* AppDelegate.swift */; };
 		AA100001000000000000001A /* MovieDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000001B /* MovieDetails.swift */; };
 		AA100001000000000000002A /* MovieDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000002B /* MovieDetailsResponse.swift */; };
@@ -57,11 +69,6 @@
 		AA100001000000000000008A /* MovieDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000008B /* MovieDetailsView.swift */; };
 		AA100001000000000000009A /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000009B /* MovieDetailsViewController.swift */; };
 		AA100001000000000000010A /* MovieReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000010B /* MovieReviewViewController.swift */; };
-		AA100001000000000000030A /* MovieReviewRatingCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000030B /* MovieReviewRatingCircleView.swift */; };
-		AA100001000000000000031A /* MovieReviewRatingSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000031B /* MovieReviewRatingSlider.swift */; };
-		AA100001000000000000032A /* MovieReviewRatingScaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000032B /* MovieReviewRatingScaleView.swift */; };
-		AA100001000000000000033A /* MovieReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000033B /* MovieReviewView.swift */; };
-		MR000001000000000000001A /* MovieReviewSheetFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = MR000001000000000000001B /* MovieReviewSheetFactory.swift */; };
 		AA100001000000000000011A /* MovieDetailsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000011B /* MovieDetailsHeaderView.swift */; };
 		AA100001000000000000012A /* SceneBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000012B /* SceneBuilders.swift */; };
 		AA100001000000000000013A /* MovieDetailsProvidersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000013B /* MovieDetailsProvidersView.swift */; };
@@ -78,6 +85,10 @@
 		AA100001000000000000026A /* MovieDetailsSimilarMovieCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000026B /* MovieDetailsSimilarMovieCardView.swift */; };
 		AA100001000000000000027A /* WatchTrailerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000027B /* WatchTrailerButton.swift */; };
 		AA100001000000000000028A /* MovieDetailsCardMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000028B /* MovieDetailsCardMetrics.swift */; };
+		AA100001000000000000030A /* MovieReviewRatingCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000030B /* MovieReviewRatingCircleView.swift */; };
+		AA100001000000000000031A /* MovieReviewRatingSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000031B /* MovieReviewRatingSlider.swift */; };
+		AA100001000000000000032A /* MovieReviewRatingScaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000032B /* MovieReviewRatingScaleView.swift */; };
+		AA100001000000000000033A /* MovieReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000033B /* MovieReviewView.swift */; };
 		AC000001000000000000009B000000000000001A /* AccountModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC000001000000000000009B /* AccountModels.swift */; };
 		AC00000100000000000000AB000000000000001A /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC00000100000000000000AB /* AccountViewController.swift */; };
 		AC00000100000000000000BB000000000000001A /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC00000100000000000000BB /* AccountView.swift */; };
@@ -101,6 +112,12 @@
 		AR000001000000000000002B000000000000001A /* AppearanceRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AR000001000000000000002B /* AppearanceRepositoryProtocol.swift */; };
 		AR000001000000000000007B000000000000001A /* AppearanceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AR000001000000000000007B /* AppearanceRepository.swift */; };
 		AT000001000000000000001B000000000000001A /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AT000001000000000000001B /* AppTheme.swift */; };
+		B6C1FC614F65734FD1DCC142 /* AuthenticationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E709F5E0E45F1EBF3BB96DAF /* AuthenticationCoordinator.swift */; };
+		B9FC16CE132B8BA89A400AE5 /* AuthenticationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1687C5F6900AF3DCD87AC1 /* AuthenticationConfigurator.swift */; };
+		B9FC16CE132B8BA89A400AE6 /* AuthenticationPromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1687C5F6900AF3DCD87AC2 /* AuthenticationPromptView.swift */; };
+		B9FC16CE132B8BA89A400AE7 /* AuthenticationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1687C5F6900AF3DCD87AC3 /* AuthenticationInteractor.swift */; };
+		B9FC16CE132B8BA89A400AE8 /* AuthenticationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1687C5F6900AF3DCD87AC4 /* AuthenticationPresenter.swift */; };
+		B9FC16CE132B8BA89A400AE9 /* AuthenticationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1687C5F6900AF3DCD87AC5 /* AuthenticationRouter.swift */; };
 		BB000001000000000000001A /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000001000000000000001B /* Genre.swift */; };
 		CC000001000000000000001A /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC000001000000000000001B /* Movie.swift */; };
 		CC000001000000000000002A /* MovieEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC000001000000000000002B /* MovieEndpoint.swift */; };
@@ -111,6 +128,7 @@
 		CC000001000000000000007A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC000001000000000000007B /* Assets.xcassets */; };
 		CC000001000000000000007C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC000001000000000000007D /* Localizable.strings */; };
 		CC00000100000000000000AA /* MovieRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC00000100000000000000AB /* MovieRepository.swift */; };
+		CEDDFF59AC8E2281FDAB7E41 /* FirestoreActivityMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96DF1451F982F4A0B6C00A7 /* FirestoreActivityMapper.swift */; };
 		CP000001000000000000009B000000000000001A /* ChangePasswordModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = CP000001000000000000009B /* ChangePasswordModels.swift */; };
 		CP00000100000000000000AB000000000000001A /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CP00000100000000000000AB /* ChangePasswordViewController.swift */; };
 		CP00000100000000000000BB000000000000001A /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CP00000100000000000000BB /* ChangePasswordView.swift */; };
@@ -133,6 +151,8 @@
 		EP000001000000000000012C000000000000001A /* EditProfileAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EP000001000000000000012C /* EditProfileAvatarView.swift */; };
 		EP000001000000000000013C000000000000001A /* EditProfileFormFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EP000001000000000000013C /* EditProfileFormFieldView.swift */; };
 		EP000001000000000000015C000000000000001A /* EditProfileFavoriteFilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EP000001000000000000015C /* EditProfileFavoriteFilmView.swift */; };
+		F92B9F9FC214C626F1928EB0 /* FirestoreMovieActivityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041A1308F8DC6BA42D5AA7F /* FirestoreMovieActivityRepository.swift */; };
+		FD000001000000000000001A /* FirestoreActivityMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD000001000000000000001B /* FirestoreActivityMapperTests.swift */; };
 		LC000001000000000000005E000000000000001A /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = LC000001000000000000005E /* Localization.swift */; };
 		LE000001000000000000009B000000000000001A /* LegalModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = LE000001000000000000009B /* LegalModels.swift */; };
 		LE00000100000000000000AB000000000000001A /* LegalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = LE00000100000000000000AB /* LegalViewController.swift */; };
@@ -162,10 +182,34 @@
 		LM000001000000000000005E000000000000001A /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = LM000001000000000000005E /* LanguageManager.swift */; };
 		LR000001000000000000002B000000000000001A /* LanguageRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = LR000001000000000000002B /* LanguageRepositoryProtocol.swift */; };
 		LR000001000000000000007B000000000000001A /* LanguageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = LR000001000000000000007B /* LanguageRepository.swift */; };
+		LS000001000000000000009A /* ListsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS000001000000000000009B /* ListsModels.swift */; };
+		LS00000100000000000000AA /* ListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS00000100000000000000AB /* ListsViewController.swift */; };
+		LS00000100000000000000BA /* ListsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS00000100000000000000BB /* ListsView.swift */; };
+		LS00000100000000000000CA /* ListsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS00000100000000000000CB /* ListsInteractor.swift */; };
+		LS00000100000000000000DA /* ListsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS00000100000000000000DB /* ListsPresenter.swift */; };
+		LS00000100000000000000EA /* ListsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS00000100000000000000EB /* ListsRouter.swift */; };
+		LS00000100000000000000FA /* ListsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS00000100000000000000FB /* ListsConfigurator.swift */; };
+		LS000001000000000000010C /* ListsMovieCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS000001000000000000010D /* ListsMovieCardView.swift */; };
+		LS000001000000000000011C /* ListsErrorStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS000001000000000000011D /* ListsErrorStateView.swift */; };
+		LS000001000000000000012A /* ListsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS000001000000000000012B /* ListsPresenterTests.swift */; };
 		MA000001000000000000001A /* MovieActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = MA000001000000000000001B /* MovieActivity.swift */; };
 		MA000001000000000000002A /* MovieActivityRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = MA000001000000000000002B /* MovieActivityRepositoryProtocol.swift */; };
 		MA000001000000000000003A /* MovieActivityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = MA000001000000000000003B /* MovieActivityRepository.swift */; };
 		MA000001000000000000004A /* MovieActivityEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = MA000001000000000000004B /* MovieActivityEntity.swift */; };
+		MA000001000000000000005A /* Cartography in Frameworks */ = {isa = PBXBuildFile; productRef = 448D4D4D2FEA0D970008718A /* Cartography */; };
+		MC000001000000000000001A /* MovieCollectionCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC000001000000000000001B /* MovieCollectionCategory.swift */; };
+		MC000001000000000000002A /* MovieCollectionPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC000001000000000000002B /* MovieCollectionPage.swift */; };
+		MC000001000000000000009A /* MovieCatalogModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC000001000000000000009B /* MovieCatalogModels.swift */; };
+		MC00000100000000000000AA /* MovieCatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC00000100000000000000AB /* MovieCatalogViewController.swift */; };
+		MC00000100000000000000BA /* MovieCatalogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC00000100000000000000BB /* MovieCatalogView.swift */; };
+		MC00000100000000000000CA /* MovieCatalogInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC00000100000000000000CB /* MovieCatalogInteractor.swift */; };
+		MC00000100000000000000DA /* MovieCatalogPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC00000100000000000000DB /* MovieCatalogPresenter.swift */; };
+		MC00000100000000000000EA /* MovieCatalogRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC00000100000000000000EB /* MovieCatalogRouter.swift */; };
+		MC00000100000000000000FA /* MovieCatalogConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC00000100000000000000FB /* MovieCatalogConfigurator.swift */; };
+		MC000001000000000000010C /* MovieCatalogGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC000001000000000000010D /* MovieCatalogGridCell.swift */; };
+		MC000001000000000000011A /* MovieCatalogPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC000001000000000000011B /* MovieCatalogPresenterTests.swift */; };
+		MC000001000000000000012A /* MovieCatalogLoadingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC000001000000000000012B /* MovieCatalogLoadingFooterView.swift */; };
+		MR000001000000000000001A /* MovieReviewSheetFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = MR000001000000000000001B /* MovieReviewSheetFactory.swift */; };
 		MY000001000000000000009A /* MyReviewsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = MY000001000000000000009B /* MyReviewsModels.swift */; };
 		MY00000100000000000000AA /* MyReviewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = MY00000100000000000000AB /* MyReviewsViewController.swift */; };
 		MY00000100000000000000BA /* MyReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MY00000100000000000000BB /* MyReviewsView.swift */; };
@@ -174,14 +218,12 @@
 		MY00000100000000000000EA /* MyReviewsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = MY00000100000000000000EB /* MyReviewsConfigurator.swift */; };
 		MY00000100000000000010CA /* MyReviewsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MY00000100000000000010CB /* MyReviewsContentView.swift */; };
 		MY00000100000000000011CA /* MyReviewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MY00000100000000000011CB /* MyReviewCardView.swift */; };
-		MA000001000000000000005A /* Cartography in Test Frameworks */ = {isa = PBXBuildFile; productRef = 448D4D4D2FEA0D970008718A /* Cartography */; };
 		PP000001000000000000001B000000000000001A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000001B /* User.swift */; };
 		PP000001000000000000002B000000000000001A /* UserRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000002B /* UserRepositoryProtocol.swift */; };
 		PP000001000000000000003B000000000000001A /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000003B /* CoreDataStack.swift */; };
 		PP000001000000000000004B000000000000001A /* ProfileSeedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000004B /* ProfileSeedData.swift */; };
 		PP000001000000000000005B000000000000001A /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000005B /* UserEntity.swift */; };
 		PP000001000000000000006B000000000000001A /* ReviewEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000006B /* ReviewEntity.swift */; };
-		PP000001000000000000007B000000000000001A /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000007B /* UserRepository.swift */; };
 		PP000001000000000000008B000000000000001A /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000008B /* StarRatingView.swift */; };
 		PP000001000000000000009B000000000000001A /* ProfileModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP000001000000000000009B /* ProfileModels.swift */; };
 		PP00000100000000000000AB000000000000001A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = PP00000100000000000000AB /* ProfileViewController.swift */; };
@@ -234,28 +276,6 @@
 		UI000001000000000000002B000000000000001A /* PasswordFormFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = UI000001000000000000002B /* PasswordFormFieldView.swift */; };
 		UI000001000000000000003B000000000000001A /* ErrorStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = UI000001000000000000003B /* ErrorStateView.swift */; };
 		UI000001000000000000004B000000000000001A /* GenreChipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = UI000001000000000000004B /* GenreChipCell.swift */; };
-		LS000001000000000000009A /* ListsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS000001000000000000009B /* ListsModels.swift */; };
-		LS00000100000000000000AA /* ListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS00000100000000000000AB /* ListsViewController.swift */; };
-		LS00000100000000000000BA /* ListsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS00000100000000000000BB /* ListsView.swift */; };
-		LS00000100000000000000CA /* ListsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS00000100000000000000CB /* ListsInteractor.swift */; };
-		LS00000100000000000000DA /* ListsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS00000100000000000000DB /* ListsPresenter.swift */; };
-		LS00000100000000000000EA /* ListsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS00000100000000000000EB /* ListsRouter.swift */; };
-		LS00000100000000000000FA /* ListsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS00000100000000000000FB /* ListsConfigurator.swift */; };
-		LS000001000000000000010C /* ListsMovieCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS000001000000000000010D /* ListsMovieCardView.swift */; };
-		LS000001000000000000011C /* ListsErrorStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS000001000000000000011D /* ListsErrorStateView.swift */; };
-		LS000001000000000000012A /* ListsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS000001000000000000012B /* ListsPresenterTests.swift */; };
-		MC000001000000000000001A /* MovieCollectionCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC000001000000000000001B /* MovieCollectionCategory.swift */; };
-		MC000001000000000000002A /* MovieCollectionPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC000001000000000000002B /* MovieCollectionPage.swift */; };
-		MC000001000000000000009A /* MovieCatalogModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC000001000000000000009B /* MovieCatalogModels.swift */; };
-		MC00000100000000000000AA /* MovieCatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC00000100000000000000AB /* MovieCatalogViewController.swift */; };
-		MC00000100000000000000BA /* MovieCatalogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC00000100000000000000BB /* MovieCatalogView.swift */; };
-		MC00000100000000000000CA /* MovieCatalogInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC00000100000000000000CB /* MovieCatalogInteractor.swift */; };
-		MC00000100000000000000DA /* MovieCatalogPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC00000100000000000000DB /* MovieCatalogPresenter.swift */; };
-		MC00000100000000000000EA /* MovieCatalogRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC00000100000000000000EB /* MovieCatalogRouter.swift */; };
-		MC00000100000000000000FA /* MovieCatalogConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC00000100000000000000FB /* MovieCatalogConfigurator.swift */; };
-		MC000001000000000000010C /* MovieCatalogGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC000001000000000000010D /* MovieCatalogGridCell.swift */; };
-		MC000001000000000000012A /* MovieCatalogLoadingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC000001000000000000012B /* MovieCatalogLoadingFooterView.swift */; };
-		MC000001000000000000011A /* MovieCatalogPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC000001000000000000011B /* MovieCatalogPresenterTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -270,6 +290,8 @@
 
 /* Begin PBXFileReference section */
 		201CF9328A44336D9DA09F84 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		358B6E132B58ACC5593DC1B3 /* FirestoreStatsRepository.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FirestoreStatsRepository.swift; sourceTree = "<group>"; };
+		4411DD433085992F0098CBF6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		442CB04A2FF5EF91004FCC82 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		442CB0512FF6027B004FCC82 /* AppDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
 		442CB0582FF603BE004FCC82 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
@@ -306,8 +328,18 @@
 		448D4D5C2FEA1C310008718A /* ParameterEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterEncoding.swift; sourceTree = "<group>"; };
 		448D4D5D2FEA1C310008718A /* URLRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilder.swift; sourceTree = "<group>"; };
 		448D4D5E2FEA1C310008718A /* URLRequestBuilder+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequestBuilder+Extension.swift"; sourceTree = "<group>"; };
-		63C362166966D16CEE5AC892 /* cinetecaTests */ = {isa = PBXFileReference; includeInIndex = 0; path = cinetecaTests; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A1687C5F6900AF3DCD87AC1 /* AuthenticationConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthenticationConfigurator.swift; sourceTree = "<group>"; };
+		4A1687C5F6900AF3DCD87AC2 /* AuthenticationPromptView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthenticationPromptView.swift; sourceTree = "<group>"; };
+		4A1687C5F6900AF3DCD87AC3 /* AuthenticationInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthenticationInteractor.swift; sourceTree = "<group>"; };
+		4A1687C5F6900AF3DCD87AC4 /* AuthenticationPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthenticationPresenter.swift; sourceTree = "<group>"; };
+		4A1687C5F6900AF3DCD87AC5 /* AuthenticationRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthenticationRouter.swift; sourceTree = "<group>"; };
+		608FA11039306AF47BB002B8 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
+		63C362166966D16CEE5AC892 /* cinetecaTests */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = file; name = cinetecaTests; path = cinetecaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		656F9C46808CEC32307992AA /* FirebaseAuthRepository.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FirebaseAuthRepository.swift; sourceTree = "<group>"; };
+		8F50B735E506F88941CE16F2 /* FirebaseConfiguration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FirebaseConfiguration.swift; sourceTree = "<group>"; };
+		9041A1308F8DC6BA42D5AA7F /* FirestoreMovieActivityRepository.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FirestoreMovieActivityRepository.swift; sourceTree = "<group>"; };
 		92D944746BF5098D7ADF3107 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = System/Library/Frameworks/XCTest.framework; sourceTree = SDKROOT; };
+		9C360D26763E23DD2EE34540 /* FirestoreUserRepository.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FirestoreUserRepository.swift; sourceTree = "<group>"; };
 		AA000001000000000000000A /* cineteca.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cineteca.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA000001000000000000001B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA000001000000000000003B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -321,11 +353,6 @@
 		AA100001000000000000008B /* MovieDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsView.swift; sourceTree = "<group>"; };
 		AA100001000000000000009B /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewController.swift; sourceTree = "<group>"; };
 		AA100001000000000000010B /* MovieReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReviewViewController.swift; sourceTree = "<group>"; };
-		AA100001000000000000030B /* MovieReviewRatingCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReviewRatingCircleView.swift; sourceTree = "<group>"; };
-		AA100001000000000000031B /* MovieReviewRatingSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReviewRatingSlider.swift; sourceTree = "<group>"; };
-		AA100001000000000000032B /* MovieReviewRatingScaleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReviewRatingScaleView.swift; sourceTree = "<group>"; };
-		AA100001000000000000033B /* MovieReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReviewView.swift; sourceTree = "<group>"; };
-		MR000001000000000000001B /* MovieReviewSheetFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReviewSheetFactory.swift; sourceTree = "<group>"; };
 		AA100001000000000000011B /* MovieDetailsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsHeaderView.swift; sourceTree = "<group>"; };
 		AA100001000000000000012B /* SceneBuilders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneBuilders.swift; sourceTree = "<group>"; };
 		AA100001000000000000013B /* MovieDetailsProvidersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsProvidersView.swift; sourceTree = "<group>"; };
@@ -342,6 +369,10 @@
 		AA100001000000000000026B /* MovieDetailsSimilarMovieCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsSimilarMovieCardView.swift; sourceTree = "<group>"; };
 		AA100001000000000000027B /* WatchTrailerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchTrailerButton.swift; sourceTree = "<group>"; };
 		AA100001000000000000028B /* MovieDetailsCardMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsCardMetrics.swift; sourceTree = "<group>"; };
+		AA100001000000000000030B /* MovieReviewRatingCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReviewRatingCircleView.swift; sourceTree = "<group>"; };
+		AA100001000000000000031B /* MovieReviewRatingSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReviewRatingSlider.swift; sourceTree = "<group>"; };
+		AA100001000000000000032B /* MovieReviewRatingScaleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReviewRatingScaleView.swift; sourceTree = "<group>"; };
+		AA100001000000000000033B /* MovieReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReviewView.swift; sourceTree = "<group>"; };
 		AC000001000000000000009B /* AccountModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModels.swift; sourceTree = "<group>"; };
 		AC00000100000000000000AB /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		AC00000100000000000000BB /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
@@ -366,6 +397,9 @@
 		AR000001000000000000007B /* AppearanceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceRepository.swift; sourceTree = "<group>"; };
 		AT000001000000000000001B /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		BB000001000000000000001B /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
+		BB684124EACB8F27D70A7993 /* AuthModels.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthModels.swift; sourceTree = "<group>"; };
+		C205413C935CBA338D4FA7FA /* AuthenticationView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
+		C96DF1451F982F4A0B6C00A7 /* FirestoreActivityMapper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FirestoreActivityMapper.swift; sourceTree = "<group>"; };
 		CC000001000000000000001B /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		CC000001000000000000002B /* MovieEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieEndpoint.swift; sourceTree = "<group>"; };
 		CC000001000000000000003B /* HomeModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModels.swift; sourceTree = "<group>"; };
@@ -386,6 +420,8 @@
 		CP000001000000000000010C /* ChangePasswordContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordContentView.swift; sourceTree = "<group>"; };
 		DD000001000000000000001B /* MovieResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieResponse.swift; sourceTree = "<group>"; };
 		DD000001000000000000002B /* MovieRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepositoryProtocol.swift; sourceTree = "<group>"; };
+		E709F5E0E45F1EBF3BB96DAF /* AuthenticationCoordinator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthenticationCoordinator.swift; sourceTree = "<group>"; };
+		E8C1821E570378887CD854F1 /* cineteca.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; path = cineteca.entitlements; sourceTree = "<group>"; };
 		EP000001000000000000009B /* EditProfileModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileModels.swift; sourceTree = "<group>"; };
 		EP00000100000000000000AB /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		EP00000100000000000000BB /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
@@ -399,6 +435,8 @@
 		EP000001000000000000013C /* EditProfileFormFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileFormFieldView.swift; sourceTree = "<group>"; };
 		EP000001000000000000015C /* EditProfileFavoriteFilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileFavoriteFilmView.swift; sourceTree = "<group>"; };
 		F09EE0361B7672E51466DEC2 /* MovieActivityRepositoryTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MovieActivityRepositoryTests.swift; sourceTree = "<group>"; };
+		F538006D2C51872E5F5480E4 /* AuthenticationModels.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthenticationModels.swift; sourceTree = "<group>"; };
+		FD000001000000000000001B /* FirestoreActivityMapperTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FirestoreActivityMapperTests.swift; sourceTree = "<group>"; };
 		LC000001000000000000005E /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		LE000001000000000000009B /* LegalModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalModels.swift; sourceTree = "<group>"; };
 		LE00000100000000000000AB /* LegalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalViewController.swift; sourceTree = "<group>"; };
@@ -428,10 +466,33 @@
 		LM000001000000000000005E /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		LR000001000000000000002B /* LanguageRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageRepositoryProtocol.swift; sourceTree = "<group>"; };
 		LR000001000000000000007B /* LanguageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageRepository.swift; sourceTree = "<group>"; };
+		LS000001000000000000009B /* ListsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsModels.swift; sourceTree = "<group>"; };
+		LS00000100000000000000AB /* ListsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsViewController.swift; sourceTree = "<group>"; };
+		LS00000100000000000000BB /* ListsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsView.swift; sourceTree = "<group>"; };
+		LS00000100000000000000CB /* ListsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsInteractor.swift; sourceTree = "<group>"; };
+		LS00000100000000000000DB /* ListsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsPresenter.swift; sourceTree = "<group>"; };
+		LS00000100000000000000EB /* ListsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsRouter.swift; sourceTree = "<group>"; };
+		LS00000100000000000000FB /* ListsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsConfigurator.swift; sourceTree = "<group>"; };
+		LS000001000000000000010D /* ListsMovieCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsMovieCardView.swift; sourceTree = "<group>"; };
+		LS000001000000000000011D /* ListsErrorStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsErrorStateView.swift; sourceTree = "<group>"; };
+		LS000001000000000000012B /* ListsPresenterTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ListsPresenterTests.swift; sourceTree = "<group>"; };
 		MA000001000000000000001B /* MovieActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieActivity.swift; sourceTree = "<group>"; };
 		MA000001000000000000002B /* MovieActivityRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieActivityRepositoryProtocol.swift; sourceTree = "<group>"; };
 		MA000001000000000000003B /* MovieActivityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieActivityRepository.swift; sourceTree = "<group>"; };
 		MA000001000000000000004B /* MovieActivityEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieActivityEntity.swift; sourceTree = "<group>"; };
+		MC000001000000000000001B /* MovieCollectionCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionCategory.swift; sourceTree = "<group>"; };
+		MC000001000000000000002B /* MovieCollectionPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionPage.swift; sourceTree = "<group>"; };
+		MC000001000000000000009B /* MovieCatalogModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogModels.swift; sourceTree = "<group>"; };
+		MC00000100000000000000AB /* MovieCatalogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogViewController.swift; sourceTree = "<group>"; };
+		MC00000100000000000000BB /* MovieCatalogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogView.swift; sourceTree = "<group>"; };
+		MC00000100000000000000CB /* MovieCatalogInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogInteractor.swift; sourceTree = "<group>"; };
+		MC00000100000000000000DB /* MovieCatalogPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogPresenter.swift; sourceTree = "<group>"; };
+		MC00000100000000000000EB /* MovieCatalogRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogRouter.swift; sourceTree = "<group>"; };
+		MC00000100000000000000FB /* MovieCatalogConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogConfigurator.swift; sourceTree = "<group>"; };
+		MC000001000000000000010D /* MovieCatalogGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogGridCell.swift; sourceTree = "<group>"; };
+		MC000001000000000000011B /* MovieCatalogPresenterTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MovieCatalogPresenterTests.swift; sourceTree = "<group>"; };
+		MC000001000000000000012B /* MovieCatalogLoadingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogLoadingFooterView.swift; sourceTree = "<group>"; };
+		MR000001000000000000001B /* MovieReviewSheetFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReviewSheetFactory.swift; sourceTree = "<group>"; };
 		MY000001000000000000009B /* MyReviewsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReviewsModels.swift; sourceTree = "<group>"; };
 		MY00000100000000000000AB /* MyReviewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReviewsViewController.swift; sourceTree = "<group>"; };
 		MY00000100000000000000BB /* MyReviewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReviewsView.swift; sourceTree = "<group>"; };
@@ -446,7 +507,6 @@
 		PP000001000000000000004B /* ProfileSeedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSeedData.swift; sourceTree = "<group>"; };
 		PP000001000000000000005B /* UserEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
 		PP000001000000000000006B /* ReviewEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewEntity.swift; sourceTree = "<group>"; };
-		PP000001000000000000007B /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		PP000001000000000000008B /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
 		PP000001000000000000009B /* ProfileModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModels.swift; sourceTree = "<group>"; };
 		PP00000100000000000000AB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -499,28 +559,6 @@
 		UI000001000000000000002B /* PasswordFormFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFormFieldView.swift; sourceTree = "<group>"; };
 		UI000001000000000000003B /* ErrorStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorStateView.swift; sourceTree = "<group>"; };
 		UI000001000000000000004B /* GenreChipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreChipCell.swift; sourceTree = "<group>"; };
-		LS000001000000000000009B /* ListsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsModels.swift; sourceTree = "<group>"; };
-		LS00000100000000000000AB /* ListsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsViewController.swift; sourceTree = "<group>"; };
-		LS00000100000000000000BB /* ListsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsView.swift; sourceTree = "<group>"; };
-		LS00000100000000000000CB /* ListsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsInteractor.swift; sourceTree = "<group>"; };
-		LS00000100000000000000DB /* ListsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsPresenter.swift; sourceTree = "<group>"; };
-		LS00000100000000000000EB /* ListsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsRouter.swift; sourceTree = "<group>"; };
-		LS00000100000000000000FB /* ListsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsConfigurator.swift; sourceTree = "<group>"; };
-		LS000001000000000000010D /* ListsMovieCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsMovieCardView.swift; sourceTree = "<group>"; };
-		LS000001000000000000011D /* ListsErrorStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsErrorStateView.swift; sourceTree = "<group>"; };
-		LS000001000000000000012B /* ListsPresenterTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ListsPresenterTests.swift; sourceTree = "<group>"; };
-		MC000001000000000000001B /* MovieCollectionCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionCategory.swift; sourceTree = "<group>"; };
-		MC000001000000000000002B /* MovieCollectionPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionPage.swift; sourceTree = "<group>"; };
-		MC000001000000000000009B /* MovieCatalogModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogModels.swift; sourceTree = "<group>"; };
-		MC00000100000000000000AB /* MovieCatalogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogViewController.swift; sourceTree = "<group>"; };
-		MC00000100000000000000BB /* MovieCatalogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogView.swift; sourceTree = "<group>"; };
-		MC00000100000000000000CB /* MovieCatalogInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogInteractor.swift; sourceTree = "<group>"; };
-		MC00000100000000000000DB /* MovieCatalogPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogPresenter.swift; sourceTree = "<group>"; };
-		MC00000100000000000000EB /* MovieCatalogRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogRouter.swift; sourceTree = "<group>"; };
-		MC00000100000000000000FB /* MovieCatalogConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogConfigurator.swift; sourceTree = "<group>"; };
-		MC000001000000000000010D /* MovieCatalogGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogGridCell.swift; sourceTree = "<group>"; };
-		MC000001000000000000012B /* MovieCatalogLoadingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogLoadingFooterView.swift; sourceTree = "<group>"; };
-		MC000001000000000000011B /* MovieCatalogPresenterTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MovieCatalogPresenterTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -528,6 +566,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4411DD403085952C0098CBF6 /* FirebaseFirestore in Frameworks */,
+				4411DD3F3085952C0098CBF6 /* FirebaseAuth in Frameworks */,
+				4411DD3E3085952C0098CBF6 /* FirebaseCore in Frameworks */,
 				448D4D4E2FEA0D970008718A /* Cartography in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -538,18 +579,41 @@
 			files = (
 				23B11876BF659763451F04D2 /* Foundation.framework in Frameworks */,
 				134D3C47F7AB36E6EA6FF6E9 /* XCTest.framework in Frameworks */,
-				MA000001000000000000005A /* Cartography in Test Frameworks */,
+				MA000001000000000000005A /* Cartography in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0ED047BE1E56940CBE1C9298 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				BB684124EACB8F27D70A7993 /* AuthModels.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		1D198F966660BFA4CAD99947 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				F538006D2C51872E5F5480E4 /* AuthenticationModels.swift */,
+				C205413C935CBA338D4FA7FA /* AuthenticationView.swift */,
+				608FA11039306AF47BB002B8 /* AuthenticationViewController.swift */,
+				4A1687C5F6900AF3DCD87AC1 /* AuthenticationConfigurator.swift */,
+				4A1687C5F6900AF3DCD87AC3 /* AuthenticationInteractor.swift */,
+				4A1687C5F6900AF3DCD87AC4 /* AuthenticationPresenter.swift */,
+				4A1687C5F6900AF3DCD87AC5 /* AuthenticationRouter.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
 		442CB0522FF6027B004FCC82 /* Application */ = {
 			isa = PBXGroup;
 			children = (
 				442CB0512FF6027B004FCC82 /* AppDependencies.swift */,
 				AA100001000000000000012B /* SceneBuilders.swift */,
+				E709F5E0E45F1EBF3BB96DAF /* AuthenticationCoordinator.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -565,6 +629,7 @@
 				SS00000100000000000000CA /* Search */,
 				ST000001000000000000001G /* Stats */,
 				CC000001000000000000008B /* TabBar */,
+				1D198F966660BFA4CAD99947 /* Authentication */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -582,30 +647,6 @@
 				442CB0682FFC821E004FCC82 /* HomeConfigurator.swift */,
 			);
 			path = Home;
-			sourceTree = "<group>";
-		};
-		MC000001000000000000001G /* MovieCatalog */ = {
-			isa = PBXGroup;
-			children = (
-				MC000001000000000000002G /* Subviews */,
-				MC000001000000000000009B /* MovieCatalogModels.swift */,
-				MC00000100000000000000AB /* MovieCatalogViewController.swift */,
-				MC00000100000000000000BB /* MovieCatalogView.swift */,
-				MC00000100000000000000CB /* MovieCatalogInteractor.swift */,
-				MC00000100000000000000DB /* MovieCatalogPresenter.swift */,
-				MC00000100000000000000EB /* MovieCatalogRouter.swift */,
-				MC00000100000000000000FB /* MovieCatalogConfigurator.swift */,
-			);
-			path = MovieCatalog;
-			sourceTree = "<group>";
-		};
-		MC000001000000000000002G /* Subviews */ = {
-			isa = PBXGroup;
-			children = (
-				MC000001000000000000010D /* MovieCatalogGridCell.swift */,
-				MC000001000000000000012B /* MovieCatalogLoadingFooterView.swift */,
-			);
-			path = Subviews;
 			sourceTree = "<group>";
 		};
 		442CB0702FFC8300004FCC82 /* Subviews */ = {
@@ -649,6 +690,7 @@
 				BB000001000000000000001C /* Models */,
 				DD000001000000000000001C /* Preferences */,
 				CC00000100000000000000CB /* Repositories */,
+				0ED047BE1E56940CBE1C9298 /* Auth */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -661,6 +703,7 @@
 				CC000001000000000000010B /* Models */,
 				CC000001000000000000011B /* Endpoints */,
 				CC00000100000000000000BB /* Repositories */,
+				5C1994B413C3419639015FFE /* Auth */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -681,14 +724,23 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
+		5C1994B413C3419639015FFE /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				8F50B735E506F88941CE16F2 /* FirebaseConfiguration.swift */,
+				656F9C46808CEC32307992AA /* FirebaseAuthRepository.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
 		6F32026A828CB7B546951827 /* cinetecaTests */ = {
 			isa = PBXGroup;
 			children = (
 				F09EE0361B7672E51466DEC2 /* MovieActivityRepositoryTests.swift */,
 				LS000001000000000000012B /* ListsPresenterTests.swift */,
 				MC000001000000000000011B /* MovieCatalogPresenterTests.swift */,
+				FD000001000000000000001B /* FirestoreActivityMapperTests.swift */,
 			);
-			name = cinetecaTests;
 			path = cinetecaTests;
 			sourceTree = "<group>";
 		};
@@ -716,6 +768,8 @@
 				CC000001000000000000007D /* Localizable.strings */,
 				442CB04A2FF5EF91004FCC82 /* Keys.plist */,
 				CC000001000000000000007B /* Assets.xcassets */,
+				E8C1821E570378887CD854F1 /* cineteca.entitlements */,
+				4411DD433085992F0098CBF6 /* GoogleService-Info.plist */,
 			);
 			path = cineteca;
 			sourceTree = "<group>";
@@ -800,6 +854,7 @@
 				UI000001000000000000003B /* ErrorStateView.swift */,
 				UI000001000000000000004B /* GenreChipCell.swift */,
 				442CB0722FFC8302004FCC82 /* GenreFilterView.swift */,
+				4A1687C5F6900AF3DCD87AC2 /* AuthenticationPromptView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -901,13 +956,16 @@
 		CC00000100000000000000BB /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				PP000001000000000000007B /* UserRepository.swift */,
 				AR000001000000000000007B /* AppearanceRepository.swift */,
 				LR000001000000000000007B /* LanguageRepository.swift */,
 				CC00000100000000000000AB /* MovieRepository.swift */,
 				ST000001000000000000007B /* StatsRepository.swift */,
 				MA000001000000000000003B /* MovieActivityRepository.swift */,
 				442CB0982FFC8405004FCC82 /* GenreRepository.swift */,
+				C96DF1451F982F4A0B6C00A7 /* FirestoreActivityMapper.swift */,
+				9041A1308F8DC6BA42D5AA7F /* FirestoreMovieActivityRepository.swift */,
+				9C360D26763E23DD2EE34540 /* FirestoreUserRepository.swift */,
+				358B6E132B58ACC5593DC1B3 /* FirestoreStatsRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1059,6 +1117,69 @@
 			path = Subviews;
 			sourceTree = "<group>";
 		};
+		LS000001000000000000001G /* Lists */ = {
+			isa = PBXGroup;
+			children = (
+				LS000001000000000000002G /* Subviews */,
+				LS000001000000000000009B /* ListsModels.swift */,
+				LS00000100000000000000AB /* ListsViewController.swift */,
+				LS00000100000000000000BB /* ListsView.swift */,
+				LS00000100000000000000CB /* ListsInteractor.swift */,
+				LS00000100000000000000DB /* ListsPresenter.swift */,
+				LS00000100000000000000EB /* ListsRouter.swift */,
+				LS00000100000000000000FB /* ListsConfigurator.swift */,
+			);
+			path = Lists;
+			sourceTree = "<group>";
+		};
+		LS000001000000000000002G /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				LS000001000000000000010D /* ListsMovieCardView.swift */,
+				LS000001000000000000011D /* ListsErrorStateView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		MC000001000000000000001G /* MovieCatalog */ = {
+			isa = PBXGroup;
+			children = (
+				MC000001000000000000002G /* Subviews */,
+				MC000001000000000000009B /* MovieCatalogModels.swift */,
+				MC00000100000000000000AB /* MovieCatalogViewController.swift */,
+				MC00000100000000000000BB /* MovieCatalogView.swift */,
+				MC00000100000000000000CB /* MovieCatalogInteractor.swift */,
+				MC00000100000000000000DB /* MovieCatalogPresenter.swift */,
+				MC00000100000000000000EB /* MovieCatalogRouter.swift */,
+				MC00000100000000000000FB /* MovieCatalogConfigurator.swift */,
+			);
+			path = MovieCatalog;
+			sourceTree = "<group>";
+		};
+		MC000001000000000000002G /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				MC000001000000000000010D /* MovieCatalogGridCell.swift */,
+				MC000001000000000000012B /* MovieCatalogLoadingFooterView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		MY000001000000000000001G /* MyReviews */ = {
+			isa = PBXGroup;
+			children = (
+				MY000001000000000000009B /* MyReviewsModels.swift */,
+				MY00000100000000000000AB /* MyReviewsViewController.swift */,
+				MY00000100000000000000BB /* MyReviewsView.swift */,
+				MY00000100000000000000CB /* MyReviewsInteractor.swift */,
+				MY00000100000000000000DB /* MyReviewsPresenter.swift */,
+				MY00000100000000000000EB /* MyReviewsConfigurator.swift */,
+				MY00000100000000000010CB /* MyReviewsContentView.swift */,
+				MY00000100000000000011CB /* MyReviewCardView.swift */,
+			);
+			path = MyReviews;
+			sourceTree = "<group>";
+		};
 		PP000001000000000000010G /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
@@ -1121,45 +1242,6 @@
 				MY000001000000000000001G /* MyReviews */,
 			);
 			path = Scenes;
-			sourceTree = "<group>";
-		};
-		MY000001000000000000001G /* MyReviews */ = {
-			isa = PBXGroup;
-			children = (
-				MY000001000000000000009B /* MyReviewsModels.swift */,
-				MY00000100000000000000AB /* MyReviewsViewController.swift */,
-				MY00000100000000000000BB /* MyReviewsView.swift */,
-				MY00000100000000000000CB /* MyReviewsInteractor.swift */,
-				MY00000100000000000000DB /* MyReviewsPresenter.swift */,
-				MY00000100000000000000EB /* MyReviewsConfigurator.swift */,
-				MY00000100000000000010CB /* MyReviewsContentView.swift */,
-				MY00000100000000000011CB /* MyReviewCardView.swift */,
-			);
-			path = MyReviews;
-			sourceTree = "<group>";
-		};
-		LS000001000000000000001G /* Lists */ = {
-			isa = PBXGroup;
-			children = (
-				LS000001000000000000002G /* Subviews */,
-				LS000001000000000000009B /* ListsModels.swift */,
-				LS00000100000000000000AB /* ListsViewController.swift */,
-				LS00000100000000000000BB /* ListsView.swift */,
-				LS00000100000000000000CB /* ListsInteractor.swift */,
-				LS00000100000000000000DB /* ListsPresenter.swift */,
-				LS00000100000000000000EB /* ListsRouter.swift */,
-				LS00000100000000000000FB /* ListsConfigurator.swift */,
-			);
-			path = Lists;
-			sourceTree = "<group>";
-		};
-		LS000001000000000000002G /* Subviews */ = {
-			isa = PBXGroup;
-			children = (
-				LS000001000000000000010D /* ListsMovieCardView.swift */,
-				LS000001000000000000011D /* ListsErrorStateView.swift */,
-			);
-			path = Subviews;
 			sourceTree = "<group>";
 		};
 		SS00000100000000000000CA /* Search */ = {
@@ -1256,6 +1338,11 @@
 			dependencies = (
 			);
 			name = cineteca;
+			packageProductDependencies = (
+				A305C61E94BA26E6FC097391 /* FirebaseCore */,
+				AA0CB820CD40EB41927092A0 /* FirebaseAuth */,
+				35F66191A53A42F77CA71207 /* FirebaseFirestore */,
+			);
 			productName = cineteca;
 			productReference = AA000001000000000000000A /* cineteca.app */;
 			productType = "com.apple.product-type.application";
@@ -1287,6 +1374,7 @@
 			mainGroup = AA000001000000000000007A;
 			packageReferences = (
 				448D4D4C2FEA0D970008718A /* XCRemoteSwiftPackageReference "Cartography" */,
+				BBA6BD772BA1B47E5F29580C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = AA000001000000000000006A /* Products */;
 			projectDirPath = "";
@@ -1309,6 +1397,7 @@
 				444CB41430033EE6000410E2 /* architecture.md in Resources */,
 				444CB41530033EE6000410E2 /* README.md in Resources */,
 				444CB41630033EE6000410E2 /* view-conventions.md in Resources */,
+				4411DD443085992F0098CBF6 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1438,7 +1527,6 @@
 				PP000001000000000000004B000000000000001A /* ProfileSeedData.swift in Sources */,
 				PP000001000000000000005B000000000000001A /* UserEntity.swift in Sources */,
 				PP000001000000000000006B000000000000001A /* ReviewEntity.swift in Sources */,
-				PP000001000000000000007B000000000000001A /* UserRepository.swift in Sources */,
 				PP000001000000000000008B000000000000001A /* StarRatingView.swift in Sources */,
 				PP000001000000000000009B000000000000001A /* ProfileModels.swift in Sources */,
 				PP00000100000000000000AB000000000000001A /* ProfileViewController.swift in Sources */,
@@ -1562,6 +1650,22 @@
 				MC00000100000000000000FA /* MovieCatalogConfigurator.swift in Sources */,
 				MC000001000000000000010C /* MovieCatalogGridCell.swift in Sources */,
 				MC000001000000000000012A /* MovieCatalogLoadingFooterView.swift in Sources */,
+				4C3A999BE67967BCEEBE8A94 /* AuthModels.swift in Sources */,
+				2025AF8A2C92ED3DA1458013 /* FirebaseConfiguration.swift in Sources */,
+				356D389445FDB9BE1D776B0C /* FirebaseAuthRepository.swift in Sources */,
+				CEDDFF59AC8E2281FDAB7E41 /* FirestoreActivityMapper.swift in Sources */,
+				F92B9F9FC214C626F1928EB0 /* FirestoreMovieActivityRepository.swift in Sources */,
+				65BA6A98C47E5B02DFCB73C7 /* FirestoreUserRepository.swift in Sources */,
+				41A954EB033598B16D7AAF04 /* FirestoreStatsRepository.swift in Sources */,
+				B6C1FC614F65734FD1DCC142 /* AuthenticationCoordinator.swift in Sources */,
+				14E387A226636E8F7A09477D /* AuthenticationModels.swift in Sources */,
+				963CE7614099E957DBC80C02 /* AuthenticationView.swift in Sources */,
+				26D3EAE36B33F630462BC23A /* AuthenticationViewController.swift in Sources */,
+				B9FC16CE132B8BA89A400AE5 /* AuthenticationConfigurator.swift in Sources */,
+				B9FC16CE132B8BA89A400AE6 /* AuthenticationPromptView.swift in Sources */,
+				B9FC16CE132B8BA89A400AE7 /* AuthenticationInteractor.swift in Sources */,
+				B9FC16CE132B8BA89A400AE8 /* AuthenticationPresenter.swift in Sources */,
+				B9FC16CE132B8BA89A400AE9 /* AuthenticationRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1572,6 +1676,7 @@
 				661DF6C81A41E7E64243F97C /* MovieActivityRepositoryTests.swift in Sources */,
 				LS000001000000000000012A /* ListsPresenterTests.swift in Sources */,
 				MC000001000000000000011A /* MovieCatalogPresenterTests.swift in Sources */,
+				FD000001000000000000001A /* FirestoreActivityMapperTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1616,8 +1721,8 @@
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/cineteca.app/cineteca";
-				WRAPPER_EXTENSION = xctest;
 				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};
@@ -1741,6 +1846,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = cineteca/cineteca.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1766,6 +1872,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = cineteca/cineteca.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1849,13 +1956,36 @@
 				minimumVersion = 4.0.0;
 			};
 		};
+		BBA6BD772BA1B47E5F29580C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.15.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		35F66191A53A42F77CA71207 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BBA6BD772BA1B47E5F29580C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
 		448D4D4D2FEA0D970008718A /* Cartography */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 448D4D4C2FEA0D970008718A /* XCRemoteSwiftPackageReference "Cartography" */;
 			productName = Cartography;
+		};
+		A305C61E94BA26E6FC097391 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BBA6BD772BA1B47E5F29580C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		AA0CB820CD40EB41927092A0 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BBA6BD772BA1B47E5F29580C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
 		};
 /* End XCSwiftPackageProductDependency section */
 

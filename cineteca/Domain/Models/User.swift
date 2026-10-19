@@ -11,6 +11,7 @@ struct User: Sendable {
     let stats: UserStats
     let reviews: [UserReview]
     let recentReviews: [UserReview]
+    let isAuthenticated: Bool
 }
 
 struct UserFavoriteFilm: Sendable {
@@ -52,7 +53,8 @@ extension User {
             favoriteFilm: favoriteFilm,
             stats: stats,
             reviews: reviews,
-            recentReviews: Array(reviews.prefix(3))
+            recentReviews: Array(reviews.prefix(3)),
+            isAuthenticated: isAuthenticated
         )
     }
 }

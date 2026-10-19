@@ -25,6 +25,37 @@
 "HomeScene.WeeklyDigest.Title" = "Your weekly digest";
 "HomeScene.WeeklyDigest.Subtitle" = "4 new films match your taste";
 
+"AuthenticationScene.Title" = "Access your account";
+"AuthenticationScene.Message" = "Sign in or create an account to save your lists, ratings, reviews and profile.";
+"AuthenticationScene.SignIn" = "Sign in";
+"AuthenticationScene.SignUp" = "Create account";
+"AuthenticationScene.Username" = "Username";
+"AuthenticationScene.Email" = "Email";
+"AuthenticationScene.Password" = "Password";
+"AuthenticationScene.ConfirmPassword" = "Confirm password";
+"AuthenticationScene.InvalidUsername" = "Use 3 to 20 characters: letters, numbers or _.";
+"AuthenticationScene.UsernameTaken" = "That username is already in use.";
+"AuthenticationScene.Error.InvalidCredential" = "We couldn't validate the credential.";
+"AuthenticationScene.Error.InvalidCredentials" = "Incorrect email or password.";
+"AuthenticationScene.Error.InvalidEmail" = "Enter a valid email address.";
+"AuthenticationScene.Error.WeakPassword" = "Your password must be at least 6 characters.";
+"AuthenticationScene.Error.EmailAlreadyInUse" = "This email already has an account.";
+"AuthenticationScene.Error.PasswordMismatch" = "The passwords do not match.";
+"AuthenticationScene.Error.Network" = "We couldn't connect to the service. Check your internet connection and try again.";
+"AuthenticationScene.Error.TooManyRequests" = "Too many attempts. Wait a moment and try again.";
+"AuthenticationScene.Error.UserDisabled" = "This account is disabled.";
+"AuthenticationScene.Error.OperationNotAllowed" = "This authentication method is not available right now.";
+"AuthenticationScene.Error.Unavailable" = "Authentication is temporarily unavailable.";
+"AuthenticationScene.Error.NotConfigured" = "Authentication is not configured yet.";
+"AuthenticationScene.Error.UserNotAuthenticated" = "Sign in to continue.";
+"AuthenticationScene.Error.DeletionRequiresRecentLogin" = "Sign in again to delete your account.";
+"AuthenticationScene.ForgotPassword" = "Forgot password?";
+"AuthenticationScene.ResetSent" = "If this email is registered, you will receive a password reset link.";
+"AuthenticationScene.Cancel" = "Not now";
+"AuthenticationScene.Prompt.Title" = "Access your account";
+"AuthenticationScene.Prompt.Message" = "Sign in or create an account to access your personal content.";
+"AuthenticationScene.Prompt.Action" = "Sign in or create account";
+
 "MovieCatalogScene.LoadMore" = "Load more";
 "MovieCatalogScene.NextPageError.Title" = "Couldn't load more films";
 "MovieCatalogScene.NextPageError.Message" = "Check your connection and try again.";
@@ -166,6 +197,10 @@
 "EditProfileScene.Field.Username" = "USERNAME";
 "EditProfileScene.Field.DisplayName" = "DISPLAY NAME";
 "EditProfileScene.Field.Bio" = "BIO";
+"EditProfileScene.Error.Title" = "Unable to save profile";
+"EditProfileScene.Error.Message" = "Check your username and try again.";
+"EditProfileScene.Error.InvalidUsername" = "Use 3 to 20 letters, numbers, or underscores.";
+"EditProfileScene.Error.UsernameTaken" = "That username is already in use.";
 
 "AccountScene.Title" = "Account";
 "AccountScene.Section.Profile" = "PROFILE";
@@ -175,8 +210,13 @@
 "AccountScene.Row.DisplayName" = "Display name";
 "AccountScene.Row.Bio" = "Bio";
 "AccountScene.Row.Email" = "Email";
-"AccountScene.Row.ChangePassword" = "Change password";
+"AccountScene.Row.Logout" = "Log out";
 "AccountScene.Row.DeleteAccount" = "Delete account";
+"AccountScene.LogoutConfirmation" = "Are you sure you want to log out?";
+"AccountScene.DeleteConfirmation" = "This permanently deletes your account. Continue?";
+"Common.Cancel" = "Cancel";
+"Common.Error" = "Error";
+"Common.OK" = "OK";
 
 "ChangePasswordScene.Title" = "Change password";
 "ChangePasswordScene.UpdatePassword" = "Update password";

@@ -23,6 +23,7 @@ final class MovieDetailsViewController: UIViewController {
     private let interactor: MovieDetailsBusinessLogic
     private let router: MovieDetailsRoutingLogic
     private let movieReviewSheetFactory: MovieReviewSheetBuilding
+    private let authGate: AuthenticationGateProtocol
     private var reviewContext: ReviewContext?
 
     init(
@@ -30,13 +31,15 @@ final class MovieDetailsViewController: UIViewController {
         customView: MovieDetailsView,
         interactor: MovieDetailsBusinessLogic,
         router: MovieDetailsRoutingLogic,
-        movieReviewSheetFactory: MovieReviewSheetBuilding
+        movieReviewSheetFactory: MovieReviewSheetBuilding,
+        authGate: AuthenticationGateProtocol
     ) {
         self.movieId = movieId
         self.customView = customView
         self.interactor = interactor
         self.router = router
         self.movieReviewSheetFactory = movieReviewSheetFactory
+        self.authGate = authGate
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -126,25 +129,34 @@ extension MovieDetailsViewController: MovieDetailsViewDelegate {
     }
 
     func didRequestRate() {
-        interactor.fetchReview(request: .init(movieId: movieId))
+        authGate.performAuthenticated { [weak self] in
+            guard let self else { return }
+            self.interactor.fetchReview(request: .init(movieId: self.movieId))
+        }
     }
 
     func didRequestFavorite(isFavorite: Bool) {
-        interactor.updateActivity(
-            request: .init(
-                movieId: movieId,
-                action: .favorite(isFavorite)
+        authGate.performAuthenticated { [weak self] in
+            guard let self else { return }
+            self.interactor.updateActivity(
+                request: .init(
+                    movieId: self.movieId,
+                    action: .favorite(isFavorite)
+                )
             )
-        )
+        }
     }
 
     func didRequestWatchlist(isInWatchlist: Bool) {
-        interactor.updateActivity(
-            request: .init(
-                movieId: movieId,
-                action: .watchlist(isInWatchlist)
+        authGate.performAuthenticated { [weak self] in
+            guard let self else { return }
+            self.interactor.updateActivity(
+                request: .init(
+                    movieId: self.movieId,
+                    action: .watchlist(isInWatchlist)
+                )
             )
-        )
+        }
     }
 
     private func presentReviewForm() {

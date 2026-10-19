@@ -1,11 +1,13 @@
 import UIKit
 
+@MainActor
 protocol LegalRoutingLogic {
     func routeBack()
     func routeToPrivacyPolicy()
     func routeToTermsOfService()
 }
 
+@MainActor
 final class LegalRouter {
     weak var viewController: UIViewController?
     private let legalDocumentBuilder: LegalDocumentBuilding

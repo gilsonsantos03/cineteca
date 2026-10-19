@@ -42,7 +42,7 @@ extension AccountPresenter: AccountPresentationLogic {
                 title: Strings.AccountScene.Section.security,
                 rows: [
                     .value(title: Strings.AccountScene.Row.email, value: user.email),
-                    .navigation(title: Strings.AccountScene.Row.changePassword, action: .changePassword)
+                    .navigation(title: Strings.AccountScene.Row.logout, action: .logout)
                 ]
             ),
             dangerSection: AccountModels.SectionViewModel(

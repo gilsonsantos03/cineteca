@@ -1,11 +1,13 @@
 import UIKit
 
+@MainActor
 protocol HomeRoutingLogic {
     func routeToTrailer(youtubeKey: String)
     func routeToMovieDetails(movieId: Int)
     func routeToMovieCatalog(category: MovieCollectionCategory, title: String)
 }
 
+@MainActor
 final class HomeRouter {
     weak var viewController: HomeViewController?
     private let movieDetailsBuilder: MovieDetailsBuilding

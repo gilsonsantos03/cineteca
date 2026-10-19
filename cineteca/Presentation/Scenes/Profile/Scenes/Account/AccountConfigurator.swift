@@ -3,19 +3,23 @@ import UIKit
 final class AccountConfigurator {
     static func resolve(
         userRepository: UserRepositoryProtocol,
-        changePasswordBuilder: ChangePasswordBuilding
+        authRepository: AuthRepositoryProtocol,
+        authGate: AuthenticationGateProtocol
     ) -> UIViewController {
         let presenter = AccountPresenter()
         let interactor = AccountInteractor(
             presenter: presenter,
             userRepository: userRepository
         )
-        let router = AccountRouter(changePasswordBuilder: changePasswordBuilder)
+        let router = AccountRouter()
         let view = AccountView()
         let viewController = AccountViewController(
             customView: view,
             interactor: interactor,
-            router: router
+            userRepository: userRepository,
+            router: router,
+            authRepository: authRepository,
+            authGate: authGate
         )
 
         presenter.view = viewController

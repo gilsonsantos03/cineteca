@@ -1,5 +1,6 @@
 import UIKit
 
+@MainActor
 final class SearchConfigurator {
     static func resolve(
         repository: MovieRepositoryProtocol,

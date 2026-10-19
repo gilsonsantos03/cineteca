@@ -10,17 +10,20 @@ final class MyReviewsViewController: UIViewController {
     private let customView: MyReviewsView
     private let interactor: MyReviewsBusinessLogic
     private let movieReviewSheetFactory: MovieReviewSheetBuilding
+    private let authGate: AuthenticationGateProtocol
     private var reviewController: MovieReviewViewController?
     private var selectedReview: MyReviewsModels.ReviewCardViewModel?
 
     init(
         customView: MyReviewsView,
         interactor: MyReviewsBusinessLogic,
-        movieReviewSheetFactory: MovieReviewSheetBuilding
+        movieReviewSheetFactory: MovieReviewSheetBuilding,
+        authGate: AuthenticationGateProtocol
     ) {
         self.customView = customView
         self.interactor = interactor
         self.movieReviewSheetFactory = movieReviewSheetFactory
+        self.authGate = authGate
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -116,12 +119,14 @@ extension MyReviewsViewController: MovieReviewViewControllerDelegate {
             directorNames: selectedReview.directorName.map { [$0] } ?? [],
             actorNames: []
         )
-        interactor.updateReview(
-            request: .init(
-                metadata: metadata,
-                rating: rating,
-                reviewText: reviewText
+        authGate.performAuthenticated { [weak self] in
+            self?.interactor.updateReview(
+                request: .init(
+                    metadata: metadata,
+                    rating: rating,
+                    reviewText: reviewText
+                )
             )
-        )
+        }
     }
 }

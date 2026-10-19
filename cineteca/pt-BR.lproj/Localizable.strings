@@ -25,6 +25,37 @@
 "HomeScene.WeeklyDigest.Title" = "Seu resumo semanal";
 "HomeScene.WeeklyDigest.Subtitle" = "4 novos filmes combinam com você";
 
+"AuthenticationScene.Title" = "Acesse sua conta";
+"AuthenticationScene.Message" = "Entre ou crie sua conta para salvar suas listas, avaliações, reviews e perfil.";
+"AuthenticationScene.SignIn" = "Entrar";
+"AuthenticationScene.SignUp" = "Criar conta";
+"AuthenticationScene.Username" = "Nome de usuário";
+"AuthenticationScene.Email" = "E-mail";
+"AuthenticationScene.Password" = "Senha";
+"AuthenticationScene.ConfirmPassword" = "Confirmar senha";
+"AuthenticationScene.InvalidUsername" = "Use de 3 a 20 caracteres: letras, números ou _.";
+"AuthenticationScene.UsernameTaken" = "Esse nome de usuário já está em uso.";
+"AuthenticationScene.Error.InvalidCredential" = "Não foi possível validar a credencial.";
+"AuthenticationScene.Error.InvalidCredentials" = "E-mail ou senha incorretos.";
+"AuthenticationScene.Error.InvalidEmail" = "Informe um e-mail válido.";
+"AuthenticationScene.Error.WeakPassword" = "A senha deve ter pelo menos 6 caracteres.";
+"AuthenticationScene.Error.EmailAlreadyInUse" = "Esse e-mail já possui uma conta.";
+"AuthenticationScene.Error.PasswordMismatch" = "As senhas não coincidem.";
+"AuthenticationScene.Error.Network" = "Não foi possível conectar ao serviço. Verifique sua internet e tente novamente.";
+"AuthenticationScene.Error.TooManyRequests" = "Muitas tentativas. Aguarde um pouco e tente novamente.";
+"AuthenticationScene.Error.UserDisabled" = "Esta conta está desativada.";
+"AuthenticationScene.Error.OperationNotAllowed" = "Este método de autenticação não está disponível no momento.";
+"AuthenticationScene.Error.Unavailable" = "A autenticação está temporariamente indisponível.";
+"AuthenticationScene.Error.NotConfigured" = "A autenticação ainda não está configurada.";
+"AuthenticationScene.Error.UserNotAuthenticated" = "Faça login para continuar.";
+"AuthenticationScene.Error.DeletionRequiresRecentLogin" = "Entre novamente para excluir sua conta.";
+"AuthenticationScene.ForgotPassword" = "Esqueci minha senha";
+"AuthenticationScene.ResetSent" = "Se o e-mail estiver cadastrado, você receberá um link para redefinir a senha.";
+"AuthenticationScene.Cancel" = "Agora não";
+"AuthenticationScene.Prompt.Title" = "Acesse sua conta";
+"AuthenticationScene.Prompt.Message" = "Entre ou crie sua conta para acessar seu conteúdo pessoal.";
+"AuthenticationScene.Prompt.Action" = "Entrar ou criar conta";
+
 "MovieCatalogScene.LoadMore" = "Carregar mais";
 "MovieCatalogScene.NextPageError.Title" = "Não foi possível carregar mais filmes";
 "MovieCatalogScene.NextPageError.Message" = "Verifique sua conexão e tente novamente.";
@@ -166,6 +197,10 @@
 "EditProfileScene.Field.Username" = "NOME DE USUÁRIO";
 "EditProfileScene.Field.DisplayName" = "NOME DE EXIBIÇÃO";
 "EditProfileScene.Field.Bio" = "BIO";
+"EditProfileScene.Error.Title" = "Não foi possível salvar o perfil";
+"EditProfileScene.Error.Message" = "Confira o nome de usuário e tente novamente.";
+"EditProfileScene.Error.InvalidUsername" = "Use de 3 a 20 letras, números ou sublinhados.";
+"EditProfileScene.Error.UsernameTaken" = "Esse nome de usuário já está em uso.";
 
 "AccountScene.Title" = "Conta";
 "AccountScene.Section.Profile" = "PERFIL";
@@ -175,8 +210,13 @@
 "AccountScene.Row.DisplayName" = "Nome de exibição";
 "AccountScene.Row.Bio" = "Bio";
 "AccountScene.Row.Email" = "E-mail";
-"AccountScene.Row.ChangePassword" = "Alterar senha";
+"AccountScene.Row.Logout" = "Sair";
 "AccountScene.Row.DeleteAccount" = "Excluir conta";
+"AccountScene.LogoutConfirmation" = "Tem certeza de que deseja sair?";
+"AccountScene.DeleteConfirmation" = "Isso excluirá sua conta permanentemente. Continuar?";
+"Common.Cancel" = "Cancelar";
+"Common.Error" = "Erro";
+"Common.OK" = "OK";
 
 "ChangePasswordScene.Title" = "Alterar senha";
 "ChangePasswordScene.UpdatePassword" = "Atualizar senha";

@@ -1,9 +1,11 @@
 import UIKit
 
+@MainActor
 protocol MovieCatalogRoutingLogic {
     func routeToMovieDetails(movieId: Int)
 }
 
+@MainActor
 final class MovieCatalogRouter {
     weak var viewController: MovieCatalogViewController?
     private let movieDetailsBuilder: MovieDetailsBuilding

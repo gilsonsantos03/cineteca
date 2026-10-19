@@ -1,5 +1,6 @@
 import UIKit
 
+@MainActor
 final class MovieCatalogConfigurator {
     static func resolve(
         category: MovieCollectionCategory,

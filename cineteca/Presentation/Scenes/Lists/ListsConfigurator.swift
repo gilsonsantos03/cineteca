@@ -1,9 +1,11 @@
 import UIKit
 
+@MainActor
 final class ListsConfigurator {
     static func resolve(
         activityRepository: MovieActivityRepositoryProtocol,
-        movieDetailsBuilder: MovieDetailsBuilding
+        movieDetailsBuilder: MovieDetailsBuilding,
+        authGate: AuthenticationGateProtocol
     ) -> UIViewController {
         let presenter = ListsPresenter()
         let interactor = ListsInteractor(
@@ -15,7 +17,8 @@ final class ListsConfigurator {
         let viewController = ListsViewController(
             customView: view,
             interactor: interactor,
-            router: router
+            router: router,
+            authGate: authGate
         )
 
         presenter.view = viewController

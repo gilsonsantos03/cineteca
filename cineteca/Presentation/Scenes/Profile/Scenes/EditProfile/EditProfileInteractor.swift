@@ -38,6 +38,7 @@ extension EditProfileInteractor: EditProfileBusinessLogic {
             do {
                 _ = try await userRepository.updateProfile(
                     UserProfileUpdate(
+                        username: request.username.trimmingCharacters(in: .whitespacesAndNewlines),
                         displayName: request.displayName.trimmingCharacters(in: .whitespacesAndNewlines),
                         bio: request.bio.trimmingCharacters(in: .whitespacesAndNewlines),
                         favoriteFilm: request.favoriteFilm.map {
@@ -50,8 +51,10 @@ extension EditProfileInteractor: EditProfileBusinessLogic {
                     )
                 )
                 response = .success
+            } catch let error as UserProfileError {
+                response = .error(error)
             } catch {
-                response = .error
+                response = .error(nil)
             }
             await MainActor.run {
                 presenter.presentSaveProfile(response: response)

@@ -10,15 +10,18 @@ final class EditProfileViewController: UIViewController {
     private let customView: EditProfileView
     private let interactor: EditProfileBusinessLogic
     private let router: EditProfileRoutingLogic
+    private let authGate: AuthenticationGateProtocol
 
     init(
         customView: EditProfileView,
         interactor: EditProfileBusinessLogic,
-        router: EditProfileRoutingLogic
+        router: EditProfileRoutingLogic,
+        authGate: AuthenticationGateProtocol
     ) {
         self.customView = customView
         self.interactor = interactor
         self.router = router
+        self.authGate = authGate
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -56,8 +59,15 @@ extension EditProfileViewController: EditProfileDisplayLogic {
         switch viewModel {
         case .success:
             router.routeBack()
-        case .error:
+        case let .error(error):
             customView.showSaveError()
+            let alert = UIAlertController(
+                title: Strings.EditProfileScene.errorTitle,
+                message: saveErrorMessage(error),
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: Strings.Common.ok, style: .default))
+            present(alert, animated: true)
         }
     }
 
@@ -75,24 +85,40 @@ extension EditProfileViewController: EditProfileViewDelegate {
     }
 
     func didTapSave(
+        username: String,
         displayName: String,
         bio: String,
         favoriteFilm: EditProfileModels.FavoriteFilmViewModel?
     ) {
-        customView.setSaving(true)
-        interactor.saveProfile(
-            request: .init(
-                displayName: displayName,
-                bio: bio,
-                favoriteFilm: favoriteFilm
+        authGate.performAuthenticated { [weak self] in
+            guard let self else { return }
+            self.customView.setSaving(true)
+            self.interactor.saveProfile(
+                request: .init(
+                    username: username,
+                    displayName: displayName,
+                    bio: bio,
+                    favoriteFilm: favoriteFilm
+                )
             )
-        )
+        }
     }
 
     func didTapChangePhoto() {}
 
     func didTapChangeFavoriteFilm() {
         router.routeToMovieSearch(delegate: self)
+    }
+
+    private func saveErrorMessage(_ error: UserProfileError?) -> String {
+        switch error {
+        case .invalidUsername:
+            return Strings.EditProfileScene.invalidUsername
+        case .usernameTaken:
+            return Strings.EditProfileScene.usernameTaken
+        case nil:
+            return Strings.EditProfileScene.errorMessage
+        }
     }
 }
 

@@ -53,7 +53,8 @@ extension UserEntity {
                 reviewsCount: reviewEntities.count
             ),
             reviews: sortedReviews.map { $0.toDomain() },
-            recentReviews: sortedReviews.prefix(3).map { $0.toDomain() }
+            recentReviews: sortedReviews.prefix(3).map { $0.toDomain() },
+            isAuthenticated: true
         )
     }
 }

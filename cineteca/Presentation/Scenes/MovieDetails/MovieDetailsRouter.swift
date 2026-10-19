@@ -1,11 +1,13 @@
 import UIKit
 
+@MainActor
 protocol MovieDetailsRoutingLogic {
     func routeBack()
     func routeToTrailer(youtubeKey: String)
     func routeToMovieDetails(movieId: Int)
 }
 
+@MainActor
 final class MovieDetailsRouter {
     weak var viewController: MovieDetailsViewController?
     private let movieDetailsBuilder: MovieDetailsBuilding

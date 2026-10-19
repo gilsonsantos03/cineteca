@@ -10,15 +10,18 @@ final class ListsViewController: UIViewController {
     private let customView: ListsView
     private let interactor: ListsBusinessLogic
     private let router: ListsRoutingLogic
+    private let authGate: AuthenticationGateProtocol
 
     init(
         customView: ListsView,
         interactor: ListsBusinessLogic,
-        router: ListsRoutingLogic
+        router: ListsRoutingLogic,
+        authGate: AuthenticationGateProtocol
     ) {
         self.customView = customView
         self.interactor = interactor
         self.router = router
+        self.authGate = authGate
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -36,7 +39,7 @@ final class ListsViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        interactor.fetchContent(request: .init())
+        loadContentForCurrentSession()
     }
 }
 
@@ -74,6 +77,10 @@ extension ListsViewController: ListsDisplayLogic {
 
 extension ListsViewController: ListsViewDelegate {
     func didSelectList(_ list: ListsModels.List) {
+        guard authGate.isAuthenticated else {
+            customView.showGuest(selectedList: list)
+            return
+        }
         interactor.selectList(request: .init(list: list))
     }
 
@@ -82,10 +89,26 @@ extension ListsViewController: ListsViewDelegate {
     }
 
     func didRequestRemoveMovie(id movieId: Int) {
-        interactor.removeMovie(request: .init(movieId: movieId))
+        authGate.performAuthenticated { [weak self] in
+            self?.interactor.removeMovie(request: .init(movieId: movieId))
+        }
     }
 
     func didRequestRetry() {
         interactor.fetchContent(request: .init())
+    }
+
+    func didRequestAuthentication() {
+        authGate.performAuthenticated { [weak self] in
+            self?.interactor.fetchContent(request: .init())
+        }
+    }
+
+    private func loadContentForCurrentSession() {
+        if authGate.isAuthenticated {
+            interactor.fetchContent(request: .init())
+        } else {
+            customView.showGuest()
+        }
     }
 }

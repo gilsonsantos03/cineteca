@@ -1,5 +1,6 @@
 import UIKit
 
+@MainActor
 final class LegalConfigurator {
     static func resolve(legalDocumentBuilder: LegalDocumentBuilding) -> UIViewController {
         let presenter = LegalPresenter()

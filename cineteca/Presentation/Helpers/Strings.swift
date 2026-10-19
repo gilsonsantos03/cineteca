@@ -1,6 +1,12 @@
 import Foundation
 
 enum Strings {
+    enum Common {
+        static var cancel: String { Localization.string("Common.Cancel") }
+        static var error: String { Localization.string("Common.Error") }
+        static var ok: String { Localization.string("Common.OK") }
+    }
+
     enum UI {
         static var watchTrailer: String { Localization.string("UI.WatchTrailerButton.Title") }
 
@@ -9,6 +15,41 @@ enum Strings {
             static var hours: String { Localization.string("UI.StatCards.Hours") }
             static var reviews: String { Localization.string("UI.StatCards.Reviews") }
         }
+    }
+
+    enum AuthenticationScene {
+        static var title: String { Localization.string("AuthenticationScene.Title") }
+        static var message: String { Localization.string("AuthenticationScene.Message") }
+        static var signIn: String { Localization.string("AuthenticationScene.SignIn") }
+        static var signUp: String { Localization.string("AuthenticationScene.SignUp") }
+        static var username: String { Localization.string("AuthenticationScene.Username") }
+        static var email: String { Localization.string("AuthenticationScene.Email") }
+        static var password: String { Localization.string("AuthenticationScene.Password") }
+        static var confirmPassword: String { Localization.string("AuthenticationScene.ConfirmPassword") }
+        static var invalidUsername: String { Localization.string("AuthenticationScene.InvalidUsername") }
+        static var usernameTaken: String { Localization.string("AuthenticationScene.UsernameTaken") }
+        static var forgotPassword: String { Localization.string("AuthenticationScene.ForgotPassword") }
+        static var resetSent: String { Localization.string("AuthenticationScene.ResetSent") }
+        static var invalidCredential: String { Localization.string("AuthenticationScene.Error.InvalidCredential") }
+        static var invalidCredentials: String { Localization.string("AuthenticationScene.Error.InvalidCredentials") }
+        static var invalidEmail: String { Localization.string("AuthenticationScene.Error.InvalidEmail") }
+        static var weakPassword: String { Localization.string("AuthenticationScene.Error.WeakPassword") }
+        static var emailAlreadyInUse: String { Localization.string("AuthenticationScene.Error.EmailAlreadyInUse") }
+        static var passwordMismatch: String { Localization.string("AuthenticationScene.Error.PasswordMismatch") }
+        static var networkError: String { Localization.string("AuthenticationScene.Error.Network") }
+        static var tooManyRequests: String { Localization.string("AuthenticationScene.Error.TooManyRequests") }
+        static var userDisabled: String { Localization.string("AuthenticationScene.Error.UserDisabled") }
+        static var operationNotAllowed: String { Localization.string("AuthenticationScene.Error.OperationNotAllowed") }
+        static var unavailable: String { Localization.string("AuthenticationScene.Error.Unavailable") }
+        static var notConfigured: String { Localization.string("AuthenticationScene.Error.NotConfigured") }
+        static var userNotAuthenticated: String { Localization.string("AuthenticationScene.Error.UserNotAuthenticated") }
+        static var deletionRequiresRecentLogin: String {
+            Localization.string("AuthenticationScene.Error.DeletionRequiresRecentLogin")
+        }
+        static var cancel: String { Localization.string("AuthenticationScene.Cancel") }
+        static var promptTitle: String { Localization.string("AuthenticationScene.Prompt.Title") }
+        static var promptMessage: String { Localization.string("AuthenticationScene.Prompt.Message") }
+        static var promptAction: String { Localization.string("AuthenticationScene.Prompt.Action") }
     }
 
     enum HomeScene {
@@ -345,8 +386,15 @@ enum Strings {
             static var displayName: String { Localization.string("AccountScene.Row.DisplayName") }
             static var bio: String { Localization.string("AccountScene.Row.Bio") }
             static var email: String { Localization.string("AccountScene.Row.Email") }
-            static var changePassword: String { Localization.string("AccountScene.Row.ChangePassword") }
+            static var logout: String { Localization.string("AccountScene.Row.Logout") }
             static var deleteAccount: String { Localization.string("AccountScene.Row.DeleteAccount") }
+        }
+
+        static var logoutConfirmation: String {
+            Localization.string("AccountScene.LogoutConfirmation")
+        }
+        static var deleteConfirmation: String {
+            Localization.string("AccountScene.DeleteConfirmation")
         }
     }
 
@@ -392,6 +440,15 @@ enum Strings {
             static var username: String { Localization.string("EditProfileScene.Field.Username") }
             static var displayName: String { Localization.string("EditProfileScene.Field.DisplayName") }
             static var bio: String { Localization.string("EditProfileScene.Field.Bio") }
+        }
+
+        static var errorTitle: String { Localization.string("EditProfileScene.Error.Title") }
+        static var errorMessage: String { Localization.string("EditProfileScene.Error.Message") }
+        static var invalidUsername: String {
+            Localization.string("EditProfileScene.Error.InvalidUsername")
+        }
+        static var usernameTaken: String {
+            Localization.string("EditProfileScene.Error.UsernameTaken")
         }
     }
 

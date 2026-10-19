@@ -38,8 +38,8 @@ extension EditProfilePresenter: EditProfilePresentationLogic {
         switch response {
         case .success:
             view?.displaySaveProfile(viewModel: .success)
-        case .error:
-            view?.displaySaveProfile(viewModel: .error)
+        case let .error(error):
+            view?.displaySaveProfile(viewModel: .error(error))
         }
     }
 

@@ -4,7 +4,8 @@ final class MyReviewsConfigurator {
     static func resolve(
         userRepository: UserRepositoryProtocol,
         activityRepository: MovieActivityRepositoryProtocol,
-        movieReviewSheetFactory: MovieReviewSheetBuilding
+        movieReviewSheetFactory: MovieReviewSheetBuilding,
+        authGate: AuthenticationGateProtocol
     ) -> UIViewController {
         let presenter = MyReviewsPresenter()
         let interactor = MyReviewsInteractor(
@@ -16,7 +17,8 @@ final class MyReviewsConfigurator {
         let viewController = MyReviewsViewController(
             customView: view,
             interactor: interactor,
-            movieReviewSheetFactory: movieReviewSheetFactory
+            movieReviewSheetFactory: movieReviewSheetFactory,
+            authGate: authGate
         )
 
         presenter.view = viewController

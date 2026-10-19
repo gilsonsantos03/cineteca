@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 
+@MainActor
 final class AppDependencies {
     let movieRepository: MovieRepositoryProtocol
     let genreRepository: GenreRepositoryProtocol
@@ -10,26 +11,56 @@ final class AppDependencies {
     let appearanceRepository: AppearanceRepositoryProtocol
     let languageRepository: LanguageRepositoryProtocol
     let movieReviewSheetFactory: MovieReviewSheetBuilding
-
-    private let coreDataStack: CoreDataStack
+    let authRepository: AuthRepositoryProtocol
+    let authenticationCoordinator: AuthenticationCoordinator
 
     init() {
+        FirebaseConfiguration.configureIfPossible()
         self.languageRepository = LanguageRepository()
         let networkService = AppDependencies.makeTMDBNetworkService(languageRepository: languageRepository)
-        self.coreDataStack = CoreDataStack()
         self.genreRepository = GenreRepository(networkService: networkService)
         self.movieRepository = MovieRepository(networkService: networkService)
-        self.movieActivityRepository = MovieActivityRepository(coreDataStack: coreDataStack)
-        self.userRepository = UserRepository(
-            coreDataStack: coreDataStack,
-            activityRepository: movieActivityRepository
-        )
-        self.statsRepository = StatsRepository(
-            activityRepository: movieActivityRepository,
-            coreDataStack: coreDataStack
-        )
+        let activityRepository = FirestoreMovieActivityRepository()
+        self.movieActivityRepository = activityRepository
+        let userRepository = FirestoreUserRepository(activityRepository: activityRepository)
+        self.userRepository = userRepository
+        self.statsRepository = FirestoreStatsRepository(activityRepository: activityRepository)
         self.appearanceRepository = AppearanceRepository()
         self.movieReviewSheetFactory = MovieReviewSheetFactory()
+        let authRepository = FirebaseAuthRepository()
+        self.authRepository = authRepository
+        self.authenticationCoordinator = AuthenticationCoordinator(
+            authRepository: authRepository,
+            userRepository: userRepository,
+            providers: [],
+            presenterProvider: {
+                AppDependencies.topViewController(from: nil)
+            }
+        )
+    }
+
+    private static var keyWindow: UIWindow? {
+        UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap(\.windows)
+            .first(where: \.isKeyWindow)
+    }
+
+    @MainActor
+    private static func topViewController(
+        from viewController: UIViewController?
+    ) -> UIViewController? {
+        let viewController = viewController ?? keyWindow?.rootViewController
+        if let presented = viewController?.presentedViewController {
+            return topViewController(from: presented)
+        }
+        if let navigation = viewController as? UINavigationController {
+            return topViewController(from: navigation.visibleViewController)
+        }
+        if let tab = viewController as? UITabBarController {
+            return topViewController(from: tab.selectedViewController)
+        }
+        return viewController
     }
 
     private static func makeTMDBNetworkService(
@@ -74,7 +105,8 @@ extension AppDependencies {
             accountBuilder: self,
             appearanceBuilder: self,
             languageBuilder: self,
-            legalBuilder: self
+            legalBuilder: self,
+            authGate: authenticationCoordinator
         )
     }
 }
@@ -90,7 +122,6 @@ extension AppDependencies:
     AppearanceBuilding,
     LanguageBuilding,
     LegalBuilding,
-    ChangePasswordBuilding,
     LegalDocumentBuilding {
     func makeMovieDetails(movieId: Int) -> UIViewController {
         MovieDetailsConfigurator.resolve(
@@ -98,7 +129,8 @@ extension AppDependencies:
             repository: movieRepository,
             activityRepository: movieActivityRepository,
             movieDetailsBuilder: self,
-            movieReviewSheetFactory: movieReviewSheetFactory
+            movieReviewSheetFactory: movieReviewSheetFactory,
+            authGate: authenticationCoordinator
         )
     }
 
@@ -115,7 +147,8 @@ extension AppDependencies:
     func makeEditProfile() -> UIViewController {
         EditProfileConfigurator.resolve(
             userRepository: userRepository,
-            searchBuilder: self
+            searchBuilder: self,
+            authGate: authenticationCoordinator
         )
     }
 
@@ -136,21 +169,24 @@ extension AppDependencies:
         MyReviewsConfigurator.resolve(
             userRepository: userRepository,
             activityRepository: movieActivityRepository,
-            movieReviewSheetFactory: movieReviewSheetFactory
+            movieReviewSheetFactory: movieReviewSheetFactory,
+            authGate: authenticationCoordinator
         )
     }
 
     func makeLists() -> UIViewController {
         ListsConfigurator.resolve(
             activityRepository: movieActivityRepository,
-            movieDetailsBuilder: self
+            movieDetailsBuilder: self,
+            authGate: authenticationCoordinator
         )
     }
 
     func makeAccount() -> UIViewController {
         AccountConfigurator.resolve(
             userRepository: userRepository,
-            changePasswordBuilder: self
+            authRepository: authRepository,
+            authGate: authenticationCoordinator
         )
     }
 
@@ -164,10 +200,6 @@ extension AppDependencies:
 
     func makeLegal() -> UIViewController {
         LegalConfigurator.resolve(legalDocumentBuilder: self)
-    }
-
-    func makeChangePassword() -> UIViewController {
-        ChangePasswordConfigurator.resolve(userRepository: userRepository)
     }
 
     func makeLegalDocument(documentType: LegalDocumentType) -> UIViewController {
