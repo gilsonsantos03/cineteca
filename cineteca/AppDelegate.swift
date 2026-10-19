@@ -4,9 +4,15 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    private let dependencies = AppDependencies()
+    private var dependencies: AppDependencies?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        guard FirebaseConfiguration.configureIfPossible() else {
+            return false
+        }
+        let dependencies = AppDependencies()
+        self.dependencies = dependencies
+
         let selectedLanguage = dependencies.languageRepository.fetchSelectedLanguage()
         LanguageManager.bootstrap(selectedLanguage: selectedLanguage)
 
@@ -18,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func reloadApplication(selectingTabIndex: Int? = nil) {
-        guard let window else { return }
+        guard let window, let dependencies else { return }
 
         let selectedLanguage = dependencies.languageRepository.fetchSelectedLanguage()
         LanguageManager.bootstrap(selectedLanguage: selectedLanguage)

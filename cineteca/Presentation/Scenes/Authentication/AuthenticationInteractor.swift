@@ -98,11 +98,11 @@ extension AuthenticationInteractor: AuthenticationBusinessLogic {
             do {
                 try await authRepository.sendPasswordReset(to: email)
                 await MainActor.run {
-                    presenter.presentPasswordReset(response: .success)
+                    self.presenter.presentPasswordReset(response: .success)
                 }
             } catch {
                 await MainActor.run {
-                    presenter.presentPasswordReset(response: .error(error))
+                    self.presenter.presentPasswordReset(response: .error(error))
                 }
             }
         }
@@ -119,11 +119,11 @@ extension AuthenticationInteractor: AuthenticationBusinessLogic {
                 let credential = try await provider.authenticate()
                 _ = try await authRepository.signIn(with: credential)
                 await MainActor.run {
-                    presenter.presentSubmit(response: .success)
+                    self.presenter.presentSubmit(response: .success)
                 }
             } catch {
                 await MainActor.run {
-                    presenter.presentSubmit(response: .error(error))
+                    self.presenter.presentSubmit(response: .error(error))
                 }
             }
         }

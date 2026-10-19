@@ -56,26 +56,30 @@ final class FirestoreUserRepository: UserRepositoryProtocol, @unchecked Sendable
     }
 
     func createProfile(username: String) async throws -> User {
-        guard let firebaseUser = Auth.auth().currentUser else {
-            throw AuthenticationError.userNotAuthenticated
-        }
+        do {
+            guard let firebaseUser = Auth.auth().currentUser else {
+                throw AuthenticationError.userNotAuthenticated
+            }
 
-        let username = try UsernamePolicy.validate(username)
-        let document = firestore.collection("users").document(firebaseUser.uid)
-        let snapshot = try await document.getDocument()
-        guard !snapshot.exists else {
+            let username = try UsernamePolicy.validate(username)
+            let document = firestore.collection("users").document(firebaseUser.uid)
+            let snapshot = try await document.getDocument()
+            guard !snapshot.exists else {
+                return try await fetchCurrentUser()
+            }
+
+            var profileData = Self.initialData(for: firebaseUser)
+            profileData["username"] = username
+            try await claimUsername(
+                username,
+                for: document,
+                userID: firebaseUser.uid,
+                profileData: profileData
+            )
             return try await fetchCurrentUser()
+        } catch {
+            throw Self.mapFirestoreError(error)
         }
-
-        var profileData = Self.initialData(for: firebaseUser)
-        profileData["username"] = username
-        try await claimUsername(
-            username,
-            for: document,
-            userID: firebaseUser.uid,
-            profileData: profileData
-        )
-        return try await fetchCurrentUser()
     }
 
     func updateProfile(_ update: UserProfileUpdate) async throws -> User {
@@ -294,6 +298,21 @@ final class FirestoreUserRepository: UserRepositoryProtocol, @unchecked Sendable
     private static func defaultUsername(for user: FirebaseAuth.User) -> String {
         let username = UsernamePolicy.normalized(user.uid.prefix(8).description)
         return username.isEmpty ? "user\(user.uid.prefix(8))" : username
+    }
+
+    private static func mapFirestoreError(_ error: Error) -> Error {
+        let nsError = error as NSError
+        guard nsError.domain == "FIRFirestoreErrorDomain" else {
+            return error
+        }
+
+        switch nsError.code {
+        case FirestoreErrorCode.unavailable.rawValue,
+             FirestoreErrorCode.deadlineExceeded.rawValue:
+            return AuthenticationError.networkError
+        default:
+            return error
+        }
     }
 
     private static func displayUsername(_ value: String) -> String {

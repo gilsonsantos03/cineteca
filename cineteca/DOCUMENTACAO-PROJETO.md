@@ -368,6 +368,11 @@ Firestore, separados por UID:
   localizadas para login, cadastro e recuperação de senha; erros de credencial
   não revelam se um e-mail está cadastrado. Essas mensagens são apresentadas em
   um alerta nativo do iOS.
+- Os campos de senha da autenticação permitem alternar entre o texto oculto e
+  visível por meio do botão de olho.
+- Durante login, cadastro ou recuperação de senha, os controles são
+  desabilitados e o botão principal exibe um indicador de carregamento até o
+  Firebase responder.
 - As regras em `firestore.rules` permitem acesso somente ao próprio UID; o
   `firebase.json` também configura Auth e Firestore Emulator para testes locais.
 

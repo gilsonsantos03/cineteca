@@ -45,6 +45,7 @@ final class AuthenticationViewController: UIViewController {
 
 extension AuthenticationViewController: AuthenticationDisplayLogic {
     func displaySubmit(viewModel: AuthenticationModels.Submit.ViewModel) {
+        customView.setLoading(false)
         switch viewModel {
         case .success:
             delegate?.didCompleteAuthentication()
@@ -54,6 +55,7 @@ extension AuthenticationViewController: AuthenticationDisplayLogic {
     }
 
     func displayPasswordReset(viewModel: AuthenticationModels.PasswordReset.ViewModel) {
+        customView.setLoading(false)
         switch viewModel {
         case .success:
             presentAlert(message: Strings.AuthenticationScene.resetSent)
@@ -81,6 +83,7 @@ extension AuthenticationViewController: AuthenticationViewDelegate {
         mode: AuthenticationModels.Mode,
         confirmation: String
     ) {
+        customView.setLoading(true)
         interactor.submit(
             request: .init(
                 email: email,
@@ -93,10 +96,12 @@ extension AuthenticationViewController: AuthenticationViewDelegate {
     }
 
     func didRequestPasswordReset(email: String) {
+        customView.setLoading(true)
         interactor.resetPassword(request: .init(email: email))
     }
 
     func didSelectProvider(identifier: String) {
+        customView.setLoading(true)
         interactor.authenticate(providerIdentifier: identifier)
     }
 

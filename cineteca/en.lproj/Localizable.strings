@@ -33,6 +33,8 @@
 "AuthenticationScene.Email" = "Email";
 "AuthenticationScene.Password" = "Password";
 "AuthenticationScene.ConfirmPassword" = "Confirm password";
+"AuthenticationScene.ShowPassword" = "Show password";
+"AuthenticationScene.HidePassword" = "Hide password";
 "AuthenticationScene.InvalidUsername" = "Use 3 to 20 characters: letters, numbers or _.";
 "AuthenticationScene.UsernameTaken" = "That username is already in use.";
 "AuthenticationScene.Error.InvalidCredential" = "We couldn't validate the credential.";

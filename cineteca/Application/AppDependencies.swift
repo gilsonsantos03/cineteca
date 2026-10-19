@@ -15,7 +15,6 @@ final class AppDependencies {
     let authenticationCoordinator: AuthenticationCoordinator
 
     init() {
-        FirebaseConfiguration.configureIfPossible()
         self.languageRepository = LanguageRepository()
         let networkService = AppDependencies.makeTMDBNetworkService(languageRepository: languageRepository)
         self.genreRepository = GenreRepository(networkService: networkService)

@@ -26,6 +26,8 @@ enum Strings {
         static var email: String { Localization.string("AuthenticationScene.Email") }
         static var password: String { Localization.string("AuthenticationScene.Password") }
         static var confirmPassword: String { Localization.string("AuthenticationScene.ConfirmPassword") }
+        static var showPassword: String { Localization.string("AuthenticationScene.ShowPassword") }
+        static var hidePassword: String { Localization.string("AuthenticationScene.HidePassword") }
         static var invalidUsername: String { Localization.string("AuthenticationScene.InvalidUsername") }
         static var usernameTaken: String { Localization.string("AuthenticationScene.UsernameTaken") }
         static var forgotPassword: String { Localization.string("AuthenticationScene.ForgotPassword") }

@@ -24,6 +24,7 @@ final class AuthenticationView: UIView {
     private var mode: AuthenticationModels.Mode = .signIn {
         didSet { updateMode() }
     }
+    private var isLoading = false
 
     // MARK: - UI Components
 
@@ -56,12 +57,14 @@ final class AuthenticationView: UIView {
     private lazy var passwordField = makeTextField(
         placeholder: Strings.AuthenticationScene.password,
         keyboardType: .default,
-        secure: true
+        secure: true,
+        visibilityTag: 1
     )
     private lazy var confirmationField = makeTextField(
         placeholder: Strings.AuthenticationScene.confirmPassword,
         keyboardType: .default,
-        secure: true
+        secure: true,
+        visibilityTag: 2
     )
 
     private lazy var fieldsStack: UIStackView = {
@@ -115,6 +118,13 @@ final class AuthenticationView: UIView {
         return button
     }()
 
+    private lazy var loadingIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .medium)
+        indicator.color = .black
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+
     // MARK: - Initialization
 
     init(providers: [AuthenticationModels.ProviderViewModel]) {
@@ -144,6 +154,7 @@ final class AuthenticationView: UIView {
         addSubview(resetButton)
         addSubview(providerStack)
         addSubview(cancelButton)
+        addSubview(loadingIndicator)
     }
 
     private func setupProviderButtons() {
@@ -171,6 +182,7 @@ final class AuthenticationView: UIView {
         constrainResetButton()
         constrainProviderStack()
         constrainCancelButton()
+        constrainLoadingIndicator()
     }
 
     private func constrainTitleLabel() {
@@ -238,12 +250,19 @@ final class AuthenticationView: UIView {
         }
     }
 
+    private func constrainLoadingIndicator() {
+        constrain(loadingIndicator, submitButton) { indicator, button in
+            indicator.center == button.center
+        }
+    }
+
     // MARK: - Helpers
 
     private func makeTextField(
         placeholder: String,
         keyboardType: UIKeyboardType,
-        secure: Bool = false
+        secure: Bool = false,
+        visibilityTag: Int? = nil
     ) -> UITextField {
         let field = UITextField()
         field.placeholder = placeholder
@@ -253,7 +272,8 @@ final class AuthenticationView: UIView {
         field.layer.cornerRadius = 12
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 14, height: 1))
         field.leftViewMode = .always
-        field.rightView = UIView(frame: CGRect(x: 0, y: 0, width: 14, height: 1))
+        field.rightView = visibilityTag.map(makeVisibilityButton(tag:))
+            ?? UIView(frame: CGRect(x: 0, y: 0, width: 14, height: 1))
         field.rightViewMode = .always
         field.heightAnchor.constraint(equalToConstant: 48).isActive = true
         field.keyboardType = keyboardType
@@ -261,6 +281,25 @@ final class AuthenticationView: UIView {
         field.autocorrectionType = .no
         field.isSecureTextEntry = secure
         return field
+    }
+
+    private func makeVisibilityButton(tag: Int) -> UIView {
+        let container = UIView(frame: CGRect(x: 0, y: 0, width: 44, height: 48))
+        let button = UIButton(type: .system)
+        button.frame = CGRect(x: 0, y: 0, width: 44, height: 48)
+        button.tag = tag
+        button.tintColor = .textSecondary
+        button.setImage(
+            UIImage(
+                systemName: "eye.slash",
+                withConfiguration: UIImage.SymbolConfiguration(pointSize: 15)
+            ),
+            for: .normal
+        )
+        button.accessibilityLabel = Strings.AuthenticationScene.showPassword
+        button.addTarget(self, action: #selector(didTapPasswordVisibility), for: .touchUpInside)
+        container.addSubview(button)
+        return container
     }
 
     private func makeButton() -> UIButton {
@@ -276,10 +315,12 @@ final class AuthenticationView: UIView {
         let isSignUp = mode == .signUp
         usernameField.isHidden = !isSignUp
         confirmationField.isHidden = !isSignUp
-        submitButton.setTitle(
-            isSignUp ? Strings.AuthenticationScene.signUp : Strings.AuthenticationScene.signIn,
-            for: .normal
-        )
+        if !isLoading {
+            submitButton.setTitle(
+                isSignUp ? Strings.AuthenticationScene.signUp : Strings.AuthenticationScene.signIn,
+                for: .normal
+            )
+        }
         modeButton.setTitle(
             isSignUp ? Strings.AuthenticationScene.signIn : Strings.AuthenticationScene.signUp,
             for: .normal
@@ -287,7 +328,47 @@ final class AuthenticationView: UIView {
         resetButton.isHidden = isSignUp
     }
 
+    @objc private func didTapPasswordVisibility(_ sender: UIButton) {
+        let field = sender.tag == 1 ? passwordField : confirmationField
+        field.isSecureTextEntry.toggle()
+        let isSecure = field.isSecureTextEntry
+        sender.setImage(
+            UIImage(
+                systemName: isSecure ? "eye.slash" : "eye",
+                withConfiguration: UIImage.SymbolConfiguration(pointSize: 15)
+            ),
+            for: .normal
+        )
+        sender.accessibilityLabel = isSecure
+            ? Strings.AuthenticationScene.showPassword
+            : Strings.AuthenticationScene.hidePassword
+    }
+
     // MARK: - Actions
+
+    func setLoading(_ isLoading: Bool) {
+        self.isLoading = isLoading
+        let controls = [
+            usernameField,
+            emailField,
+            passwordField,
+            confirmationField,
+            submitButton,
+            modeButton,
+            resetButton,
+            cancelButton
+        ]
+        controls.forEach { $0.isEnabled = !isLoading }
+        providerStack.isUserInteractionEnabled = !isLoading
+
+        if isLoading {
+            submitButton.setTitle(nil, for: .normal)
+            loadingIndicator.startAnimating()
+        } else {
+            loadingIndicator.stopAnimating()
+            updateMode()
+        }
+    }
 
     @objc private func didTapSubmit() {
         delegate?.didSubmitEmailPassword(
