@@ -5,6 +5,7 @@ protocol ProfileViewDelegate: AnyObject {
     func didTapEdit()
     func didTapFavoriteFilm(movieId: Int)
     func didTapSeeAllReviews()
+    func didTapSignOut()
     func didSelectSetting(_ setting: ProfileModels.Setting)
     func didRequestAuthentication()
 }
@@ -120,6 +121,10 @@ extension ProfileView: ProfileContentViewDelegate {
 
     func didTapSeeAllReviews() {
         delegate?.didTapSeeAllReviews()
+    }
+
+    func didTapSignOut() {
+        delegate?.didTapSignOut()
     }
 
     func didSelectSetting(_ setting: ProfileModels.Setting) {

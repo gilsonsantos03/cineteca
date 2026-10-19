@@ -11,7 +11,8 @@ final class ProfileConfigurator {
         appearanceBuilder: AppearanceBuilding,
         languageBuilder: LanguageBuilding,
         legalBuilder: LegalBuilding,
-        authGate: AuthenticationGateProtocol
+        authGate: AuthenticationGateProtocol,
+        authRepository: AuthRepositoryProtocol
     ) -> UIViewController {
         let presenter = ProfilePresenter()
         let interactor = ProfileInteractor(
@@ -32,7 +33,8 @@ final class ProfileConfigurator {
             customView: view,
             interactor: interactor,
             router: router,
-            authGate: authGate
+            authGate: authGate,
+            authRepository: authRepository
         )
 
         presenter.view = viewController

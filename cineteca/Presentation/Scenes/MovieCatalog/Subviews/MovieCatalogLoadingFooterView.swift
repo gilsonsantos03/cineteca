@@ -33,6 +33,8 @@ final class MovieCatalogLoadingFooterView: UICollectionReusableView {
             ]
         )
         label.numberOfLines = 1
+        label.setContentHuggingPriority(.required, for: .horizontal)
+        label.setContentCompressionResistancePriority(.required, for: .horizontal)
         return label
     }()
 
@@ -115,7 +117,7 @@ final class MovieCatalogLoadingFooterView: UICollectionReusableView {
         constrain(loadMoreButton, self) { button, container in
             button.top == container.top + 8
             button.centerX == container.centerX
-            button.width == 170
+            button.width >= 170
             button.height == 56
         }
     }
@@ -124,6 +126,8 @@ final class MovieCatalogLoadingFooterView: UICollectionReusableView {
         constrain(contentStackView, loadMoreButton) { stack, button in
             stack.centerX == button.centerX
             stack.centerY == button.centerY
+            stack.left == button.left + 16
+            stack.right == button.right - 16
         }
     }
 

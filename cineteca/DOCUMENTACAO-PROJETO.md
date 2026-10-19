@@ -198,7 +198,8 @@ builder apenas para serem instanciadas.
 cineteca/
 ├── cineteca.xcodeproj/
 └── cineteca/
-    ├── AppDelegate.swift                 # Entry point, UIWindow
+    ├── AppDelegate.swift                 # Firebase e composição inicial
+    ├── SceneDelegate.swift               # UIWindow e ciclo de vida da cena
     ├── Info.plist
     ├── Keys.plist                        # ⚠️ Gitignored — API_KEY do TMDB
     │
@@ -362,8 +363,13 @@ Firestore, separados por UID:
   Authentication. Contas antigas sem perfil continuam sendo inicializadas sob
   demanda no primeiro acesso autenticado.
 - Perfil, atividades, reviews e estatísticas são lidos do Firestore do usuário.
-- A tela Conta permite sair e excluir a conta Firebase. A recuperação de senha
-  é iniciada por e-mail na tela de autenticação.
+- O Perfil e a tela Conta permitem sair com confirmação; sair encerra apenas a
+  sessão atual do Firebase e retorna o Perfil ao modo visitante, sem excluir
+  dados da conta. A recuperação de senha é iniciada por e-mail na tela de
+  autenticação.
+- A sessão autenticada é local à instalação do app: um simulador e um device
+  real precisam realizar login separadamente. Depois do login com a mesma conta,
+  ambos acessam os mesmos dados persistidos pelo UID no Firebase.
 - Erros de autenticação do Firebase são convertidos em mensagens amigáveis e
   localizadas para login, cadastro e recuperação de senha; erros de credencial
   não revelam se um e-mail está cadastrado. Essas mensagens são apresentadas em
@@ -723,13 +729,14 @@ User → Delegate → ViewController → Interactor → Repository
 
 ```
 AppDelegate
-  └── UIWindow
-        └── MainTabBarController
-              ├── UINavigationController → Home (implementada)
-              ├── UINavigationController → Search (implementada)
-              ├── UINavigationController → Lists
-              ├── UINavigationController → Stats (implementada)
-              └── UINavigationController → Profile (implementada)
+  └── SceneDelegate
+        └── UIWindow
+              └── MainTabBarController
+                    ├── UINavigationController → Home (implementada)
+                    ├── UINavigationController → Search (implementada)
+                    ├── UINavigationController → Lists
+                    ├── UINavigationController → Stats (implementada)
+                    └── UINavigationController → Profile (implementada)
 ```
 
 ### 10.2 Home
@@ -739,7 +746,8 @@ AppDelegate
 - `MovieCatalog` exibe a lista completa da seção escolhida em grade e permite
   voltar para a Home ou abrir Movie Details
 - Sem deep linking, sem Coordinator pattern
-- Sem SceneDelegate — lifecycle clássico via `AppDelegate`
+- O ciclo de vida da interface usa `SceneDelegate`; o `AppDelegate` permanece
+  responsável pela configuração do Firebase e pela composição das dependências
 
 ### 10.3 Cabeçalhos das telas secundárias
 

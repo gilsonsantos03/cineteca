@@ -10,17 +10,20 @@ final class ProfileViewController: UIViewController {
     private let interactor: ProfileBusinessLogic
     private let router: ProfileRoutingLogic
     private let authGate: AuthenticationGateProtocol
+    private let authRepository: AuthRepositoryProtocol
 
     init(
         customView: ProfileView,
         interactor: ProfileBusinessLogic,
         router: ProfileRoutingLogic,
-        authGate: AuthenticationGateProtocol
+        authGate: AuthenticationGateProtocol,
+        authRepository: AuthRepositoryProtocol
     ) {
         self.customView = customView
         self.interactor = interactor
         self.router = router
         self.authGate = authGate
+        self.authRepository = authRepository
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -78,6 +81,24 @@ extension ProfileViewController: ProfileViewDelegate {
         }
     }
 
+    func didTapSignOut() {
+        let alert = UIAlertController(
+            title: Strings.AccountScene.Row.logout,
+            message: Strings.AccountScene.logoutConfirmation,
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: Strings.Common.cancel, style: .cancel))
+        alert.addAction(UIAlertAction(title: Strings.AccountScene.Row.logout, style: .destructive) { [weak self] _ in
+            do {
+                try self?.authRepository.signOut()
+                self?.customView.showGuest()
+            } catch {
+                self?.showError(error)
+            }
+        })
+        present(alert, animated: true)
+    }
+
     func didSelectSetting(_ setting: ProfileModels.Setting) {
         switch setting {
         case .account:
@@ -99,5 +120,15 @@ extension ProfileViewController: ProfileViewDelegate {
         authGate.performAuthenticated { [weak self] in
             self?.interactor.fetchProfile(request: .init())
         }
+    }
+
+    private func showError(_ error: Error) {
+        let alert = UIAlertController(
+            title: Strings.Common.error,
+            message: (error as? LocalizedError)?.errorDescription ?? error.localizedDescription,
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: Strings.Common.ok, style: .default))
+        present(alert, animated: true)
     }
 }

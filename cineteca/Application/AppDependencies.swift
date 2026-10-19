@@ -105,7 +105,8 @@ extension AppDependencies {
             appearanceBuilder: self,
             languageBuilder: self,
             legalBuilder: self,
-            authGate: authenticationCoordinator
+            authGate: authenticationCoordinator,
+            authRepository: authRepository
         )
     }
 }

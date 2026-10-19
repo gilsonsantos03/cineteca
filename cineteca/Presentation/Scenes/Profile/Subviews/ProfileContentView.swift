@@ -5,6 +5,7 @@ protocol ProfileContentViewDelegate: AnyObject {
     func didTapEdit()
     func didTapFavoriteFilm(movieId: Int)
     func didTapSeeAllReviews()
+    func didTapSignOut()
     func didSelectSetting(_ setting: ProfileModels.Setting)
 }
 
@@ -42,7 +43,7 @@ final class ProfileContentView: UIView {
         button.setTitle(Strings.ProfileScene.signOut, for: .normal)
         button.setTitleColor(.destructiveRed, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
-        button.isUserInteractionEnabled = false
+        button.addTarget(self, action: #selector(didTapSignOut), for: .touchUpInside)
         return button
     }()
 
@@ -132,6 +133,10 @@ final class ProfileContentView: UIView {
             spacer.height == height
         }
         return view
+    }
+
+    @objc private func didTapSignOut() {
+        delegate?.didTapSignOut()
     }
 }
 

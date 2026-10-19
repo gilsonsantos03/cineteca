@@ -16,6 +16,7 @@ final class MainTabBarController: UITabBarController {
     private let languageBuilder: LanguageBuilding
     private let legalBuilder: LegalBuilding
     private let authGate: AuthenticationGateProtocol
+    private let authRepository: AuthRepositoryProtocol
 
     init(
         repository: MovieRepositoryProtocol,
@@ -32,7 +33,8 @@ final class MainTabBarController: UITabBarController {
         appearanceBuilder: AppearanceBuilding,
         languageBuilder: LanguageBuilding,
         legalBuilder: LegalBuilding,
-        authGate: AuthenticationGateProtocol
+        authGate: AuthenticationGateProtocol,
+        authRepository: AuthRepositoryProtocol
     ) {
         self.repository = repository
         self.genreRepository = genreRepository
@@ -49,6 +51,7 @@ final class MainTabBarController: UITabBarController {
         self.languageBuilder = languageBuilder
         self.legalBuilder = legalBuilder
         self.authGate = authGate
+        self.authRepository = authRepository
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -147,7 +150,8 @@ final class MainTabBarController: UITabBarController {
             appearanceBuilder: appearanceBuilder,
             languageBuilder: languageBuilder,
             legalBuilder: legalBuilder,
-            authGate: authGate
+            authGate: authGate,
+            authRepository: authRepository
         )
         profileVC.tabBarItem = UITabBarItem(
             title: Strings.TabBar.profile,

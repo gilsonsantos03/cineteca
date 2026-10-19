@@ -16,7 +16,7 @@ extension EditProfilePresenter: EditProfilePresentationLogic {
         case .content(let user):
             view?.displayFetchProfile(viewModel: .content(
                 EditProfileModels.FetchProfile.ViewModel.Content(
-                    username: user.username,
+                    username: UsernamePolicy.normalized(user.username),
                     displayName: user.displayName,
                     bio: user.bio,
                     favoriteFilm: user.favoriteFilm.map {

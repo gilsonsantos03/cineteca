@@ -121,10 +121,14 @@ implementations (currently e-mail/password, with other providers available as
 future integrations) and replays one pending protected action
 after successful login, allowing Google to be added without changing feature
 repositories or scene contracts.
+The Profile and Account scenes receive `AuthRepositoryProtocol` for the
+explicit sign-out action; signing out changes the Firebase session state without
+deleting the user's Firestore data.
 
 `AppDelegate` initializes `FirebaseApp` before constructing `AppDependencies`;
 repositories must therefore only be created after the Firebase default app is
-configured.
+configured. `SceneDelegate` owns the scene window and installs the root
+`MainTabBarController` after the dependencies are ready.
 
 The e-mail/password sign-up flow also receives `UserRepositoryProtocol` through
 the Authentication scene. After Firebase Authentication creates the account,

@@ -3,8 +3,8 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: UIWindow?
-    private var dependencies: AppDependencies?
+    weak var window: UIWindow?
+    var dependencies: AppDependencies?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         guard FirebaseConfiguration.configureIfPossible() else {
@@ -15,11 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let selectedLanguage = dependencies.languageRepository.fetchSelectedLanguage()
         LanguageManager.bootstrap(selectedLanguage: selectedLanguage)
-
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = dependencies.makeRootViewController()
-        window?.makeKeyAndVisible()
-        ThemeManager.apply(dependencies.appearanceRepository.fetchSelectedTheme())
         return true
     }
 

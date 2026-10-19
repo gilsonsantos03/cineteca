@@ -59,6 +59,7 @@
 		661DF6C81A41E7E64243F97C /* MovieActivityRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09EE0361B7672E51466DEC2 /* MovieActivityRepositoryTests.swift */; };
 		963CE7614099E957DBC80C02 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C205413C935CBA338D4FA7FA /* AuthenticationView.swift */; };
 		AA000001000000000000001A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000001B /* AppDelegate.swift */; };
+		AA000001000000000000001D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000001C /* SceneDelegate.swift */; };
 		AA100001000000000000001A /* MovieDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000001B /* MovieDetails.swift */; };
 		AA100001000000000000002A /* MovieDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000002B /* MovieDetailsResponse.swift */; };
 		AA100001000000000000003A /* MovieDetailsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000003B /* MovieDetailsModels.swift */; };
@@ -342,6 +343,7 @@
 		9C360D26763E23DD2EE34540 /* FirestoreUserRepository.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FirestoreUserRepository.swift; sourceTree = "<group>"; };
 		AA000001000000000000000A /* cineteca.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cineteca.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA000001000000000000001B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AA000001000000000000001C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		AA000001000000000000003B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA100001000000000000001B /* MovieDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetails.swift; sourceTree = "<group>"; };
 		AA100001000000000000002B /* MovieDetailsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsResponse.swift; sourceTree = "<group>"; };
@@ -764,6 +766,7 @@
 				448D4C262FEA0A870008718A /* Domain */,
 				448D4C252FEA0A800008718A /* Presentation */,
 				AA000001000000000000001B /* AppDelegate.swift */,
+				AA000001000000000000001C /* SceneDelegate.swift */,
 				AA000001000000000000003B /* Info.plist */,
 				CC000001000000000000007D /* Localizable.strings */,
 				442CB04A2FF5EF91004FCC82 /* Keys.plist */,
@@ -1416,6 +1419,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA000001000000000000001A /* AppDelegate.swift in Sources */,
+				AA000001000000000000001D /* SceneDelegate.swift in Sources */,
 				442CB05A2FF603BE004FCC82 /* NetworkConfiguration.swift in Sources */,
 				442CB0612FFC81F8004FCC82 /* HomeView.swift in Sources */,
 				442CB0652FFC8213004FCC82 /* HomePresenter.swift in Sources */,
