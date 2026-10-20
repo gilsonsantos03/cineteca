@@ -166,6 +166,9 @@
 "MovieDetailsScene.TrailerUnavailable.OkButton.Text" = "OK";
 
 "ProfileScene.MemberSince.Format" = "Membro desde %@";
+"ProfileScene.Error.Title" = "Não foi possível carregar seu perfil";
+"ProfileScene.Error.Subtitle" = "Verifique sua conexão e tente novamente.";
+"ProfileScene.Error.RetryButton.Text" = "Tentar novamente";
 "ProfileScene.SignOut.Text" = "Sair";
 "ProfileScene.FavoriteFilm.Badge" = "MEU FILME FAVORITO";
 "ProfileScene.FavoriteFilm.Empty" = "Você ainda não escolheu um filme favorito.";

@@ -217,6 +217,12 @@ enum Strings {
         static var memberSinceFormat: String { Localization.string("ProfileScene.MemberSince.Format") }
         static var signOut: String { Localization.string("ProfileScene.SignOut.Text") }
 
+        enum Error {
+            static var title: String { Localization.string("ProfileScene.Error.Title") }
+            static var subtitle: String { Localization.string("ProfileScene.Error.Subtitle") }
+            static var retryButton: String { Localization.string("ProfileScene.Error.RetryButton.Text") }
+        }
+
         enum FavoriteFilm {
             static var badge: String { Localization.string("ProfileScene.FavoriteFilm.Badge") }
             static var empty: String { Localization.string("ProfileScene.FavoriteFilm.Empty") }

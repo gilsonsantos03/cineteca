@@ -122,6 +122,10 @@ extension ProfileViewController: ProfileViewDelegate {
         }
     }
 
+    func didRequestRetry() {
+        interactor.fetchProfile(request: .init())
+    }
+
     private func showError(_ error: Error) {
         let alert = UIAlertController(
             title: Strings.Common.error,

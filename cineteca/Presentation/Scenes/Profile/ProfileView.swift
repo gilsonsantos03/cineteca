@@ -8,6 +8,7 @@ protocol ProfileViewDelegate: AnyObject {
     func didTapSignOut()
     func didSelectSetting(_ setting: ProfileModels.Setting)
     func didRequestAuthentication()
+    func didRequestRetry()
 }
 
 final class ProfileView: UIView {
@@ -20,6 +21,7 @@ final class ProfileView: UIView {
 
     private lazy var contentView = ProfileContentView()
     private lazy var authenticationPromptView = AuthenticationPromptView()
+    private lazy var errorStateView = ErrorStateView()
 
     private lazy var loadingIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .large)
@@ -43,6 +45,15 @@ final class ProfileView: UIView {
         backgroundColor = .appBackground
         contentView.delegate = self
         authenticationPromptView.delegate = self
+        errorStateView.delegate = self
+        errorStateView.configure(
+            viewModel: .init(
+                title: Strings.ProfileScene.Error.title,
+                subtitle: Strings.ProfileScene.Error.subtitle,
+                retryButtonTitle: Strings.ProfileScene.Error.retryButton
+            )
+        )
+        errorStateView.isHidden = true
         setupSubviews()
         setupConstraints()
     }
@@ -51,12 +62,14 @@ final class ProfileView: UIView {
         addSubview(contentView)
         addSubview(loadingIndicator)
         addSubview(authenticationPromptView)
+        addSubview(errorStateView)
     }
 
     private func setupConstraints() {
         constrainContentView()
         constrainLoadingIndicator()
         constrainAuthenticationPromptView()
+        constrainErrorStateView()
     }
 
     private func constrainContentView() {
@@ -80,16 +93,24 @@ final class ProfileView: UIView {
         }
     }
 
+    private func constrainErrorStateView() {
+        constrain(errorStateView, self) { error, superview in
+            error.edges == superview.edges
+        }
+    }
+
     // MARK: - Public API
 
     func showLoading() {
         contentView.isHidden = true
         authenticationPromptView.isHidden = true
+        errorStateView.isHidden = true
         loadingIndicator.startAnimating()
     }
 
     func showGuest() {
         contentView.isHidden = true
+        errorStateView.isHidden = true
         loadingIndicator.stopAnimating()
         authenticationPromptView.isHidden = false
     }
@@ -97,6 +118,7 @@ final class ProfileView: UIView {
     func showContent(content: ProfileModels.FetchProfile.ViewModel.Content) {
         loadingIndicator.stopAnimating()
         authenticationPromptView.isHidden = true
+        errorStateView.isHidden = true
         contentView.configure(content: content)
         contentView.isHidden = false
     }
@@ -105,6 +127,7 @@ final class ProfileView: UIView {
         loadingIndicator.stopAnimating()
         authenticationPromptView.isHidden = true
         contentView.isHidden = true
+        errorStateView.isHidden = false
     }
 }
 
@@ -130,11 +153,16 @@ extension ProfileView: ProfileContentViewDelegate {
     func didSelectSetting(_ setting: ProfileModels.Setting) {
         delegate?.didSelectSetting(setting)
     }
-
 }
 
 extension ProfileView: AuthenticationPromptViewDelegate {
     func didTapAuthenticationPrompt() {
         delegate?.didRequestAuthentication()
+    }
+}
+
+extension ProfileView: ErrorStateViewDelegate {
+    func didRequestRetry() {
+        delegate?.didRequestRetry()
     }
 }

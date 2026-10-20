@@ -7,6 +7,12 @@ protocol ErrorStateViewDelegate: AnyObject {
 
 final class ErrorStateView: UIView {
 
+    struct ViewModel {
+        let title: String
+        let subtitle: String
+        let retryButtonTitle: String
+    }
+
     // MARK: - Properties
 
     weak var delegate: ErrorStateViewDelegate?
@@ -115,6 +121,14 @@ final class ErrorStateView: UIView {
             button.width == 160
             button.height == 44
         }
+    }
+
+    // MARK: - Configuration
+
+    func configure(viewModel: ViewModel) {
+        titleLabel.text = viewModel.title
+        subtitleLabel.text = viewModel.subtitle
+        retryButton.setTitle(viewModel.retryButtonTitle, for: .normal)
     }
 
     // MARK: - Actions
