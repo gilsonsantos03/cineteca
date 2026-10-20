@@ -287,7 +287,7 @@ cineteca/
 | **Carregamento da Home** | 1 request de gêneros + 4 requests de filmes em paralelo | `HomeInteractor.loadContent()` |
 | **Pull-to-refresh** | Invalida cache de gêneros e recarrega tudo | `HomeInteractor.refresh()` |
 | **Filtro por gênero** | Chips horizontais; filtro instantâneo no cliente por `Genre.id` | `HomeInteractor`, `GenreFilterView` |
-| **Detalhe do filme** | Tela VIP com overview, cast, crew, providers e similares | `MovieDetails/` |
+| **Detalhe do filme** | Tela VIP com overview, cast, crew, provedores de streaming/aluguel/compra/gratuitos para a região do dispositivo e filmes similares. A atribuição “Powered by JustWatch” abre o link regional de opções fornecido pelo TMDB; falha ou ausência dos dados não bloqueia os detalhes. | `MovieDetails/` |
 | **Seleção de filme** | A cena Search é apresentada em diálogo com comportamento de seleção para escolher o filme favorito no Edit Profile | `Search/`, `EditProfileRouter` |
 | **Filtros da Search** | Sheet com gênero, ano (range), nota mínima (slider inteiro 0–10, mesma escala TMDB/`vote_average`) e idioma; `minRating > 0` vira `vote_average.gte` sem conversão | `SearchFilters`, `SearchFiltersView`, `MovieEndpoint.discover` |
 | **Trailer** | Abre YouTube (app ou web) a partir da Home ou Movie Details | `HomeRouter`, `MovieDetailsRouter` |

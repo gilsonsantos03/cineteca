@@ -6,6 +6,7 @@ protocol MovieDetailsViewDelegate: AnyObject {
     func didRequestBack()
     func didRequestTrailer(for movieId: Int)
     func didSelectSimilarMovie(id movieId: Int)
+    func didRequestWatchOptions(url: URL)
     func didRequestRate()
     func didRequestFavorite(isFavorite: Bool)
     func didRequestWatchlist(isInWatchlist: Bool)
@@ -106,6 +107,7 @@ final class MovieDetailsView: UIView {
         navigationHeader.delegate = self
         actionsView.delegate = self
         watchTrailerButton.delegate = self
+        providersView.delegate = self
         similarMoviesView.delegate = self
         errorView.delegate = self
     }
@@ -204,7 +206,10 @@ final class MovieDetailsView: UIView {
         ratingView.configure(rating: viewModel.rating)
         actionsView.configure(activity: viewModel.activity)
         activityHintLabel.isHidden = viewModel.activity.canFavorite
-        providersView.configure(viewModel.watchProviders)
+        providersView.configure(
+            groups: viewModel.watchProviderGroups,
+            watchOptionsURL: viewModel.watchOptionsURL
+        )
         overviewView.configure(text: viewModel.overview)
         castView.configure(viewModel.cast)
         crewView.configure(viewModel.crew)
@@ -267,6 +272,14 @@ extension MovieDetailsView: MovieDetailsActionsViewDelegate {
 extension MovieDetailsView: WatchTrailerButtonDelegate {
     func didTap() {
         requestTrailer()
+    }
+}
+
+// MARK: - MovieDetailsProvidersViewDelegate
+
+extension MovieDetailsView: MovieDetailsProvidersViewDelegate {
+    func didRequestWatchOptions(url: URL) {
+        delegate?.didRequestWatchOptions(url: url)
     }
 }
 

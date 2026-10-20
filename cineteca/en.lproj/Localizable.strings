@@ -143,6 +143,12 @@
 "MovieDetailsScene.ActivityError.OkButton" = "OK";
 
 "MovieDetailsScene.Section.WhereToWatch.Title" = "Where to watch";
+"MovieDetailsScene.ProviderCategory.Streaming" = "Streaming";
+"MovieDetailsScene.ProviderCategory.Rent" = "Rent";
+"MovieDetailsScene.ProviderCategory.Buy" = "Buy";
+"MovieDetailsScene.ProviderCategory.Free" = "Free";
+"MovieDetailsScene.ProviderCategory.Ads" = "Free with ads";
+"MovieDetailsScene.ProviderCategory.PoweredByJustWatch" = "Powered by JustWatch";
 "MovieDetailsScene.Section.Synopsis.Title" = "Synopsis";
 "MovieDetailsScene.Section.Cast.Title" = "Cast";
 "MovieDetailsScene.Section.Crew.Title" = "Crew";

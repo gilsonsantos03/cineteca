@@ -124,6 +124,10 @@ extension MovieDetailsViewController: MovieDetailsViewDelegate {
         interactor.watchTrailer(request: .init(movieId: movieId))
     }
 
+    func didRequestWatchOptions(url: URL) {
+        router.routeToWatchOptions(url: url)
+    }
+
     func didSelectSimilarMovie(id movieId: Int) {
         router.routeToMovieDetails(movieId: movieId)
     }

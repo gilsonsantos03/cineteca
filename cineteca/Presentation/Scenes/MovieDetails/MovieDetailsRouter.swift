@@ -4,6 +4,7 @@ import UIKit
 protocol MovieDetailsRoutingLogic {
     func routeBack()
     func routeToTrailer(youtubeKey: String)
+    func routeToWatchOptions(url: URL)
     func routeToMovieDetails(movieId: Int)
 }
 
@@ -33,6 +34,11 @@ extension MovieDetailsRouter: MovieDetailsRoutingLogic {
         } else {
             UIApplication.shared.open(webURL)
         }
+    }
+
+    func routeToWatchOptions(url: URL) {
+        guard url.scheme == "https", url.host != nil else { return }
+        UIApplication.shared.open(url)
     }
 
     func routeToMovieDetails(movieId: Int) {

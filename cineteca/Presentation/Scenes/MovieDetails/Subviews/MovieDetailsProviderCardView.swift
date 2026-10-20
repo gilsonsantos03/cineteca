@@ -13,7 +13,7 @@ final class MovieDetailsProviderCardView: UIView {
 
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 10, weight: .medium)
+        label.font = .systemFont(ofSize: 11, weight: .medium)
         label.textColor = .textPrimary
         label.numberOfLines = 2
         label.textAlignment = .center
@@ -58,8 +58,8 @@ final class MovieDetailsProviderCardView: UIView {
 
     private func constrainSelf() {
         constrain(self) { view in
-            view.width == 68
-            view.height == 70
+            view.width == 76
+            view.height == 82
         }
     }
 

@@ -143,6 +143,12 @@
 "MovieDetailsScene.ActivityError.OkButton" = "OK";
 
 "MovieDetailsScene.Section.WhereToWatch.Title" = "Onde assistir";
+"MovieDetailsScene.ProviderCategory.Streaming" = "Streaming";
+"MovieDetailsScene.ProviderCategory.Rent" = "Aluguel";
+"MovieDetailsScene.ProviderCategory.Buy" = "Compra";
+"MovieDetailsScene.ProviderCategory.Free" = "Grátis";
+"MovieDetailsScene.ProviderCategory.Ads" = "Grátis com anúncios";
+"MovieDetailsScene.ProviderCategory.PoweredByJustWatch" = "Powered by JustWatch";
 "MovieDetailsScene.Section.Synopsis.Title" = "Sinopse";
 "MovieDetailsScene.Section.Cast.Title" = "Elenco";
 "MovieDetailsScene.Section.Crew.Title" = "Equipe";

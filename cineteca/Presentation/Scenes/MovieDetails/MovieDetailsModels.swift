@@ -27,7 +27,8 @@ enum MovieDetailsModels {
                 let rating: String
                 let cast: [CastViewModel]
                 let crew: [CrewViewModel]
-                let watchProviders: [WatchProviderViewModel]
+                let watchProviderGroups: [WatchProviderGroupViewModel]
+                let watchOptionsURL: URL?
                 let similarMovies: [SimilarMovieViewModel]
                 let activity: ActivityViewModel
             }
@@ -101,6 +102,11 @@ enum MovieDetailsModels {
     struct CrewViewModel {
         let name: String
         let role: String
+    }
+
+    struct WatchProviderGroupViewModel {
+        let title: String
+        let providers: [WatchProviderViewModel]
     }
 
     struct WatchProviderViewModel {

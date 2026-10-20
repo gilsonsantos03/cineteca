@@ -479,6 +479,27 @@ enum Strings {
             static var similar: String { Localization.string("MovieDetailsScene.Section.Similar.Title") }
         }
 
+        enum ProviderCategory {
+            static func title(_ category: WatchProviderCategory) -> String {
+                switch category {
+                case .streaming:
+                    Localization.string("MovieDetailsScene.ProviderCategory.Streaming")
+                case .rent:
+                    Localization.string("MovieDetailsScene.ProviderCategory.Rent")
+                case .buy:
+                    Localization.string("MovieDetailsScene.ProviderCategory.Buy")
+                case .free:
+                    Localization.string("MovieDetailsScene.ProviderCategory.Free")
+                case .withAds:
+                    Localization.string("MovieDetailsScene.ProviderCategory.Ads")
+                }
+            }
+
+            static var poweredByJustWatch: String {
+                Localization.string("MovieDetailsScene.ProviderCategory.PoweredByJustWatch")
+            }
+        }
+
         enum Rating {
             static var tmdb: String { Localization.string("MovieDetailsScene.Rating.TMDB.Text") }
         }

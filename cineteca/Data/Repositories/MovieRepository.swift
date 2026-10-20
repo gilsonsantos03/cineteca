@@ -80,7 +80,8 @@ final class MovieRepository: MovieRepositoryProtocol {
             crew: (credits?.crew ?? [])
                 .filter { $0.job == "Director" || $0.job == "Writer" || $0.job == "Screenplay" }
                 .map { $0.toDomain() },
-            watchProviders: providers?.results[regionCode]?.allProviders.map { $0.toDomain() } ?? [],
+            watchProviders: providers?.results[regionCode]?.toDomain()
+                ?? MovieWatchProviders(groups: [], optionsURL: nil),
             similarMovies: (similar?.results ?? []).map { $0.toDomain(genreLookup: [:]) }
         )
     }

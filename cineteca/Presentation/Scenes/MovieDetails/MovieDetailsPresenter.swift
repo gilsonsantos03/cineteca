@@ -47,7 +47,8 @@ extension MovieDetailsPresenter: MovieDetailsPresentationLogic {
             rating: String(format: "%.1f", movie.rating),
             cast: movie.cast.map { makeCastViewModel(from: $0) },
             crew: movie.crew.map { makeCrewViewModel(from: $0) },
-            watchProviders: movie.watchProviders.map { makeWatchProviderViewModel(from: $0) },
+            watchProviderGroups: movie.watchProviders.groups.map { makeWatchProviderGroupViewModel(from: $0) },
+            watchOptionsURL: movie.watchProviders.optionsURL,
             similarMovies: movie.similarMovies.prefix(10).map { makeSimilarMovieViewModel(from: $0) },
             activity: makeActivityViewModel(from: activity)
         )
@@ -107,8 +108,15 @@ extension MovieDetailsPresenter: MovieDetailsPresentationLogic {
         )
     }
 
-    private func makeWatchProviderViewModel(from provider: WatchProvider) -> MovieDetailsModels.WatchProviderViewModel {
-        MovieDetailsModels.WatchProviderViewModel(name: provider.name, logoURL: provider.logoURL)
+    private func makeWatchProviderGroupViewModel(
+        from group: MovieWatchProviderGroup
+    ) -> MovieDetailsModels.WatchProviderGroupViewModel {
+        MovieDetailsModels.WatchProviderGroupViewModel(
+            title: Strings.MovieDetailsScene.ProviderCategory.title(group.category),
+            providers: group.providers.map {
+                MovieDetailsModels.WatchProviderViewModel(name: $0.name, logoURL: $0.logoURL)
+            }
+        )
     }
 
     private func makeSimilarMovieViewModel(from movie: Movie) -> MovieDetailsModels.SimilarMovieViewModel {

@@ -36,19 +36,43 @@ struct WatchProvidersResponse: Decodable, Sendable {
 }
 
 struct WatchProvidersCountryResponse: Decodable, Sendable {
+    let link: String?
     let flatrate: [WatchProviderResponse]?
     let rent: [WatchProviderResponse]?
     let buy: [WatchProviderResponse]?
+    let free: [WatchProviderResponse]?
+    let ads: [WatchProviderResponse]?
 
-    var allProviders: [WatchProviderResponse] {
-        let combined = (flatrate ?? []) + (rent ?? []) + (buy ?? [])
-        var seenProviderIDs = Set<Int>()
-        return combined.filter { seenProviderIDs.insert($0.providerID).inserted }
+    func toDomain() -> MovieWatchProviders {
+        var groups: [MovieWatchProviderGroup] = []
+        appendGroup(.streaming, providers: flatrate, to: &groups)
+        appendGroup(.rent, providers: rent, to: &groups)
+        appendGroup(.buy, providers: buy, to: &groups)
+        appendGroup(.free, providers: free, to: &groups)
+        appendGroup(.withAds, providers: ads, to: &groups)
+
+        return MovieWatchProviders(
+            groups: groups,
+            optionsURL: link.flatMap { URL(string: $0) }
+        )
+    }
+
+    private func appendGroup(
+        _ category: WatchProviderCategory,
+        providers: [WatchProviderResponse]?,
+        to groups: inout [MovieWatchProviderGroup]
+    ) {
+        guard let providers, !providers.isEmpty else { return }
+        groups.append(
+            MovieWatchProviderGroup(
+                category: category,
+                providers: providers.map { $0.toDomain() }
+            )
+        )
     }
 }
 
 struct WatchProviderResponse: Decodable, Sendable {
-    let providerID: Int
     let providerName: String
     let logoPath: String?
 }
@@ -71,7 +95,7 @@ extension MovieDetailsResponse {
         certification: String?,
         cast: [MovieCastMember],
         crew: [MovieCrewMember],
-        watchProviders: [WatchProvider],
+        watchProviders: MovieWatchProviders,
         similarMovies: [Movie]
     ) -> MovieDetails {
         MovieDetails(

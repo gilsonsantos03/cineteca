@@ -7,10 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		134D3C47F7AB36E6EA6FF6E9 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92D944746BF5098D7ADF3107 /* XCTest.framework */; };
 		14E387A226636E8F7A09477D /* AuthenticationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F538006D2C51872E5F5480E4 /* AuthenticationModels.swift */; };
 		2025AF8A2C92ED3DA1458013 /* FirebaseConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F50B735E506F88941CE16F2 /* FirebaseConfiguration.swift */; };
-		23B11876BF659763451F04D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 201CF9328A44336D9DA09F84 /* Foundation.framework */; };
 		26D3EAE36B33F630462BC23A /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608FA11039306AF47BB002B8 /* AuthenticationViewController.swift */; };
 		356D389445FDB9BE1D776B0C /* FirebaseAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656F9C46808CEC32307992AA /* FirebaseAuthRepository.swift */; };
 		41A954EB033598B16D7AAF04 /* FirestoreStatsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358B6E132B58ACC5593DC1B3 /* FirestoreStatsRepository.swift */; };
@@ -56,7 +54,6 @@
 		448D4D642FEA1C310008718A /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448D4D592FEA1C310008718A /* HTTPMethod.swift */; };
 		4C3A999BE67967BCEEBE8A94 /* AuthModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB684124EACB8F27D70A7993 /* AuthModels.swift */; };
 		65BA6A98C47E5B02DFCB73C7 /* FirestoreUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C360D26763E23DD2EE34540 /* FirestoreUserRepository.swift */; };
-		661DF6C81A41E7E64243F97C /* MovieActivityRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09EE0361B7672E51466DEC2 /* MovieActivityRepositoryTests.swift */; };
 		963CE7614099E957DBC80C02 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C205413C935CBA338D4FA7FA /* AuthenticationView.swift */; };
 		AA000001000000000000001A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000001B /* AppDelegate.swift */; };
 		AA000001000000000000001D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000001C /* SceneDelegate.swift */; };
@@ -153,7 +150,6 @@
 		EP000001000000000000013C000000000000001A /* EditProfileFormFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EP000001000000000000013C /* EditProfileFormFieldView.swift */; };
 		EP000001000000000000015C000000000000001A /* EditProfileFavoriteFilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EP000001000000000000015C /* EditProfileFavoriteFilmView.swift */; };
 		F92B9F9FC214C626F1928EB0 /* FirestoreMovieActivityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9041A1308F8DC6BA42D5AA7F /* FirestoreMovieActivityRepository.swift */; };
-		FD000001000000000000001A /* FirestoreActivityMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD000001000000000000001B /* FirestoreActivityMapperTests.swift */; };
 		LC000001000000000000005E000000000000001A /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = LC000001000000000000005E /* Localization.swift */; };
 		LE000001000000000000009B000000000000001A /* LegalModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = LE000001000000000000009B /* LegalModels.swift */; };
 		LE00000100000000000000AB000000000000001A /* LegalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = LE00000100000000000000AB /* LegalViewController.swift */; };
@@ -192,12 +188,10 @@
 		LS00000100000000000000FA /* ListsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS00000100000000000000FB /* ListsConfigurator.swift */; };
 		LS000001000000000000010C /* ListsMovieCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS000001000000000000010D /* ListsMovieCardView.swift */; };
 		LS000001000000000000011C /* ListsErrorStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS000001000000000000011D /* ListsErrorStateView.swift */; };
-		LS000001000000000000012A /* ListsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS000001000000000000012B /* ListsPresenterTests.swift */; };
 		MA000001000000000000001A /* MovieActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = MA000001000000000000001B /* MovieActivity.swift */; };
 		MA000001000000000000002A /* MovieActivityRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = MA000001000000000000002B /* MovieActivityRepositoryProtocol.swift */; };
 		MA000001000000000000003A /* MovieActivityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = MA000001000000000000003B /* MovieActivityRepository.swift */; };
 		MA000001000000000000004A /* MovieActivityEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = MA000001000000000000004B /* MovieActivityEntity.swift */; };
-		MA000001000000000000005A /* Cartography in Frameworks */ = {isa = PBXBuildFile; productRef = 448D4D4D2FEA0D970008718A /* Cartography */; };
 		MC000001000000000000001A /* MovieCollectionCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC000001000000000000001B /* MovieCollectionCategory.swift */; };
 		MC000001000000000000002A /* MovieCollectionPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC000001000000000000002B /* MovieCollectionPage.swift */; };
 		MC000001000000000000009A /* MovieCatalogModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC000001000000000000009B /* MovieCatalogModels.swift */; };
@@ -208,7 +202,6 @@
 		MC00000100000000000000EA /* MovieCatalogRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC00000100000000000000EB /* MovieCatalogRouter.swift */; };
 		MC00000100000000000000FA /* MovieCatalogConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC00000100000000000000FB /* MovieCatalogConfigurator.swift */; };
 		MC000001000000000000010C /* MovieCatalogGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC000001000000000000010D /* MovieCatalogGridCell.swift */; };
-		MC000001000000000000011A /* MovieCatalogPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC000001000000000000011B /* MovieCatalogPresenterTests.swift */; };
 		MC000001000000000000012A /* MovieCatalogLoadingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC000001000000000000012B /* MovieCatalogLoadingFooterView.swift */; };
 		MR000001000000000000001A /* MovieReviewSheetFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = MR000001000000000000001B /* MovieReviewSheetFactory.swift */; };
 		MY000001000000000000009A /* MyReviewsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = MY000001000000000000009B /* MyReviewsModels.swift */; };
@@ -280,17 +273,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		723A1EE052DB057DA89F9C4D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AA000001000000000000012A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AA000001000000000000008A;
-			remoteInfo = cineteca;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		201CF9328A44336D9DA09F84 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		358B6E132B58ACC5593DC1B3 /* FirestoreStatsRepository.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FirestoreStatsRepository.swift; sourceTree = "<group>"; };
 		4411DD433085992F0098CBF6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		442CB04A2FF5EF91004FCC82 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
@@ -335,11 +320,9 @@
 		4A1687C5F6900AF3DCD87AC4 /* AuthenticationPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthenticationPresenter.swift; sourceTree = "<group>"; };
 		4A1687C5F6900AF3DCD87AC5 /* AuthenticationRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthenticationRouter.swift; sourceTree = "<group>"; };
 		608FA11039306AF47BB002B8 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
-		63C362166966D16CEE5AC892 /* cinetecaTests */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = file; name = cinetecaTests; path = cinetecaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		656F9C46808CEC32307992AA /* FirebaseAuthRepository.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FirebaseAuthRepository.swift; sourceTree = "<group>"; };
 		8F50B735E506F88941CE16F2 /* FirebaseConfiguration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FirebaseConfiguration.swift; sourceTree = "<group>"; };
 		9041A1308F8DC6BA42D5AA7F /* FirestoreMovieActivityRepository.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FirestoreMovieActivityRepository.swift; sourceTree = "<group>"; };
-		92D944746BF5098D7ADF3107 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = System/Library/Frameworks/XCTest.framework; sourceTree = SDKROOT; };
 		9C360D26763E23DD2EE34540 /* FirestoreUserRepository.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FirestoreUserRepository.swift; sourceTree = "<group>"; };
 		AA000001000000000000000A /* cineteca.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cineteca.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA000001000000000000001B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -436,9 +419,7 @@
 		EP000001000000000000012C /* EditProfileAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileAvatarView.swift; sourceTree = "<group>"; };
 		EP000001000000000000013C /* EditProfileFormFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileFormFieldView.swift; sourceTree = "<group>"; };
 		EP000001000000000000015C /* EditProfileFavoriteFilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileFavoriteFilmView.swift; sourceTree = "<group>"; };
-		F09EE0361B7672E51466DEC2 /* MovieActivityRepositoryTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MovieActivityRepositoryTests.swift; sourceTree = "<group>"; };
 		F538006D2C51872E5F5480E4 /* AuthenticationModels.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthenticationModels.swift; sourceTree = "<group>"; };
-		FD000001000000000000001B /* FirestoreActivityMapperTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FirestoreActivityMapperTests.swift; sourceTree = "<group>"; };
 		LC000001000000000000005E /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		LE000001000000000000009B /* LegalModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalModels.swift; sourceTree = "<group>"; };
 		LE00000100000000000000AB /* LegalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalViewController.swift; sourceTree = "<group>"; };
@@ -477,7 +458,6 @@
 		LS00000100000000000000FB /* ListsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsConfigurator.swift; sourceTree = "<group>"; };
 		LS000001000000000000010D /* ListsMovieCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsMovieCardView.swift; sourceTree = "<group>"; };
 		LS000001000000000000011D /* ListsErrorStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsErrorStateView.swift; sourceTree = "<group>"; };
-		LS000001000000000000012B /* ListsPresenterTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ListsPresenterTests.swift; sourceTree = "<group>"; };
 		MA000001000000000000001B /* MovieActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieActivity.swift; sourceTree = "<group>"; };
 		MA000001000000000000002B /* MovieActivityRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieActivityRepositoryProtocol.swift; sourceTree = "<group>"; };
 		MA000001000000000000003B /* MovieActivityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieActivityRepository.swift; sourceTree = "<group>"; };
@@ -492,7 +472,6 @@
 		MC00000100000000000000EB /* MovieCatalogRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogRouter.swift; sourceTree = "<group>"; };
 		MC00000100000000000000FB /* MovieCatalogConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogConfigurator.swift; sourceTree = "<group>"; };
 		MC000001000000000000010D /* MovieCatalogGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogGridCell.swift; sourceTree = "<group>"; };
-		MC000001000000000000011B /* MovieCatalogPresenterTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MovieCatalogPresenterTests.swift; sourceTree = "<group>"; };
 		MC000001000000000000012B /* MovieCatalogLoadingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogLoadingFooterView.swift; sourceTree = "<group>"; };
 		MR000001000000000000001B /* MovieReviewSheetFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReviewSheetFactory.swift; sourceTree = "<group>"; };
 		MY000001000000000000009B /* MyReviewsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReviewsModels.swift; sourceTree = "<group>"; };
@@ -572,16 +551,6 @@
 				4411DD3F3085952C0098CBF6 /* FirebaseAuth in Frameworks */,
 				4411DD3E3085952C0098CBF6 /* FirebaseCore in Frameworks */,
 				448D4D4E2FEA0D970008718A /* Cartography in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D6738D147058DCE0C0F478C2 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				23B11876BF659763451F04D2 /* Foundation.framework in Frameworks */,
-				134D3C47F7AB36E6EA6FF6E9 /* XCTest.framework in Frameworks */,
-				MA000001000000000000005A /* Cartography in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -735,26 +704,6 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
-		6F32026A828CB7B546951827 /* cinetecaTests */ = {
-			isa = PBXGroup;
-			children = (
-				F09EE0361B7672E51466DEC2 /* MovieActivityRepositoryTests.swift */,
-				LS000001000000000000012B /* ListsPresenterTests.swift */,
-				MC000001000000000000011B /* MovieCatalogPresenterTests.swift */,
-				FD000001000000000000001B /* FirestoreActivityMapperTests.swift */,
-			);
-			path = cinetecaTests;
-			sourceTree = "<group>";
-		};
-		8B78A07CA56640C3B93F8645 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				C267668E745CEAC3B493DFFC /* iOS */,
-				92D944746BF5098D7ADF3107 /* XCTest.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		AA000001000000000000005A /* cineteca */ = {
 			isa = PBXGroup;
 			children = (
@@ -781,7 +730,6 @@
 			isa = PBXGroup;
 			children = (
 				AA000001000000000000000A /* cineteca.app */,
-				63C362166966D16CEE5AC892 /* cinetecaTests */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -791,8 +739,6 @@
 			children = (
 				AA000001000000000000005A /* cineteca */,
 				AA000001000000000000006A /* Products */,
-				8B78A07CA56640C3B93F8645 /* Frameworks */,
-				6F32026A828CB7B546951827 /* cinetecaTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -925,14 +871,6 @@
 				SS000001000000000000001B /* SearchFilters.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		C267668E745CEAC3B493DFFC /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				201CF9328A44336D9DA09F84 /* Foundation.framework */,
-			);
-			name = iOS;
 			sourceTree = "<group>";
 		};
 		CC000001000000000000008B /* TabBar */ = {
@@ -1307,27 +1245,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4DDE73560D96E29287FB2EBF /* cinetecaTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 78946BCF874EF5C1A84DA2D0 /* Build configuration list for PBXNativeTarget "cinetecaTests" */;
-			buildPhases = (
-				D8015FE64F277CAD268FF934 /* Sources */,
-				D6738D147058DCE0C0F478C2 /* Frameworks */,
-				FEBD1E0F20A27EC17E12D247 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				06A3FCEDC74257D6017478E6 /* PBXTargetDependency */,
-			);
-			name = cinetecaTests;
-			packageProductDependencies = (
-				448D4D4D2FEA0D970008718A /* Cartography */,
-			);
-			productName = cinetecaTests;
-			productReference = 63C362166966D16CEE5AC892 /* cinetecaTests */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		AA000001000000000000008A /* cineteca */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AA000001000000000000009A /* Build configuration list for PBXNativeTarget "cineteca" */;
@@ -1384,7 +1301,6 @@
 			projectRoot = "";
 			targets = (
 				AA000001000000000000008A /* cineteca */,
-				4DDE73560D96E29287FB2EBF /* cinetecaTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1401,13 +1317,6 @@
 				444CB41530033EE6000410E2 /* README.md in Resources */,
 				444CB41630033EE6000410E2 /* view-conventions.md in Resources */,
 				4411DD443085992F0098CBF6 /* GoogleService-Info.plist in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FEBD1E0F20A27EC17E12D247 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1673,26 +1582,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D8015FE64F277CAD268FF934 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				661DF6C81A41E7E64243F97C /* MovieActivityRepositoryTests.swift in Sources */,
-				LS000001000000000000012A /* ListsPresenterTests.swift in Sources */,
-				MC000001000000000000011A /* MovieCatalogPresenterTests.swift in Sources */,
-				FD000001000000000000001A /* FirestoreActivityMapperTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		06A3FCEDC74257D6017478E6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = cineteca;
-			target = AA000001000000000000008A /* cineteca */;
-			targetProxy = 723A1EE052DB057DA89F9C4D /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -1708,28 +1600,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		0D692E45B99DE1147BFCD738 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.gilson.cineteca.tests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/cineteca.app/cineteca";
-				VALIDATE_PRODUCT = YES;
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 		AA000001000000000000014A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1900,39 +1770,9 @@
 			};
 			name = Release;
 		};
-		CC70D9B476547D068361DB4A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.gilson.cineteca.tests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/cineteca.app/cineteca";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		78946BCF874EF5C1A84DA2D0 /* Build configuration list for PBXNativeTarget "cinetecaTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0D692E45B99DE1147BFCD738 /* Release */,
-				CC70D9B476547D068361DB4A /* Debug */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		AA000001000000000000009A /* Build configuration list for PBXNativeTarget "cineteca" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
