@@ -90,6 +90,12 @@ extension HomeViewController: HomeDisplayLogic {
 // MARK: - HomeViewDelegate
 
 extension HomeViewController: HomeViewDelegate {
+    func didTapMovieRecommendation() {
+        authGate.performAuthenticated { [weak self] in
+            self?.router.routeToMovieRecommendation()
+        }
+    }
+
     func didRequestRefresh() {
         interactor.refresh()
     }

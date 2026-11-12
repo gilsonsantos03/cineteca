@@ -1,3 +1,4 @@
+import FirebaseAppCheck
 import UIKit
 
 @main
@@ -7,6 +8,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var dependencies: AppDependencies?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        AppCheck.setAppCheckProviderFactory(FirebaseAppCheckProviderFactory())
         guard FirebaseConfiguration.configureIfPossible() else {
             return false
         }

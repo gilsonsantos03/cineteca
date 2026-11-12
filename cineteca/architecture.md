@@ -87,6 +87,16 @@ The Home scene reads the featured movie's activity from
 `upsertMetadata` plus `setWatchlist`. The visual state is returned through the
 VIP Presenter and is not persisted by the View.
 
+Movie Recommendation follows the same repository-first boundary. The
+`MovieRecommendationRepositoryProtocol` hides the Firebase callable
+`recommendMovie`; the Cloud Function validates the request, obtains candidates
+from TMDB, asks Gemini to rank only those candidates, and returns a movie ID
+plus explanation. The iOS repository then fetches canonical movie details from
+the existing `MovieRepositoryProtocol`. A registered Firebase Auth account is
+required by the callable; App Check enforcement is temporarily disabled in
+development and must be re-enabled before production. The server keeps only a
+hashed-UID rate-limit state.
+
 The Lists scene reads the `MovieActivityRepositoryProtocol.fetchActivities()`
 snapshot and projects it into three presentation tabs: `isInWatchlist`,
 `isFavorite`, and `isRated` (the latter means a rating and `ratedAt` exist).
@@ -130,13 +140,13 @@ repositories must therefore only be created after the Firebase default app is
 configured. `SceneDelegate` owns the scene window and installs the root
 `MainTabBarController` after the dependencies are ready.
 
-The e-mail/password sign-up flow also receives `UserRepositoryProtocol` through
-the Authentication scene. After Firebase Authentication creates the account,
-the interactor creates `users/{uid}` and atomically reserves the normalized
-username in `usernames/{username}`. If profile creation fails, the newly
-created account is removed and the repository attempts to clean up partial
-profile data before the error is presented. Existing authenticated accounts remain supported
-through the repository's lazy initialization path.
+The e-mail/password sign-up flow keeps profile creation inside
+`FirebaseAuthRepository`. After Firebase Authentication creates the account,
+the repository atomically reserves the normalized username in
+`usernames/{username}`. If profile creation fails, it removes partial profile
+data and rolls back the newly created account before presenting the error.
+Existing authenticated accounts remain supported through the repository's lazy
+initialization path.
 
 The Authentication scene follows the full UIKit Clean Swift cycle:
 `AuthenticationViewController` forwards user events to

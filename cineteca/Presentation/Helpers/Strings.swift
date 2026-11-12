@@ -94,6 +94,25 @@ enum Strings {
         }
     }
 
+    enum MovieRecommendationScene {
+        static var title: String { Localization.string("MovieRecommendationScene.Title") }
+        static var subtitle: String { Localization.string("MovieRecommendationScene.Subtitle") }
+        static var homeButton: String { Localization.string("MovieRecommendationScene.HomeButton") }
+        static var momentMode: String { Localization.string("MovieRecommendationScene.Mode.Moment") }
+        static var blendMode: String { Localization.string("MovieRecommendationScene.Mode.Blend") }
+        static var promptPlaceholder: String { Localization.string("MovieRecommendationScene.PromptPlaceholder") }
+        static var recommendButton: String { Localization.string("MovieRecommendationScene.RecommendButton") }
+        static var selectMovie: String { Localization.string("MovieRecommendationScene.SelectMovie") }
+        static var detailsButton: String { Localization.string("MovieRecommendationScene.DetailsButton") }
+        static var retryButton: String { Localization.string("MovieRecommendationScene.RetryButton") }
+        static var newRecommendation: String { Localization.string("MovieRecommendationScene.NewRecommendation") }
+        static var rateLimited: String { Localization.string("MovieRecommendationScene.RateLimited") }
+        static var invalidInput: String { Localization.string("MovieRecommendationScene.InvalidInput") }
+        static var errorMessage: String { Localization.string("MovieRecommendationScene.ErrorMessage") }
+        static var duplicateMovieTitle: String { Localization.string("MovieRecommendationScene.DuplicateMovieTitle") }
+        static var duplicateMovieMessage: String { Localization.string("MovieRecommendationScene.DuplicateMovieMessage") }
+    }
+
     enum MovieCatalogScene {
         static var loadMore: String { Localization.string("MovieCatalogScene.LoadMore") }
         static var nextPageErrorTitle: String { Localization.string("MovieCatalogScene.NextPageError.Title") }

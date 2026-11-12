@@ -45,6 +45,8 @@
 		444CB41430033EE6000410E2 /* architecture.md in Resources */ = {isa = PBXBuildFile; fileRef = 444CB41230033EE6000410E2 /* architecture.md */; };
 		444CB41530033EE6000410E2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 444CB41130033EE6000410E2 /* README.md */; };
 		444CB41630033EE6000410E2 /* view-conventions.md in Resources */ = {isa = PBXBuildFile; fileRef = 444CB41330033EE6000410E2 /* view-conventions.md */; };
+		44684C133090284800BE67AD /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = MR000001000000000000004A /* FirebaseAppCheck */; };
+		44684C143090284800BE67AD /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = MR000001000000000000005A /* FirebaseFunctions */; };
 		448D4D4E2FEA0D970008718A /* Cartography in Frameworks */ = {isa = PBXBuildFile; productRef = 448D4D4D2FEA0D970008718A /* Cartography */; };
 		448D4D5F2FEA1C310008718A /* URLRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448D4D5D2FEA1C310008718A /* URLRequestBuilder.swift */; };
 		448D4D602FEA1C310008718A /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448D4D5C2FEA1C310008718A /* ParameterEncoding.swift */; };
@@ -55,6 +57,7 @@
 		4C3A999BE67967BCEEBE8A94 /* AuthModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB684124EACB8F27D70A7993 /* AuthModels.swift */; };
 		65BA6A98C47E5B02DFCB73C7 /* FirestoreUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C360D26763E23DD2EE34540 /* FirestoreUserRepository.swift */; };
 		963CE7614099E957DBC80C02 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C205413C935CBA338D4FA7FA /* AuthenticationView.swift */; };
+		A1100001000000000000001A /* AuthProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1100001000000000000001B /* AuthProtocols.swift */; };
 		AA000001000000000000001A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000001B /* AppDelegate.swift */; };
 		AA000001000000000000001D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000001C /* SceneDelegate.swift */; };
 		AA100001000000000000001A /* MovieDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA100001000000000000001B /* MovieDetails.swift */; };
@@ -204,6 +207,21 @@
 		MC000001000000000000010C /* MovieCatalogGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC000001000000000000010D /* MovieCatalogGridCell.swift */; };
 		MC000001000000000000012A /* MovieCatalogLoadingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC000001000000000000012B /* MovieCatalogLoadingFooterView.swift */; };
 		MR000001000000000000001A /* MovieReviewSheetFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = MR000001000000000000001B /* MovieReviewSheetFactory.swift */; };
+		MR000001000000000000022A /* FirebaseAppCheckProviderFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = MR000001000000000000022B /* FirebaseAppCheckProviderFactory.swift */; };
+		MR000001000000000000023A /* FirebaseMovieRecommendationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = MR000001000000000000023B /* FirebaseMovieRecommendationRepository.swift */; };
+		MR000001000000000000024A /* MovieRecommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = MR000001000000000000024B /* MovieRecommendation.swift */; };
+		MR000001000000000000025A /* MovieRecommendationRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = MR000001000000000000025B /* MovieRecommendationRepositoryProtocol.swift */; };
+		MR000001000000000000026A /* MovieRecommendationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = MR000001000000000000026B /* MovieRecommendationModels.swift */; };
+		MR000001000000000000027A /* MovieRecommendationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = MR000001000000000000027B /* MovieRecommendationViewController.swift */; };
+		MR000001000000000000028A /* MovieRecommendationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MR000001000000000000028B /* MovieRecommendationView.swift */; };
+		MR000001000000000000029A /* MovieRecommendationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = MR000001000000000000029B /* MovieRecommendationInteractor.swift */; };
+		MR000001000000000000030A /* MovieRecommendationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = MR000001000000000000030B /* MovieRecommendationPresenter.swift */; };
+		MR000001000000000000031A /* MovieRecommendationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = MR000001000000000000031B /* MovieRecommendationRouter.swift */; };
+		MR000001000000000000032A /* MovieRecommendationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = MR000001000000000000032B /* MovieRecommendationConfigurator.swift */; };
+		MR000001000000000000033A /* MovieRecommendationFloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = MR000001000000000000033B /* MovieRecommendationFloatingButton.swift */; };
+		MR000001000000000000038A /* MovieRecommendationInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MR000001000000000000038B /* MovieRecommendationInputView.swift */; };
+		MR000001000000000000039A /* MovieRecommendationResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MR000001000000000000039B /* MovieRecommendationResultView.swift */; };
+		MR000001000000000000040A /* MovieRecommendationErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MR000001000000000000040B /* MovieRecommendationErrorView.swift */; };
 		MY000001000000000000009A /* MyReviewsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = MY000001000000000000009B /* MyReviewsModels.swift */; };
 		MY00000100000000000000AA /* MyReviewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = MY00000100000000000000AB /* MyReviewsViewController.swift */; };
 		MY00000100000000000000BA /* MyReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MY00000100000000000000BB /* MyReviewsView.swift */; };
@@ -272,9 +290,6 @@
 		UI000001000000000000004B000000000000001A /* GenreChipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = UI000001000000000000004B /* GenreChipCell.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		358B6E132B58ACC5593DC1B3 /* FirestoreStatsRepository.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FirestoreStatsRepository.swift; sourceTree = "<group>"; };
 		4411DD433085992F0098CBF6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -324,6 +339,7 @@
 		8F50B735E506F88941CE16F2 /* FirebaseConfiguration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FirebaseConfiguration.swift; sourceTree = "<group>"; };
 		9041A1308F8DC6BA42D5AA7F /* FirestoreMovieActivityRepository.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FirestoreMovieActivityRepository.swift; sourceTree = "<group>"; };
 		9C360D26763E23DD2EE34540 /* FirestoreUserRepository.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FirestoreUserRepository.swift; sourceTree = "<group>"; };
+		A1100001000000000000001B /* AuthProtocols.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AuthProtocols.swift; sourceTree = "<group>"; };
 		AA000001000000000000000A /* cineteca.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cineteca.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA000001000000000000001B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA000001000000000000001C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -474,6 +490,21 @@
 		MC000001000000000000010D /* MovieCatalogGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogGridCell.swift; sourceTree = "<group>"; };
 		MC000001000000000000012B /* MovieCatalogLoadingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCatalogLoadingFooterView.swift; sourceTree = "<group>"; };
 		MR000001000000000000001B /* MovieReviewSheetFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReviewSheetFactory.swift; sourceTree = "<group>"; };
+		MR000001000000000000022B /* FirebaseAppCheckProviderFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAppCheckProviderFactory.swift; sourceTree = "<group>"; };
+		MR000001000000000000023B /* FirebaseMovieRecommendationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseMovieRecommendationRepository.swift; sourceTree = "<group>"; };
+		MR000001000000000000024B /* MovieRecommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRecommendation.swift; sourceTree = "<group>"; };
+		MR000001000000000000025B /* MovieRecommendationRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRecommendationRepositoryProtocol.swift; sourceTree = "<group>"; };
+		MR000001000000000000026B /* MovieRecommendationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRecommendationModels.swift; sourceTree = "<group>"; };
+		MR000001000000000000027B /* MovieRecommendationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRecommendationViewController.swift; sourceTree = "<group>"; };
+		MR000001000000000000028B /* MovieRecommendationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRecommendationView.swift; sourceTree = "<group>"; };
+		MR000001000000000000029B /* MovieRecommendationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRecommendationInteractor.swift; sourceTree = "<group>"; };
+		MR000001000000000000030B /* MovieRecommendationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRecommendationPresenter.swift; sourceTree = "<group>"; };
+		MR000001000000000000031B /* MovieRecommendationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRecommendationRouter.swift; sourceTree = "<group>"; };
+		MR000001000000000000032B /* MovieRecommendationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRecommendationConfigurator.swift; sourceTree = "<group>"; };
+		MR000001000000000000033B /* MovieRecommendationFloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRecommendationFloatingButton.swift; sourceTree = "<group>"; };
+		MR000001000000000000038B /* MovieRecommendationInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRecommendationInputView.swift; sourceTree = "<group>"; };
+		MR000001000000000000039B /* MovieRecommendationResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRecommendationResultView.swift; sourceTree = "<group>"; };
+		MR000001000000000000040B /* MovieRecommendationErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRecommendationErrorView.swift; sourceTree = "<group>"; };
 		MY000001000000000000009B /* MyReviewsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReviewsModels.swift; sourceTree = "<group>"; };
 		MY00000100000000000000AB /* MyReviewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReviewsViewController.swift; sourceTree = "<group>"; };
 		MY00000100000000000000BB /* MyReviewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReviewsView.swift; sourceTree = "<group>"; };
@@ -547,6 +578,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44684C143090284800BE67AD /* FirebaseFunctions in Frameworks */,
+				44684C133090284800BE67AD /* FirebaseAppCheck in Frameworks */,
 				4411DD403085952C0098CBF6 /* FirebaseFirestore in Frameworks */,
 				4411DD3F3085952C0098CBF6 /* FirebaseAuth in Frameworks */,
 				4411DD3E3085952C0098CBF6 /* FirebaseCore in Frameworks */,
@@ -561,6 +594,7 @@
 			isa = PBXGroup;
 			children = (
 				BB684124EACB8F27D70A7993 /* AuthModels.swift */,
+				A1100001000000000000001B /* AuthProtocols.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -593,6 +627,7 @@
 			isa = PBXGroup;
 			children = (
 				442CB05D2FFC81ED004FCC82 /* Home */,
+				MR000001000000000000034B /* MovieRecommendation */,
 				MC000001000000000000001G /* MovieCatalog */,
 				LS000001000000000000001G /* Lists */,
 				PP000001000000000000012G /* Profile */,
@@ -631,6 +666,7 @@
 				442CB0762FFC8306004FCC82 /* WeeklyDigestView.swift */,
 				442CB0A72FFC8507004FCC82 /* HomeErrorStateView.swift */,
 				442CB0A82FFC8508004FCC82 /* HomeContentView.swift */,
+				MR000001000000000000033B /* MovieRecommendationFloatingButton.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -699,6 +735,7 @@
 			isa = PBXGroup;
 			children = (
 				8F50B735E506F88941CE16F2 /* FirebaseConfiguration.swift */,
+				MR000001000000000000022B /* FirebaseAppCheckProviderFactory.swift */,
 				656F9C46808CEC32307992AA /* FirebaseAuthRepository.swift */,
 			);
 			path = Auth;
@@ -864,6 +901,7 @@
 				ST000001000000000000001B /* YearInFilmStats.swift */,
 				BB000001000000000000001B /* Genre.swift */,
 				CC000001000000000000001B /* Movie.swift */,
+				MR000001000000000000024B /* MovieRecommendation.swift */,
 				MC000001000000000000001B /* MovieCollectionCategory.swift */,
 				MC000001000000000000002B /* MovieCollectionPage.swift */,
 				AA100001000000000000001B /* MovieDetails.swift */,
@@ -907,6 +945,7 @@
 				9041A1308F8DC6BA42D5AA7F /* FirestoreMovieActivityRepository.swift */,
 				9C360D26763E23DD2EE34540 /* FirestoreUserRepository.swift */,
 				358B6E132B58ACC5593DC1B3 /* FirestoreStatsRepository.swift */,
+				MR000001000000000000023B /* FirebaseMovieRecommendationRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -918,6 +957,7 @@
 				AR000001000000000000002B /* AppearanceRepositoryProtocol.swift */,
 				LR000001000000000000002B /* LanguageRepositoryProtocol.swift */,
 				DD000001000000000000002B /* MovieRepositoryProtocol.swift */,
+				MR000001000000000000025B /* MovieRecommendationRepositoryProtocol.swift */,
 				ST000001000000000000002B /* StatsRepositoryProtocol.swift */,
 				MA000001000000000000002B /* MovieActivityRepositoryProtocol.swift */,
 				442CB0962FFC8404004FCC82 /* GenreRepositoryProtocol.swift */,
@@ -1106,6 +1146,31 @@
 			path = Subviews;
 			sourceTree = "<group>";
 		};
+		MR000001000000000000034B /* MovieRecommendation */ = {
+			isa = PBXGroup;
+			children = (
+				MR000001000000000000026B /* MovieRecommendationModels.swift */,
+				MR000001000000000000027B /* MovieRecommendationViewController.swift */,
+				MR000001000000000000028B /* MovieRecommendationView.swift */,
+				MR000001000000000000029B /* MovieRecommendationInteractor.swift */,
+				MR000001000000000000030B /* MovieRecommendationPresenter.swift */,
+				MR000001000000000000031B /* MovieRecommendationRouter.swift */,
+				MR000001000000000000032B /* MovieRecommendationConfigurator.swift */,
+				MR000001000000000000041B /* Subviews */,
+			);
+			path = MovieRecommendation;
+			sourceTree = "<group>";
+		};
+		MR000001000000000000041B /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				MR000001000000000000038B /* MovieRecommendationInputView.swift */,
+				MR000001000000000000039B /* MovieRecommendationResultView.swift */,
+				MR000001000000000000040B /* MovieRecommendationErrorView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
 		MY000001000000000000001G /* MyReviews */ = {
 			isa = PBXGroup;
 			children = (
@@ -1262,6 +1327,8 @@
 				A305C61E94BA26E6FC097391 /* FirebaseCore */,
 				AA0CB820CD40EB41927092A0 /* FirebaseAuth */,
 				35F66191A53A42F77CA71207 /* FirebaseFirestore */,
+				MR000001000000000000004A /* FirebaseAppCheck */,
+				MR000001000000000000005A /* FirebaseFunctions */,
 			);
 			productName = cineteca;
 			productReference = AA000001000000000000000A /* cineteca.app */;
@@ -1328,6 +1395,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA000001000000000000001A /* AppDelegate.swift in Sources */,
+				MR000001000000000000022A /* FirebaseAppCheckProviderFactory.swift in Sources */,
+				MR000001000000000000023A /* FirebaseMovieRecommendationRepository.swift in Sources */,
+				MR000001000000000000024A /* MovieRecommendation.swift in Sources */,
+				MR000001000000000000025A /* MovieRecommendationRepositoryProtocol.swift in Sources */,
+				MR000001000000000000026A /* MovieRecommendationModels.swift in Sources */,
+				MR000001000000000000027A /* MovieRecommendationViewController.swift in Sources */,
+				MR000001000000000000028A /* MovieRecommendationView.swift in Sources */,
+				MR000001000000000000029A /* MovieRecommendationInteractor.swift in Sources */,
+				MR000001000000000000030A /* MovieRecommendationPresenter.swift in Sources */,
+				MR000001000000000000031A /* MovieRecommendationRouter.swift in Sources */,
+				MR000001000000000000032A /* MovieRecommendationConfigurator.swift in Sources */,
+				MR000001000000000000033A /* MovieRecommendationFloatingButton.swift in Sources */,
+				MR000001000000000000038A /* MovieRecommendationInputView.swift in Sources */,
+				MR000001000000000000039A /* MovieRecommendationResultView.swift in Sources */,
+				MR000001000000000000040A /* MovieRecommendationErrorView.swift in Sources */,
 				AA000001000000000000001D /* SceneDelegate.swift in Sources */,
 				442CB05A2FF603BE004FCC82 /* NetworkConfiguration.swift in Sources */,
 				442CB0612FFC81F8004FCC82 /* HomeView.swift in Sources */,
@@ -1564,6 +1646,7 @@
 				MC000001000000000000010C /* MovieCatalogGridCell.swift in Sources */,
 				MC000001000000000000012A /* MovieCatalogLoadingFooterView.swift in Sources */,
 				4C3A999BE67967BCEEBE8A94 /* AuthModels.swift in Sources */,
+				A1100001000000000000001A /* AuthProtocols.swift in Sources */,
 				2025AF8A2C92ED3DA1458013 /* FirebaseConfiguration.swift in Sources */,
 				356D389445FDB9BE1D776B0C /* FirebaseAuthRepository.swift in Sources */,
 				CEDDFF59AC8E2281FDAB7E41 /* FirestoreActivityMapper.swift in Sources */,
@@ -1583,9 +1666,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		CC000001000000000000007D /* Localizable.strings */ = {
@@ -1832,6 +1912,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BBA6BD772BA1B47E5F29580C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		MR000001000000000000004A /* FirebaseAppCheck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BBA6BD772BA1B47E5F29580C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAppCheck;
+		};
+		MR000001000000000000005A /* FirebaseFunctions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BBA6BD772BA1B47E5F29580C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFunctions;
 		};
 /* End XCSwiftPackageProductDependency section */
 

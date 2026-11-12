@@ -17,6 +17,9 @@ xcuserdata/
 # Build
 build/
 DerivedData/
+node_modules/
+functions/lib/
+.claude/worktrees/
 *.hmap
 *.ipa
 *.dSYM.zip

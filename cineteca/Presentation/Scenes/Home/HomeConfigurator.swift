@@ -8,6 +8,7 @@ final class HomeConfigurator {
         activityRepository: MovieActivityRepositoryProtocol,
         movieDetailsBuilder: MovieDetailsBuilding,
         movieCatalogBuilder: MovieCatalogBuilding,
+        movieRecommendationBuilder: MovieRecommendationBuilding,
         authGate: AuthenticationGateProtocol
     ) -> UIViewController {
         let presenter = HomePresenter()
@@ -19,7 +20,8 @@ final class HomeConfigurator {
         )
         let router = HomeRouter(
             movieDetailsBuilder: movieDetailsBuilder,
-            movieCatalogBuilder: movieCatalogBuilder
+            movieCatalogBuilder: movieCatalogBuilder,
+            movieRecommendationBuilder: movieRecommendationBuilder
         )
         let view = HomeView()
         let viewController = HomeViewController(

@@ -11,6 +11,11 @@ protocol MovieCatalogBuilding {
 }
 
 @MainActor
+protocol MovieRecommendationBuilding {
+    func makeMovieRecommendation() -> UIViewController
+}
+
+@MainActor
 protocol EditProfileBuilding {
     func makeEditProfile() -> UIViewController
 }

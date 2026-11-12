@@ -3,7 +3,6 @@ import UIKit
 final class AuthenticationConfigurator {
     static func resolve(
         authRepository: AuthRepositoryProtocol,
-        userRepository: UserRepositoryProtocol,
         providers: [AuthenticationProviderProtocol],
         providerViewModels: [AuthenticationModels.ProviderViewModel]
     ) -> AuthenticationViewController {
@@ -11,7 +10,6 @@ final class AuthenticationConfigurator {
         let interactor = AuthenticationInteractor(
             presenter: presenter,
             authRepository: authRepository,
-            userRepository: userRepository,
             providers: providers
         )
         let router = AuthenticationRouter()

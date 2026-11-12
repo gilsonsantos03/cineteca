@@ -90,7 +90,7 @@ final class HomeContentView: UIView {
         contentStack.addArrangedSubview(makeSpacer(height: 24))
         contentStack.addArrangedSubview(topRatedSectionView)
         contentStack.addArrangedSubview(makeSpacer(height: 24))
-        contentStack.addArrangedSubview(makeSpacer(height: 32))
+        contentStack.addArrangedSubview(makeSpacer(height: 96))
     }
 
     private func setupConstraints() {
@@ -117,7 +117,12 @@ final class HomeContentView: UIView {
     // MARK: - Configure
 
     func configure(content: HomeModels.FetchContent.ViewModel.Content) {
-        featuredView.configure(viewModel: content.featured)
+        if let featured = content.featured {
+            featuredView.isHidden = false
+            featuredView.configure(viewModel: featured)
+        } else {
+            featuredView.isHidden = true
+        }
         genreFilterView.configure(
             options: content.genreFilter.options,
             selectedIndex: content.genreFilter.selectedIndex

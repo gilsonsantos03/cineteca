@@ -2,6 +2,7 @@ import UIKit
 import Cartography
 
 protocol HomeViewDelegate: AnyObject {
+    func didTapMovieRecommendation()
     func didRequestRefresh()
     func didRequestRetry()
     func didSelectGenre(at index: Int)
@@ -30,6 +31,11 @@ final class HomeView: UIView {
     private lazy var loadingSkeletonView = HomeSkeletonView()
     private lazy var homeContentView = HomeContentView()
     private lazy var errorStateView = ErrorStateView()
+    private lazy var recommendationButton: MovieRecommendationFloatingButton = {
+        let button = MovieRecommendationFloatingButton()
+        button.actionDelegate = self
+        return button
+    }()
 
     // MARK: - Initialization
 
@@ -55,12 +61,14 @@ final class HomeView: UIView {
         addSubview(homeContentView)
         addSubview(errorStateView)
         addSubview(loadingSkeletonView)
+        addSubview(recommendationButton)
     }
 
     private func setupConstraints() {
         constrainLoadingSkeletonView()
         constrainHomeContentView()
         constrainErrorStateView()
+        constrainRecommendationButton()
     }
 
     private func constrainLoadingSkeletonView() {
@@ -79,6 +87,19 @@ final class HomeView: UIView {
         constrain(errorStateView, self) { view, superview in
             view.edges == superview.edges
         }
+    }
+
+    private func constrainRecommendationButton() {
+        constrain(recommendationButton, self) { button, superview in
+            button.right == superview.right - 20
+            button.bottom == superview.safeAreaLayoutGuide.bottom - 20
+            button.height == 50
+        }
+    }
+
+    override func didMoveToWindow() {
+        super.didMoveToWindow()
+        bringSubviewToFront(recommendationButton)
     }
 
     // MARK: - Public API
@@ -110,6 +131,14 @@ final class HomeView: UIView {
         loadingSkeletonView.isHidden = state != .loading
         homeContentView.isHidden = state != .content
         errorStateView.isHidden = state != .error
+        recommendationButton.isHidden = state == .loading
+        bringSubviewToFront(recommendationButton)
+    }
+}
+
+extension HomeView: MovieRecommendationFloatingButtonDelegate {
+    func didTapMovieRecommendation() {
+        delegate?.didTapMovieRecommendation()
     }
 }
 

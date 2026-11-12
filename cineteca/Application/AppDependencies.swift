@@ -4,6 +4,7 @@ import UIKit
 @MainActor
 final class AppDependencies {
     let movieRepository: MovieRepositoryProtocol
+    let movieRecommendationRepository: MovieRecommendationRepositoryProtocol
     let genreRepository: GenreRepositoryProtocol
     let movieActivityRepository: MovieActivityRepositoryProtocol
     let userRepository: UserRepositoryProtocol
@@ -26,11 +27,13 @@ final class AppDependencies {
         self.statsRepository = FirestoreStatsRepository(activityRepository: activityRepository)
         self.appearanceRepository = AppearanceRepository()
         self.movieReviewSheetFactory = MovieReviewSheetFactory()
-        let authRepository = FirebaseAuthRepository()
+        let authRepository = FirebaseAuthRepository(userRepository: userRepository)
         self.authRepository = authRepository
+        self.movieRecommendationRepository = FirebaseMovieRecommendationRepository(
+            localeProvider: LocaleProvider(languageRepository: languageRepository)
+        )
         self.authenticationCoordinator = AuthenticationCoordinator(
             authRepository: authRepository,
-            userRepository: userRepository,
             providers: [],
             presenterProvider: {
                 AppDependencies.topViewController(from: nil)
@@ -98,6 +101,7 @@ extension AppDependencies {
             statsRepository: statsRepository,
             movieDetailsBuilder: self,
             movieCatalogBuilder: self,
+            movieRecommendationBuilder: self,
             listsBuilder: self,
             editProfileBuilder: self,
             myReviewsBuilder: self,
@@ -114,6 +118,7 @@ extension AppDependencies {
 extension AppDependencies:
     MovieDetailsBuilding,
     MovieCatalogBuilding,
+    MovieRecommendationBuilding,
     EditProfileBuilding,
     SearchBuilding,
     MyReviewsBuilding,
@@ -141,6 +146,16 @@ extension AppDependencies:
             repository: movieRepository,
             genreRepository: genreRepository,
             movieDetailsBuilder: self
+        )
+    }
+
+    func makeMovieRecommendation() -> UIViewController {
+        MovieRecommendationConfigurator.resolve(
+            recommendationRepository: movieRecommendationRepository,
+            movieRepository: movieRepository,
+            searchBuilder: self,
+            movieDetailsBuilder: self,
+            authGate: authenticationCoordinator
         )
     }
 

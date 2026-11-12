@@ -130,9 +130,17 @@ final class FirestoreUserRepository: UserRepositoryProtocol, @unchecked Sendable
             userSnapshot.data()?["username"] as? String ?? ""
         )
         let username = normalizedUsername.isEmpty ? nil : normalizedUsername
-        let activities = try await userDocument.collection("activities").getDocuments()
+        let activityCollection = userDocument.collection("activities")
+        while true {
+            let activities = try await activityCollection.limit(to: 400).getDocuments()
+            guard !activities.documents.isEmpty else { break }
+
+            let batch = firestore.batch()
+            activities.documents.forEach { batch.deleteDocument($0.reference) }
+            try await batch.commit()
+        }
+
         let batch = firestore.batch()
-        activities.documents.forEach { batch.deleteDocument($0.reference) }
         if let username {
             batch.deleteDocument(firestore.collection("usernames").document(username))
         }

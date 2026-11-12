@@ -58,6 +58,23 @@
 "AuthenticationScene.Prompt.Message" = "Entre ou crie sua conta para acessar seu conteúdo pessoal.";
 "AuthenticationScene.Prompt.Action" = "Entrar ou criar conta";
 
+"MovieRecommendationScene.Title" = "Recomendação para você";
+"MovieRecommendationScene.Subtitle" = "Conte o que combina com seu momento ou misture dois filmes.";
+"MovieRecommendationScene.HomeButton" = "Recomendar filme";
+"MovieRecommendationScene.Mode.Moment" = "Meu momento";
+"MovieRecommendationScene.Mode.Blend" = "Combinar filmes";
+"MovieRecommendationScene.PromptPlaceholder" = "Ex.: quero um filme leve e divertido para assistir hoje";
+"MovieRecommendationScene.RecommendButton" = "Encontrar um filme";
+"MovieRecommendationScene.SelectMovie" = "Escolher filme";
+"MovieRecommendationScene.DetailsButton" = "Ver detalhes do filme";
+"MovieRecommendationScene.RetryButton" = "Tentar novamente";
+"MovieRecommendationScene.NewRecommendation" = "Fazer outra recomendação";
+"MovieRecommendationScene.InvalidInput" = "Confira o texto ou escolha dois filmes diferentes.";
+"MovieRecommendationScene.ErrorMessage" = "Não foi possível gerar uma recomendação agora. Tente novamente.";
+"MovieRecommendationScene.RateLimited" = "Muitas solicitações. Aguarde um momento e tente novamente.";
+"MovieRecommendationScene.DuplicateMovieTitle" = "Escolha filmes diferentes";
+"MovieRecommendationScene.DuplicateMovieMessage" = "Selecione um filme diferente para combinar.";
+
 "MovieCatalogScene.LoadMore" = "Carregar mais";
 "MovieCatalogScene.NextPageError.Title" = "Não foi possível carregar mais filmes";
 "MovieCatalogScene.NextPageError.Message" = "Verifique sua conexão e tente novamente.";

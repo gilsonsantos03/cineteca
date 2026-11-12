@@ -49,6 +49,8 @@
 - Permite avaliar filmes, adicionar reviews, favoritar e adicionar filmes à watchlist
 - O botão Watchlist do filme em destaque persiste a alteração no Firestore e atualiza o estado visual do hero
 - Exibe perfil, estatísticas e reviews recentes do usuário
+- Oferece recomendações por momento ou pela combinação de dois filmes para
+  pessoas autenticadas
 - Persiste dados autenticados por UID no Firebase Authentication e Firestore
 
 ### O que ainda não faz
@@ -72,6 +74,7 @@
 | Localização | `Localizable.strings` + enum type-safe `Strings` |
 | Dependências externas | SPM (Cartography e Firebase iOS SDK) |
 | Persistência | Firebase Authentication + Firestore por UID |
+| Recomendação de filmes | Firebase Callable Functions + TMDB + Gemini |
 
 ### Frameworks Apple utilizados
 
@@ -218,6 +221,10 @@ cineteca/
     │       └── GenreRepositoryProtocol.swift
     │
     ├── Data/
+    │   ├── Auth/
+    │   │   ├── FirebaseConfiguration.swift
+    │   │   ├── FirebaseAppCheckProviderFactory.swift
+    │   │   └── FirebaseAuthRepository.swift
     │   ├── Endpoints/
     │   │   ├── MovieEndpoint.swift
     │   │   └── GenreEndpoint.swift
@@ -235,6 +242,7 @@ cineteca/
     │   │   └── ParameterEncoding.swift
     │   └── Repositories/
     │       ├── MovieRepository.swift
+    │       ├── FirebaseMovieRecommendationRepository.swift
     │       └── GenreRepository.swift   # actor
     │
     ├── Presentation/
@@ -253,6 +261,8 @@ cineteca/
     │       ├── Search/                   # Cena Search (VIP; busca ou seleção)
     │       │   ├── SearchConfigurator.swift
     │       │   ├── SearchViewController.swift
+    │       │   └── ...
+    │       ├── MovieRecommendation/     # Recomendação por IA (VIP)
     │       │   └── ...
     │       └── MovieDetails/             # Cena Movie Details (VIP)
     │           ├── MovieDetailsConfigurator.swift
@@ -273,6 +283,9 @@ cineteca/
     ├── view-conventions.md
     └── DOCUMENTACAO-PROJETO.md           # Este arquivo
 ```
+
+Na raiz do repositório, `functions/` contém a Callable Function
+`recommendMovie`, seus testes e a configuração Node.js.
 
 ---
 
@@ -297,6 +310,7 @@ cineteca/
 | **Estado de erro** | Tela cheia com botão retry | `HomeErrorStateView` |
 | **Imagens assíncronas** | Posters/backdrops do CDN TMDB | `UIImageView+AsyncLoad` |
 | **Localização** | UI em en/pt-BR; gêneros da API no idioma do device | `Strings`, `LocaleProvider` |
+| **Recomendação por IA** | Recomenda um filme a partir de um momento textual ou de dois filmes selecionados; candidatos vêm do TMDB e são ranqueados pelo Gemini | `MovieRecommendation/`, `functions/` |
 | **Avaliação de filmes** | Nota inteira de 0 a 10, com data da avaliação | `MovieActivityRepository`, `MovieReviewView` |
 | **Reviews do usuário** | Texto opcional associado à avaliação; edição sem duplicidade | `ReviewEntity`, `MyReviews/` |
 | **Atividade do usuário** | Favoritos (exigem avaliação) e watchlist por filme | `MovieActivityRepository` |
@@ -358,6 +372,10 @@ Firestore, separados por UID:
   cadastro com username, login e recuperação de senha. A cena e o coordinator mantêm
   contratos de provedores intercambiáveis, permitindo adicionar Google ou outro
   provedor futuramente sem alterar as cenas protegidas.
+- A tela de recomendação exige uma conta autenticada antes de permitir a
+  geração. Visitantes não recebem uma sessão Firebase anônima.
+- O backend limita cinco chamadas de recomendação por UID autenticado por
+  minuto.
 - No cadastro, o documento `users/{uid}` e a reserva
   `usernames/{username}` são criados imediatamente após a conta do Firebase
   Authentication. Contas antigas sem perfil continuam sendo inicializadas sob
@@ -459,10 +477,14 @@ Firebase Authentication identifica o usuário. O Firestore mantém:
 | `users/{uid}` | Username, perfil, preferências de perfil e dados básicos da conta |
 | `users/{uid}/activities/{movieId}` | Metadados do filme, nota, review, favorito e watchlist |
 | `usernames/{username}` | Reserva única do username e UID proprietário |
+| `movieRecommendationRateLimits/{sha256(uid)}` | Janela e contador de chamadas recentes |
 
 `FirestoreUserRepository`, `FirestoreMovieActivityRepository` e
 `FirestoreStatsRepository` escondem o SDK atrás dos contratos de domínio. Não
 há persistência pessoal local nem limpeza automática no lançamento.
+
+Os documentos de rate limit são escritos somente pelo Admin SDK da Cloud
+Function; o cliente não acessa esses documentos diretamente.
 
 ### 6.5 Cache interno do Interactor
 
@@ -519,7 +541,21 @@ Carregadas via `UIImageView.loadImage(from:)` com `URLSession.shared`.
 | `NetworkConfiguration` | Base URL + headers padrão |
 | `NetworkError` | Erros tipados (401, 403, 404, 5xx, decoding, underlying) |
 
-### 7.5 Contratos dos repositórios
+### 7.5 Recomendação por IA
+
+| Componente | Uso |
+|---|---|
+| `recommendMovie` | Callable Function regional `us-central1`; exige Firebase Auth; App Check está temporariamente sem enforcement em desenvolvimento |
+| TMDB `/discover/movie` | Candidatos populares para o modo “Meu momento” |
+| TMDB `/movie/{id}/similar` | Candidatos relacionados aos dois filmes do modo “Combinar filmes” |
+| Gemini `gemini-2.5-flash` | Escolhe exatamente um candidato e produz uma explicação curta |
+
+O cliente envia `{ mode, prompt/movieIds, locale }`. Os únicos locales aceitos
+no backend são `en-US` e `pt-BR`. A resposta contém somente `movieId` e
+`explanation`; o cliente busca os detalhes canônicos do filme no TMDB antes de
+exibir o resultado. As chaves TMDB e Gemini ficam em Firebase Secrets.
+
+### 7.6 Contratos dos repositórios
 
 ```swift
 protocol MovieRepositoryProtocol {
@@ -608,7 +644,7 @@ O `HomeInteractor` chama `genres()` uma vez e repassa `[Genre]` para cada `fetch
 1. Sem gênero selecionado → featured original
 2. Featured já tem o gênero → mantém
 3. Senão → primeiro match em nowPlaying → trending → topRated
-4. Nenhum match → mantém featured original
+4. Nenhum match → oculta o featured para não exibir um filme fora do gênero
 
 ### 8.4 Pull-to-refresh
 
@@ -685,6 +721,25 @@ usado para decidir qual endpoint chamar.
 6. Profile e Stats consultam as atividades e reviews para atualizar os agregados
 ```
 
+### 8.9 Recomendação de filmes
+
+```
+1. Usuário abre a recomendação pelo botão flutuante da Home
+2. Se não houver conta autenticada, o coordinator apresenta login/cadastro
+3. No modo “Meu momento”, o texto descreve a preferência; no modo
+   “Combinar filmes”, Search retorna dois IDs distintos
+4. MovieRecommendationRepository chama `recommendMovie`
+5. A Function valida que a conta não é anônima e aplica rate limit; App Check
+   está temporariamente sem enforcement em desenvolvimento e deve ser
+   reativado antes da publicação
+6. TMDB fornece candidatos populares ou similares; Gemini escolhe um ID
+   somente entre esses candidatos e produz a explicação
+7. O iOS busca os detalhes completos do ID pelo MovieRepository
+8. O Presenter formata o resultado; retry e nova recomendação retornam aos
+   estados apropriados
+9. Falhas do TMDB/Gemini exibem o estado de erro sem persistir resultado
+```
+
 ---
 
 ## 9. Estado e concorrência
@@ -698,6 +753,8 @@ usado para decidir qual endpoint chamar.
 | Perfil e atividade de filmes | Firestore via repositórios por UID | `users/{uid}` e `users/{uid}/activities/{movieId}` |
 | Estado visual (loading/content/error) | `HomeView` | `enum State { loading, content, error }` |
 | Seleção de chip | `GenreFilterView` | `options` + `selectedIndex` via `configure` |
+| Recomendação em andamento | `MovieRecommendationInteractor` | Task cancelável; resultado não é persistido |
+| Quota e rate limit da recomendação | Cloud Function | Transações Firestore por hash do UID |
 
 ### 9.2 Sem framework reativo
 

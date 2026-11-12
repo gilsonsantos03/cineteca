@@ -16,6 +16,11 @@ final class SearchInteractor {
     private var filters = SearchFilters()
     private var currentQuery = ""
     private var searchTask: Task<Void, Never>?
+    private var initialContentTask: Task<Void, Never>?
+    private var contentGeneration = 0
+    private var isInitialContentLoading = false
+    private var genresTask: Task<[Genre], Error>?
+    private var genresTaskID: UUID?
 
     init(
         presenter: SearchPresentationLogic,
@@ -31,17 +36,27 @@ final class SearchInteractor {
 extension SearchInteractor: SearchBusinessLogic {
     func loadContent(request: SearchModels.LoadContent.Request) {
         presenter.presentLoading(mode: .suggested)
-        Task { await loadInitialContent() }
+        contentGeneration += 1
+        let generation = contentGeneration
+        isInitialContentLoading = true
+        initialContentTask?.cancel()
+        initialContentTask = Task { await loadInitialContent(generation: generation) }
     }
 
     func search(request: SearchModels.Search.Request) {
         currentQuery = request.query
-        searchTask?.cancel()
-        searchTask = Task { await performSearch() }
+        startSearch()
     }
 
     func updateFilters(request: SearchModels.UpdateFilters.Request) {
         filters = request.filters
+        startSearch()
+    }
+
+    private func startSearch() {
+        contentGeneration += 1
+        isInitialContentLoading = false
+        initialContentTask?.cancel()
         searchTask?.cancel()
         searchTask = Task { await performSearch() }
     }
@@ -52,21 +67,55 @@ extension SearchInteractor: SearchBusinessLogic {
         )
     }
 
-    private func loadInitialContent() async {
+    private func loadGenres() async throws -> [Genre] {
+        if let genresTask {
+            return try await genresTask.value
+        }
+        let taskID = UUID()
+        let task = Task { try await genreRepository.genres() }
+        genresTaskID = taskID
+        genresTask = task
         do {
-            genres = try await genreRepository.genres()
-            let suggested = try await repository.fetchTrending(genres: genres)
+            let loaded = try await task.value
+            if genresTaskID == taskID {
+                genresTask = nil
+                genresTaskID = nil
+            }
+            genres = loaded
+            return loaded
+        } catch {
+            if genresTaskID == taskID {
+                genresTask = nil
+                genresTaskID = nil
+            }
+            throw error
+        }
+    }
+
+    private func loadInitialContent(generation: Int) async {
+        do {
+            let loaded = try await loadGenres()
+            guard !Task.isCancelled, generation == contentGeneration else { return }
+            let suggested = try await repository.fetchTrending(genres: loaded)
+            guard !Task.isCancelled, generation == contentGeneration else { return }
+            isInitialContentLoading = false
             await MainActor.run {
                 presenter.presentMovies(
                     response: .content(movies: suggested, mode: .suggested)
                 )
             }
         } catch {
+            guard !Task.isCancelled, generation == contentGeneration else { return }
+            isInitialContentLoading = false
             await MainActor.run { presenter.presentMovies(response: .error) }
         }
     }
 
     private func performSearch() async {
+        if isInitialContentLoading {
+            initialContentTask?.cancel()
+            isInitialContentLoading = false
+        }
         let trimmedQuery = currentQuery.trimmingCharacters(in: .whitespacesAndNewlines)
 
         if trimmedQuery.isEmpty, !filters.hasActiveFilters {
@@ -78,15 +127,17 @@ extension SearchInteractor: SearchBusinessLogic {
         await MainActor.run { presenter.presentLoading(mode: loadingMode) }
 
         do {
+            let loadedGenres = try await loadGenres()
+            guard !Task.isCancelled else { return }
             let movies: [Movie]
             if filters.hasActiveFilters {
                 movies = try await repository.discoverMovies(
                     filters: filters,
                     query: trimmedQuery.isEmpty ? nil : trimmedQuery,
-                    genres: genres
+                    genres: loadedGenres
                 )
             } else {
-                movies = try await repository.searchMovies(query: trimmedQuery, genres: genres)
+                movies = try await repository.searchMovies(query: trimmedQuery, genres: loadedGenres)
             }
 
             guard !Task.isCancelled else { return }
@@ -107,7 +158,9 @@ extension SearchInteractor: SearchBusinessLogic {
         await MainActor.run { presenter.presentLoading(mode: loadingMode) }
 
         do {
-            let suggested = try await repository.fetchTrending(genres: genres)
+            let loadedGenres = try await loadGenres()
+            guard !Task.isCancelled else { return }
+            let suggested = try await repository.fetchTrending(genres: loadedGenres)
             guard !Task.isCancelled else { return }
             await MainActor.run {
                 presenter.presentMovies(

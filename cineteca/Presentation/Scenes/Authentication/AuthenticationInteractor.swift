@@ -14,18 +14,15 @@ protocol AuthenticationPresentationLogic: AnyObject {
 final class AuthenticationInteractor {
     private let presenter: AuthenticationPresentationLogic
     private let authRepository: AuthRepositoryProtocol
-    private let userRepository: UserRepositoryProtocol
     private let providers: [AuthenticationProviderProtocol]
 
     init(
         presenter: AuthenticationPresentationLogic,
         authRepository: AuthRepositoryProtocol,
-        userRepository: UserRepositoryProtocol,
         providers: [AuthenticationProviderProtocol]
     ) {
         self.presenter = presenter
         self.authRepository = authRepository
-        self.userRepository = userRepository
         self.providers = providers
     }
 }
@@ -65,15 +62,9 @@ extension AuthenticationInteractor: AuthenticationBusinessLogic {
                 case .signUp:
                     _ = try await authRepository.createAccount(
                         email: email,
-                        password: request.password
+                        password: request.password,
+                        username: username ?? ""
                     )
-                    do {
-                        _ = try await userRepository.createProfile(username: username ?? "")
-                    } catch {
-                        try? await userRepository.deleteCurrentUserData()
-                        try? await authRepository.deleteAccount()
-                        throw error
-                    }
                 }
                 await MainActor.run {
                     self.presenter.presentSubmit(response: .success)

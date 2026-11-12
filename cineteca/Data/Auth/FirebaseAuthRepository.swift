@@ -1,7 +1,14 @@
 import FirebaseAuth
+import FirebaseFirestore
 import Foundation
 
 final class FirebaseAuthRepository: AuthRepositoryProtocol, @unchecked Sendable {
+    private let userRepository: UserRepositoryProtocol
+
+    init(userRepository: UserRepositoryProtocol) {
+        self.userRepository = userRepository
+    }
+
     var state: AuthState {
         guard FirebaseConfiguration.isConfigured else { return .guest }
         guard let user = Auth.auth().currentUser else { return .guest }
@@ -17,18 +24,16 @@ final class FirebaseAuthRepository: AuthRepositoryProtocol, @unchecked Sendable 
         }
 
         let firebaseCredential = OAuthProvider.credential(
-            withProviderID: credential.providerID,
+            providerID: .custom(credential.providerID),
             idToken: credential.idToken,
             rawNonce: rawNonce
         )
 
         do {
-            let result = try await Auth.auth().signIn(with: firebaseCredential)
-            return AuthenticatedUser(
-                id: result.user.uid,
-                email: result.user.email,
-                displayName: result.user.displayName
-            )
+            let auth = Auth.auth()
+            let result = try await auth.signIn(with: firebaseCredential)
+            try await createProfileIfNeeded(username: nil)
+            return Self.makeUser(from: result.user)
         } catch {
             throw Self.map(error)
         }
@@ -40,21 +45,59 @@ final class FirebaseAuthRepository: AuthRepositoryProtocol, @unchecked Sendable 
         }
 
         do {
-            let result = try await Auth.auth().signIn(withEmail: email, password: password)
+            let auth = Auth.auth()
+            let result = try await auth.signIn(withEmail: email, password: password)
+            try await createProfileIfNeeded(username: nil)
             return Self.makeUser(from: result.user)
         } catch {
             throw Self.map(error)
         }
     }
 
-    func createAccount(email: String, password: String) async throws -> AuthenticatedUser {
+    func createAccount(
+        email: String,
+        password: String,
+        username: String?
+    ) async throws -> AuthenticatedUser {
         guard FirebaseConfiguration.isConfigured else {
             throw AuthenticationError.notConfigured
         }
 
         do {
-            let result = try await Auth.auth().createUser(withEmail: email, password: password)
+            let auth = Auth.auth()
+            let result = try await auth.createUser(withEmail: email, password: password)
+            do {
+                try await createProfileIfNeeded(username: username)
+            } catch {
+                await rollbackNewAccount(result.user)
+                throw error
+            }
             return Self.makeUser(from: result.user)
+        } catch {
+            throw Self.map(error)
+        }
+    }
+
+    func createProfileIfNeeded(username: String?) async throws {
+        guard FirebaseConfiguration.isConfigured else {
+            throw AuthenticationError.notConfigured
+        }
+        guard let user = Auth.auth().currentUser else {
+            throw AuthenticationError.userNotAuthenticated
+        }
+
+        do {
+            let document = Firestore.firestore().collection("users").document(user.uid)
+            let snapshot = try await document.getDocument()
+            guard !snapshot.exists else { return }
+
+            let profileUsername: String
+            if let username, !username.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                profileUsername = username
+            } else {
+                profileUsername = String(user.uid.prefix(8)).lowercased()
+            }
+            _ = try await userRepository.createProfile(username: profileUsername)
         } catch {
             throw Self.map(error)
         }
@@ -99,6 +142,9 @@ final class FirebaseAuthRepository: AuthRepositoryProtocol, @unchecked Sendable 
     }
 
     private static func map(_ error: Error) -> AuthenticationError {
+        if let authenticationError = error as? AuthenticationError {
+            return authenticationError
+        }
         let nsError = error as NSError
         if nsError.code == AuthErrorCode.invalidEmail.rawValue {
             return .invalidEmail
@@ -135,6 +181,11 @@ final class FirebaseAuthRepository: AuthRepositoryProtocol, @unchecked Sendable 
             return .deletionRequiresRecentLogin
         }
         return .underlying(message: error.localizedDescription)
+    }
+
+    private func rollbackNewAccount(_ user: FirebaseAuth.User) async {
+        try? await userRepository.deleteCurrentUserData()
+        try? await user.delete()
     }
 
     private static func makeUser(from user: FirebaseAuth.User) -> AuthenticatedUser {

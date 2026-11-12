@@ -6,7 +6,7 @@ enum HomeModels {
 
         enum Response {
             case content(
-                featured: Movie,
+                featured: Movie?,
                 nowPlaying: [Movie],
                 trending: [Movie],
                 topRated: [Movie],
@@ -21,7 +21,7 @@ enum HomeModels {
             case error
 
             struct Content {
-                let featured: FeaturedViewModel
+                let featured: FeaturedViewModel?
                 let genreFilter: GenreFilterViewModel
                 let nowPlaying: [MovieCardViewModel]
                 let trending: [MovieCardViewModel]

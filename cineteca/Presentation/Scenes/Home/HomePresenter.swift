@@ -18,10 +18,12 @@ extension HomePresenter: HomePresentationLogic {
             view?.displayFetchContent(
                 viewModel: .content(
                     HomeModels.FetchContent.ViewModel.Content(
-                        featured: makeFeaturedViewModel(
-                            from: featured,
-                            isInWatchlist: featuredIsInWatchlist
-                        ),
+                        featured: featured.map {
+                            makeFeaturedViewModel(
+                                from: $0,
+                                isInWatchlist: featuredIsInWatchlist
+                            )
+                        },
                         genreFilter: HomeModels.GenreFilterViewModel(
                             options: [Strings.HomeScene.GenreFilter.all] + genreFilter.genres.map(\.name),
                             selectedIndex: genreFilter.selectedIndex

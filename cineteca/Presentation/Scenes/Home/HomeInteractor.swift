@@ -90,7 +90,7 @@ extension HomeInteractor: HomeBusinessLogic {
                     request.isInWatchlist,
                     for: request.movieId
                 )
-                self.cachedHomeContent?.featuredIsInWatchlist = activity.isInWatchlist
+                self.cachedHomeContent?.watchlistByMovieID[request.movieId] = activity.isInWatchlist
                 response = .success(activity)
             } catch {
                 response = .error
@@ -121,15 +121,17 @@ extension HomeInteractor: HomeBusinessLogic {
             }
 
             sortedGenres = genres.sorted { $0.name < $1.name }
-            let featuredActivity = try? await activityRepository.fetchActivity(
-                for: featuredMovie.id
-            )
+            let activities = (try? await activityRepository.fetchActivities()) ?? []
             let content = CachedHomeContent(
                 featured: featuredMovie,
                 nowPlaying: nowPlayingMovies,
                 trending: trendingMovies,
                 topRated: topRatedMovies,
-                featuredIsInWatchlist: featuredActivity?.isInWatchlist ?? false
+                watchlistByMovieID: Dictionary(
+                    uniqueKeysWithValues: activities.map {
+                        ($0.metadata.movieId, $0.isInWatchlist)
+                    }
+                )
             )
             cachedHomeContent = content
             await MainActor.run { presentFilteredContent(from: content) }
@@ -140,14 +142,17 @@ extension HomeInteractor: HomeBusinessLogic {
 
     private func presentFilteredContent(from content: CachedHomeContent) {
         let selectedGenre = selectedGenre
+        let featured = resolveFeatured(from: content, genre: selectedGenre)
         presenter.presentFetchContent(
             response: .content(
-                featured: resolveFeatured(from: content, genre: selectedGenre),
+                featured: featured,
                 nowPlaying: filter(content.nowPlaying, by: selectedGenre),
                 trending: filter(content.trending, by: selectedGenre),
                 topRated: filter(content.topRated, by: selectedGenre),
                 genreFilter: HomeModels.GenreFilter(genres: sortedGenres, selectedIndex: selectedGenreIndex),
-                featuredIsInWatchlist: content.featuredIsInWatchlist
+                featuredIsInWatchlist: featured.map {
+                    content.watchlistByMovieID[$0.id] ?? false
+                } ?? false
             )
         )
     }
@@ -164,7 +169,7 @@ extension HomeInteractor: HomeBusinessLogic {
         }
     }
 
-    private func resolveFeatured(from content: CachedHomeContent, genre: Genre?) -> Movie {
+    private func resolveFeatured(from content: CachedHomeContent, genre: Genre?) -> Movie? {
         guard let genre else { return content.featured }
         if content.featured.genres.contains(where: { $0.id == genre.id }) {
             return content.featured
@@ -172,7 +177,6 @@ extension HomeInteractor: HomeBusinessLogic {
         return filter(content.nowPlaying, by: genre).first
             ?? filter(content.trending, by: genre).first
             ?? filter(content.topRated, by: genre).first
-            ?? content.featured
     }
 }
 
@@ -181,7 +185,7 @@ private struct CachedHomeContent {
     let nowPlaying: [Movie]
     let trending: [Movie]
     let topRated: [Movie]
-    var featuredIsInWatchlist: Bool
+    var watchlistByMovieID: [Int: Bool]
 
     func movie(withID movieID: Int) -> Movie? {
         ([featured] + nowPlaying + trending + topRated)

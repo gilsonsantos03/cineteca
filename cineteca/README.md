@@ -86,7 +86,7 @@ O presenter e as views recebem `HomeModels.FetchContent.Response` — listas já
 1. Sem gênero selecionado → featured original.
 2. Featured já tem o gênero → mantém.
 3. Senão → primeiro match em now playing, trending ou top rated.
-4. Nenhum match → mantém o featured original.
+4. Nenhum match → oculta o featured para não exibir um filme fora do gênero.
 
 ### Por que filtrar no cliente?
 

@@ -3,7 +3,6 @@ import UIKit
 @MainActor
 final class AuthenticationCoordinator: NSObject, AuthenticationGateProtocol {
     private let authRepository: AuthRepositoryProtocol
-    private let userRepository: UserRepositoryProtocol
     private let providers: [AuthenticationProviderProtocol]
     private let presenterProvider: () -> UIViewController?
 
@@ -12,12 +11,10 @@ final class AuthenticationCoordinator: NSObject, AuthenticationGateProtocol {
 
     init(
         authRepository: AuthRepositoryProtocol,
-        userRepository: UserRepositoryProtocol,
         providers: [AuthenticationProviderProtocol],
         presenterProvider: @escaping () -> UIViewController?
     ) {
         self.authRepository = authRepository
-        self.userRepository = userRepository
         self.providers = providers
         self.presenterProvider = presenterProvider
     }
@@ -39,6 +36,10 @@ final class AuthenticationCoordinator: NSObject, AuthenticationGateProtocol {
         presentAuthenticationIfNeeded()
     }
 
+    func requestAuthentication() {
+        performAuthenticated {}
+    }
+
     private func presentAuthenticationIfNeeded() {
         guard authenticationViewController == nil else { return }
         guard let presenter = presenterProvider() else { return }
@@ -51,7 +52,6 @@ final class AuthenticationCoordinator: NSObject, AuthenticationGateProtocol {
         }
         let viewController = AuthenticationConfigurator.resolve(
             authRepository: authRepository,
-            userRepository: userRepository,
             providers: providers,
             providerViewModels: viewModelProviders
         )
@@ -73,6 +73,7 @@ final class AuthenticationCoordinator: NSObject, AuthenticationGateProtocol {
         action?()
     }
 }
+
 extension AuthenticationCoordinator: AuthenticationViewControllerDelegate {
     func didCompleteAuthentication() {
         completeAuthentication()

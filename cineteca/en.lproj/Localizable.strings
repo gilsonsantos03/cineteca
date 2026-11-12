@@ -58,6 +58,23 @@
 "AuthenticationScene.Prompt.Message" = "Sign in or create an account to access your personal content.";
 "AuthenticationScene.Prompt.Action" = "Sign in or create account";
 
+"MovieRecommendationScene.Title" = "Your movie pick";
+"MovieRecommendationScene.Subtitle" = "Describe your mood or combine two films you love.";
+"MovieRecommendationScene.HomeButton" = "Recommend a movie";
+"MovieRecommendationScene.Mode.Moment" = "My moment";
+"MovieRecommendationScene.Mode.Blend" = "Blend movies";
+"MovieRecommendationScene.PromptPlaceholder" = "E.g. something light and funny to watch tonight";
+"MovieRecommendationScene.RecommendButton" = "Find a movie";
+"MovieRecommendationScene.SelectMovie" = "Choose a movie";
+"MovieRecommendationScene.DetailsButton" = "See movie details";
+"MovieRecommendationScene.RetryButton" = "Try again";
+"MovieRecommendationScene.NewRecommendation" = "Start a new recommendation";
+"MovieRecommendationScene.InvalidInput" = "Check your text or choose two different movies.";
+"MovieRecommendationScene.ErrorMessage" = "We couldn't make a recommendation right now. Please try again.";
+"MovieRecommendationScene.RateLimited" = "Too many requests. Wait a moment and try again.";
+"MovieRecommendationScene.DuplicateMovieTitle" = "Choose different movies";
+"MovieRecommendationScene.DuplicateMovieMessage" = "Select a different movie to create a blend.";
+
 "MovieCatalogScene.LoadMore" = "Load more";
 "MovieCatalogScene.NextPageError.Title" = "Couldn't load more films";
 "MovieCatalogScene.NextPageError.Message" = "Check your connection and try again.";
