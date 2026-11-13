@@ -51,6 +51,9 @@
 - Exibe perfil, estatísticas e reviews recentes do usuário
 - Oferece recomendações por momento ou pela combinação de dois filmes para
   pessoas autenticadas
+- Na tela de recomendação, os modos aparecem em abas com ícone e indicador
+  amarelo; no modo “Combinar filmes”, os dois slots são exibidos lado a lado
+  como cards com imagem e título, mantendo seleção, troca e remoção do filme.
 - Persiste dados autenticados por UID no Firebase Authentication e Firestore
 
 ### O que ainda não faz

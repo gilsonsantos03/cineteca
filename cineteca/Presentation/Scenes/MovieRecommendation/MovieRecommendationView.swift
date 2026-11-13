@@ -126,8 +126,8 @@ final class MovieRecommendationView: UIView {
     private func constrainNavigationHeader() {
         constrain(navigationHeader, self) { header, superview in
             header.top == superview.safeAreaLayoutGuide.top + 12
-            header.left == superview.left
-            header.right == superview.right
+            header.leading == superview.leading
+            header.trailing == superview.trailing
             header.height == 36
         }
     }
@@ -135,8 +135,8 @@ final class MovieRecommendationView: UIView {
     private func constrainScrollView() {
         constrain(scrollView, navigationHeader, self) { scrollView, header, superview in
             scrollView.top == header.bottom + 16
-            scrollView.left == superview.left
-            scrollView.right == superview.right
+            scrollView.leading == superview.leading
+            scrollView.trailing == superview.trailing
             scrollView.bottom == superview.safeAreaLayoutGuide.bottom
         }
     }
@@ -144,8 +144,8 @@ final class MovieRecommendationView: UIView {
     private func constrainContentStack() {
         constrain(contentStack, scrollView) { stack, scrollView in
             stack.top == scrollView.top + 8
-            stack.left == scrollView.left + 20
-            stack.right == scrollView.right - 20
+            stack.leading == scrollView.leading + 20
+            stack.trailing == scrollView.trailing - 20
             stack.bottom == scrollView.bottom - 24
             stack.width == scrollView.width - 40
         }

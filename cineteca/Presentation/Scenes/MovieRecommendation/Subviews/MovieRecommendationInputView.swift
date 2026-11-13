@@ -14,6 +14,7 @@ final class MovieRecommendationInputView: UIView {
     weak var delegate: MovieRecommendationInputViewDelegate?
 
     private var selectedMovies: [MovieRecommendationModels.SelectedMovieViewModel] = []
+    private var selectedModeIndex = 0
 
     // MARK: - UI Components
 
@@ -33,14 +34,31 @@ final class MovieRecommendationInputView: UIView {
         return label
     }()
 
-    private lazy var modeControl: UISegmentedControl = {
-        let control = UISegmentedControl(items: [
-            Strings.MovieRecommendationScene.momentMode,
-            Strings.MovieRecommendationScene.blendMode
-        ])
-        control.selectedSegmentIndex = 0
-        control.addTarget(self, action: #selector(modeDidChange), for: .valueChanged)
-        return control
+    private lazy var momentModeButton = makeModeButton(
+        title: Strings.MovieRecommendationScene.momentMode,
+        imageName: "sparkles",
+        tag: 0
+    )
+
+    private lazy var blendModeButton = makeModeButton(
+        title: Strings.MovieRecommendationScene.blendMode,
+        imageName: "shuffle",
+        tag: 1
+    )
+
+    private lazy var modeTabsView = UIView()
+
+    private lazy var modeTabsStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [momentModeButton, blendModeButton])
+        stack.axis = .horizontal
+        stack.distribution = .fillEqually
+        return stack
+    }()
+
+    private lazy var modeIndicator: UIView = {
+        let view = UIView()
+        view.backgroundColor = .accentYellow
+        return view
     }()
 
     private lazy var promptTextView: UITextView = {
@@ -76,7 +94,9 @@ final class MovieRecommendationInputView: UIView {
 
     private lazy var movieSelectionStack: UIStackView = {
         let stack = UIStackView()
-        stack.axis = .vertical
+        stack.axis = .horizontal
+        stack.distribution = .fillEqually
+        stack.alignment = .fill
         stack.spacing = 12
         return stack
     }()
@@ -122,8 +142,10 @@ final class MovieRecommendationInputView: UIView {
 
     private func setupSubviews() {
         addSubview(contentStack)
+        modeTabsView.addSubview(modeTabsStack)
+        modeTabsView.addSubview(modeIndicator)
         contentStack.addArrangedSubview(introLabel)
-        contentStack.addArrangedSubview(modeControl)
+        contentStack.addArrangedSubview(modeTabsView)
         contentStack.addArrangedSubview(promptContainer)
         contentStack.addArrangedSubview(movieSelectionStack)
         contentStack.addArrangedSubview(generateButton)
@@ -133,6 +155,27 @@ final class MovieRecommendationInputView: UIView {
         constrainContentStack()
         constrainPromptTextView()
         constrainPromptPlaceholder()
+        constrainModeTabsStack()
+        constrainModeIndicator()
+    }
+
+    private func constrainModeTabsStack() {
+        constrain(modeTabsStack, modeTabsView) { stack, container in
+            stack.top == container.top
+            stack.leading == container.leading
+            stack.trailing == container.trailing
+            stack.bottom == container.bottom - 2
+            container.height == 58
+        }
+    }
+
+    private func constrainModeIndicator() {
+        constrain(modeIndicator, modeTabsView) { indicator, container in
+            indicator.bottom == container.bottom
+            indicator.leading == container.leading
+            indicator.width == container.width / 2
+            indicator.height == 2
+        }
     }
 
     private func constrainContentStack() {
@@ -151,8 +194,8 @@ final class MovieRecommendationInputView: UIView {
     private func constrainPromptPlaceholder() {
         constrain(promptPlaceholder, promptContainer) { label, container in
             label.top == container.top + 14
-            label.left == container.left + 16
-            label.right == container.right - 16
+            label.leading == container.leading + 16
+            label.trailing == container.trailing - 16
         }
     }
 
@@ -166,7 +209,7 @@ final class MovieRecommendationInputView: UIView {
 
     func reset() {
         selectedMovies.removeAll()
-        modeControl.selectedSegmentIndex = 0
+        selectedModeIndex = 0
         promptTextView.text = ""
         promptPlaceholder.isHidden = false
         updateInputMode()
@@ -176,6 +219,7 @@ final class MovieRecommendationInputView: UIView {
     // MARK: - Actions
 
     @objc private func modeDidChange() {
+        selectedModeIndex = 1 - selectedModeIndex
         updateInputMode()
     }
 
@@ -194,7 +238,7 @@ final class MovieRecommendationInputView: UIView {
     // MARK: - Helpers
 
     private var currentMode: MovieRecommendationMode {
-        if modeControl.selectedSegmentIndex == 0 {
+        if selectedModeIndex == 0 {
             return .moment(promptTextView.text ?? "")
         }
 
@@ -205,15 +249,16 @@ final class MovieRecommendationInputView: UIView {
     }
 
     private func updateInputMode() {
-        let isMoment = modeControl.selectedSegmentIndex == 0
+        let isMoment = selectedModeIndex == 0
         promptContainer.isHidden = !isMoment
         movieSelectionStack.isHidden = isMoment
+        updateModeTabs()
         updateGenerateButton()
     }
 
     private func updateGenerateButton() {
         let isValid: Bool
-        switch modeControl.selectedSegmentIndex {
+        switch selectedModeIndex {
         case 0:
             let text = promptTextView.text.trimmingCharacters(in: .whitespacesAndNewlines)
             isValid = !text.isEmpty && text.count <= 500
@@ -230,108 +275,59 @@ final class MovieRecommendationInputView: UIView {
 
         for index in 0..<2 {
             if selectedMovies.indices.contains(index) {
-                movieSelectionStack.addArrangedSubview(
-                    makeSelectedMovieRow(selectedMovies[index], at: index)
-                )
+                let card = SelectedMovieCardView()
+                card.delegate = self
+                card.configure(viewModel: selectedMovies[index], index: index)
+                movieSelectionStack.addArrangedSubview(card)
             } else {
-                movieSelectionStack.addArrangedSubview(makeAddMovieButton(index: index))
+                let card = EmptyMovieSelectionCardView()
+                card.delegate = self
+                card.configure(index: index)
+                movieSelectionStack.addArrangedSubview(card)
             }
         }
     }
 
-    private func makeAddMovieButton(index: Int) -> UIButton {
-        var configuration = UIButton.Configuration.filled()
-        configuration.title = Strings.MovieRecommendationScene.selectMovie
-        configuration.image = UIImage(systemName: "plus")
+    private func makeModeButton(title: String, imageName: String, tag: Int) -> UIButton {
+        var configuration = UIButton.Configuration.plain()
+        configuration.title = title
+        configuration.image = UIImage(systemName: imageName)
         configuration.imagePlacement = .leading
         configuration.imagePadding = 8
-        configuration.titleAlignment = .leading
-        configuration.contentInsets = NSDirectionalEdgeInsets(
-            top: 16,
-            leading: 16,
-            bottom: 16,
-            trailing: 16
-        )
-        configuration.cornerStyle = .medium
-        configuration.baseBackgroundColor = .cardBackground
-        configuration.baseForegroundColor = .textPrimary
-
-        let button = UIButton(configuration: configuration)
-        button.tag = index
-        button.addTarget(self, action: #selector(selectMovieTapped(_:)), for: .touchUpInside)
-        button.accessibilityIdentifier = "movieRecommendation.selectMovie.\(index)"
-        button.heightAnchor.constraint(equalToConstant: 58).isActive = true
-        return button
-    }
-
-    private func makeSelectedMovieRow(
-        _ movie: MovieRecommendationModels.SelectedMovieViewModel,
-        at index: Int
-    ) -> UIView {
-        let container = UIView()
-        container.backgroundColor = .cardBackground
-        container.layer.cornerRadius = 14
-
-        let titleLabel = UILabel()
-        titleLabel.text = movie.title
-        titleLabel.textColor = .textPrimary
-        titleLabel.font = .preferredFont(forTextStyle: .subheadline)
-        titleLabel.adjustsFontForContentSizeCategory = true
-        titleLabel.numberOfLines = 2
-
-        let changeButton = makeMovieActionButton(
-            imageName: "arrow.triangle.2.circlepath",
-            accessibilityIdentifier: "movieRecommendation.changeMovie.\(index)"
-        )
-        changeButton.addTarget(self, action: #selector(selectMovieTapped(_:)), for: .touchUpInside)
-        changeButton.tag = index
-
-        let removeButton = makeMovieActionButton(
-            imageName: "xmark.circle.fill",
-            accessibilityIdentifier: "movieRecommendation.removeMovie.\(index)"
-        )
-        removeButton.tintColor = .textSecondary
-        removeButton.addTarget(self, action: #selector(removeMovieTapped(_:)), for: .touchUpInside)
-        removeButton.tag = index
-
-        let actionStack = UIStackView(arrangedSubviews: [changeButton, removeButton])
-        actionStack.axis = .horizontal
-        actionStack.spacing = 12
-
-        container.addSubview(titleLabel)
-        container.addSubview(actionStack)
-        constrain(titleLabel, actionStack, container) { titleLabel, actionStack, container in
-            titleLabel.top == container.top + 8
-            titleLabel.left == container.left + 16
-            titleLabel.bottom == container.bottom - 8
-            titleLabel.right == actionStack.left - 10
-            actionStack.centerY == container.centerY
-            actionStack.right == container.right - 12
-        }
-        container.heightAnchor.constraint(greaterThanOrEqualToConstant: 58).isActive = true
-        return container
-    }
-
-    private func makeMovieActionButton(
-        imageName: String,
-        accessibilityIdentifier: String
-    ) -> UIButton {
-        var configuration = UIButton.Configuration.plain()
-        configuration.image = UIImage(systemName: imageName)
+        configuration.baseForegroundColor = .textSecondary
         configuration.contentInsets = NSDirectionalEdgeInsets(
             top: 8,
-            leading: 4,
+            leading: 8,
             bottom: 8,
-            trailing: 4
+            trailing: 8
         )
-        configuration.baseForegroundColor = .accentYellow
 
         let button = UIButton(configuration: configuration)
-        button.accessibilityIdentifier = accessibilityIdentifier
-        button.widthAnchor.constraint(equalToConstant: 32).isActive = true
-        button.heightAnchor.constraint(equalToConstant: 32).isActive = true
+        button.tag = tag
+        button.addTarget(self, action: #selector(modeButtonTapped(_:)), for: .touchUpInside)
         return button
     }
+
+    @objc private func modeButtonTapped(_ sender: UIButton) {
+        guard sender.tag != selectedModeIndex else { return }
+        selectedModeIndex = sender.tag
+        updateInputMode()
+    }
+
+    private func updateModeTabs() {
+        let buttons = [momentModeButton, blendModeButton]
+        for (index, button) in buttons.enumerated() {
+            button.configuration?.baseForegroundColor = index == selectedModeIndex
+                ? .accentYellow
+                : .textSecondary
+        }
+
+        modeIndicator.transform = CGAffineTransform(
+            translationX: selectedModeIndex == 0 ? 0 : modeTabsView.bounds.width / 2,
+            y: 0
+        )
+    }
+
 }
 
 // MARK: - UITextViewDelegate
@@ -340,5 +336,21 @@ extension MovieRecommendationInputView: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         promptPlaceholder.isHidden = !textView.text.isEmpty
         updateGenerateButton()
+    }
+}
+
+extension MovieRecommendationInputView: SelectedMovieCardViewDelegate {
+    func didTapMovie(at index: Int) {
+        delegate?.didRequestMovieSelection(at: index)
+    }
+
+    func didTapRemove(at index: Int) {
+        delegate?.didRemoveMovie(at: index)
+    }
+}
+
+extension MovieRecommendationInputView: EmptyMovieSelectionCardViewDelegate {
+    func didTapSelectMovie(at index: Int) {
+        delegate?.didRequestMovieSelection(at: index)
     }
 }

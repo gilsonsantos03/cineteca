@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		MR00000100000000000003BA /* EmptyMovieSelectionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MR00000100000000000003BB /* EmptyMovieSelectionCardView.swift */; };
+		MR00000100000000000003AA /* SelectedMovieCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MR00000100000000000003AB /* SelectedMovieCardView.swift */; };
 		UC000001000000000000007B000000000000001A /* UserScopedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = UC000001000000000000007B /* UserScopedCache.swift */; };
 		14E387A226636E8F7A09477D /* AuthenticationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F538006D2C51872E5F5480E4 /* AuthenticationModels.swift */; };
 		2025AF8A2C92ED3DA1458013 /* FirebaseConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F50B735E506F88941CE16F2 /* FirebaseConfiguration.swift */; };
@@ -290,6 +292,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		MR00000100000000000003BB /* EmptyMovieSelectionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyMovieSelectionCardView.swift; sourceTree = "<group>"; };
+		MR00000100000000000003AB /* SelectedMovieCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedMovieCardView.swift; sourceTree = "<group>"; };
 		UC000001000000000000007B /* UserScopedCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserScopedCache.swift; sourceTree = "<group>"; };
 		358B6E132B58ACC5593DC1B3 /* FirestoreStatsRepository.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FirestoreStatsRepository.swift; sourceTree = "<group>"; };
 		4411DD433085992F0098CBF6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -1163,6 +1167,8 @@
 			children = (
 				MR000001000000000000038B /* MovieRecommendationInputView.swift */,
 				MR000001000000000000039B /* MovieRecommendationResultView.swift */,
+				MR00000100000000000003AB /* SelectedMovieCardView.swift */,
+				MR00000100000000000003BB /* EmptyMovieSelectionCardView.swift */,
 				MR000001000000000000040B /* MovieRecommendationErrorView.swift */,
 			);
 			path = Subviews;
@@ -1406,6 +1412,8 @@
 				MR000001000000000000033A /* MovieRecommendationFloatingButton.swift in Sources */,
 				MR000001000000000000038A /* MovieRecommendationInputView.swift in Sources */,
 				MR000001000000000000039A /* MovieRecommendationResultView.swift in Sources */,
+				MR00000100000000000003AA /* SelectedMovieCardView.swift in Sources */,
+				MR00000100000000000003BA /* EmptyMovieSelectionCardView.swift in Sources */,
 				MR000001000000000000040A /* MovieRecommendationErrorView.swift in Sources */,
 				AA000001000000000000001D /* SceneDelegate.swift in Sources */,
 				442CB05A2FF603BE004FCC82 /* NetworkConfiguration.swift in Sources */,
