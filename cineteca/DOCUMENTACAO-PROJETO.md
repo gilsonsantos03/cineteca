@@ -358,6 +358,7 @@ Firestore, separados por UID:
 - Tocar em um card abre Movie Details. A lixeira remove o filme da lista atual; em Rated, desfaz a avaliação, remove o favorito dependente e exclui a review associada.
 - Cada aba possui um empty state próprio quando não há filmes.
 - Quando não há reviews, o Perfil exibe um estado vazio na seção de reviews e “Minhas reviews” exibe um estado vazio próprio; no Perfil, “Ver tudo” fica oculto.
+- O Perfil exibe o indicador de carregamento apenas na primeira carga da sessão. Nas visitas seguintes, mostra imediatamente o último perfil carregado e o atualiza em segundo plano; se essa atualização falhar, o conteúdo anterior é mantido. Esse cache fica em memória no repositório de usuário, associado ao UID: sair da conta ou entrar com outra conta o invalida, e excluir a conta o apaga. Ele não persiste entre aberturas do app.
 - As alterações são salvas no Firestore durante o uso do app. Visitantes podem
   navegar pelo catálogo, mas precisam entrar ou criar uma conta para avaliar,
   favoritar, usar a watchlist ou remover itens das listas.

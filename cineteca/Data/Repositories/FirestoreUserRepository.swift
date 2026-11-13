@@ -8,6 +8,8 @@ final class FirestoreUserRepository: UserRepositoryProtocol, @unchecked Sendable
 
     private let firestore: Firestore
     private let activityRepository: FirestoreMovieActivityRepository
+    private let cacheLock = NSLock()
+    private var cachedUser: (userID: String, user: User)?
 
     init(
         firestore: Firestore = .firestore(),
@@ -15,6 +17,13 @@ final class FirestoreUserRepository: UserRepositoryProtocol, @unchecked Sendable
     ) {
         self.firestore = firestore
         self.activityRepository = activityRepository
+    }
+
+    func cachedCurrentUser() -> User? {
+        guard let userID = Auth.auth().currentUser?.uid else { return nil }
+        return cacheLock.withLock {
+            cachedUser?.userID == userID ? cachedUser?.user : nil
+        }
     }
 
     func fetchCurrentUser() async throws -> User {
@@ -48,11 +57,19 @@ final class FirestoreUserRepository: UserRepositoryProtocol, @unchecked Sendable
 
         let profile = try await document.getDocument().data() ?? [:]
         let records = try await activityRepository.fetchActivityRecords()
-        return Self.makeUser(
+        let user = Self.makeUser(
             profile: profile,
             activities: records,
             firebaseUser: firebaseUser
         )
+
+        guard Auth.auth().currentUser?.uid == firebaseUser.uid else {
+            throw AuthenticationError.userNotAuthenticated
+        }
+        cacheLock.withLock {
+            cachedUser = (firebaseUser.uid, user)
+        }
+        return user
     }
 
     func createProfile(username: String) async throws -> User {
@@ -146,6 +163,9 @@ final class FirestoreUserRepository: UserRepositoryProtocol, @unchecked Sendable
         }
         batch.deleteDocument(userDocument)
         try await batch.commit()
+        cacheLock.withLock {
+            cachedUser = nil
+        }
     }
 
     private func claimUsername(

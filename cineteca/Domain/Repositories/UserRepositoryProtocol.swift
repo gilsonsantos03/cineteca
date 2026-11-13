@@ -52,6 +52,7 @@ enum UserRepositoryError: Error {
 }
 
 protocol UserRepositoryProtocol: Sendable {
+    func cachedCurrentUser() -> User?
     func fetchCurrentUser() async throws -> User
     func createProfile(username: String) async throws -> User
     func updateProfile(_ update: UserProfileUpdate) async throws -> User

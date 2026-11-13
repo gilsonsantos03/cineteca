@@ -71,6 +71,14 @@ the `User` read model. This allows a rating without comment to appear in the
 profile review cards without creating a separate review document or duplicating a review
 that already has text.
 
+`UserRepository` also keeps the last `User` built by `fetchCurrentUser` in memory,
+keyed by the Firebase UID, and exposes it through `cachedCurrentUser()`. The cache
+is only returned while that UID is still signed in, so sign-out and account switches
+invalidate it without scene involvement; account deletion clears it. Scenes use it
+to render immediately and still call `fetchCurrentUser` to revalidate. A fetch that
+finishes after the session changed throws `AuthenticationError.userNotAuthenticated`
+instead of returning or caching the previous account.
+
 The profile's favorite film is a separate `users/{uid}` field managed by
 `UserRepository.updateProfile`. It is selected through the Edit Profile search
 dialog and persisted with the scene's Save action; it must not be inferred from

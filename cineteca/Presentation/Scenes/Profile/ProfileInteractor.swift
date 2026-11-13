@@ -16,13 +16,22 @@ final class ProfileInteractor {
 
 extension ProfileInteractor: ProfileBusinessLogic {
     func fetchProfile(request: ProfileModels.FetchProfile.Request) {
-        presenter.presentLoading()
+        let cachedUser = userRepository.cachedCurrentUser()
+        if let cachedUser {
+            presenter.presentFetchProfile(response: .content(cachedUser))
+        } else {
+            presenter.presentLoading()
+        }
+
         Task {
             let response: ProfileModels.FetchProfile.Response
             do {
                 let user = try await userRepository.fetchCurrentUser()
                 response = .content(user)
+            } catch AuthenticationError.userNotAuthenticated {
+                return
             } catch {
+                guard cachedUser == nil else { return }
                 response = .error
             }
             await MainActor.run {
