@@ -69,15 +69,15 @@ final class WeeklyDigestView: UIView {
         constrain(digestTextStack, self) { stack, superview in
             stack.top == superview.top + 16
             stack.bottom == superview.bottom - 16
-            stack.left == superview.left + 16
+            stack.leading == superview.leading + 16
         }
     }
 
     private func constrainStarImageView() {
         constrain(starImageView, self, digestTextStack) { imageView, superview, stack in
             imageView.centerY == stack.centerY
-            imageView.right == superview.right - 16
-            imageView.left >= stack.right + 8
+            imageView.trailing == superview.trailing - 16
+            imageView.leading >= stack.trailing + 8
             imageView.width == 28
             imageView.height == 28
         }

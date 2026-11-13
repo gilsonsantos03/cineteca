@@ -96,16 +96,16 @@ final class ListsErrorStateView: UIView {
     private func constrainTitleLabel() {
         constrain(titleLabel, iconImageView, self) { label, imageView, superview in
             label.top == imageView.bottom + 20
-            label.left == superview.left + 32
-            label.right == superview.right - 32
+            label.leading == superview.leading + 32
+            label.trailing == superview.trailing - 32
         }
     }
 
     private func constrainSubtitleLabel() {
         constrain(subtitleLabel, titleLabel, self) { label, title, superview in
             label.top == title.bottom + 8
-            label.left == superview.left + 32
-            label.right == superview.right - 32
+            label.leading == superview.leading + 32
+            label.trailing == superview.trailing - 32
         }
     }
 

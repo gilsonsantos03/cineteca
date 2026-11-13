@@ -99,7 +99,7 @@ final class EditProfileAvatarView: UIView {
 
     private func constrainCameraButton() {
         constrain(cameraButton, avatarContainerView) { button, avatar in
-            button.right == avatar.right + 2
+            button.trailing == avatar.trailing + 2
             button.bottom == avatar.bottom + 2
             button.width == 32
             button.height == 32
@@ -109,8 +109,8 @@ final class EditProfileAvatarView: UIView {
     private func constrainHintLabel() {
         constrain(hintLabel, avatarContainerView, self) { label, avatar, superview in
             label.top == avatar.bottom + 12
-            label.left == superview.left + 20
-            label.right == superview.right - 20
+            label.leading == superview.leading + 20
+            label.trailing == superview.trailing - 20
             label.bottom == superview.bottom
         }
     }

@@ -188,32 +188,32 @@ final class AuthenticationView: UIView {
     private func constrainTitleLabel() {
         constrain(titleLabel, self) { title, superview in
             title.top == superview.safeAreaLayoutGuide.top + 32
-            title.left == superview.left + 24
-            title.right == superview.right - 24
+            title.leading == superview.leading + 24
+            title.trailing == superview.trailing - 24
         }
     }
 
     private func constrainMessageLabel() {
         constrain(messageLabel, titleLabel, self) { message, title, superview in
             message.top == title.bottom + 12
-            message.left == superview.left + 24
-            message.right == superview.right - 24
+            message.leading == superview.leading + 24
+            message.trailing == superview.trailing - 24
         }
     }
 
     private func constrainFieldsStack() {
         constrain(fieldsStack, messageLabel, self) { fields, message, superview in
             fields.top == message.bottom + 24
-            fields.left == superview.left + 24
-            fields.right == superview.right - 24
+            fields.leading == superview.leading + 24
+            fields.trailing == superview.trailing - 24
         }
     }
 
     private func constrainSubmitButton() {
         constrain(submitButton, fieldsStack, self) { button, fields, superview in
             button.top == fields.bottom + 20
-            button.left == superview.left + 24
-            button.right == superview.right - 24
+            button.leading == superview.leading + 24
+            button.trailing == superview.trailing - 24
             button.height == 44
         }
     }
@@ -235,16 +235,16 @@ final class AuthenticationView: UIView {
     private func constrainProviderStack() {
         constrain(providerStack, resetButton, self) { providers, reset, superview in
             providers.top == reset.bottom + 16
-            providers.left == superview.left + 24
-            providers.right == superview.right - 24
+            providers.leading == superview.leading + 24
+            providers.trailing == superview.trailing - 24
         }
     }
 
     private func constrainCancelButton() {
         constrain(cancelButton, providerStack, self) { cancel, providers, superview in
             cancel.top == providers.bottom + 24
-            cancel.left == superview.left + 24
-            cancel.right == superview.right - 24
+            cancel.leading == superview.leading + 24
+            cancel.trailing == superview.trailing - 24
             cancel.height == 44
             cancel.bottom <= superview.safeAreaLayoutGuide.bottom - 24
         }

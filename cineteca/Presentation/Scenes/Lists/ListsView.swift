@@ -186,16 +186,16 @@ final class ListsView: UIView {
     private func constrainTitleLabel() {
         constrain(titleLabel, self) { label, superview in
             label.top == superview.safeAreaLayoutGuide.top + 20
-            label.left == superview.left + 28
-            label.right == superview.right - 28
+            label.leading == superview.leading + 28
+            label.trailing == superview.trailing - 28
         }
     }
 
     private func constrainTabsContainer() {
         constrain(tabsContainer, titleLabel, self) { tabs, title, superview in
             tabs.top == title.bottom + 24
-            tabs.left == superview.left + 20
-            tabs.right == superview.right - 20
+            tabs.leading == superview.leading + 20
+            tabs.trailing == superview.trailing - 20
             tabs.height == 44
         }
     }
@@ -208,8 +208,8 @@ final class ListsView: UIView {
 
     private func constrainTabDividerView() {
         constrain(tabDividerView, tabsContainer) { divider, container in
-            divider.left == container.left
-            divider.right == container.right
+            divider.leading == container.leading
+            divider.trailing == container.trailing
             divider.bottom == container.bottom
             divider.height == 1
         }
@@ -218,8 +218,8 @@ final class ListsView: UIView {
     private func constrainScrollView() {
         constrain(scrollView, tabsContainer, self) { scroll, tabs, superview in
             scroll.top == tabs.bottom
-            scroll.left == superview.left
-            scroll.right == superview.right
+            scroll.leading == superview.leading
+            scroll.trailing == superview.trailing
             scroll.bottom == superview.bottom
         }
     }
@@ -227,8 +227,8 @@ final class ListsView: UIView {
     private func constrainContentStack() {
         constrain(contentStack, scrollView) { stack, scroll in
             stack.top == scroll.top + 16
-            stack.left == scroll.left + 20
-            stack.right == scroll.right - 20
+            stack.leading == scroll.leading + 20
+            stack.trailing == scroll.trailing - 20
             stack.bottom == scroll.bottom - 20
             stack.width == scroll.width - 40
         }
@@ -252,8 +252,8 @@ final class ListsView: UIView {
     private func constrainAuthenticationPromptView() {
         constrain(authenticationPromptView, scrollView) { prompt, scroll in
             prompt.centerY == scroll.centerY
-            prompt.left == scroll.left + 20
-            prompt.right == scroll.right - 20
+            prompt.leading == scroll.leading + 20
+            prompt.trailing == scroll.trailing - 20
         }
     }
 

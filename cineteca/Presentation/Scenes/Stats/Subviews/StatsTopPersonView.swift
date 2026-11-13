@@ -94,16 +94,16 @@ final class StatsTopPersonView: UIView {
     private func constrainSectionTitleLabel() {
         constrain(sectionTitleLabel, self) { label, superview in
             label.top == superview.top
-            label.left == superview.left + 20
-            label.right == superview.right - 20
+            label.leading == superview.leading + 20
+            label.trailing == superview.trailing - 20
         }
     }
 
     private func constrainCardView() {
         constrain(cardView, sectionTitleLabel, self) { card, title, superview in
             card.top == title.bottom + 12
-            card.left == superview.left + 20
-            card.right == superview.right - 20
+            card.leading == superview.leading + 20
+            card.trailing == superview.trailing - 20
             card.bottom == superview.bottom
             card.height == 80
         }
@@ -111,7 +111,7 @@ final class StatsTopPersonView: UIView {
 
     private func constrainAvatarImageView() {
         constrain(avatarImageView, cardView) { imageView, card in
-            imageView.left == card.left + 16
+            imageView.leading == card.leading + 16
             imageView.centerY == card.centerY
             imageView.width == 48
             imageView.height == 48
@@ -120,8 +120,8 @@ final class StatsTopPersonView: UIView {
 
     private func constrainTextStack() {
         constrain(textStack, avatarImageView, cardView) { stack, avatar, card in
-            stack.left == avatar.right + 14
-            stack.right == card.right - 16
+            stack.leading == avatar.trailing + 14
+            stack.trailing == card.trailing - 16
             stack.centerY == card.centerY
         }
     }

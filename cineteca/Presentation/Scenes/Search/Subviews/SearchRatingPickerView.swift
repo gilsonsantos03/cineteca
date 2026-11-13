@@ -87,8 +87,8 @@ final class SearchRatingPickerView: UIView {
         let horizontalInset = thumbSize / 2
         constrain(trackView, self) { track, superview in
             track.centerY == superview.centerY
-            track.left == superview.left + horizontalInset
-            track.right == superview.right - horizontalInset
+            track.leading == superview.leading + horizontalInset
+            track.trailing == superview.trailing - horizontalInset
             track.height == trackHeight
         }
     }

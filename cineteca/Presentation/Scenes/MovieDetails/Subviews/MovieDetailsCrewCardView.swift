@@ -64,8 +64,8 @@ final class MovieDetailsCrewCardView: UIView {
         constrain(contentStack, self) { stack, container in
             stack.top == container.top + 10
             stack.bottom == container.bottom - 10
-            stack.left == container.left + 10
-            stack.right == container.right - 10
+            stack.leading == container.leading + 10
+            stack.trailing == container.trailing - 10
         }
     }
 

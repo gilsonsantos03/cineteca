@@ -96,7 +96,7 @@ final class ProfileReviewCardView: UIView {
     private func constrainPosterImageView() {
         constrain(posterImageView, self) { poster, superview in
             poster.top == superview.top + 16
-            poster.left == superview.left + 16
+            poster.leading == superview.leading + 16
             poster.bottom <= superview.bottom - 16
             poster.width == 80
             poster.height == 80
@@ -106,23 +106,23 @@ final class ProfileReviewCardView: UIView {
     private func constrainTitleLabel() {
         constrain(titleLabel, posterImageView, ratingStack) { title, poster, rating in
             title.top == poster.top
-            title.left == poster.right + 14
-            title.right == rating.left - 8
+            title.leading == poster.trailing + 14
+            title.trailing == rating.leading - 8
         }
     }
 
     private func constrainRatingStack() {
         constrain(ratingStack, posterImageView, self) { rating, poster, superview in
             rating.top == poster.top - 2
-            rating.right == superview.right - 16
+            rating.trailing == superview.trailing - 16
         }
     }
 
     private func constrainReviewTextLabel() {
         constrain(reviewTextLabel, posterImageView, self) { text, poster, superview in
             text.centerY == poster.centerY
-            text.left == poster.right + 14
-            text.right == superview.right - 16
+            text.leading == poster.trailing + 14
+            text.trailing == superview.trailing - 16
             text.bottom == superview.bottom - 16
         }
     }

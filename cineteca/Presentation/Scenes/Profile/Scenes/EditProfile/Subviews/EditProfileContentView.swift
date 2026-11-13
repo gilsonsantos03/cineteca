@@ -136,8 +136,8 @@ final class EditProfileContentView: UIView {
     private func constrainHeaderView() {
         constrain(headerView, self) { header, superview in
             header.top == superview.safeAreaLayoutGuide.top + 8
-            header.left == superview.left
-            header.right == superview.right
+            header.leading == superview.leading
+            header.trailing == superview.trailing
         }
     }
 
@@ -145,16 +145,16 @@ final class EditProfileContentView: UIView {
         constrain(scrollView, headerView, self) { scroll, header, superview in
             scroll.top == header.bottom + 16
             scroll.bottom == superview.bottom
-            scroll.left == superview.left
-            scroll.right == superview.right
+            scroll.leading == superview.leading
+            scroll.trailing == superview.trailing
         }
     }
 
     private func constrainContentStack() {
         constrain(contentStack, scrollView) { stack, scroll in
             stack.top == scroll.top
-            stack.left == scroll.left + 20
-            stack.right == scroll.right - 20
+            stack.leading == scroll.leading + 20
+            stack.trailing == scroll.trailing - 20
             stack.bottom == scroll.bottom
             stack.width == scroll.width - 40
         }

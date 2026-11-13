@@ -148,7 +148,7 @@ final class ListsMovieCardView: UIView {
     private func constrainPosterImageView() {
         constrain(posterImageView, contentContainerView) { imageView, container in
             imageView.top == container.top + 12
-            imageView.left == container.left + 12
+            imageView.leading == container.leading + 12
             imageView.bottom == container.bottom - 12
             imageView.width == 112
         }
@@ -157,8 +157,8 @@ final class ListsMovieCardView: UIView {
     private func constrainTitleLabel() {
         constrain(titleLabel, posterImageView, removeButton) { label, imageView, button in
             label.top == imageView.top
-            label.left == imageView.right + 14
-            label.right == button.left - 8
+            label.leading == imageView.trailing + 14
+            label.trailing == button.leading - 8
             label.height == 42
         }
     }
@@ -166,23 +166,23 @@ final class ListsMovieCardView: UIView {
     private func constrainMetadataLabel() {
         constrain(metadataLabel, titleLabel, removeButton) { label, title, button in
             label.top == title.bottom + 4
-            label.left == title.left
-            label.right == button.left - 8
+            label.leading == title.leading
+            label.trailing == button.leading - 8
         }
     }
 
     private func constrainGenresStack() {
         constrain(genresStack, metadataLabel, removeButton) { stack, metadata, button in
             stack.top == metadata.bottom + 8
-            stack.left == metadata.left
-            stack.right <= button.left - 8
+            stack.leading == metadata.leading
+            stack.trailing <= button.leading - 8
             stack.height == 26
         }
     }
 
     private func constrainRatingStack() {
         constrain(ratingStack, posterImageView, contentContainerView) { stack, imageView, container in
-            stack.left == imageView.right + 14
+            stack.leading == imageView.trailing + 14
             stack.bottom == imageView.bottom
         }
     }
@@ -190,7 +190,7 @@ final class ListsMovieCardView: UIView {
     private func constrainRemoveButton() {
         constrain(removeButton, contentContainerView) { button, container in
             button.top == container.top + 14
-            button.right == container.right - 14
+            button.trailing == container.trailing - 14
             button.width == 18
             button.height == 18
         }

@@ -99,16 +99,16 @@ final class EditProfileFormFieldView: UIView, UITextViewDelegate {
     private func constrainTitleLabel() {
         constrain(titleLabel, self) { label, superview in
             label.top == superview.top
-            label.left == superview.left
-            label.right == superview.right
+            label.leading == superview.leading
+            label.trailing == superview.trailing
         }
     }
 
     private func constrainInputContainerView() {
         constrain(inputContainerView, titleLabel, self) { container, title, superview in
             container.top == title.bottom + 8
-            container.left == superview.left
-            container.right == superview.right
+            container.leading == superview.leading
+            container.trailing == superview.trailing
             container.bottom == superview.bottom
         }
     }
@@ -117,8 +117,8 @@ final class EditProfileFormFieldView: UIView, UITextViewDelegate {
         constrain(textField, inputContainerView) { textField, container in
             textField.top == container.top + 14
             textField.bottom == container.bottom - 14
-            textField.left == container.left + 14
-            textField.right == container.right - 14
+            textField.leading == container.leading + 14
+            textField.trailing == container.trailing - 14
         }
     }
 
@@ -126,8 +126,8 @@ final class EditProfileFormFieldView: UIView, UITextViewDelegate {
         constrain(textView, inputContainerView) { textView, container in
             textView.top == container.top + 12
             textView.bottom == container.bottom - 12
-            textView.left == container.left + 14
-            textView.right == container.right - 14
+            textView.leading == container.leading + 14
+            textView.trailing == container.trailing - 14
             textView.height >= 88
         }
     }

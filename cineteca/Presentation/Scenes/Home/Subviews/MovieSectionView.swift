@@ -103,22 +103,22 @@ final class MovieSectionView: UIView {
     private func constrainTitleLabel() {
         constrain(titleLabel, self) { label, superview in
             label.top == superview.top + 4
-            label.left == superview.left + 20
+            label.leading == superview.leading + 20
         }
     }
 
     private func constrainSeeAllButton() {
         constrain(seeAllButton, titleLabel, self) { button, label, superview in
             button.centerY == label.centerY
-            button.right == superview.right - 20
+            button.trailing == superview.trailing - 20
         }
     }
 
     private func constrainCollectionView() {
         constrain(collectionView, titleLabel, self) { collectionView, label, superview in
             collectionView.top == label.bottom + 12
-            collectionView.left == superview.left
-            collectionView.right == superview.right
+            collectionView.leading == superview.leading
+            collectionView.trailing == superview.trailing
             collectionView.bottom == superview.bottom
         }
     }
@@ -126,8 +126,8 @@ final class MovieSectionView: UIView {
     private func constrainEmptyStateLabel() {
         constrain(emptyStateLabel, collectionView, self) { label, collectionView, superview in
             label.centerY == collectionView.centerY
-            label.left == superview.left + 20
-            label.right == superview.right - 20
+            label.leading == superview.leading + 20
+            label.trailing == superview.trailing - 20
         }
     }
 

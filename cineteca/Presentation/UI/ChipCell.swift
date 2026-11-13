@@ -44,8 +44,8 @@ final class ChipCell: UICollectionViewCell {
         constrain(titleLabel, contentView) { label, container in
             label.top == container.top + 8
             label.bottom == container.bottom - 8
-            label.left == container.left + 16
-            label.right == container.right - 16
+            label.leading == container.leading + 16
+            label.trailing == container.trailing - 16
         }
     }
 

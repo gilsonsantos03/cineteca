@@ -139,7 +139,7 @@ final class MovieDetailsHeaderView: UIView {
 
     private func constrainPosterImageView() {
         constrain(posterImageView, self) { imageView, superview in
-            imageView.left == superview.left + 20
+            imageView.leading == superview.leading + 20
             imageView.bottom == superview.bottom - 20
             imageView.width == 100
             imageView.height == 150
@@ -148,10 +148,10 @@ final class MovieDetailsHeaderView: UIView {
 
     private func constrainTitleLabel() {
         constrain(titleLabel, posterImageView) { label, poster in
-            label.left == poster.right + 14
+            label.leading == poster.trailing + 14
         }
         constrain(titleLabel, self) { label, superview in
-            label.right == superview.right - 20
+            label.trailing == superview.trailing - 20
         }
         constrain(titleLabel, metadataStack) { label, metadata in
             label.bottom == metadata.top - 7
@@ -160,7 +160,7 @@ final class MovieDetailsHeaderView: UIView {
 
     private func constrainMetadataStack() {
         constrain(metadataStack, posterImageView) { stack, poster in
-            stack.left == poster.right + 14
+            stack.leading == poster.trailing + 14
         }
         constrain(metadataStack, genresStack) { stack, genres in
             stack.bottom == genres.top - 7
@@ -171,14 +171,14 @@ final class MovieDetailsHeaderView: UIView {
         constrain(certificationLabel, certificationBadge) { label, badge in
             label.top == badge.top + 3
             label.bottom == badge.bottom - 3
-            label.left == badge.left + 6
-            label.right == badge.right - 6
+            label.leading == badge.leading + 6
+            label.trailing == badge.trailing - 6
         }
     }
 
     private func constrainGenresStack() {
         constrain(genresStack, posterImageView) { stack, poster in
-            stack.left == poster.right + 14
+            stack.leading == poster.trailing + 14
             stack.bottom == poster.bottom
         }
     }
@@ -224,8 +224,8 @@ final class MovieDetailsHeaderView: UIView {
         constrain(label, container) { label, container in
             label.top == container.top + 4
             label.bottom == container.bottom - 4
-            label.left == container.left + 8
-            label.right == container.right - 8
+            label.leading == container.leading + 8
+            label.trailing == container.trailing - 8
         }
         return container
     }

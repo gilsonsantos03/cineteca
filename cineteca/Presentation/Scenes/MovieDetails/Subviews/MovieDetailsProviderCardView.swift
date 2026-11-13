@@ -67,8 +67,8 @@ final class MovieDetailsProviderCardView: UIView {
         constrain(contentStack, self) { stack, container in
             stack.top == container.top + 8
             stack.bottom == container.bottom - 8
-            stack.left == container.left + 8
-            stack.right == container.right - 8
+            stack.leading == container.leading + 8
+            stack.trailing == container.trailing - 8
         }
     }
 

@@ -109,8 +109,8 @@ final class MovieDetailsProvidersView: UIStackView {
         constrain(categoryStack, categoryScrollView.contentLayoutGuide, categoryScrollView.frameLayoutGuide) { stack, content, frame in
             stack.top == content.top
             stack.bottom == content.bottom
-            stack.left == content.left
-            stack.right == content.right
+            stack.leading == content.leading
+            stack.trailing == content.trailing
             stack.height == frame.height
         }
     }
@@ -125,8 +125,8 @@ final class MovieDetailsProvidersView: UIStackView {
         constrain(providersStack, providersScrollView.contentLayoutGuide, providersScrollView.frameLayoutGuide) { stack, content, frame in
             stack.top == content.top
             stack.bottom == content.bottom
-            stack.left == content.left
-            stack.right == content.right
+            stack.leading == content.leading
+            stack.trailing == content.trailing
             stack.height == frame.height
         }
     }

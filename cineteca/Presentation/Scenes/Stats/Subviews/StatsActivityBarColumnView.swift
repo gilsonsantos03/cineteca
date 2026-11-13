@@ -65,16 +65,16 @@ final class StatsActivityBarColumnView: UIView {
     private func constrainValueLabel() {
         constrain(valueLabel, self) { label, superview in
             label.top == superview.top
-            label.left == superview.left
-            label.right == superview.right
+            label.leading == superview.leading
+            label.trailing == superview.trailing
             label.height == 14
         }
     }
 
     private func constrainBarView() {
         constrain(barView, valueLabel, self) { bar, value, superview in
-            bar.left == superview.left
-            bar.right == superview.right
+            bar.leading == superview.leading
+            bar.trailing == superview.trailing
             bar.bottom == superview.bottom
             bar.top >= value.bottom + 4
         }

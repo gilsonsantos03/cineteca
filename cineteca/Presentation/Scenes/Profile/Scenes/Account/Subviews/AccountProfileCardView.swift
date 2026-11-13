@@ -91,7 +91,7 @@ final class AccountProfileCardView: UIView {
     private func constrainAvatarContainerView() {
         constrain(avatarContainerView, containerView) { avatar, container in
             avatar.top == container.top + 16
-            avatar.left == container.left + 16
+            avatar.leading == container.leading + 16
             avatar.bottom == container.bottom - 16
             avatar.width == 56
             avatar.height == 56
@@ -107,8 +107,8 @@ final class AccountProfileCardView: UIView {
     private func constrainTextStack() {
         constrain(textStack, avatarContainerView, containerView) { stack, avatar, container in
             stack.centerY == avatar.centerY
-            stack.left == avatar.right + 14
-            stack.right == container.right - 16
+            stack.leading == avatar.trailing + 14
+            stack.trailing == container.trailing - 16
         }
     }
 

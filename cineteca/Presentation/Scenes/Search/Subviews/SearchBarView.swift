@@ -96,15 +96,15 @@ final class SearchBarView: UIView {
         constrain(contentRow, self) { row, superview in
             row.top == superview.top + 8
             row.bottom == superview.bottom - 8
-            row.left == superview.left + 20
-            row.right == superview.right - 20
+            row.leading == superview.leading + 20
+            row.trailing == superview.trailing - 20
         }
     }
 
     private func constrainSearchIconImageView() {
         constrain(searchIconImageView, searchFieldContainer) { imageView, container in
             imageView.centerY == container.centerY
-            imageView.left == container.left + 14
+            imageView.leading == container.leading + 14
             imageView.width == 18
             imageView.height == 18
         }
@@ -113,8 +113,8 @@ final class SearchBarView: UIView {
     private func constrainSearchTextField() {
         constrain(searchTextField, searchIconImageView, searchFieldContainer) { textField, imageView, container in
             textField.centerY == container.centerY
-            textField.left == imageView.right + 10
-            textField.right == container.right - 14
+            textField.leading == imageView.trailing + 10
+            textField.trailing == container.trailing - 14
             textField.top == container.top + 12
             textField.bottom == container.bottom - 12
         }

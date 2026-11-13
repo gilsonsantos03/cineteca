@@ -84,8 +84,8 @@ final class HomeSkeletonView: UIView {
     private func constrainContentStack() {
         constrain(contentStack, scrollView) { stack, scrollView in
             stack.top == scrollView.top
-            stack.left == scrollView.left
-            stack.right == scrollView.right
+            stack.leading == scrollView.leading
+            stack.trailing == scrollView.trailing
             stack.bottom == scrollView.bottom
             stack.width == scrollView.width
         }
@@ -94,8 +94,8 @@ final class HomeSkeletonView: UIView {
     private func constrainFeaturedBackdropShimmer() {
         constrain(featuredBackdropShimmer, featuredContainerView) { shimmer, container in
             shimmer.top == container.top
-            shimmer.left == container.left
-            shimmer.right == container.right
+            shimmer.leading == container.leading
+            shimmer.trailing == container.trailing
             shimmer.height == 420
             shimmer.bottom == container.bottom
         }
@@ -103,8 +103,8 @@ final class HomeSkeletonView: UIView {
 
     private func constrainFeaturedButtonShimmer() {
         constrain(featuredButtonShimmer, featuredBackdropShimmer, featuredContainerView) { shimmer, backdrop, container in
-            shimmer.left == container.left + 20
-            shimmer.right == container.right - 20
+            shimmer.leading == container.leading + 20
+            shimmer.trailing == container.trailing - 20
             shimmer.bottom == backdrop.bottom - 20
             shimmer.height == 44
         }
@@ -112,8 +112,8 @@ final class HomeSkeletonView: UIView {
 
     private func constrainFeaturedTitleShimmer() {
         constrain(featuredTitleShimmer, featuredButtonShimmer, featuredContainerView) { shimmer, button, container in
-            shimmer.left == container.left + 20
-            shimmer.right == container.right - 80
+            shimmer.leading == container.leading + 20
+            shimmer.trailing == container.trailing - 80
             shimmer.bottom == button.top - 24
             shimmer.height == 28
         }
@@ -121,7 +121,7 @@ final class HomeSkeletonView: UIView {
 
     private func constrainFeaturedRatingYearShimmer() {
         constrain(featuredRatingYearShimmer, featuredTitleShimmer, featuredContainerView) { shimmer, title, container in
-            shimmer.left == container.left + 20
+            shimmer.leading == container.leading + 20
             shimmer.width == 160
             shimmer.bottom == title.top - 8
             shimmer.height == 14

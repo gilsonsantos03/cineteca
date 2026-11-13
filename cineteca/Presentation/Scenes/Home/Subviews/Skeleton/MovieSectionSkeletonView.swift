@@ -56,7 +56,7 @@ final class MovieSectionSkeletonView: UIView {
     private func constrainTitleShimmer() {
         constrain(titleShimmer, self) { shimmer, superview in
             shimmer.top == superview.top + 4
-            shimmer.left == superview.left + 20
+            shimmer.leading == superview.leading + 20
             shimmer.width == 140
             shimmer.height == 16
         }
@@ -65,8 +65,8 @@ final class MovieSectionSkeletonView: UIView {
     private func constrainCollectionView() {
         constrain(collectionView, titleShimmer, self) { collectionView, shimmer, superview in
             collectionView.top == shimmer.bottom + 12
-            collectionView.left == superview.left
-            collectionView.right == superview.right
+            collectionView.leading == superview.leading
+            collectionView.trailing == superview.trailing
             collectionView.height == 210
             collectionView.bottom == superview.bottom
         }

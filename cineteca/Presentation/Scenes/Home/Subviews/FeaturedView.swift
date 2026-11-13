@@ -200,8 +200,8 @@ final class FeaturedView: UIView {
     private func constrainBackdropImageView() {
         constrain(backdropImageView, self) { imageView, superview in
             imageView.top == superview.top
-            imageView.left == superview.left
-            imageView.right == superview.right
+            imageView.leading == superview.leading
+            imageView.trailing == superview.trailing
             imageView.height == 420
             imageView.bottom == superview.bottom
         }
@@ -210,7 +210,7 @@ final class FeaturedView: UIView {
     private func constrainNotificationButton() {
         constrain(notificationButton, self) { button, superview in
             button.top == superview.safeAreaLayoutGuide.top + 12
-            button.right == superview.right - 20
+            button.trailing == superview.trailing - 20
             button.width == 40
             button.height == 40
         }
@@ -220,15 +220,15 @@ final class FeaturedView: UIView {
         constrain(tmdbBadgeStack, tmdbBadgeView) { stack, container in
             stack.top == container.top + 3
             stack.bottom == container.bottom - 3
-            stack.left == container.left + 6
-            stack.right == container.right - 6
+            stack.leading == container.leading + 6
+            stack.trailing == container.trailing - 6
         }
     }
 
     private func constrainActionButtonRow() {
         constrain(actionButtonRow, backdropImageView, self) { row, imageView, superview in
-            row.left == superview.left + 20
-            row.right == superview.right - 20
+            row.leading == superview.leading + 20
+            row.trailing == superview.trailing - 20
             row.bottom == imageView.bottom - 20
             row.height == 44
         }
@@ -236,22 +236,22 @@ final class FeaturedView: UIView {
 
     private func constrainGenreChipStack() {
         constrain(genreChipStack, actionButtonRow) { stack, row in
-            stack.left == row.left
+            stack.leading == row.leading
             stack.bottom == row.top - 16
         }
     }
 
     private func constrainTitleLabel() {
         constrain(titleLabel, genreChipStack) { label, stack in
-            label.left == stack.left
-            label.right == stack.right + 200
+            label.leading == stack.leading
+            label.trailing == stack.trailing + 200
             label.bottom == stack.top - 10
         }
     }
 
     private func constrainRatingYearRow() {
         constrain(ratingYearRow, titleLabel) { row, label in
-            row.left == label.left
+            row.leading == label.leading
             row.bottom == label.top - 8
         }
     }
@@ -311,8 +311,8 @@ final class FeaturedView: UIView {
         constrain(label, container) { label, container in
             label.top == container.top + 5
             label.bottom == container.bottom - 5
-            label.left == container.left + 10
-            label.right == container.right - 10
+            label.leading == container.leading + 10
+            label.trailing == container.trailing - 10
         }
         return container
     }

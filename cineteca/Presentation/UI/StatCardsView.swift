@@ -54,8 +54,8 @@ final class StatCardsView: UIView {
     private func constrainStackView() {
         constrain(stackView, self) { stack, superview in
             stack.top == superview.top
-            stack.left == superview.left + 20
-            stack.right == superview.right - 20
+            stack.leading == superview.leading + 20
+            stack.trailing == superview.trailing - 20
             stack.bottom == superview.bottom
             stack.height == 72
         }

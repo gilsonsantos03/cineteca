@@ -197,8 +197,8 @@ final class SearchFiltersView: UIView {
     private func constrainScrollView() {
         constrain(scrollView, handleView, self) { scrollView, handle, superview in
             scrollView.top == handle.bottom + 16
-            scrollView.left == superview.left
-            scrollView.right == superview.right
+            scrollView.leading == superview.leading
+            scrollView.trailing == superview.trailing
             scrollView.bottom == superview.bottom - 24
         }
     }
@@ -207,8 +207,8 @@ final class SearchFiltersView: UIView {
         constrain(contentStack, scrollView) { stack, scrollView in
             stack.top == scrollView.top
             stack.bottom == scrollView.bottom
-            stack.left == scrollView.left + 20
-            stack.right == scrollView.right - 20
+            stack.leading == scrollView.leading + 20
+            stack.trailing == scrollView.trailing - 20
             stack.width == scrollView.width - 40
         }
     }
@@ -216,7 +216,7 @@ final class SearchFiltersView: UIView {
     private func constrainLanguageChevronImageView() {
         constrain(languageChevronImageView, languageButton) { imageView, button in
             imageView.centerY == button.centerY
-            imageView.right == button.right - 16
+            imageView.trailing == button.trailing - 16
             imageView.width == 14
             imageView.height == 14
         }

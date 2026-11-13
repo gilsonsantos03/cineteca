@@ -54,13 +54,13 @@ final class AuthenticationPromptView: UIView {
         constrain(titleLabel, self) { title, superview in
             title.top == superview.top
             title.centerX == superview.centerX
-            title.left == superview.left + 24
-            title.right == superview.right - 24
+            title.leading == superview.leading + 24
+            title.trailing == superview.trailing - 24
         }
         constrain(messageLabel, titleLabel, self) { message, title, superview in
             message.top == title.bottom + 10
-            message.left == superview.left + 24
-            message.right == superview.right - 24
+            message.leading == superview.leading + 24
+            message.trailing == superview.trailing - 24
         }
         constrain(actionButton, messageLabel, self) { button, message, superview in
             button.top == message.bottom + 24

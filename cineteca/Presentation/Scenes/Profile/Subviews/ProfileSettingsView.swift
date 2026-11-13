@@ -57,8 +57,8 @@ final class ProfileSettingsView: UIView {
     private func constrainContainerView() {
         constrain(containerView, self) { container, superview in
             container.top == superview.top
-            container.left == superview.left + 20
-            container.right == superview.right - 20
+            container.leading == superview.leading + 20
+            container.trailing == superview.trailing - 20
             container.bottom == superview.bottom
         }
     }
@@ -66,8 +66,8 @@ final class ProfileSettingsView: UIView {
     private func constrainRowsStack() {
         constrain(rowsStack, containerView) { stack, container in
             stack.top == container.top
-            stack.left == container.left
-            stack.right == container.right
+            stack.leading == container.leading
+            stack.trailing == container.trailing
             stack.bottom == container.bottom
         }
     }
@@ -151,14 +151,14 @@ private final class ProfileSettingsRowView: UIView {
     private func constrainTitleLabel() {
         constrain(titleLabel, self) { label, superview in
             label.centerY == superview.centerY
-            label.left == superview.left + 16
+            label.leading == superview.leading + 16
         }
     }
 
     private func constrainChevronImageView() {
         constrain(chevronImageView, self) { chevron, superview in
             chevron.centerY == superview.centerY
-            chevron.right == superview.right - 16
+            chevron.trailing == superview.trailing - 16
             chevron.width == 10
             chevron.height == 16
         }
@@ -166,8 +166,8 @@ private final class ProfileSettingsRowView: UIView {
 
     private func constrainSeparatorView() {
         constrain(separatorView, self) { separator, superview in
-            separator.left == superview.left + 16
-            separator.right == superview.right
+            separator.leading == superview.leading + 16
+            separator.trailing == superview.trailing
             separator.bottom == superview.bottom
             separator.height == 1
         }

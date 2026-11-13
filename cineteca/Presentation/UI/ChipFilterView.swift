@@ -61,8 +61,8 @@ final class ChipFilterView: UIView {
         constrain(collectionView, self) { collectionView, superview in
             collectionView.top == superview.top + 20
             collectionView.bottom == superview.bottom - 12
-            collectionView.left == superview.left
-            collectionView.right == superview.right
+            collectionView.leading == superview.leading
+            collectionView.trailing == superview.trailing
             collectionView.height == 40
         }
     }

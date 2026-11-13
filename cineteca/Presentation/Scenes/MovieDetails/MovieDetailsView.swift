@@ -134,16 +134,16 @@ final class MovieDetailsView: UIView {
     private func constrainNavigationHeader() {
         constrain(navigationHeader, self) { header, superview in
             header.top == superview.safeAreaLayoutGuide.top + 8
-            header.left == superview.left
-            header.right == superview.right
+            header.leading == superview.leading
+            header.trailing == superview.trailing
         }
     }
 
     private func constrainScrollView() {
         constrain(scrollView, navigationHeader, self) { scrollView, header, superview in
             scrollView.top == header.bottom + 16
-            scrollView.left == superview.left
-            scrollView.right == superview.right
+            scrollView.leading == superview.leading
+            scrollView.trailing == superview.trailing
             scrollView.bottom == superview.bottom
         }
     }
@@ -170,8 +170,8 @@ final class MovieDetailsView: UIView {
     private func constrainErrorView() {
         constrain(errorView, self) { errorView, superview in
             errorView.center == superview.center
-            errorView.left == superview.left + 32
-            errorView.right == superview.right - 32
+            errorView.leading == superview.leading + 32
+            errorView.trailing == superview.trailing - 32
         }
     }
 

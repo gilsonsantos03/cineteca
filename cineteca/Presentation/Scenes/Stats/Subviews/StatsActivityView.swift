@@ -90,16 +90,16 @@ final class StatsActivityView: UIView {
     private func constrainHeaderStack() {
         constrain(headerStack, self) { stack, superview in
             stack.top == superview.top
-            stack.left == superview.left + 20
-            stack.right == superview.right - 20
+            stack.leading == superview.leading + 20
+            stack.trailing == superview.trailing - 20
         }
     }
 
     private func constrainChartContainerView() {
         constrain(chartContainerView, headerStack, self) { chart, header, superview in
             chart.top == header.bottom + 12
-            chart.left == superview.left + 20
-            chart.right == superview.right - 20
+            chart.leading == superview.leading + 20
+            chart.trailing == superview.trailing - 20
             chart.bottom == superview.bottom
             chart.height == chartHeight + 44
         }
@@ -108,8 +108,8 @@ final class StatsActivityView: UIView {
     private func constrainBarsStack() {
         constrain(barsStack, chartContainerView) { stack, chart in
             stack.top == chart.top + 12
-            stack.left == chart.left + 12
-            stack.right == chart.right - 12
+            stack.leading == chart.leading + 12
+            stack.trailing == chart.trailing - 12
             stack.height == chartHeight
         }
     }
@@ -117,8 +117,8 @@ final class StatsActivityView: UIView {
     private func constrainLabelsStack() {
         constrain(labelsStack, barsStack, chartContainerView) { labels, bars, chart in
             labels.top == bars.bottom + 8
-            labels.left == bars.left
-            labels.right == bars.right
+            labels.leading == bars.leading
+            labels.trailing == bars.trailing
             labels.bottom == chart.bottom - 12
         }
     }

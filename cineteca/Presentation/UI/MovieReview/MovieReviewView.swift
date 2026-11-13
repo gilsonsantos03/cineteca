@@ -245,14 +245,14 @@ final class MovieReviewView: UIView {
     private func constrainTitleLabel() {
         constrain(titleLabel, self) { label, superview in
             label.top == superview.safeAreaLayoutGuide.top + 18
-            label.left == superview.left + 20
+            label.leading == superview.leading + 20
         }
     }
 
     private func constrainCloseButton() {
         constrain(closeButton, titleLabel, self) { button, title, superview in
             button.centerY == title.centerY
-            button.right == superview.right - 20
+            button.trailing == superview.trailing - 20
             button.width == 28
             button.height == 28
         }
@@ -261,8 +261,8 @@ final class MovieReviewView: UIView {
     private func constrainContentStack() {
         constrain(contentStack, titleLabel, self) { stack, title, superview in
             stack.top == title.bottom + 18
-            stack.left == superview.left + 20
-            stack.right == superview.right - 20
+            stack.leading == superview.leading + 20
+            stack.trailing == superview.trailing - 20
         }
         constrain(contentStack, keyboardLayoutGuide) { stack, keyboardGuide in
             stack.bottom <= keyboardGuide.top - 16
@@ -304,8 +304,8 @@ final class MovieReviewView: UIView {
     private func constrainPlaceholderLabel() {
         constrain(placeholderLabel, reviewTextView) { placeholder, textView in
             placeholder.top == textView.top + 14
-            placeholder.left == textView.left + 16
-            placeholder.right == textView.right - 12
+            placeholder.leading == textView.leading + 16
+            placeholder.trailing == textView.trailing - 12
         }
     }
 

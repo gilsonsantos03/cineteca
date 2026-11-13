@@ -41,8 +41,8 @@ final class MovieCardSkeletonCell: UICollectionViewCell {
     private func constrainPosterShimmer() {
         constrain(posterShimmer, contentView) { shimmer, container in
             shimmer.top == container.top
-            shimmer.left == container.left
-            shimmer.right == container.right
+            shimmer.leading == container.leading
+            shimmer.trailing == container.trailing
             shimmer.height == 170
         }
     }
@@ -50,8 +50,8 @@ final class MovieCardSkeletonCell: UICollectionViewCell {
     private func constrainTitleShimmer() {
         constrain(titleShimmer, posterShimmer, contentView) { shimmer, poster, container in
             shimmer.top == poster.bottom + 8
-            shimmer.left == container.left
-            shimmer.right == container.right
+            shimmer.leading == container.leading
+            shimmer.trailing == container.trailing
             shimmer.height == 12
         }
     }
@@ -59,7 +59,7 @@ final class MovieCardSkeletonCell: UICollectionViewCell {
     private func constrainRatingShimmer() {
         constrain(ratingShimmer, titleShimmer, contentView) { shimmer, title, container in
             shimmer.top == title.bottom + 6
-            shimmer.left == container.left
+            shimmer.leading == container.leading
             shimmer.width == 40
             shimmer.height == 12
         }

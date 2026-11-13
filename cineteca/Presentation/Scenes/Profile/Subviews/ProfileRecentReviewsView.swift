@@ -82,22 +82,22 @@ final class ProfileRecentReviewsView: UIView {
     private func constrainTitleLabel() {
         constrain(titleLabel, self) { label, superview in
             label.top == superview.top
-            label.left == superview.left + 20
+            label.leading == superview.leading + 20
         }
     }
 
     private func constrainSeeAllButton() {
         constrain(seeAllButton, titleLabel, self) { button, label, superview in
             button.centerY == label.centerY
-            button.right == superview.right - 20
+            button.trailing == superview.trailing - 20
         }
     }
 
     private func constrainCardsStack() {
         constrain(cardsStack, titleLabel, self) { stack, label, superview in
             stack.top == label.bottom + 16
-            stack.left == superview.left + 20
-            stack.right == superview.right - 20
+            stack.leading == superview.leading + 20
+            stack.trailing == superview.trailing - 20
             stack.bottom == superview.bottom
         }
     }

@@ -116,8 +116,8 @@ final class MovieCardCell: UICollectionViewCell {
     private func constrainPosterImageView() {
         constrain(posterImageView, contentView) { imageView, container in
             imageView.top == container.top
-            imageView.left == container.left
-            imageView.right == container.right
+            imageView.leading == container.leading
+            imageView.trailing == container.trailing
             imageView.height == 170
         }
     }
@@ -125,7 +125,7 @@ final class MovieCardCell: UICollectionViewCell {
     private func constrainTrendingBadgeView() {
         constrain(trendingBadgeView, posterImageView) { badge, imageView in
             badge.top == imageView.top + 8
-            badge.left == imageView.left + 8
+            badge.leading == imageView.leading + 8
         }
     }
 
@@ -133,8 +133,8 @@ final class MovieCardCell: UICollectionViewCell {
         constrain(trendingRow, trendingBadgeView) { row, container in
             row.top == container.top + 4
             row.bottom == container.bottom - 4
-            row.left == container.left + 6
-            row.right == container.right - 6
+            row.leading == container.leading + 6
+            row.trailing == container.trailing - 6
         }
     }
 
@@ -148,8 +148,8 @@ final class MovieCardCell: UICollectionViewCell {
     private func constrainMovieInfoStack() {
         constrain(movieInfoStack, posterImageView, contentView) { stack, imageView, container in
             stack.top == imageView.bottom + 6
-            stack.left == container.left
-            stack.right == container.right
+            stack.leading == container.leading
+            stack.trailing == container.trailing
         }
     }
 

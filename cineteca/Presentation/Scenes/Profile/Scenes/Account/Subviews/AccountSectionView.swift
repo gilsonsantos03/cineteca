@@ -66,16 +66,16 @@ final class AccountSectionView: UIView {
     private func constrainTitleLabel() {
         constrain(titleLabel, self) { label, superview in
             label.top == superview.top
-            label.left == superview.left
-            label.right == superview.right
+            label.leading == superview.leading
+            label.trailing == superview.trailing
         }
     }
 
     private func constrainContainerView() {
         constrain(containerView, titleLabel, self) { container, title, superview in
             container.top == title.bottom + 8
-            container.left == superview.left
-            container.right == superview.right
+            container.leading == superview.leading
+            container.trailing == superview.trailing
             container.bottom == superview.bottom
         }
     }
@@ -164,16 +164,16 @@ private final class AccountValueRowView: UIView {
         constrain(self) { view in view.height >= 52 }
         constrain(titleLabel, self) { label, superview in
             label.centerY == superview.centerY
-            label.left == superview.left + 16
+            label.leading == superview.leading + 16
         }
         constrain(valueLabel, titleLabel, self) { value, title, superview in
             value.centerY == superview.centerY
-            value.left == title.right + 12
-            value.right == superview.right - 16
+            value.leading == title.trailing + 12
+            value.trailing == superview.trailing - 16
         }
         constrain(separatorView, self) { separator, superview in
-            separator.left == superview.left + 16
-            separator.right == superview.right
+            separator.leading == superview.leading + 16
+            separator.trailing == superview.trailing
             separator.bottom == superview.bottom
             separator.height == 1
         }
@@ -222,17 +222,17 @@ private final class AccountNavigationRowView: UIView {
         constrain(self) { view in view.height == 52 }
         constrain(titleLabel, self) { label, superview in
             label.centerY == superview.centerY
-            label.left == superview.left + 16
+            label.leading == superview.leading + 16
         }
         constrain(chevronImageView, self) { chevron, superview in
             chevron.centerY == superview.centerY
-            chevron.right == superview.right - 16
+            chevron.trailing == superview.trailing - 16
             chevron.width == 10
             chevron.height == 16
         }
         constrain(separatorView, self) { separator, superview in
-            separator.left == superview.left + 16
-            separator.right == superview.right
+            separator.leading == superview.leading + 16
+            separator.trailing == superview.trailing
             separator.bottom == superview.bottom
             separator.height == 1
         }

@@ -67,7 +67,7 @@ final class BackNavigationHeaderView: UIView {
     private func constrainBackButton() {
         constrain(backButton, self) { button, superview in
             button.top == superview.top
-            button.left == superview.left + 20
+            button.leading == superview.leading + 20
             button.width == 36
             button.height == 36
             button.bottom == superview.bottom
@@ -78,8 +78,8 @@ final class BackNavigationHeaderView: UIView {
         constrain(titleLabel, backButton, self) { label, backButton, superview in
             label.centerX == superview.centerX
             label.centerY == backButton.centerY
-            label.left >= backButton.right + 12
-            label.right <= superview.right - 20
+            label.leading >= backButton.trailing + 12
+            label.trailing <= superview.trailing - 20
         }
     }
 

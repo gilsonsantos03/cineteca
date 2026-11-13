@@ -84,8 +84,8 @@ final class StatsContentView: UIView {
     private func constrainContentStack() {
         constrain(contentStack, scrollView) { stack, scroll in
             stack.top == scroll.top + 16
-            stack.left == scroll.left
-            stack.right == scroll.right
+            stack.leading == scroll.leading
+            stack.trailing == scroll.trailing
             stack.bottom == scroll.bottom
             stack.width == scroll.width
         }

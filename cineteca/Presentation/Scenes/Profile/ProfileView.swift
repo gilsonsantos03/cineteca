@@ -88,8 +88,8 @@ final class ProfileView: UIView {
     private func constrainAuthenticationPromptView() {
         constrain(authenticationPromptView, self) { prompt, superview in
             prompt.centerY == superview.centerY
-            prompt.left == superview.left + 20
-            prompt.right == superview.right - 20
+            prompt.leading == superview.leading + 20
+            prompt.trailing == superview.trailing - 20
         }
     }
 

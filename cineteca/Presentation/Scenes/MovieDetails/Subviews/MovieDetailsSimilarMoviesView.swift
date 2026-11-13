@@ -71,8 +71,8 @@ final class MovieDetailsSimilarMoviesView: UIStackView {
         constrain(contentStack, scrollView.contentLayoutGuide, scrollView.frameLayoutGuide) { stack, content, frame in
             stack.top == content.top
             stack.bottom == content.bottom
-            stack.left == content.left
-            stack.right == content.right
+            stack.leading == content.leading
+            stack.trailing == content.trailing
             stack.height == frame.height
         }
     }

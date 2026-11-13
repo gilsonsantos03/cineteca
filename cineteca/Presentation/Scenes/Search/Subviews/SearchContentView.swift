@@ -87,16 +87,16 @@ final class SearchContentView: UIView {
     private func constrainSectionTitleLabel() {
         constrain(sectionTitleLabel, self) { label, superview in
             label.top == superview.top + 16
-            label.left == superview.left + 20
-            label.right == superview.right - 20
+            label.leading == superview.leading + 20
+            label.trailing == superview.trailing - 20
         }
     }
 
     private func constrainCollectionView() {
         constrain(collectionView, sectionTitleLabel, self) { collectionView, title, superview in
             collectionView.top == title.bottom + 16
-            collectionView.left == superview.left
-            collectionView.right == superview.right
+            collectionView.leading == superview.leading
+            collectionView.trailing == superview.trailing
             collectionView.bottom == superview.bottom
         }
     }

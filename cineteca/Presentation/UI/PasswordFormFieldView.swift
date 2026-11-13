@@ -82,16 +82,16 @@ final class PasswordFormFieldView: UIView {
     private func constrainTitleLabel() {
         constrain(titleLabel, self) { label, superview in
             label.top == superview.top
-            label.left == superview.left
-            label.right == superview.right
+            label.leading == superview.leading
+            label.trailing == superview.trailing
         }
     }
 
     private func constrainInputContainerView() {
         constrain(inputContainerView, titleLabel, self) { container, title, superview in
             container.top == title.bottom + 8
-            container.left == superview.left
-            container.right == superview.right
+            container.leading == superview.leading
+            container.trailing == superview.trailing
             container.bottom == superview.bottom
         }
     }
@@ -100,15 +100,15 @@ final class PasswordFormFieldView: UIView {
         constrain(textField, visibilityButton, inputContainerView) { textField, button, container in
             textField.top == container.top + 14
             textField.bottom == container.bottom - 14
-            textField.left == container.left + 14
-            textField.right == button.left - 8
+            textField.leading == container.leading + 14
+            textField.trailing == button.leading - 8
         }
     }
 
     private func constrainVisibilityButton() {
         constrain(visibilityButton, inputContainerView) { button, container in
             button.centerY == container.centerY
-            button.right == container.right - 14
+            button.trailing == container.trailing - 14
             button.width == 24
             button.height == 24
         }

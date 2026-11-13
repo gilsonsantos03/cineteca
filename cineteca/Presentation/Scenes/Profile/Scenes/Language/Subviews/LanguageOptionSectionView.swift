@@ -66,16 +66,16 @@ final class LanguageOptionSectionView: UIView {
     private func constrainTitleLabel() {
         constrain(titleLabel, self) { label, superview in
             label.top == superview.top
-            label.left == superview.left
-            label.right == superview.right
+            label.leading == superview.leading
+            label.trailing == superview.trailing
         }
     }
 
     private func constrainContainerView() {
         constrain(containerView, titleLabel, self) { container, title, superview in
             container.top == title.bottom + 8
-            container.left == superview.left
-            container.right == superview.right
+            container.leading == superview.leading
+            container.trailing == superview.trailing
             container.bottom == superview.bottom
         }
     }
@@ -171,14 +171,14 @@ private final class LanguageOptionRowView: UIView {
     private func constrainTitleLabel() {
         constrain(titleLabel, self) { label, superview in
             label.centerY == superview.centerY
-            label.left == superview.left + 16
+            label.leading == superview.leading + 16
         }
     }
 
     private func constrainCheckmarkImageView() {
         constrain(checkmarkImageView, self) { checkmark, superview in
             checkmark.centerY == superview.centerY
-            checkmark.right == superview.right - 16
+            checkmark.trailing == superview.trailing - 16
             checkmark.width == 16
             checkmark.height == 16
         }
@@ -186,8 +186,8 @@ private final class LanguageOptionRowView: UIView {
 
     private func constrainSeparatorView() {
         constrain(separatorView, self) { separator, superview in
-            separator.left == superview.left + 16
-            separator.right == superview.right
+            separator.leading == superview.leading + 16
+            separator.trailing == superview.trailing
             separator.bottom == superview.bottom
             separator.height == 1
         }

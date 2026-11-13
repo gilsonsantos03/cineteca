@@ -141,7 +141,7 @@ final class MyReviewCardView: UIView {
     private func constrainPosterImageView() {
         constrain(posterImageView, self) { poster, superview in
             poster.top == superview.top + 16
-            poster.left == superview.left + 16
+            poster.leading == superview.leading + 16
             poster.width == 60
             poster.height == 60
         }
@@ -150,31 +150,31 @@ final class MyReviewCardView: UIView {
     private func constrainRatingStack() {
         constrain(ratingStack, posterImageView, self) { rating, poster, superview in
             rating.centerY == poster.centerY
-            rating.right == superview.right - 16
+            rating.trailing == superview.trailing - 16
         }
     }
 
     private func constrainTitleLabel() {
         constrain(movieInfoStack, posterImageView, ratingStack) { info, poster, rating in
             info.centerY == poster.centerY
-            info.left == poster.right + 14
-            info.right == rating.left - 8
+            info.leading == poster.trailing + 14
+            info.trailing == rating.leading - 8
         }
     }
 
     private func constrainReviewTextLabel() {
         constrain(reviewTextLabel, posterImageView, self) { text, poster, superview in
             text.top == poster.bottom + 16
-            text.left == superview.left + 16
-            text.right == superview.right - 16
+            text.leading == superview.leading + 16
+            text.trailing == superview.trailing - 16
         }
     }
 
     private func constrainSeparatorView() {
         constrain(separatorView, reviewTextLabel, self) { separator, text, superview in
             separator.top == text.bottom + 16
-            separator.left == superview.left + 16
-            separator.right == superview.right - 16
+            separator.leading == superview.leading + 16
+            separator.trailing == superview.trailing - 16
             separator.height == 1
         }
     }
@@ -182,7 +182,7 @@ final class MyReviewCardView: UIView {
     private func constrainDateLabel() {
         constrain(dateLabel, separatorView, self) { date, separator, superview in
             date.top == separator.bottom + 14
-            date.left == superview.left + 16
+            date.leading == superview.leading + 16
             date.bottom == superview.bottom - 16
         }
     }

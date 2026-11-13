@@ -91,7 +91,7 @@ final class HomeView: UIView {
 
     private func constrainRecommendationButton() {
         constrain(recommendationButton, self) { button, superview in
-            button.right == superview.right - 20
+            button.trailing == superview.trailing - 20
             button.bottom == superview.safeAreaLayoutGuide.bottom - 20
             button.height == 50
         }

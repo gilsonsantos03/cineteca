@@ -1,0 +1,16 @@
+---
+description: Use leading and trailing instead of left and right in Cartography constraints
+globs: cineteca/**/*.swift
+alwaysApply: true
+---
+
+# Directional layout constraints
+
+In Cartography constraints, always use semantic directional anchors:
+
+- Use `leading` instead of `left`.
+- Use `trailing` instead of `right`.
+
+This applies to all new and modified Swift views, including constraints between
+subviews and containers. Do not change unrelated UIKit properties or APIs that
+are not layout constraints.

@@ -94,7 +94,7 @@ final class ProfileHeaderView: UIView {
     private func constrainEditButton() {
         constrain(editButton, self) { button, superview in
             button.top == superview.top
-            button.right == superview.right - 20
+            button.trailing == superview.trailing - 20
             button.width == 36
             button.height == 36
         }
@@ -118,16 +118,16 @@ final class ProfileHeaderView: UIView {
     private func constrainUsernameLabel() {
         constrain(usernameLabel, avatarContainerView, self) { label, avatar, superview in
             label.top == avatar.bottom + 12
-            label.left == superview.left + 20
-            label.right == superview.right - 20
+            label.leading == superview.leading + 20
+            label.trailing == superview.trailing - 20
         }
     }
 
     private func constrainMemberSinceLabel() {
         constrain(memberSinceLabel, usernameLabel, self) { label, username, superview in
             label.top == username.bottom + 4
-            label.left == superview.left + 20
-            label.right == superview.right - 20
+            label.leading == superview.leading + 20
+            label.trailing == superview.trailing - 20
             label.bottom == superview.bottom
         }
     }

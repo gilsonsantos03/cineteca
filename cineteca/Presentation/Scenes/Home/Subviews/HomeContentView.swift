@@ -107,8 +107,8 @@ final class HomeContentView: UIView {
     private func constrainContentStack() {
         constrain(contentStack, scrollView) { stack, scrollView in
             stack.top == scrollView.top
-            stack.left == scrollView.left
-            stack.right == scrollView.right
+            stack.leading == scrollView.leading
+            stack.trailing == scrollView.trailing
             stack.bottom == scrollView.bottom
             stack.width == scrollView.width
         }

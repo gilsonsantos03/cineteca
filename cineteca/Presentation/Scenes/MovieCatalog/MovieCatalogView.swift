@@ -121,8 +121,8 @@ final class MovieCatalogView: UIView {
     private func constrainHeaderView() {
         constrain(headerView, self) { header, superview in
             header.top == superview.safeAreaLayoutGuide.top + 16
-            header.left == superview.left
-            header.right == superview.right
+            header.leading == superview.leading
+            header.trailing == superview.trailing
         }
     }
 
@@ -130,8 +130,8 @@ final class MovieCatalogView: UIView {
         constrain(collectionView, genreFilterView, self) {
             collectionView, genreFilter, superview in
             collectionView.top == genreFilter.bottom
-            collectionView.left == superview.left
-            collectionView.right == superview.right
+            collectionView.leading == superview.leading
+            collectionView.trailing == superview.trailing
             collectionView.bottom == superview.bottom
         }
     }
@@ -139,8 +139,8 @@ final class MovieCatalogView: UIView {
     private func constrainGenreFilterView() {
         constrain(genreFilterView, headerView, self) { genreFilter, header, superview in
             genreFilter.top == header.bottom
-            genreFilter.left == superview.left
-            genreFilter.right == superview.right
+            genreFilter.leading == superview.leading
+            genreFilter.trailing == superview.trailing
         }
     }
 
@@ -155,8 +155,8 @@ final class MovieCatalogView: UIView {
         constrain(emptyStateLabel, collectionView) { label, collectionView in
             label.centerX == collectionView.centerX
             label.centerY == collectionView.centerY
-            label.left == collectionView.left + 24
-            label.right == collectionView.right - 24
+            label.leading == collectionView.leading + 24
+            label.trailing == collectionView.trailing - 24
         }
     }
 

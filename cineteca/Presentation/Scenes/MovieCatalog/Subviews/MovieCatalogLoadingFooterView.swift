@@ -126,8 +126,8 @@ final class MovieCatalogLoadingFooterView: UICollectionReusableView {
         constrain(contentStackView, loadMoreButton) { stack, button in
             stack.centerX == button.centerX
             stack.centerY == button.centerY
-            stack.left == button.left + 16
-            stack.right == button.right - 16
+            stack.leading == button.leading + 16
+            stack.trailing == button.trailing - 16
         }
     }
 

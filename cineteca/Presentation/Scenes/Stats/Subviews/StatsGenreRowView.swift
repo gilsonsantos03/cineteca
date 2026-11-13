@@ -91,7 +91,7 @@ final class StatsGenreRowView: UIView {
 
     private func constrainNameLabel() {
         constrain(nameLabel, self) { label, superview in
-            label.left == superview.left
+            label.leading == superview.leading
             label.centerY == superview.centerY
             label.width == 72
         }
@@ -99,7 +99,7 @@ final class StatsGenreRowView: UIView {
 
     private func constrainPercentageLabel() {
         constrain(percentageLabel, self) { label, superview in
-            label.right == superview.right
+            label.trailing == superview.trailing
             label.centerY == superview.centerY
             label.width == 40
         }
@@ -107,8 +107,8 @@ final class StatsGenreRowView: UIView {
 
     private func constrainTrackView() {
         constrain(trackView, nameLabel, percentageLabel, self) { track, name, percentage, superview in
-            track.left == name.right + 12
-            track.right == percentage.left - 12
+            track.leading == name.trailing + 12
+            track.trailing == percentage.leading - 12
             track.centerY == superview.centerY
             track.height == 8
         }
@@ -118,7 +118,7 @@ final class StatsGenreRowView: UIView {
         constrain(fillView, trackView) { fill, track in
             fill.top == track.top
             fill.bottom == track.bottom
-            fill.left == track.left
+            fill.leading == track.leading
         }
         let constraint = fillView.widthAnchor.constraint(equalToConstant: 0)
         constraint.isActive = true

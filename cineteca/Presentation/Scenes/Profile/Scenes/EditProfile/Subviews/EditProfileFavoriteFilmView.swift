@@ -117,7 +117,7 @@ final class EditProfileFavoriteFilmView: UIView {
     private func constrainBadgeView() {
         constrain(badgeView, backdropImageView) { badge, image in
             badge.top == image.top + 12
-            badge.left == image.left + 12
+            badge.leading == image.leading + 12
         }
     }
 
@@ -125,22 +125,22 @@ final class EditProfileFavoriteFilmView: UIView {
         constrain(badgeLabel, badgeView) { label, badge in
             label.top == badge.top + 4
             label.bottom == badge.bottom - 4
-            label.left == badge.left + 8
-            label.right == badge.right - 8
+            label.leading == badge.leading + 8
+            label.trailing == badge.trailing - 8
         }
     }
 
     private func constrainTitleLabel() {
         constrain(titleLabel, backdropImageView, changeButton) { title, image, change in
-            title.left == image.left + 16
+            title.leading == image.leading + 16
             title.bottom == image.bottom - 16
-            title.right <= change.left - 12
+            title.trailing <= change.leading - 12
         }
     }
 
     private func constrainChangeButton() {
         constrain(changeButton, backdropImageView) { change, image in
-            change.right == image.right - 16
+            change.trailing == image.trailing - 16
             change.centerY == image.bottom - 28
         }
     }
