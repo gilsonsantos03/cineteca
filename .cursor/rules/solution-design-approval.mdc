@@ -1,0 +1,26 @@
+---
+description: Ask which solution to follow before implementing; favor scalable but proportionate designs
+alwaysApply: true
+---
+
+# Solution design approval
+
+Before implementing a fix or feature (anything beyond a trivial, mechanical change):
+
+1. Investigate the code first, then present 2–3 options with their trade-offs.
+2. Recommend one option and say why.
+3. Ask the user which one to follow (use `AskQuestion`) and wait for the answer before editing code.
+
+## Proportionate design
+
+- Prefer solutions that scale: put responsibilities in the right layer (e.g. caching in the repository, not in a scene's interactor) so other scenes benefit and invalidation stays in one place.
+- Don't over-engineer: avoid new abstractions, data sources, streams, or frameworks unless the problem actually needs them.
+- Call out concurrency and stale-state risks of each option.
+
+## Example
+
+Profile showed a spinner on every visit.
+
+- ❌ Implement a cache in `ProfileInteractor` straight away.
+- ❌ Jump to a full real-time Firestore listener stack.
+- ✅ Present: scene-level cache, repository cache keyed by UID (recommended), or snapshot listener. Ask, then implement the chosen one.
