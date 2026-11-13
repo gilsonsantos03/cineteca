@@ -1,15 +1,15 @@
 import UIKit
 import Cartography
 
-protocol GenreFilterViewDelegate: AnyObject {
-    func didSelectGenre(at index: Int)
+protocol ChipFilterViewDelegate: AnyObject {
+    func didSelectOption(at index: Int)
 }
 
-final class GenreFilterView: UIView {
+final class ChipFilterView: UIView {
 
     // MARK: - Properties
 
-    weak var delegate: GenreFilterViewDelegate?
+    weak var delegate: ChipFilterViewDelegate?
 
     private var options: [String] = []
     private var selectedIndex = 0
@@ -25,7 +25,7 @@ final class GenreFilterView: UIView {
         collectionView.backgroundColor = .clear
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-        collectionView.register(GenreChipCell.self, forCellWithReuseIdentifier: GenreChipCell.reuseId)
+        collectionView.register(ChipCell.self, forCellWithReuseIdentifier: ChipCell.reuseId)
         collectionView.dataSource = self
         collectionView.delegate = self
         return collectionView
@@ -84,7 +84,7 @@ final class GenreFilterView: UIView {
 
 // MARK: - UICollectionViewDataSource, UICollectionViewDelegate
 
-extension GenreFilterView: UICollectionViewDataSource, UICollectionViewDelegate {
+extension ChipFilterView: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         options.count
     }
@@ -94,15 +94,15 @@ extension GenreFilterView: UICollectionViewDataSource, UICollectionViewDelegate 
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: GenreChipCell.reuseId,
+            withReuseIdentifier: ChipCell.reuseId,
             for: indexPath
-        ) as! GenreChipCell
+        ) as! ChipCell
         cell.configure(title: options[indexPath.item], isSelected: indexPath.item == selectedIndex)
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard indexPath.item != selectedIndex else { return }
-        delegate?.didSelectGenre(at: indexPath.item)
+        delegate?.didSelectOption(at: indexPath.item)
     }
 }

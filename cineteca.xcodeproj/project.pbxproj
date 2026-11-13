@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		UC000001000000000000007B000000000000001A /* UserScopedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = UC000001000000000000007B /* UserScopedCache.swift */; };
 		14E387A226636E8F7A09477D /* AuthenticationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F538006D2C51872E5F5480E4 /* AuthenticationModels.swift */; };
 		2025AF8A2C92ED3DA1458013 /* FirebaseConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F50B735E506F88941CE16F2 /* FirebaseConfiguration.swift */; };
 		26D3EAE36B33F630462BC23A /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608FA11039306AF47BB002B8 /* AuthenticationViewController.swift */; };
@@ -27,7 +28,7 @@
 		442CB0672FFC8218004FCC82 /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CB0662FFC8218004FCC82 /* HomeRouter.swift */; };
 		442CB0692FFC821E004FCC82 /* HomeConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CB0682FFC821E004FCC82 /* HomeConfigurator.swift */; };
 		442CB0812FFC8301004FCC82 /* FeaturedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CB0712FFC8301004FCC82 /* FeaturedView.swift */; };
-		442CB0822FFC8302004FCC82 /* GenreFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CB0722FFC8302004FCC82 /* GenreFilterView.swift */; };
+		442CB0822FFC8302004FCC82 /* ChipFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CB0722FFC8302004FCC82 /* ChipFilterView.swift */; };
 		442CB0842FFC8304004FCC82 /* MovieSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CB0742FFC8304004FCC82 /* MovieSectionView.swift */; };
 		442CB0852FFC8305004FCC82 /* MovieCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CB0752FFC8305004FCC82 /* MovieCardCell.swift */; };
 		442CB0862FFC8306004FCC82 /* WeeklyDigestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CB0762FFC8306004FCC82 /* WeeklyDigestView.swift */; };
@@ -267,12 +268,11 @@
 		SS000001000000000000016A /* SearchFiltersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SS000001000000000000016B /* SearchFiltersView.swift */; };
 		SS000001000000000000017A /* SearchContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SS000001000000000000017B /* SearchContentView.swift */; };
 		SS000001000000000000018A /* SearchYearRangeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = SS000001000000000000018B /* SearchYearRangeSliderView.swift */; };
-		ST000001000000000000001B000000000000001A /* YearInFilmStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000001B /* YearInFilmStats.swift */; };
+		ST000001000000000000001B000000000000001A /* FilmStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000001B /* FilmStats.swift */; };
 		ST000001000000000000002B000000000000001A /* StatsRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000002B /* StatsRepositoryProtocol.swift */; };
 		ST000001000000000000003B000000000000001A /* StatsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000003B /* StatsModels.swift */; };
 		ST000001000000000000004B000000000000001A /* StatsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000004B /* StatsInteractor.swift */; };
 		ST000001000000000000005B000000000000001A /* StatsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000005B /* StatsPresenter.swift */; };
-		ST000001000000000000007B000000000000001A /* StatsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000007B /* StatsRepository.swift */; };
 		ST000001000000000000007C000000000000001A /* StatsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000007C /* StatsConfigurator.swift */; };
 		ST000001000000000000008B000000000000001A /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000008B /* StatsView.swift */; };
 		ST000001000000000000009B000000000000001A /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000009B /* StatsViewController.swift */; };
@@ -281,16 +281,17 @@
 		ST000001000000000000012C000000000000001A /* StatsGenreDistributionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000012C /* StatsGenreDistributionView.swift */; };
 		ST000001000000000000013C000000000000001A /* StatsGenreRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000013C /* StatsGenreRowView.swift */; };
 		ST000001000000000000014C000000000000001A /* StatsTopPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000014C /* StatsTopPersonView.swift */; };
-		ST000001000000000000015C000000000000001A /* StatsMonthlyActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000015C /* StatsMonthlyActivityView.swift */; };
-		ST000001000000000000016C000000000000001A /* StatsMonthlyBarColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000016C /* StatsMonthlyBarColumnView.swift */; };
+		ST000001000000000000015C000000000000001A /* StatsActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000015C /* StatsActivityView.swift */; };
+		ST000001000000000000016C000000000000001A /* StatsActivityBarColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000016C /* StatsActivityBarColumnView.swift */; };
 		TM000001000000000000005E000000000000001A /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = TM000001000000000000005E /* ThemeManager.swift */; };
 		UI000001000000000000001B000000000000001A /* BackNavigationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = UI000001000000000000001B /* BackNavigationHeaderView.swift */; };
 		UI000001000000000000002B000000000000001A /* PasswordFormFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = UI000001000000000000002B /* PasswordFormFieldView.swift */; };
 		UI000001000000000000003B000000000000001A /* ErrorStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = UI000001000000000000003B /* ErrorStateView.swift */; };
-		UI000001000000000000004B000000000000001A /* GenreChipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = UI000001000000000000004B /* GenreChipCell.swift */; };
+		UI000001000000000000004B000000000000001A /* ChipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = UI000001000000000000004B /* ChipCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		UC000001000000000000007B /* UserScopedCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserScopedCache.swift; sourceTree = "<group>"; };
 		358B6E132B58ACC5593DC1B3 /* FirestoreStatsRepository.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FirestoreStatsRepository.swift; sourceTree = "<group>"; };
 		4411DD433085992F0098CBF6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		442CB04A2FF5EF91004FCC82 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
@@ -304,7 +305,7 @@
 		442CB0662FFC8218004FCC82 /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
 		442CB0682FFC821E004FCC82 /* HomeConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeConfigurator.swift; sourceTree = "<group>"; };
 		442CB0712FFC8301004FCC82 /* FeaturedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedView.swift; sourceTree = "<group>"; };
-		442CB0722FFC8302004FCC82 /* GenreFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreFilterView.swift; sourceTree = "<group>"; };
+		442CB0722FFC8302004FCC82 /* ChipFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipFilterView.swift; sourceTree = "<group>"; };
 		442CB0732FFC8303004FCC82 /* GenreChipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreChipCell.swift; sourceTree = "<group>"; };
 		442CB0742FFC8304004FCC82 /* MovieSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSectionView.swift; sourceTree = "<group>"; };
 		442CB0752FFC8305004FCC82 /* MovieCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCardCell.swift; sourceTree = "<group>"; };
@@ -550,12 +551,11 @@
 		SS000001000000000000016B /* SearchFiltersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFiltersView.swift; sourceTree = "<group>"; };
 		SS000001000000000000017B /* SearchContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchContentView.swift; sourceTree = "<group>"; };
 		SS000001000000000000018B /* SearchYearRangeSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchYearRangeSliderView.swift; sourceTree = "<group>"; };
-		ST000001000000000000001B /* YearInFilmStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearInFilmStats.swift; sourceTree = "<group>"; };
+		ST000001000000000000001B /* FilmStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmStats.swift; sourceTree = "<group>"; };
 		ST000001000000000000002B /* StatsRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsRepositoryProtocol.swift; sourceTree = "<group>"; };
 		ST000001000000000000003B /* StatsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsModels.swift; sourceTree = "<group>"; };
 		ST000001000000000000004B /* StatsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsInteractor.swift; sourceTree = "<group>"; };
 		ST000001000000000000005B /* StatsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsPresenter.swift; sourceTree = "<group>"; };
-		ST000001000000000000007B /* StatsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsRepository.swift; sourceTree = "<group>"; };
 		ST000001000000000000007C /* StatsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsConfigurator.swift; sourceTree = "<group>"; };
 		ST000001000000000000008B /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		ST000001000000000000009B /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
@@ -564,13 +564,13 @@
 		ST000001000000000000012C /* StatsGenreDistributionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGenreDistributionView.swift; sourceTree = "<group>"; };
 		ST000001000000000000013C /* StatsGenreRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGenreRowView.swift; sourceTree = "<group>"; };
 		ST000001000000000000014C /* StatsTopPersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTopPersonView.swift; sourceTree = "<group>"; };
-		ST000001000000000000015C /* StatsMonthlyActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsMonthlyActivityView.swift; sourceTree = "<group>"; };
-		ST000001000000000000016C /* StatsMonthlyBarColumnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsMonthlyBarColumnView.swift; sourceTree = "<group>"; };
+		ST000001000000000000015C /* StatsActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsActivityView.swift; sourceTree = "<group>"; };
+		ST000001000000000000016C /* StatsActivityBarColumnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsActivityBarColumnView.swift; sourceTree = "<group>"; };
 		TM000001000000000000005E /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		UI000001000000000000001B /* BackNavigationHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackNavigationHeaderView.swift; sourceTree = "<group>"; };
 		UI000001000000000000002B /* PasswordFormFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFormFieldView.swift; sourceTree = "<group>"; };
 		UI000001000000000000003B /* ErrorStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorStateView.swift; sourceTree = "<group>"; };
-		UI000001000000000000004B /* GenreChipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreChipCell.swift; sourceTree = "<group>"; };
+		UI000001000000000000004B /* ChipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -838,8 +838,8 @@
 				UI000001000000000000001B /* BackNavigationHeaderView.swift */,
 				UI000001000000000000002B /* PasswordFormFieldView.swift */,
 				UI000001000000000000003B /* ErrorStateView.swift */,
-				UI000001000000000000004B /* GenreChipCell.swift */,
-				442CB0722FFC8302004FCC82 /* GenreFilterView.swift */,
+				UI000001000000000000004B /* ChipCell.swift */,
+				442CB0722FFC8302004FCC82 /* ChipFilterView.swift */,
 				4A1687C5F6900AF3DCD87AC2 /* AuthenticationPromptView.swift */,
 			);
 			path = UI;
@@ -898,7 +898,7 @@
 			isa = PBXGroup;
 			children = (
 				PP000001000000000000001B /* User.swift */,
-				ST000001000000000000001B /* YearInFilmStats.swift */,
+				ST000001000000000000001B /* FilmStats.swift */,
 				BB000001000000000000001B /* Genre.swift */,
 				CC000001000000000000001B /* Movie.swift */,
 				MR000001000000000000024B /* MovieRecommendation.swift */,
@@ -938,13 +938,13 @@
 				AR000001000000000000007B /* AppearanceRepository.swift */,
 				LR000001000000000000007B /* LanguageRepository.swift */,
 				CC00000100000000000000AB /* MovieRepository.swift */,
-				ST000001000000000000007B /* StatsRepository.swift */,
 				MA000001000000000000003B /* MovieActivityRepository.swift */,
 				442CB0982FFC8405004FCC82 /* GenreRepository.swift */,
 				C96DF1451F982F4A0B6C00A7 /* FirestoreActivityMapper.swift */,
 				9041A1308F8DC6BA42D5AA7F /* FirestoreMovieActivityRepository.swift */,
 				9C360D26763E23DD2EE34540 /* FirestoreUserRepository.swift */,
 				358B6E132B58ACC5593DC1B3 /* FirestoreStatsRepository.swift */,
+				UC000001000000000000007B /* UserScopedCache.swift */,
 				MR000001000000000000023B /* FirebaseMovieRecommendationRepository.swift */,
 			);
 			path = Repositories;
@@ -1301,8 +1301,8 @@
 				ST000001000000000000012C /* StatsGenreDistributionView.swift */,
 				ST000001000000000000013C /* StatsGenreRowView.swift */,
 				ST000001000000000000014C /* StatsTopPersonView.swift */,
-				ST000001000000000000015C /* StatsMonthlyActivityView.swift */,
-				ST000001000000000000016C /* StatsMonthlyBarColumnView.swift */,
+				ST000001000000000000015C /* StatsActivityView.swift */,
+				ST000001000000000000016C /* StatsActivityBarColumnView.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -1430,7 +1430,7 @@
 				442CB05F2FFC81F4004FCC82 /* HomeViewController.swift in Sources */,
 				442CB0632FFC8202004FCC82 /* HomeInteractor.swift in Sources */,
 				442CB0812FFC8301004FCC82 /* FeaturedView.swift in Sources */,
-				442CB0822FFC8302004FCC82 /* GenreFilterView.swift in Sources */,
+				442CB0822FFC8302004FCC82 /* ChipFilterView.swift in Sources */,
 				442CB0842FFC8304004FCC82 /* MovieSectionView.swift in Sources */,
 				442CB0852FFC8305004FCC82 /* MovieCardCell.swift in Sources */,
 				442CB0862FFC8306004FCC82 /* WeeklyDigestView.swift in Sources */,
@@ -1500,9 +1500,8 @@
 				SS000001000000000000018A /* SearchYearRangeSliderView.swift in Sources */,
 				SS000001000000000000016A /* SearchFiltersView.swift in Sources */,
 				SS000001000000000000017A /* SearchContentView.swift in Sources */,
-				ST000001000000000000001B000000000000001A /* YearInFilmStats.swift in Sources */,
+				ST000001000000000000001B000000000000001A /* FilmStats.swift in Sources */,
 				ST000001000000000000002B000000000000001A /* StatsRepositoryProtocol.swift in Sources */,
-				ST000001000000000000007B000000000000001A /* StatsRepository.swift in Sources */,
 				ST000001000000000000003B000000000000001A /* StatsModels.swift in Sources */,
 				ST000001000000000000004B000000000000001A /* StatsInteractor.swift in Sources */,
 				ST000001000000000000005B000000000000001A /* StatsPresenter.swift in Sources */,
@@ -1514,8 +1513,8 @@
 				ST000001000000000000012C000000000000001A /* StatsGenreDistributionView.swift in Sources */,
 				ST000001000000000000013C000000000000001A /* StatsGenreRowView.swift in Sources */,
 				ST000001000000000000014C000000000000001A /* StatsTopPersonView.swift in Sources */,
-				ST000001000000000000015C000000000000001A /* StatsMonthlyActivityView.swift in Sources */,
-				ST000001000000000000016C000000000000001A /* StatsMonthlyBarColumnView.swift in Sources */,
+				ST000001000000000000015C000000000000001A /* StatsActivityView.swift in Sources */,
+				ST000001000000000000016C000000000000001A /* StatsActivityBarColumnView.swift in Sources */,
 				PP000001000000000000001B000000000000001A /* User.swift in Sources */,
 				PP000001000000000000002B000000000000001A /* UserRepositoryProtocol.swift in Sources */,
 				PP000001000000000000003B000000000000001A /* CoreDataStack.swift in Sources */,
@@ -1552,7 +1551,7 @@
 				UI000001000000000000001B000000000000001A /* BackNavigationHeaderView.swift in Sources */,
 				UI000001000000000000002B000000000000001A /* PasswordFormFieldView.swift in Sources */,
 				UI000001000000000000003B000000000000001A /* ErrorStateView.swift in Sources */,
-				UI000001000000000000004B000000000000001A /* GenreChipCell.swift in Sources */,
+				UI000001000000000000004B000000000000001A /* ChipCell.swift in Sources */,
 				AC000001000000000000009B000000000000001A /* AccountModels.swift in Sources */,
 				AC00000100000000000000AB000000000000001A /* AccountViewController.swift in Sources */,
 				AC00000100000000000000BB000000000000001A /* AccountView.swift in Sources */,
@@ -1653,6 +1652,7 @@
 				F92B9F9FC214C626F1928EB0 /* FirestoreMovieActivityRepository.swift in Sources */,
 				65BA6A98C47E5B02DFCB73C7 /* FirestoreUserRepository.swift in Sources */,
 				41A954EB033598B16D7AAF04 /* FirestoreStatsRepository.swift in Sources */,
+				UC000001000000000000007B000000000000001A /* UserScopedCache.swift in Sources */,
 				B6C1FC614F65734FD1DCC142 /* AuthenticationCoordinator.swift in Sources */,
 				14E387A226636E8F7A09477D /* AuthenticationModels.swift in Sources */,
 				963CE7614099E957DBC80C02 /* AuthenticationView.swift in Sources */,

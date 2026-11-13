@@ -29,7 +29,7 @@ final class MovieCatalogView: UIView {
     // MARK: - UI Components
 
     private lazy var headerView = BackNavigationHeaderView(title: title)
-    private lazy var genreFilterView = GenreFilterView()
+    private lazy var genreFilterView = ChipFilterView()
 
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -267,10 +267,10 @@ extension MovieCatalogView: BackNavigationHeaderViewDelegate, ErrorStateViewDele
     }
 }
 
-// MARK: - GenreFilterViewDelegate
+// MARK: - ChipFilterViewDelegate
 
-extension MovieCatalogView: GenreFilterViewDelegate {
-    func didSelectGenre(at index: Int) {
+extension MovieCatalogView: ChipFilterViewDelegate {
+    func didSelectOption(at index: Int) {
         guard genreIDs.indices.contains(index) else { return }
         selectedGenreID = genreIDs[index]
         genreFilterView.configure(

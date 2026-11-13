@@ -1,7 +1,7 @@
 import UIKit
 import Cartography
 
-final class StatsMonthlyActivityView: UIView {
+final class StatsActivityView: UIView {
 
     // MARK: - Properties
 
@@ -125,16 +125,16 @@ final class StatsMonthlyActivityView: UIView {
 
     // MARK: - Configure
 
-    func configure(viewModel: StatsModels.MonthlyActivityViewModel) {
+    func configure(viewModel: StatsModels.ActivityViewModel) {
         titleLabel.text = viewModel.title
         subtitleLabel.text = viewModel.subtitle
         clearStacks()
 
         viewModel.bars.forEach { bar in
-            let column = StatsMonthlyBarColumnView()
+            let column = StatsActivityBarColumnView()
             column.configure(viewModel: bar)
             barsStack.addArrangedSubview(column)
-            labelsStack.addArrangedSubview(makeMonthLabel(text: bar.monthLabel))
+            labelsStack.addArrangedSubview(makeBarLabel(text: bar.label))
         }
     }
 
@@ -149,12 +149,14 @@ final class StatsMonthlyActivityView: UIView {
         }
     }
 
-    private func makeMonthLabel(text: String) -> UILabel {
+    private func makeBarLabel(text: String) -> UILabel {
         let label = UILabel()
         label.text = text
         label.font = .systemFont(ofSize: 11, weight: .medium)
         label.textColor = .textSecondary
         label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.7
         return label
     }
 }

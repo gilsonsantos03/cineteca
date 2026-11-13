@@ -116,6 +116,11 @@
 "StatsScene.TopActor.Title" = "Ator em destaque";
 "StatsScene.MonthlyActivity.Title" = "Atividade mensal";
 "StatsScene.MonthlyActivity.Subtitle" = "Filmes assistidos por mês";
+"StatsScene.AllTime.Title" = "Sua vida em filmes";
+"StatsScene.AllTime.Label" = "TODO O PERÍODO";
+"StatsScene.AllTime.Chip" = "Todo o período";
+"StatsScene.YearlyActivity.Title" = "Atividade anual";
+"StatsScene.YearlyActivity.Subtitle" = "Filmes assistidos por ano";
 
 "SearchScene.SearchBar.Placeholder" = "Filmes, diretores, atores...";
 "SearchScene.Section.Suggested" = "Sugeridos para você";

@@ -42,7 +42,7 @@ final class SearchFiltersView: UIView {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
         collectionView.isScrollEnabled = false
-        collectionView.register(GenreChipCell.self, forCellWithReuseIdentifier: GenreChipCell.reuseId)
+        collectionView.register(ChipCell.self, forCellWithReuseIdentifier: ChipCell.reuseId)
         collectionView.dataSource = self
         collectionView.delegate = self
         return collectionView
@@ -321,9 +321,9 @@ extension SearchFiltersView: UICollectionViewDataSource, UICollectionViewDelegat
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: GenreChipCell.reuseId,
+            withReuseIdentifier: ChipCell.reuseId,
             for: indexPath
-        ) as! GenreChipCell
+        ) as! ChipCell
         let option = genreOptions[indexPath.item]
         cell.configure(title: option.name, isSelected: option.isSelected)
         return cell

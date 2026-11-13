@@ -19,8 +19,16 @@ final class StatsPresenter {
 extension StatsPresenter: StatsPresentationLogic {
     func presentFetchStats(response: StatsModels.FetchStats.Response) {
         switch response {
-        case .content(let stats):
-            view?.displayFetchStats(viewModel: .content(makeContent(from: stats)))
+        case let .content(history, periods, selectedPeriod):
+            guard let content = makeContent(
+                history: history,
+                periods: periods,
+                selectedPeriod: selectedPeriod
+            ) else {
+                view?.displayFetchStats(viewModel: .error)
+                return
+            }
+            view?.displayFetchStats(viewModel: .content(content))
         case .error:
             view?.displayFetchStats(viewModel: .error)
         }
@@ -30,13 +38,34 @@ extension StatsPresenter: StatsPresentationLogic {
         view?.displayLoading()
     }
 
-    private func makeContent(from stats: YearInFilmStats) -> StatsModels.FetchStats.ViewModel.Content {
-        let maxMonthly = stats.monthlyActivity.map(\.filmsCount).max() ?? 1
+    private func makeContent(
+        history: FilmStatsHistory,
+        periods: [StatsModels.Period],
+        selectedPeriod: StatsModels.Period
+    ) -> StatsModels.FetchStats.ViewModel.Content? {
+        let stats: FilmStats
+        let header: StatsModels.HeaderViewModel
+        switch selectedPeriod {
+        case .allTime:
+            stats = history.allTime
+            header = StatsModels.HeaderViewModel(
+                periodText: Strings.StatsScene.AllTime.label,
+                title: Strings.StatsScene.AllTime.title
+            )
+        case let .year(year):
+            guard let yearStats = history.statsByYear[year] else { return nil }
+            stats = yearStats
+            header = StatsModels.HeaderViewModel(
+                periodText: "\(year)",
+                title: Strings.StatsScene.title
+            )
+        }
 
         return StatsModels.FetchStats.ViewModel.Content(
-            header: StatsModels.HeaderViewModel(
-                yearText: "\(stats.year)",
-                title: Strings.StatsScene.title
+            header: header,
+            periodFilter: StatsModels.PeriodFilterViewModel(
+                options: periods.map(periodTitle),
+                selectedIndex: periods.firstIndex(of: selectedPeriod) ?? 0
             ),
             summary: StatsModels.SummaryViewModel(
                 filmsCount: "\(stats.filmsCount)",
@@ -72,21 +101,44 @@ extension StatsPresenter: StatsPresentationLogic {
                 ),
                 profileURL: stats.topActor.profileURL
             ),
-            monthlyActivity: StatsModels.MonthlyActivityViewModel(
+            activity: makeActivity(from: stats.activity)
+        )
+    }
+
+    private func periodTitle(for period: StatsModels.Period) -> String {
+        switch period {
+        case .allTime: Strings.StatsScene.AllTime.chip
+        case let .year(year): "\(year)"
+        }
+    }
+
+    private func makeActivity(from activity: FilmActivity) -> StatsModels.ActivityViewModel {
+        switch activity {
+        case let .monthly(months):
+            StatsModels.ActivityViewModel(
                 title: Strings.StatsScene.MonthlyActivity.title,
                 subtitle: Strings.StatsScene.MonthlyActivity.subtitle,
-                bars: stats.monthlyActivity.map { month in
-                    let relative = maxMonthly > 0
-                        ? Double(month.filmsCount) / Double(maxMonthly)
-                        : 0
-                    return StatsModels.MonthlyBarViewModel(
-                        monthLabel: monthLabel(for: month.monthIndex),
-                        valueText: "\(month.filmsCount)",
-                        relativeHeight: max(relative, 0.08)
-                    )
-                }
+                bars: makeBars(months.map { (monthLabel(for: $0.monthIndex), $0.filmsCount) })
             )
-        )
+        case let .yearly(years):
+            StatsModels.ActivityViewModel(
+                title: Strings.StatsScene.YearlyActivity.title,
+                subtitle: Strings.StatsScene.YearlyActivity.subtitle,
+                bars: makeBars(years.map { ("\($0.year)", $0.filmsCount) })
+            )
+        }
+    }
+
+    private func makeBars(_ values: [(label: String, count: Int)]) -> [StatsModels.ActivityBarViewModel] {
+        let maxCount = values.map(\.count).max() ?? 0
+        return values.map { value in
+            let relative = maxCount > 0 ? Double(value.count) / Double(maxCount) : 0
+            return StatsModels.ActivityBarViewModel(
+                label: value.label,
+                valueText: "\(value.count)",
+                relativeHeight: max(relative, 0.08)
+            )
+        }
     }
 
     private func genreName(for id: GenreStatID) -> String {

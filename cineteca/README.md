@@ -71,7 +71,7 @@ O presenter e as views recebem `HomeModels.FetchContent.Response` — listas já
 
 ### Filtro por gênero
 
-1. Usuário toca um chip em `GenreFilterView`.
+1. Usuário toca um chip em `ChipFilterView`.
 2. Evento sobe via delegates até `HomeViewController`.
 3. `selectGenre(index:)` atualiza `selectedGenreIndex`.
 4. `presentFilteredContent(from: cachedHomeContent)` — sem loading, sem rede.
@@ -107,5 +107,5 @@ O presenter e as views recebem `HomeModels.FetchContent.Response` — listas já
 | Buscar e cachear gêneros | `GenreRepository` |
 | Cache + filtro | `HomeInteractor` (`CachedHomeContent`) |
 | View models | `HomePresenter` |
-| Chips e listas | `GenreFilterView`, `HomeContentView` |
-| Eventos | Delegates (`GenreFilterViewDelegate` → … → `HomeViewDelegate`) |
+| Chips e listas | `ChipFilterView`, `HomeContentView` |
+| Eventos | Delegates (`ChipFilterViewDelegate` → … → `HomeViewDelegate`) |

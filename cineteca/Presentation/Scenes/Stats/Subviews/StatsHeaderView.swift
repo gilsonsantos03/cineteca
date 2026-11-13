@@ -5,7 +5,7 @@ final class StatsHeaderView: UIView {
 
     // MARK: - UI Components
 
-    private lazy var yearLabel: UILabel = {
+    private lazy var periodLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13, weight: .semibold)
         label.textColor = .accentYellow
@@ -36,7 +36,7 @@ final class StatsHeaderView: UIView {
     }()
 
     private lazy var contentStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [yearLabel, titleRow])
+        let stack = UIStackView(arrangedSubviews: [periodLabel, titleRow])
         stack.axis = .vertical
         stack.alignment = .leading
         stack.spacing = 4
@@ -88,7 +88,7 @@ final class StatsHeaderView: UIView {
     // MARK: - Configure
 
     func configure(viewModel: StatsModels.HeaderViewModel) {
-        yearLabel.text = viewModel.yearText
+        periodLabel.text = viewModel.periodText
         titleLabel.text = viewModel.title
     }
 }

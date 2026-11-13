@@ -8,8 +8,7 @@ final class FirestoreUserRepository: UserRepositoryProtocol, @unchecked Sendable
 
     private let firestore: Firestore
     private let activityRepository: FirestoreMovieActivityRepository
-    private let cacheLock = NSLock()
-    private var cachedUser: (userID: String, user: User)?
+    private let cache = UserScopedCache<User>()
 
     init(
         firestore: Firestore = .firestore(),
@@ -21,9 +20,7 @@ final class FirestoreUserRepository: UserRepositoryProtocol, @unchecked Sendable
 
     func cachedCurrentUser() -> User? {
         guard let userID = Auth.auth().currentUser?.uid else { return nil }
-        return cacheLock.withLock {
-            cachedUser?.userID == userID ? cachedUser?.user : nil
-        }
+        return cache.value(for: userID)
     }
 
     func fetchCurrentUser() async throws -> User {
@@ -66,9 +63,7 @@ final class FirestoreUserRepository: UserRepositoryProtocol, @unchecked Sendable
         guard Auth.auth().currentUser?.uid == firebaseUser.uid else {
             throw AuthenticationError.userNotAuthenticated
         }
-        cacheLock.withLock {
-            cachedUser = (firebaseUser.uid, user)
-        }
+        cache.store(user, for: firebaseUser.uid)
         return user
     }
 
@@ -163,9 +158,7 @@ final class FirestoreUserRepository: UserRepositoryProtocol, @unchecked Sendable
         }
         batch.deleteDocument(userDocument)
         try await batch.commit()
-        cacheLock.withLock {
-            cachedUser = nil
-        }
+        cache.clear()
     }
 
     private func claimUsername(

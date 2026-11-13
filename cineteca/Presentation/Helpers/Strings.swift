@@ -176,6 +176,12 @@ enum Strings {
         static var title: String { Localization.string("StatsScene.Title") }
         static var filmsWatchedFormat: String { Localization.string("StatsScene.FilmsWatched.Format") }
 
+        enum AllTime {
+            static var title: String { Localization.string("StatsScene.AllTime.Title") }
+            static var label: String { Localization.string("StatsScene.AllTime.Label") }
+            static var chip: String { Localization.string("StatsScene.AllTime.Chip") }
+        }
+
         enum GenreDistribution {
             static var title: String { Localization.string("StatsScene.GenreDistribution.Title") }
         }
@@ -199,6 +205,11 @@ enum Strings {
         enum MonthlyActivity {
             static var title: String { Localization.string("StatsScene.MonthlyActivity.Title") }
             static var subtitle: String { Localization.string("StatsScene.MonthlyActivity.Subtitle") }
+        }
+
+        enum YearlyActivity {
+            static var title: String { Localization.string("StatsScene.YearlyActivity.Title") }
+            static var subtitle: String { Localization.string("StatsScene.YearlyActivity.Subtitle") }
         }
     }
 

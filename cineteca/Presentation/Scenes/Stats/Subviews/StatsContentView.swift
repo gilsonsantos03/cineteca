@@ -1,7 +1,15 @@
 import UIKit
 import Cartography
 
+protocol StatsContentViewDelegate: AnyObject {
+    func didSelectPeriod(at index: Int)
+}
+
 final class StatsContentView: UIView {
+
+    // MARK: - Properties
+
+    weak var delegate: StatsContentViewDelegate?
 
     // MARK: - UI Components
 
@@ -21,11 +29,12 @@ final class StatsContentView: UIView {
     }()
 
     private lazy var headerView = StatsHeaderView()
+    private lazy var periodFilterView = ChipFilterView()
     private lazy var summaryView = StatCardsView()
     private lazy var genreDistributionView = StatsGenreDistributionView()
     private lazy var topDirectorView = StatsTopPersonView()
     private lazy var topActorView = StatsTopPersonView()
-    private lazy var monthlyActivityView = StatsMonthlyActivityView()
+    private lazy var activityView = StatsActivityView()
 
     // MARK: - Initialization
 
@@ -40,6 +49,7 @@ final class StatsContentView: UIView {
 
     private func setup() {
         backgroundColor = .appBackground
+        periodFilterView.delegate = self
         setupSubviews()
         setupConstraints()
     }
@@ -49,11 +59,14 @@ final class StatsContentView: UIView {
         scrollView.addSubview(contentStack)
 
         contentStack.addArrangedSubview(headerView)
+        contentStack.addArrangedSubview(periodFilterView)
         contentStack.addArrangedSubview(summaryView)
+        contentStack.setCustomSpacing(0, after: headerView)
+        contentStack.setCustomSpacing(12, after: periodFilterView)
         contentStack.addArrangedSubview(genreDistributionView)
         contentStack.addArrangedSubview(topDirectorView)
         contentStack.addArrangedSubview(topActorView)
-        contentStack.addArrangedSubview(monthlyActivityView)
+        contentStack.addArrangedSubview(activityView)
         contentStack.addArrangedSubview(makeSpacer(height: 24))
     }
 
@@ -82,6 +95,10 @@ final class StatsContentView: UIView {
 
     func configure(content: StatsModels.FetchStats.ViewModel.Content) {
         headerView.configure(viewModel: content.header)
+        periodFilterView.configure(
+            options: content.periodFilter.options,
+            selectedIndex: content.periodFilter.selectedIndex
+        )
         summaryView.configure(
             viewModel: .init(
                 filmsCount: content.summary.filmsCount,
@@ -92,7 +109,7 @@ final class StatsContentView: UIView {
         genreDistributionView.configure(viewModel: content.genres)
         topDirectorView.configure(viewModel: content.topDirector)
         topActorView.configure(viewModel: content.topActor)
-        monthlyActivityView.configure(viewModel: content.monthlyActivity)
+        activityView.configure(viewModel: content.activity)
     }
 
     // MARK: - Helpers
@@ -103,5 +120,13 @@ final class StatsContentView: UIView {
             spacer.height == height
         }
         return view
+    }
+}
+
+// MARK: - ChipFilterViewDelegate
+
+extension StatsContentView: ChipFilterViewDelegate {
+    func didSelectOption(at index: Int) {
+        delegate?.didSelectPeriod(at: index)
     }
 }

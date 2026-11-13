@@ -299,13 +299,13 @@ Na raiz do repositório, `functions/` contém a Callable Function
 | **Estado vazio das seções** | Quando uma categoria não retorna filmes, o carrossel é substituído por uma mensagem localizada | `MovieSectionView` |
 | **Carregamento da Home** | 1 request de gêneros + 4 requests de filmes em paralelo | `HomeInteractor.loadContent()` |
 | **Pull-to-refresh** | Invalida cache de gêneros e recarrega tudo | `HomeInteractor.refresh()` |
-| **Filtro por gênero** | Chips horizontais; filtro instantâneo no cliente por `Genre.id` | `HomeInteractor`, `GenreFilterView` |
+| **Filtro por gênero** | Chips horizontais; filtro instantâneo no cliente por `Genre.id` | `HomeInteractor`, `ChipFilterView` |
 | **Detalhe do filme** | Tela VIP com overview, cast, crew, provedores de streaming/aluguel/compra/gratuitos para a região do dispositivo e filmes similares. A atribuição “Powered by JustWatch” abre o link regional de opções fornecido pelo TMDB; falha ou ausência dos dados não bloqueia os detalhes. | `MovieDetails/` |
 | **Seleção de filme** | A cena Search é apresentada em diálogo com comportamento de seleção para escolher o filme favorito no Edit Profile | `Search/`, `EditProfileRouter` |
 | **Filtros da Search** | Sheet com gênero, ano (range), nota mínima (slider inteiro 0–10, mesma escala TMDB/`vote_average`) e idioma; `minRating > 0` vira `vote_average.gte` sem conversão | `SearchFilters`, `SearchFiltersView`, `MovieEndpoint.discover` |
 | **Trailer** | Abre YouTube (app ou web) a partir da Home ou Movie Details | `HomeRouter`, `MovieDetailsRouter` |
 | **Lists** | Watchlist, Curtidos e Rated com cards, empty states, remoção e navegação para detalhes | `Lists/` |
-| **Catálogo por seção** | “Ver tudo” abre uma grade paginada de Now Playing, Trending ou Top Rated; o título da tela acompanha a seção de origem, o filtro de gêneros permanece fixo no topo, categorias sem filmes exibem estado vazio e novas páginas são carregadas pelo botão no fim da grade | `MovieCatalog/`, `Presentation/UI/GenreFilterView.swift` |
+| **Catálogo por seção** | “Ver tudo” abre uma grade paginada de Now Playing, Trending ou Top Rated; o título da tela acompanha a seção de origem, o filtro de gêneros permanece fixo no topo, categorias sem filmes exibem estado vazio e novas páginas são carregadas pelo botão no fim da grade | `MovieCatalog/`, `Presentation/UI/ChipFilterView.swift` |
 | **Skeleton loading** | Shimmer placeholders no layout final | `HomeSkeletonView` |
 | **Estado de erro** | Tela cheia com botão retry | `HomeErrorStateView` |
 | **Imagens assíncronas** | Posters/backdrops do CDN TMDB | `UIImageView+AsyncLoad` |
@@ -314,7 +314,7 @@ Na raiz do repositório, `functions/` contém a Callable Function
 | **Avaliação de filmes** | Nota inteira de 0 a 10, com data da avaliação | `MovieActivityRepository`, `MovieReviewView` |
 | **Reviews do usuário** | Texto opcional associado à avaliação; edição sem duplicidade | `ReviewEntity`, `MyReviews/` |
 | **Atividade do usuário** | Favoritos (exigem avaliação) e watchlist por filme | `MovieActivityRepository` |
-| **Perfil e estatísticas** | Dados do usuário, filmes avaliados, horas, reviews e filme favorito | `Profile/`, `Stats/` |
+| **Perfil e estatísticas** | Dados do usuário, filmes avaliados, horas, reviews e filme favorito; estatísticas por ano ou de todo o período, escolhidas por chips | `Profile/`, `Stats/` |
 
 ### 5.2 Seções da Home
 
@@ -358,7 +358,12 @@ Firestore, separados por UID:
 - Tocar em um card abre Movie Details. A lixeira remove o filme da lista atual; em Rated, desfaz a avaliação, remove o favorito dependente e exclui a review associada.
 - Cada aba possui um empty state próprio quando não há filmes.
 - Quando não há reviews, o Perfil exibe um estado vazio na seção de reviews e “Minhas reviews” exibe um estado vazio próprio; no Perfil, “Ver tudo” fica oculto.
-- O Perfil exibe o indicador de carregamento apenas na primeira carga da sessão. Nas visitas seguintes, mostra imediatamente o último perfil carregado e o atualiza em segundo plano; se essa atualização falhar, o conteúdo anterior é mantido. Esse cache fica em memória no repositório de usuário, associado ao UID: sair da conta ou entrar com outra conta o invalida, e excluir a conta o apaga. Ele não persiste entre aberturas do app.
+- O Perfil exibe o indicador de carregamento apenas na primeira carga da sessão. Nas visitas seguintes, mostra imediatamente o último perfil carregado e o atualiza em segundo plano; se essa atualização falhar, o conteúdo anterior é mantido. Esse cache fica em memória no repositório de usuário, associado ao UID: só é usado enquanto a mesma conta estiver logada, nunca é mostrado para outra conta, e excluir a conta o apaga. Ele não persiste entre aberturas do app.
+- As Estatísticas consideram todos os filmes avaliados pelo usuário. Um filme pertence ao ano da sua avaliação (`ratedAt`).
+- Chips horizontais abaixo do título permitem escolher o período: “Todo o período”/“All time” primeiro, seguido dos anos do mais recente para o mais antigo. Aparecem o ano atual (sempre, mesmo sem filmes) e os anos com pelo menos um filme avaliado. A tela abre no ano atual e mantém o período escolhido enquanto o app estiver aberto; ele volta ao ano atual ao entrar com outra conta ou na virada do ano.
+- Com um ano selecionado, o cabeçalho mostra o ano e “Seu ano em filmes”/“Your Year in Film”; filmes, horas, reviews, gêneros, diretor e ator consideram só os filmes avaliados naquele ano, e a atividade mostra 12 barras por mês.
+- Com “Todo o período”, o cabeçalho mostra “TODO O PERÍODO”/“ALL TIME” e “Sua vida em filmes”/“Your Life in Film”; os números somam todos os filmes, a contagem de reviews inclui todas as reviews de todos os tempos, e a seção vira “Atividade anual”, com uma barra por ano desde o primeiro ano com filmes até o ano atual (anos sem filmes aparecem zerados).
+- Trocar de período não faz nova busca. As Estatísticas usam o mesmo comportamento de cache do Perfil: o loading aparece só na primeira carga da sessão, as visitas seguintes mostram o último histórico e o atualizam em segundo plano, e o cache nunca é mostrado para outra conta e é descartado na virada do ano.
 - As alterações são salvas no Firestore durante o uso do app. Visitantes podem
   navegar pelo catálogo, mas precisam entrar ou criar uma conta para avaliar,
   favoritar, usar a watchlist ou remover itens das listas.
@@ -627,8 +632,8 @@ O `HomeInteractor` chama `genres()` uma vez e repassa `[Genre]` para cada `fetch
 ### 8.3 Filtro por gênero (sem rede)
 
 ```
-1. Usuário toca chip em GenreFilterView
-2. Delegate chain: GenreFilterView → HomeContentView → HomeView → HomeViewController
+1. Usuário toca chip em ChipFilterView
+2. Delegate chain: ChipFilterView → HomeContentView → HomeView → HomeViewController
 3. interactor.selectGenre(index:)
 4. Atualiza selectedGenreIndex
 5. presentFilteredContent(from: cachedHomeContent)
@@ -753,7 +758,7 @@ usado para decidir qual endpoint chamar.
 | Cache de gêneros da API | `GenreRepository` (actor) | `cache: [Genre]?` in-memory |
 | Perfil e atividade de filmes | Firestore via repositórios por UID | `users/{uid}` e `users/{uid}/activities/{movieId}` |
 | Estado visual (loading/content/error) | `HomeView` | `enum State { loading, content, error }` |
-| Seleção de chip | `GenreFilterView` | `options` + `selectedIndex` via `configure` |
+| Seleção de chip | `ChipFilterView` | `options` + `selectedIndex` via `configure` |
 | Recomendação em andamento | `MovieRecommendationInteractor` | Task cancelável; resultado não é persistido |
 | Quota e rate limit da recomendação | Cloud Function | Transações Firestore por hash do UID |
 
@@ -823,7 +828,7 @@ padrão de navegação secundária.
 ### 10.4 Cadeia de delegates (eventos)
 
 ```
-GenreFilterViewDelegate
+ChipFilterViewDelegate
     → HomeContentViewDelegate
         → HomeViewDelegate
             → HomeViewController
@@ -1058,14 +1063,14 @@ graph TB
 ```mermaid
 sequenceDiagram
     actor Usuário
-    participant GenreFilterView
+    participant ChipFilterView
     participant HomeViewController
     participant HomeInteractor
     participant HomePresenter
     participant HomeView
 
-    Usuário->>GenreFilterView: Toca chip de gênero
-    GenreFilterView->>HomeViewController: didSelectGenreAt(index)
+    Usuário->>ChipFilterView: Toca chip de gênero
+    ChipFilterView->>HomeViewController: didSelectOption(at:) → didSelectGenre(at:)
     HomeViewController->>HomeInteractor: selectGenre(index)
 
     alt índice inválido ou igual ao atual

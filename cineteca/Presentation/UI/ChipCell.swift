@@ -1,8 +1,8 @@
 import UIKit
 import Cartography
 
-final class GenreChipCell: UICollectionViewCell {
-    static let reuseId = "GenreChipCell"
+final class ChipCell: UICollectionViewCell {
+    static let reuseId = "ChipCell"
 
     private var isSelectedChip = false
 

@@ -1,14 +1,25 @@
 import Foundation
 
-struct YearInFilmStats: Sendable {
-    let year: Int
+struct FilmStatsHistory: Sendable {
+    let currentYear: Int
+    let years: [Int]
+    let allTime: FilmStats
+    let statsByYear: [Int: FilmStats]
+}
+
+struct FilmStats: Sendable {
     let filmsCount: Int
     let hoursWatched: Int
     let reviewsCount: Int
     let genres: [GenreStat]
     let topDirector: PersonStat
     let topActor: PersonStat
-    let monthlyActivity: [MonthlyActivityStat]
+    let activity: FilmActivity
+}
+
+enum FilmActivity: Sendable {
+    case monthly([MonthlyActivityStat])
+    case yearly([YearlyActivityStat])
 }
 
 struct GenreStat: Sendable {
@@ -32,5 +43,10 @@ struct PersonStat: Sendable {
 
 struct MonthlyActivityStat: Sendable {
     let monthIndex: Int
+    let filmsCount: Int
+}
+
+struct YearlyActivityStat: Sendable {
+    let year: Int
     let filmsCount: Int
 }

@@ -1,30 +1,93 @@
+import FirebaseAuth
 import Foundation
 
 final class FirestoreStatsRepository: StatsRepositoryProtocol, @unchecked Sendable {
     private let activityRepository: FirestoreMovieActivityRepository
+    private let cache = UserScopedCache<FilmStatsHistory>()
 
     init(activityRepository: FirestoreMovieActivityRepository) {
         self.activityRepository = activityRepository
     }
 
-    func fetchYearInFilmStats() async throws -> YearInFilmStats {
-        let year = Calendar.current.component(.year, from: Date())
-        let records = try await activityRepository.fetchActivityRecords()
-        let ratedRecords = records.filter {
-            guard let ratedAt = $0.ratedAt else { return false }
-            return Calendar.current.component(.year, from: ratedAt) == year
-        }
-        let reviewsCount = records.filter { $0.review != nil }.count
+    func cachedFilmStatsHistory() -> FilmStatsHistory? {
+        guard
+            let userID = Auth.auth().currentUser?.uid,
+            let history = cache.value(for: userID),
+            history.currentYear == Self.currentYear
+        else { return nil }
+        return history
+    }
 
-        return YearInFilmStats(
-            year: year,
-            filmsCount: ratedRecords.count,
-            hoursWatched: hoursWatched(for: ratedRecords),
+    func fetchFilmStatsHistory() async throws -> FilmStatsHistory {
+        guard let userID = Auth.auth().currentUser?.uid else {
+            throw AuthenticationError.userNotAuthenticated
+        }
+
+        let records = try await activityRepository.fetchActivityRecords()
+        let history = makeHistory(from: records)
+
+        guard Auth.auth().currentUser?.uid == userID else {
+            throw AuthenticationError.userNotAuthenticated
+        }
+        cache.store(history, for: userID)
+        return history
+    }
+
+    private static var currentYear: Int {
+        Calendar.current.component(.year, from: Date())
+    }
+
+    private func makeHistory(from records: [FirestoreActivityRecord]) -> FilmStatsHistory {
+        let calendar = Calendar.current
+        let currentYear = Self.currentYear
+        let ratedRecordsByYear = records.reduce(into: [Int: [FirestoreActivityRecord]]()) { result, record in
+            guard let ratedAt = record.ratedAt else { return }
+            result[calendar.component(.year, from: ratedAt), default: []].append(record)
+        }
+        let years = Set(ratedRecordsByYear.keys).union([currentYear]).sorted(by: >)
+
+        let statsByYear = Dictionary(uniqueKeysWithValues: years.map { year in
+            let yearRecords = ratedRecordsByYear[year] ?? []
+            return (
+                year,
+                stats(
+                    for: yearRecords,
+                    reviewsCount: yearRecords.filter { $0.review != nil }.count,
+                    activity: .monthly(monthlyActivity(for: yearRecords))
+                )
+            )
+        })
+
+        let allRatedRecords = ratedRecordsByYear.values.flatMap { $0 }
+        let allTime = stats(
+            for: allRatedRecords,
+            reviewsCount: records.filter { $0.review != nil }.count,
+            activity: .yearly(((years.last ?? currentYear)...currentYear).map {
+                YearlyActivityStat(year: $0, filmsCount: ratedRecordsByYear[$0]?.count ?? 0)
+            })
+        )
+
+        return FilmStatsHistory(
+            currentYear: currentYear,
+            years: years,
+            allTime: allTime,
+            statsByYear: statsByYear
+        )
+    }
+
+    private func stats(
+        for records: [FirestoreActivityRecord],
+        reviewsCount: Int,
+        activity: FilmActivity
+    ) -> FilmStats {
+        FilmStats(
+            filmsCount: records.count,
+            hoursWatched: hoursWatched(for: records),
             reviewsCount: reviewsCount,
-            genres: genreStats(for: ratedRecords),
-            topDirector: topPerson(names: ratedRecords.flatMap(\.metadata.directorNames)),
-            topActor: topPerson(names: ratedRecords.flatMap(\.metadata.actorNames)),
-            monthlyActivity: monthlyActivity(for: ratedRecords, year: year)
+            genres: genreStats(for: records),
+            topDirector: topPerson(names: records.flatMap(\.metadata.directorNames)),
+            topActor: topPerson(names: records.flatMap(\.metadata.actorNames)),
+            activity: activity
         )
     }
 
@@ -75,16 +138,10 @@ final class FirestoreStatsRepository: StatsRepositoryProtocol, @unchecked Sendab
         return PersonStat(name: top?.key ?? "", filmsWatched: top?.value ?? 0, profileURL: nil)
     }
 
-    private func monthlyActivity(
-        for records: [FirestoreActivityRecord],
-        year: Int
-    ) -> [MonthlyActivityStat] {
+    private func monthlyActivity(for records: [FirestoreActivityRecord]) -> [MonthlyActivityStat] {
         let calendar = Calendar.current
         let counts = records.reduce(into: [Int: Int]()) { result, record in
-            guard
-                let ratedAt = record.ratedAt,
-                calendar.component(.year, from: ratedAt) == year
-            else { return }
+            guard let ratedAt = record.ratedAt else { return }
             result[calendar.component(.month, from: ratedAt), default: 0] += 1
         }
         return (1...12).map {

@@ -3,6 +3,7 @@ import Cartography
 
 protocol StatsViewDelegate: AnyObject {
     func didRequestAuthentication()
+    func didSelectPeriod(at index: Int)
 }
 
 final class StatsView: UIView {
@@ -33,6 +34,7 @@ final class StatsView: UIView {
 
     private func setup() {
         backgroundColor = .appBackground
+        contentView.delegate = self
         authenticationPromptView.delegate = self
         setupSubviews()
         setupConstraints()
@@ -96,6 +98,12 @@ final class StatsView: UIView {
         loadingIndicator.stopAnimating()
         authenticationPromptView.isHidden = true
         contentView.isHidden = true
+    }
+}
+
+extension StatsView: StatsContentViewDelegate {
+    func didSelectPeriod(at index: Int) {
+        delegate?.didSelectPeriod(at: index)
     }
 }
 

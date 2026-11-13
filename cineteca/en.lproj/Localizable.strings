@@ -116,6 +116,11 @@
 "StatsScene.TopActor.Title" = "Top Actor";
 "StatsScene.MonthlyActivity.Title" = "Monthly Activity";
 "StatsScene.MonthlyActivity.Subtitle" = "Films watched per month";
+"StatsScene.AllTime.Title" = "Your Life in Film";
+"StatsScene.AllTime.Label" = "ALL TIME";
+"StatsScene.AllTime.Chip" = "All time";
+"StatsScene.YearlyActivity.Title" = "Yearly Activity";
+"StatsScene.YearlyActivity.Subtitle" = "Films watched per year";
 
 "SearchScene.SearchBar.Placeholder" = "Movies, directors, actors...";
 "SearchScene.Section.Suggested" = "Suggested for you";

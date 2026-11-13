@@ -1,7 +1,7 @@
 import UIKit
 import Cartography
 
-final class StatsMonthlyBarColumnView: UIView {
+final class StatsActivityBarColumnView: UIView {
 
     // MARK: - Properties
 
@@ -86,7 +86,7 @@ final class StatsMonthlyBarColumnView: UIView {
 
     // MARK: - Configure
 
-    func configure(viewModel: StatsModels.MonthlyBarViewModel) {
+    func configure(viewModel: StatsModels.ActivityBarViewModel) {
         valueLabel.text = viewModel.valueText
         relativeHeight = viewModel.relativeHeight
         setNeedsLayout()

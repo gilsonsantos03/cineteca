@@ -49,6 +49,10 @@ extension StatsViewController: StatsViewDelegate {
             self?.interactor.fetchStats(request: .init())
         }
     }
+
+    func didSelectPeriod(at index: Int) {
+        interactor.selectPeriod(request: .init(index: index))
+    }
 }
 
 extension StatsViewController: StatsDisplayLogic {

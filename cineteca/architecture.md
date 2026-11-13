@@ -55,13 +55,18 @@ and behavior or invariants that must be preserved. A query result or screen
 projection should not be persisted as an entity merely because it has a
 dedicated struct.
 
-`YearInFilmStats` is a read model (an immutable aggregate/projection), not a
-persistent entity. It represents the result needed by the Stats scene after film
-history has been aggregated by year. It has no independent identity, lifecycle,
-or persistence requirements.
+`FilmStatsHistory` is a read model (an immutable aggregate/projection), not a
+persistent entity. It holds the years with rated films (the current year is always
+included), one `FilmStats` per year and an all-time `FilmStats`. Yearly stats carry
+monthly activity; all-time stats carry yearly activity. It has no independent
+identity, lifecycle, or persistence requirements.
 
-`StatsRepository` builds the same read model from the Firestore movie activity
-repository. Reviews and profile data are persisted in the authenticated user's
+`FirestoreStatsRepository` builds the whole history at once from the Firestore
+movie activity repository, grouping rated activities by the year of `ratedAt`.
+Reviews count per year only for films rated in that year; all-time counts every
+review. The Stats interactor only keeps the selected period (scene state); switching
+periods re-reads the repository's cached history and does not refetch. The
+selection resets to the current year whenever a fetch starts without cache. Reviews and profile data are persisted in the authenticated user's
 Firestore document tree; activity documents store ratings, favorites,
 watchlist state, and movie metadata. These persistence details remain behind
 repository protocols and are not exposed to Presentation.
@@ -71,13 +76,16 @@ the `User` read model. This allows a rating without comment to appear in the
 profile review cards without creating a separate review document or duplicating a review
 that already has text.
 
-`UserRepository` also keeps the last `User` built by `fetchCurrentUser` in memory,
-keyed by the Firebase UID, and exposes it through `cachedCurrentUser()`. The cache
-is only returned while that UID is still signed in, so sign-out and account switches
-invalidate it without scene involvement; account deletion clears it. Scenes use it
-to render immediately and still call `fetchCurrentUser` to revalidate. A fetch that
-finishes after the session changed throws `AuthenticationError.userNotAuthenticated`
-instead of returning or caching the previous account.
+Repositories that back tab scenes keep their last result in memory with
+`UserScopedCache<Value>`, keyed by the Firebase UID: `UserRepository` exposes
+`cachedCurrentUser()` and `StatsRepository` exposes `cachedFilmStatsHistory()`
+(also discarded when the calendar year changes). A cached value is only returned
+while that UID is still signed in, so it is hidden after sign-out and never served
+to another account, without scene involvement; account deletion clears the user
+cache. Scenes use the
+cache to render immediately and still fetch to revalidate. A fetch that finishes
+after the session changed throws `AuthenticationError.userNotAuthenticated` instead
+of returning or caching the previous account.
 
 The profile's favorite film is a separate `users/{uid}` field managed by
 `UserRepository.updateProfile`. It is selected through the Edit Profile search
@@ -202,7 +210,7 @@ MovieCatalog follows the same VIP cycle as Lists. Its View emits back, retry,
 load-more and movie-selection actions; its Interactor loads one movie category
 and guards paginated requests; its Presenter maps `Movie` into catalog-card
 view models; and its Router owns only the transition to Movie Details. The
-shared `GenreFilterView` lives in `Presentation/UI`; MovieCatalog keeps it
+shared `ChipFilterView` lives in `Presentation/UI`; MovieCatalog keeps it
 outside the scrolling grid and filters the loaded cards locally.
 
 ### SwiftUI: MVVM
@@ -340,8 +348,11 @@ statsView.configure(
 
 Put a view in `Presentation/UI/` only when **two or more scenes** compose it. One scene → `<Scene>/Subviews/`.
 
-The current shared presentation components include `ErrorStateView` and
-`GenreChipCell`, both composed by Home and Search. Scene-specific implementations
+The current shared presentation components include `ErrorStateView`, `ChipCell`
+(composed by Home and Search) and `ChipFilterView` (Home, MovieCatalog and Stats).
+`ChipFilterView` is generic: it receives option titles and a selected index and
+reports `didSelectOption(at:)`; each scene maps the index to its own meaning
+(genre, period). Scene-specific implementations
 remain under their owning scene's `Subviews/` folder.
 
 #### Scene models: content + error

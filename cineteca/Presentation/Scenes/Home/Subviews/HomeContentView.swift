@@ -42,7 +42,7 @@ final class HomeContentView: UIView {
     }()
 
     private lazy var featuredView = FeaturedView()
-    private lazy var genreFilterView = GenreFilterView()
+    private lazy var genreFilterView = ChipFilterView()
     private lazy var nowPlayingSectionView = MovieSectionView(
         title: Strings.HomeScene.Section.nowPlaying,
         category: .nowPlaying
@@ -158,10 +158,10 @@ final class HomeContentView: UIView {
     }
 }
 
-// MARK: - GenreFilterViewDelegate
+// MARK: - ChipFilterViewDelegate
 
-extension HomeContentView: GenreFilterViewDelegate {
-    func didSelectGenre(at index: Int) {
+extension HomeContentView: ChipFilterViewDelegate {
+    func didSelectOption(at index: Int) {
         delegate?.didSelectGenre(at: index)
     }
 }

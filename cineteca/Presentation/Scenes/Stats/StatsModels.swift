@@ -1,11 +1,16 @@
 import Foundation
 
 enum StatsModels {
+    enum Period: Equatable {
+        case allTime
+        case year(Int)
+    }
+
     enum FetchStats {
         struct Request {}
 
         enum Response {
-            case content(YearInFilmStats)
+            case content(history: FilmStatsHistory, periods: [Period], selectedPeriod: Period)
             case error
         }
 
@@ -15,18 +20,30 @@ enum StatsModels {
 
             struct Content {
                 let header: HeaderViewModel
+                let periodFilter: PeriodFilterViewModel
                 let summary: SummaryViewModel
                 let genres: GenreDistributionViewModel
                 let topDirector: TopPersonViewModel
                 let topActor: TopPersonViewModel
-                let monthlyActivity: MonthlyActivityViewModel
+                let activity: ActivityViewModel
             }
         }
     }
 
+    enum SelectPeriod {
+        struct Request {
+            let index: Int
+        }
+    }
+
     struct HeaderViewModel {
-        let yearText: String
+        let periodText: String
         let title: String
+    }
+
+    struct PeriodFilterViewModel {
+        let options: [String]
+        let selectedIndex: Int
     }
 
     struct SummaryViewModel {
@@ -61,14 +78,14 @@ enum StatsModels {
         let profileURL: URL?
     }
 
-    struct MonthlyActivityViewModel {
+    struct ActivityViewModel {
         let title: String
         let subtitle: String
-        let bars: [MonthlyBarViewModel]
+        let bars: [ActivityBarViewModel]
     }
 
-    struct MonthlyBarViewModel {
-        let monthLabel: String
+    struct ActivityBarViewModel {
+        let label: String
         let valueText: String
         let relativeHeight: Double
     }
