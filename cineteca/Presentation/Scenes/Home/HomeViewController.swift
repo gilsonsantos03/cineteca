@@ -4,6 +4,7 @@ protocol HomeDisplayLogic: AnyObject {
     func displayFetchContent(viewModel: HomeModels.FetchContent.ViewModel)
     func displayLoading()
     func displayWatchTrailer(viewModel: HomeModels.WatchTrailer.ViewModel)
+    func displayFetchWatchlist(viewModel: HomeModels.FetchWatchlist.ViewModel)
     func displayDidTapWatchlist(viewModel: HomeModels.DidTapWatchlist.ViewModel)
 }
 
@@ -38,6 +39,11 @@ final class HomeViewController: UIViewController {
         customView.delegate = self
         interactor.fetchContent(request: .init())
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        interactor.fetchWatchlist(request: .init())
+    }
 }
 
 extension HomeViewController: HomeDisplayLogic {
@@ -64,6 +70,10 @@ extension HomeViewController: HomeDisplayLogic {
             alert.addAction(UIAlertAction(title: Strings.HomeScene.TrailerUnavailable.okButton, style: .default))
             present(alert, animated: true)
         }
+    }
+
+    func displayFetchWatchlist(viewModel: HomeModels.FetchWatchlist.ViewModel) {
+        customView.updateWatchlist(isInWatchlist: viewModel.isInWatchlist)
     }
 
     func displayDidTapWatchlist(viewModel: HomeModels.DidTapWatchlist.ViewModel) {

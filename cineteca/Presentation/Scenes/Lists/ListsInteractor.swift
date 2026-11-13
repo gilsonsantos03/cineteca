@@ -10,7 +10,6 @@ final class ListsInteractor {
     private let presenter: ListsPresentationLogic
     private let activityRepository: MovieActivityRepositoryProtocol
 
-    private var activities: [MovieActivity] = []
     private var selectedList: ListsModels.List = .watchlist
 
     init(
@@ -24,23 +23,30 @@ final class ListsInteractor {
 
 extension ListsInteractor: ListsBusinessLogic {
     func fetchContent(request: ListsModels.FetchContent.Request) {
-        presenter.presentLoading()
-        Task {
-            let response: ListsModels.FetchContent.Response
-            do {
-                response = .content(
-                    activities: try await activityRepository.fetchActivities(),
-                    selectedList: selectedList
-                )
-            } catch {
-                response = .error
-            }
+        let cachedActivities = activityRepository.cachedActivities()
+        if let cachedActivities {
+            presenter.presentFetchContent(
+                response: .content(activities: cachedActivities, selectedList: selectedList)
+            )
+        } else {
+            presenter.presentLoading()
+        }
 
-            await MainActor.run {
-                if case let .content(activities: activities, selectedList: _) = response {
-                    self.activities = activities
+        Task {
+            do {
+                let activities = try await activityRepository.fetchActivities()
+                await MainActor.run {
+                    presenter.presentFetchContent(
+                        response: .content(activities: activities, selectedList: selectedList)
+                    )
                 }
-                self.presenter.presentFetchContent(response: response)
+            } catch AuthenticationError.userNotAuthenticated {
+                return
+            } catch {
+                guard cachedActivities == nil else { return }
+                await MainActor.run {
+                    presenter.presentFetchContent(response: .error)
+                }
             }
         }
     }
@@ -48,6 +54,7 @@ extension ListsInteractor: ListsBusinessLogic {
     func selectList(request: ListsModels.SelectList.Request) {
         guard request.list != selectedList else { return }
         selectedList = request.list
+        guard let activities = activityRepository.cachedActivities() else { return }
         presenter.presentFetchContent(
             response: .content(activities: activities, selectedList: selectedList)
         )
@@ -75,9 +82,6 @@ extension ListsInteractor: ListsBusinessLogic {
             }
 
             await MainActor.run {
-                if case let .content(activities: activities, selectedList: _) = response {
-                    self.activities = activities
-                }
                 self.presenter.presentRemoveMovie(response: response)
             }
         }

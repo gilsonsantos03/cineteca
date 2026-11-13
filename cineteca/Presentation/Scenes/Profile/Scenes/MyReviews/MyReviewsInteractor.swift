@@ -23,12 +23,21 @@ final class MyReviewsInteractor {
 
 extension MyReviewsInteractor: MyReviewsBusinessLogic {
     func fetchReviews(request: MyReviewsModels.FetchReviews.Request) {
-        presenter.presentLoading()
+        let cachedUser = userRepository.cachedCurrentUser()
+        if let cachedUser {
+            presenter.presentFetchReviews(response: .content(cachedUser))
+        } else {
+            presenter.presentLoading()
+        }
+
         Task {
             let response: MyReviewsModels.FetchReviews.Response
             do {
                 response = .content(try await userRepository.fetchCurrentUser())
+            } catch AuthenticationError.userNotAuthenticated {
+                return
             } catch {
+                guard cachedUser == nil else { return }
                 response = .error
             }
             await MainActor.run {

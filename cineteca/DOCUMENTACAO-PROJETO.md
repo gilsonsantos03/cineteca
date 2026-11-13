@@ -356,9 +356,12 @@ Firestore, separados por UID:
 - Movie Details usa “Curtir”/“Like” para a atividade consumida pela cena Lists; isso é separado do filme favorito do perfil.
 - A cena Lists exibe as atividades em três abas: Watchlist (`isInWatchlist`), Curtidos/Favorites (`isFavorite`) e Rated (`isRated`).
 - Tocar em um card abre Movie Details. A lixeira remove o filme da lista atual; em Rated, desfaz a avaliação, remove o favorito dependente e exclui a review associada.
+- Nos cards de Lists, arrastar da direita para a esquerda remove o filme diretamente usando o mesmo fluxo da lixeira.
 - Cada aba possui um empty state próprio quando não há filmes.
 - Quando não há reviews, o Perfil exibe um estado vazio na seção de reviews e “Minhas reviews” exibe um estado vazio próprio; no Perfil, “Ver tudo” fica oculto.
 - O Perfil exibe o indicador de carregamento apenas na primeira carga da sessão. Nas visitas seguintes, mostra imediatamente o último perfil carregado e o atualiza em segundo plano; se essa atualização falhar, o conteúdo anterior é mantido. Esse cache fica em memória no repositório de usuário, associado ao UID: só é usado enquanto a mesma conta estiver logada, nunca é mostrado para outra conta, e excluir a conta o apaga. Ele não persiste entre aberturas do app.
+- Listas e Minhas reviews seguem o mesmo comportamento de cache: o loading aparece só na primeira carga da sessão, as visitas seguintes mostram os últimos dados da conta logada e os atualizam em segundo plano, e uma falha nessa atualização mantém o conteúdo anterior. Em Listas, trocar de aba não faz nova busca.
+- Sempre que a Home aparece, o estado “na watchlist” do filme em destaque é recarregado a partir das atividades da conta logada, sem loading e sem refazer as chamadas ao TMDB. Assim, mudanças feitas em Movie Details ou em Listas aparecem ao voltar para a Home, e depois de sair da conta ou trocar de conta o botão não mostra a watchlist da conta anterior.
 - As Estatísticas consideram todos os filmes avaliados pelo usuário. Um filme pertence ao ano da sua avaliação (`ratedAt`).
 - Chips horizontais abaixo do título permitem escolher o período: “Todo o período”/“All time” primeiro, seguido dos anos do mais recente para o mais antigo. Aparecem o ano atual (sempre, mesmo sem filmes) e os anos com pelo menos um filme avaliado. A tela abre no ano atual e mantém o período escolhido enquanto o app estiver aberto; ele volta ao ano atual ao entrar com outra conta ou na virada do ano.
 - Com um ano selecionado, o cabeçalho mostra o ano e “Seu ano em filmes”/“Your Year in Film”; filmes, horas, reviews, gêneros, diretor e ator consideram só os filmes avaliados naquele ano, e a atividade mostra 12 barras por mês.
@@ -674,12 +677,15 @@ loadContent() catch → presenter.presentError(error)
 
 ```
 1. ListsViewController.viewWillAppear()
-2. ListsInteractor.fetchContent()
-3. MovieActivityRepository.fetchActivities()
+2. ListsInteractor.fetchContent(): se MovieActivityRepository.cachedActivities()
+   tiver dados da conta logada, exibe-os na hora; senão, exibe o loading
+3. MovieActivityRepository.fetchActivities() (sempre, para revalidar)
 4. ListsPresenter filtra o snapshot pela aba selecionada
 5. ListsView exibe cards ou o empty state da aba
 6. Toque no card → ListsRouter → MovieDetailsBuilding → Movie Details
-7. Retorno à tab → novo fetch para refletir alterações feitas nos detalhes
+7. Retorno à tab → mostra o último snapshot e faz novo fetch para refletir
+   alterações feitas nos detalhes
+8. Troca de aba → reapresenta o snapshot em cache, sem novo fetch
 ```
 
 As abas usam as seguintes regras:
@@ -938,7 +944,7 @@ Sugestões de tópicos para a conversa com o engenheiro iOS:
 | 1 | **Próximas features** | Notificações |
 | 2 | **UseCase vs Interactor** | Regra de filtro no Interactor é suficiente? Quando extrair? |
 | 3 | **Modularização** | Monolito hoje; `architecture.md` descreve split Interface/Implementation |
-| 4 | **Testes** | Ampliar cobertura além dos testes atuais de `MovieActivityRepository` |
+| 4 | **Testes** | Criar um target de testes unitários; o projeto ainda não tem testes automatizados |
 | 5 | **Image loading** | Trocar loader custom por Nuke/Kingfisher? Cancelamento de task? |
 | 6 | **Persistência** | Validar regras, índices e comportamento offline do Firestore Emulator e do projeto Firebase |
 | 7 | **iOS 17 baseline** | Permite concurrency moderna sem preocupação com retrocompat |

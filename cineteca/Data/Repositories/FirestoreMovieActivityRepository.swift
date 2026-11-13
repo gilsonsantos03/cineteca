@@ -4,6 +4,7 @@ import Foundation
 
 final class FirestoreMovieActivityRepository: MovieActivityRepositoryProtocol, @unchecked Sendable {
     private let firestore: Firestore
+    private let activitiesCache = UserScopedCache<[MovieActivity]>()
 
     init(firestore: Firestore = .firestore()) {
         self.firestore = firestore
@@ -122,12 +123,24 @@ final class FirestoreMovieActivityRepository: MovieActivityRepositoryProtocol, @
         return try await fetchRequiredActivity(for: movieId)
     }
 
+    func cachedActivities() -> [MovieActivity]? {
+        guard let userID = Auth.auth().currentUser?.uid else { return nil }
+        return activitiesCache.value(for: userID)
+    }
+
     func fetchActivities() async throws -> [MovieActivity] {
-        guard let userDocument = userDocument else { return [] }
-        let snapshot = try await userDocument.collection("activities")
+        guard let userID = Auth.auth().currentUser?.uid else { return [] }
+        let snapshot = try await firestore.collection("users").document(userID)
+            .collection("activities")
             .order(by: "updatedAt", descending: true)
             .getDocuments()
-        return snapshot.documents.map { FirestoreActivityRecord(document: $0).activity }
+        let activities = snapshot.documents.map { FirestoreActivityRecord(document: $0).activity }
+
+        guard Auth.auth().currentUser?.uid == userID else {
+            throw AuthenticationError.userNotAuthenticated
+        }
+        activitiesCache.store(activities, for: userID)
+        return activities
     }
 
     func fetchActivityRecords() async throws -> [FirestoreActivityRecord] {

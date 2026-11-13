@@ -9,6 +9,7 @@ protocol MovieActivityRepositoryProtocol: Sendable {
     func saveReview(for movieId: Int, rating: Double, text: String) async throws
     func setFavorite(_ isFavorite: Bool, for movieId: Int) async throws -> MovieActivity
     func setWatchlist(_ isInWatchlist: Bool, for movieId: Int) async throws -> MovieActivity
+    func cachedActivities() -> [MovieActivity]?
     func fetchActivities() async throws -> [MovieActivity]
 }
 

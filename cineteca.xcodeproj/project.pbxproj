@@ -194,7 +194,6 @@
 		LS000001000000000000011C /* ListsErrorStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = LS000001000000000000011D /* ListsErrorStateView.swift */; };
 		MA000001000000000000001A /* MovieActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = MA000001000000000000001B /* MovieActivity.swift */; };
 		MA000001000000000000002A /* MovieActivityRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = MA000001000000000000002B /* MovieActivityRepositoryProtocol.swift */; };
-		MA000001000000000000003A /* MovieActivityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = MA000001000000000000003B /* MovieActivityRepository.swift */; };
 		MA000001000000000000004A /* MovieActivityEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = MA000001000000000000004B /* MovieActivityEntity.swift */; };
 		MC000001000000000000001A /* MovieCollectionCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC000001000000000000001B /* MovieCollectionCategory.swift */; };
 		MC000001000000000000002A /* MovieCollectionPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = MC000001000000000000002B /* MovieCollectionPage.swift */; };
@@ -477,7 +476,6 @@
 		LS000001000000000000011D /* ListsErrorStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsErrorStateView.swift; sourceTree = "<group>"; };
 		MA000001000000000000001B /* MovieActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieActivity.swift; sourceTree = "<group>"; };
 		MA000001000000000000002B /* MovieActivityRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieActivityRepositoryProtocol.swift; sourceTree = "<group>"; };
-		MA000001000000000000003B /* MovieActivityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieActivityRepository.swift; sourceTree = "<group>"; };
 		MA000001000000000000004B /* MovieActivityEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieActivityEntity.swift; sourceTree = "<group>"; };
 		MC000001000000000000001B /* MovieCollectionCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionCategory.swift; sourceTree = "<group>"; };
 		MC000001000000000000002B /* MovieCollectionPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionPage.swift; sourceTree = "<group>"; };
@@ -938,7 +936,6 @@
 				AR000001000000000000007B /* AppearanceRepository.swift */,
 				LR000001000000000000007B /* LanguageRepository.swift */,
 				CC00000100000000000000AB /* MovieRepository.swift */,
-				MA000001000000000000003B /* MovieActivityRepository.swift */,
 				442CB0982FFC8405004FCC82 /* GenreRepository.swift */,
 				C96DF1451F982F4A0B6C00A7 /* FirestoreActivityMapper.swift */,
 				9041A1308F8DC6BA42D5AA7F /* FirestoreMovieActivityRepository.swift */,
@@ -1616,7 +1613,6 @@
 				PP000001000000000000017A /* Cineteca.xcdatamodeld in Sources */,
 				MA000001000000000000001A /* MovieActivity.swift in Sources */,
 				MA000001000000000000002A /* MovieActivityRepositoryProtocol.swift in Sources */,
-				MA000001000000000000003A /* MovieActivityRepository.swift in Sources */,
 				MA000001000000000000004A /* MovieActivityEntity.swift in Sources */,
 				MY000001000000000000009A /* MyReviewsModels.swift in Sources */,
 				MY00000100000000000000AA /* MyReviewsViewController.swift in Sources */,

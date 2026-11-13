@@ -78,8 +78,12 @@ that already has text.
 
 Repositories that back tab scenes keep their last result in memory with
 `UserScopedCache<Value>`, keyed by the Firebase UID: `UserRepository` exposes
-`cachedCurrentUser()` and `StatsRepository` exposes `cachedFilmStatsHistory()`
-(also discarded when the calendar year changes). A cached value is only returned
+`cachedCurrentUser()`, `MovieActivityRepository` exposes `cachedActivities()` and
+`StatsRepository` exposes `cachedFilmStatsHistory()` (also discarded when the
+calendar year changes). These caches are read-only snapshots of the last fetch:
+writes do not update them, and scenes always refetch after rendering the cached
+value. Interactors keep only scene state (selected tab, period or genre) and read
+data back from the repository cache instead of holding their own copy. A cached value is only returned
 while that UID is still signed in, so it is hidden after sign-out and never served
 to another account, without scene involvement; account deletion clears the user
 cache. Scenes use the

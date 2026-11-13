@@ -4,6 +4,7 @@ protocol HomePresentationLogic {
     func presentFetchContent(response: HomeModels.FetchContent.Response)
     func presentLoading()
     func presentWatchTrailer(response: HomeModels.WatchTrailer.Response)
+    func presentFetchWatchlist(response: HomeModels.FetchWatchlist.Response)
     func presentDidTapWatchlist(response: HomeModels.DidTapWatchlist.Response)
 }
 
@@ -55,6 +56,10 @@ extension HomePresenter: HomePresentationLogic {
                 )
             )
         }
+    }
+
+    func presentFetchWatchlist(response: HomeModels.FetchWatchlist.Response) {
+        view?.displayFetchWatchlist(viewModel: .init(isInWatchlist: response.featuredIsInWatchlist))
     }
 
     func presentDidTapWatchlist(response: HomeModels.DidTapWatchlist.Response) {

@@ -12,6 +12,16 @@ final class ListsMovieCardView: UIView {
 
     weak var delegate: ListsMovieCardViewDelegate?
     private var movieId: Int?
+    private var isRemoving = false
+    private var panStartX: CGFloat = 0
+
+    private lazy var contentContainerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .cardBackground
+        view.layer.cornerRadius = 20
+        view.clipsToBounds = true
+        return view
+    }()
 
     // MARK: - UI Components
 
@@ -100,24 +110,33 @@ final class ListsMovieCardView: UIView {
     // MARK: - Setup
 
     private func setup() {
-        backgroundColor = .cardBackground
+        backgroundColor = .appBackground
         layer.cornerRadius = 20
+        clipsToBounds = true
         isUserInteractionEnabled = true
-        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapCard)))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapCard))
+        contentContainerView.addGestureRecognizer(tapGesture)
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(didPanCard(_:)))
+        panGesture.delegate = self
+        contentContainerView.addGestureRecognizer(panGesture)
         setupSubviews()
         setupConstraints()
     }
 
     private func setupSubviews() {
-        addSubview(posterImageView)
-        addSubview(titleLabel)
-        addSubview(metadataLabel)
-        addSubview(genresStack)
-        addSubview(ratingStack)
-        addSubview(removeButton)
+        addSubview(contentContainerView)
+        contentContainerView.addSubview(posterImageView)
+        contentContainerView.addSubview(titleLabel)
+        contentContainerView.addSubview(metadataLabel)
+        contentContainerView.addSubview(genresStack)
+        contentContainerView.addSubview(ratingStack)
+        contentContainerView.addSubview(removeButton)
     }
 
     private func setupConstraints() {
+        constrain(contentContainerView, self) { content, container in
+            content.edges == container.edges
+        }
         constrainPosterImageView()
         constrainTitleLabel()
         constrainMetadataLabel()
@@ -127,7 +146,7 @@ final class ListsMovieCardView: UIView {
     }
 
     private func constrainPosterImageView() {
-        constrain(posterImageView, self) { imageView, container in
+        constrain(posterImageView, contentContainerView) { imageView, container in
             imageView.top == container.top + 12
             imageView.left == container.left + 12
             imageView.bottom == container.bottom - 12
@@ -162,14 +181,14 @@ final class ListsMovieCardView: UIView {
     }
 
     private func constrainRatingStack() {
-        constrain(ratingStack, posterImageView, self) { stack, imageView, container in
+        constrain(ratingStack, posterImageView, contentContainerView) { stack, imageView, container in
             stack.left == imageView.right + 14
             stack.bottom == imageView.bottom
         }
     }
 
     private func constrainRemoveButton() {
-        constrain(removeButton, self) { button, container in
+        constrain(removeButton, contentContainerView) { button, container in
             button.top == container.top + 14
             button.right == container.right - 14
             button.width == 18
@@ -209,6 +228,56 @@ final class ListsMovieCardView: UIView {
         delegate?.didRequestRemoveMovie(id: movieId)
     }
 
+    @objc private func didPanCard(_ gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translation(in: self)
+
+        switch gesture.state {
+        case .began:
+            panStartX = contentContainerView.transform.tx
+        case .changed:
+            let x = min(0, panStartX + translation.x)
+            let progress = min(abs(x) / max(bounds.width, 1), 1)
+            contentContainerView.transform = CGAffineTransform(translationX: x, y: 0)
+            contentContainerView.alpha = 1 - progress * 0.25
+        case .ended, .cancelled:
+            let shouldRemove = contentContainerView.transform.tx <= -bounds.width * 0.35
+            if shouldRemove {
+                removeAfterSwipe()
+            } else {
+                restoreAfterSwipe()
+            }
+        default:
+            break
+        }
+    }
+
+    private func removeAfterSwipe() {
+        guard !isRemoving, movieId != nil else { return }
+        isRemoving = true
+        UIView.animate(
+            withDuration: 0.18,
+            delay: 0,
+            options: [.curveEaseIn],
+            animations: {
+                self.contentContainerView.transform = CGAffineTransform(
+                    translationX: -self.bounds.width,
+                    y: 0
+                )
+                self.contentContainerView.alpha = 0
+            },
+            completion: { [weak self] _ in
+                self?.didTapRemove()
+            }
+        )
+    }
+
+    private func restoreAfterSwipe() {
+        UIView.animate(withDuration: 0.2) {
+            self.contentContainerView.transform = .identity
+            self.contentContainerView.alpha = 1
+        }
+    }
+
     // MARK: - Helpers
 
     private func makeGenreLabel(title: String) -> UILabel {
@@ -223,6 +292,14 @@ final class ListsMovieCardView: UIView {
         label.layer.cornerRadius = 10
         label.clipsToBounds = true
         return label
+    }
+}
+
+extension ListsMovieCardView: UIGestureRecognizerDelegate {
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        guard let panGesture = gestureRecognizer as? UIPanGestureRecognizer else { return true }
+        let velocity = panGesture.velocity(in: self)
+        return abs(velocity.x) > abs(velocity.y) && velocity.x < 0
     }
 }
 

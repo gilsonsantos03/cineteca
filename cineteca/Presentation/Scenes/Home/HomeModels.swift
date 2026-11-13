@@ -36,6 +36,18 @@ enum HomeModels {
         }
     }
 
+    enum FetchWatchlist {
+        struct Request {}
+
+        struct Response {
+            let featuredIsInWatchlist: Bool
+        }
+
+        struct ViewModel {
+            let isInWatchlist: Bool
+        }
+    }
+
     enum DidTapWatchlist {
         struct Request {
             let movieId: Int

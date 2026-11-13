@@ -37,30 +37,30 @@ final class FeaturedView: UIView {
         return button
     }()
 
-    private lazy var imdbBadgeLabel: UILabel = {
+    private lazy var tmdbBadgeLabel: UILabel = {
         let label = UILabel()
-        label.text = "IMDb"
+        label.text = "TMDB"
         label.font = .systemFont(ofSize: 10, weight: .bold)
         label.textColor = .black
         return label
     }()
 
-    private lazy var imdbBadgeView: UIView = {
+    private lazy var tmdbBadgeView: UIView = {
         let container = UIView()
         container.backgroundColor = .accentYellow
         container.layer.cornerRadius = 6
         return container
     }()
 
-    private lazy var imdbRatingLabel: UILabel = {
+    private lazy var tmdbRatingLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 10, weight: .bold)
         label.textColor = .black
         return label
     }()
 
-    private lazy var imdbBadgeStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [imdbBadgeLabel, imdbRatingLabel])
+    private lazy var tmdbBadgeStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [tmdbBadgeLabel, tmdbRatingLabel])
         stack.axis = .horizontal
         stack.spacing = 4
         stack.alignment = .center
@@ -112,7 +112,7 @@ final class FeaturedView: UIView {
     }()
 
     private lazy var ratingYearRow: UIStackView = {
-        let row = UIStackView(arrangedSubviews: [imdbBadgeView, yearLabel])
+        let row = UIStackView(arrangedSubviews: [tmdbBadgeView, yearLabel])
         row.axis = .horizontal
         row.spacing = 8
         row.alignment = .center
@@ -180,7 +180,7 @@ final class FeaturedView: UIView {
     private func setupSubviews() {
         addSubview(backdropImageView)
         addSubview(notificationButton)
-        imdbBadgeView.addSubview(imdbBadgeStack)
+        tmdbBadgeView.addSubview(tmdbBadgeStack)
         addSubview(ratingYearRow)
         addSubview(titleLabel)
         addSubview(genreChipStack)
@@ -217,7 +217,7 @@ final class FeaturedView: UIView {
     }
 
     private func constrainImdbBadgeStack() {
-        constrain(imdbBadgeStack, imdbBadgeView) { stack, container in
+        constrain(tmdbBadgeStack, tmdbBadgeView) { stack, container in
             stack.top == container.top + 3
             stack.bottom == container.bottom - 3
             stack.left == container.left + 6
@@ -262,7 +262,7 @@ final class FeaturedView: UIView {
         movieId = viewModel.movieId
         backdropImageView.loadImage(from: viewModel.backdropURL)
         titleLabel.text = viewModel.title
-        imdbRatingLabel.text = viewModel.rating
+        tmdbRatingLabel.text = viewModel.rating
         yearLabel.text = viewModel.year
         updateWatchlist(isInWatchlist: viewModel.isInWatchlist)
 
