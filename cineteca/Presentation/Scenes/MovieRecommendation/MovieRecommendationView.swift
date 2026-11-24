@@ -198,7 +198,7 @@ final class MovieRecommendationView: UIView {
         recommendationInputView.isHidden = state != .input
         resultView.isHidden = state != .result
         errorView.isHidden = state != .error
-        newRecommendationButton.isHidden = state != .result && state != .error
+        newRecommendationButton.isHidden = state != .result
     }
 
     // MARK: - Actions
@@ -245,6 +245,10 @@ extension MovieRecommendationView: MovieRecommendationResultViewDelegate {
 extension MovieRecommendationView: MovieRecommendationErrorViewDelegate {
     func didRequestRetry() {
         delegate?.didRequestRetry()
+    }
+
+    func didRequestNewRecommendation() {
+        delegate?.didRequestNewRecommendation()
     }
 }
 

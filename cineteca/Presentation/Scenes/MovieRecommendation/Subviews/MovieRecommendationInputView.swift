@@ -224,6 +224,7 @@ final class MovieRecommendationInputView: UIView {
     }
 
     @objc private func generateTapped() {
+        endEditing(true)
         delegate?.didRequestRecommendation(mode: currentMode)
     }
 

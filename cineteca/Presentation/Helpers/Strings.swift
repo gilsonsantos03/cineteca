@@ -105,6 +105,7 @@ enum Strings {
         static var selectMovie: String { Localization.string("MovieRecommendationScene.SelectMovie") }
         static var detailsButton: String { Localization.string("MovieRecommendationScene.DetailsButton") }
         static var retryButton: String { Localization.string("MovieRecommendationScene.RetryButton") }
+        static var errorTitle: String { Localization.string("MovieRecommendationScene.ErrorTitle") }
         static var newRecommendation: String { Localization.string("MovieRecommendationScene.NewRecommendation") }
         static var rateLimited: String { Localization.string("MovieRecommendationScene.RateLimited") }
         static var invalidInput: String { Localization.string("MovieRecommendationScene.InvalidInput") }

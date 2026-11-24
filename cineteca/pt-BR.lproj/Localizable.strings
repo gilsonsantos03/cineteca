@@ -68,6 +68,7 @@
 "MovieRecommendationScene.SelectMovie" = "Escolher filme";
 "MovieRecommendationScene.DetailsButton" = "Ver detalhes do filme";
 "MovieRecommendationScene.RetryButton" = "Tentar novamente";
+"MovieRecommendationScene.ErrorTitle" = "Recomendação indisponível";
 "MovieRecommendationScene.NewRecommendation" = "Fazer outra recomendação";
 "MovieRecommendationScene.InvalidInput" = "Confira o texto ou escolha dois filmes diferentes.";
 "MovieRecommendationScene.ErrorMessage" = "Não foi possível gerar uma recomendação agora. Tente novamente.";
