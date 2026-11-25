@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		MR000001000000000000040A /* MovieRecommendationErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MR000001000000000000040B /* MovieRecommendationErrorView.swift */; };
-		MR00000100000000000003BA /* EmptyMovieSelectionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MR00000100000000000003BB /* EmptyMovieSelectionCardView.swift */; };
-		MR00000100000000000003AA /* SelectedMovieCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MR00000100000000000003AB /* SelectedMovieCardView.swift */; };
-		UC000001000000000000007B000000000000001A /* UserScopedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = UC000001000000000000007B /* UserScopedCache.swift */; };
 		14E387A226636E8F7A09477D /* AuthenticationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F538006D2C51872E5F5480E4 /* AuthenticationModels.swift */; };
 		2025AF8A2C92ED3DA1458013 /* FirebaseConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F50B735E506F88941CE16F2 /* FirebaseConfiguration.swift */; };
 		26D3EAE36B33F630462BC23A /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608FA11039306AF47BB002B8 /* AuthenticationViewController.swift */; };
@@ -224,6 +220,9 @@
 		MR000001000000000000033A /* MovieRecommendationFloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = MR000001000000000000033B /* MovieRecommendationFloatingButton.swift */; };
 		MR000001000000000000038A /* MovieRecommendationInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MR000001000000000000038B /* MovieRecommendationInputView.swift */; };
 		MR000001000000000000039A /* MovieRecommendationResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MR000001000000000000039B /* MovieRecommendationResultView.swift */; };
+		MR00000100000000000003AA /* SelectedMovieCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MR00000100000000000003AB /* SelectedMovieCardView.swift */; };
+		MR00000100000000000003BA /* EmptyMovieSelectionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MR00000100000000000003BB /* EmptyMovieSelectionCardView.swift */; };
+		MR000001000000000000040A /* MovieRecommendationErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MR000001000000000000040B /* MovieRecommendationErrorView.swift */; };
 		MY000001000000000000009A /* MyReviewsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = MY000001000000000000009B /* MyReviewsModels.swift */; };
 		MY00000100000000000000AA /* MyReviewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = MY00000100000000000000AB /* MyReviewsViewController.swift */; };
 		MY00000100000000000000BA /* MyReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = MY00000100000000000000BB /* MyReviewsView.swift */; };
@@ -285,6 +284,7 @@
 		ST000001000000000000015C000000000000001A /* StatsActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000015C /* StatsActivityView.swift */; };
 		ST000001000000000000016C000000000000001A /* StatsActivityBarColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ST000001000000000000016C /* StatsActivityBarColumnView.swift */; };
 		TM000001000000000000005E000000000000001A /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = TM000001000000000000005E /* ThemeManager.swift */; };
+		UC000001000000000000007B000000000000001A /* UserScopedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = UC000001000000000000007B /* UserScopedCache.swift */; };
 		UI000001000000000000001B000000000000001A /* BackNavigationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = UI000001000000000000001B /* BackNavigationHeaderView.swift */; };
 		UI000001000000000000002B000000000000001A /* PasswordFormFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = UI000001000000000000002B /* PasswordFormFieldView.swift */; };
 		UI000001000000000000003B000000000000001A /* ErrorStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = UI000001000000000000003B /* ErrorStateView.swift */; };
@@ -292,10 +292,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		MR000001000000000000040B /* MovieRecommendationErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRecommendationErrorView.swift; sourceTree = "<group>"; };
-		MR00000100000000000003BB /* EmptyMovieSelectionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyMovieSelectionCardView.swift; sourceTree = "<group>"; };
-		MR00000100000000000003AB /* SelectedMovieCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedMovieCardView.swift; sourceTree = "<group>"; };
-		UC000001000000000000007B /* UserScopedCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserScopedCache.swift; sourceTree = "<group>"; };
 		358B6E132B58ACC5593DC1B3 /* FirestoreStatsRepository.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FirestoreStatsRepository.swift; sourceTree = "<group>"; };
 		4411DD433085992F0098CBF6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		442CB04A2FF5EF91004FCC82 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
@@ -508,6 +504,9 @@
 		MR000001000000000000033B /* MovieRecommendationFloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRecommendationFloatingButton.swift; sourceTree = "<group>"; };
 		MR000001000000000000038B /* MovieRecommendationInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRecommendationInputView.swift; sourceTree = "<group>"; };
 		MR000001000000000000039B /* MovieRecommendationResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRecommendationResultView.swift; sourceTree = "<group>"; };
+		MR00000100000000000003AB /* SelectedMovieCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedMovieCardView.swift; sourceTree = "<group>"; };
+		MR00000100000000000003BB /* EmptyMovieSelectionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyMovieSelectionCardView.swift; sourceTree = "<group>"; };
+		MR000001000000000000040B /* MovieRecommendationErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRecommendationErrorView.swift; sourceTree = "<group>"; };
 		MY000001000000000000009B /* MyReviewsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReviewsModels.swift; sourceTree = "<group>"; };
 		MY00000100000000000000AB /* MyReviewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReviewsViewController.swift; sourceTree = "<group>"; };
 		MY00000100000000000000BB /* MyReviewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReviewsView.swift; sourceTree = "<group>"; };
@@ -569,6 +568,7 @@
 		ST000001000000000000015C /* StatsActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsActivityView.swift; sourceTree = "<group>"; };
 		ST000001000000000000016C /* StatsActivityBarColumnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsActivityBarColumnView.swift; sourceTree = "<group>"; };
 		TM000001000000000000005E /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
+		UC000001000000000000007B /* UserScopedCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserScopedCache.swift; sourceTree = "<group>"; };
 		UI000001000000000000001B /* BackNavigationHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackNavigationHeaderView.swift; sourceTree = "<group>"; };
 		UI000001000000000000002B /* PasswordFormFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFormFieldView.swift; sourceTree = "<group>"; };
 		UI000001000000000000003B /* ErrorStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorStateView.swift; sourceTree = "<group>"; };
